@@ -1,7 +1,16 @@
 <nav class="navbar  navbar-expand-lg navbar-light" style="background-color: rgb(210, 216, 245);">
     <span class="navbar-text mr-sm-5" style="font-size: 25px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(51, 51, 226)">Rent-a-car admin</span>
-    <button type="button" class="btn btn-outline-primary  mr-sm-2 ml-sm-3">User profile</button>
-    <button type="button" class="btn btn-outline-primary mr-sm-2">Page profile</button>
+    <button type="button" class="btn btn-outline-primary  mr-sm-2 ml-sm-3" routerLink = "/userInfo">User profile</button>
+    <button type="button" class="btn btn-outline-primary mr-sm-2" routerLink = "/carServiceInfo">Page profile</button>
+    <div class="mr-sm-2 position-relative">
+      <a class="mx-auto" href="#">
+          <img src="assets/images/logo1.png" class="rounded-circle ml-sm-2 mr-sm-2" height="90px" width="90px">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+  </div>
+   
     <div class="dropdown mr-sm-2">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -12,6 +21,7 @@
           <a class="dropdown-item" href="#">Income report</a>
         </div>
     </div>
+
     <div class="dropdown mr-auto">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -21,6 +31,6 @@
         </div>
     </div>
     <div>
-      <button type="button" class="btn btn-dark" routerLink="content">Log out</button>
+      <button type="button" class="btn btn-dark" routerLink="/home">Log out</button>
     </div>
 </nav>
