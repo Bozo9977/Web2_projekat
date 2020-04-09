@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RentACarAdminComponent } from './components/rent-a-car-admin/rent-a-car-admin.component';
+import { LoggedInUserComponent } from './components/logged-in-user/logged-in-user.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
 
 const routes: Routes = [
   {
@@ -19,11 +21,18 @@ const routes: Routes = [
     path: "register",
     component: RegisterComponent
   },
-
   {
     path: "rent-a-car-Admin",
     component: RentACarAdminComponent
 
+  },
+  {
+    path: "mainPage",
+    component: LoggedInUserComponent
+  },
+  {
+    path: 'userInfo',
+    component: UserInfoComponent
   }
 ];
 

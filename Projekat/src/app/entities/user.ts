@@ -4,6 +4,8 @@ export class User {
     city: string;
     email: string;
     password: string;
+    phone: string;
+    photo: ImageBitmap;
 
     constructor(name: string, lastName: string, city: string, email: string, password: string){
         this.name = name;

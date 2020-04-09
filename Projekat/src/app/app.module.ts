@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RentACarAdminComponent } from './components/rent-a-car-admin/rent-a-car-admin.component';
+import { LoggedInUserComponent } from './components/logged-in-user/logged-in-user.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { RentACarAdminComponent } from './components/rent-a-car-admin/rent-a-car
     AppComponent,
     HomepageComponent,
     RegisterComponent,
-    RentACarAdminComponent
+    RentACarAdminComponent,
+    LoggedInUserComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
