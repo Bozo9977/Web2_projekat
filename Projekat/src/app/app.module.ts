@@ -8,9 +8,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { RentACarAdminComponent } from './components/rent-a-car-admin/rent-a-car-admin.component';
 import { LoggedInUserComponent } from './components/logged-in-user/logged-in-user.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
-import { CarServiceInfoComponent } from './components/car-service-info/car-service-info.component';
 import { CarInfoComponent } from './components/car-info/car-info.component';
 import { CarChangeComponent } from './components/car-change/car-change.component';
+import { CompanyInfoComponent } from './components/company-info/company-info.component';
+import { AircompanyAdminComponent } from './components/aircompany-admin/aircompany-admin.component';
+import { FlightInfoComponent } from './components/flight-info/flight-info.component';
 
 
 @NgModule({
@@ -21,9 +23,11 @@ import { CarChangeComponent } from './components/car-change/car-change.component
     RentACarAdminComponent,
     LoggedInUserComponent,
     UserInfoComponent,
-    CarServiceInfoComponent,
     CarInfoComponent,
-    CarChangeComponent
+    CarChangeComponent,
+    CompanyInfoComponent,
+    AircompanyAdminComponent,
+    FlightInfoComponent
   ],
   imports: [
     BrowserModule,

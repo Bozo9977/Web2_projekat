@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(210, 216, 245); height: 100px;">
+    <span class="navbar-text mr-sm-5" style="font-size: 25px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; color: rgb(51, 51, 226)">Aircompany admin</span>
+    <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
+        <ul class="navbar-nav text-center nav-fill w-100">
+            <li class="nav-item active">
+                <button type="button" class="btn btn-info" routerLink="/userInfo">User profile</button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn btn-outline-primary ml-auto" routerLink="/companyInfo">Company info</button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn btn-outline-primary">Destinations</button>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto my-2 order-0 order-md-1 position-relative">
+        <a class="mx-auto" href="#">
+            <img src="assets/images/logo1.png" class="rounded-circle ml-sm-2 mr-sm-2" height="90px" width="90px">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
+        <ul class="navbar-nav ml-auto text-center nav-fill w-100">
+            <li class="nav-item">
+                <div class="dropdown mr-sm-2">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Flights</button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item"  routerLink="/flight_info">Add flight</a>
+                        <a class="dropdown-item" href="#">Quick reservations</a>
+                        <a class="dropdown-item" href="#">Flight seats</a>
+                        <a class="dropdown-item" href="#">Price list</a>
+                      </div>
+                  </div>
+            </li>
+            <li class="nav-item">
+                <div class="dropdown mr-sm-2">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">Company rating</a>
+                        <a class="dropdown-item" href="#">Flight ratings</a>
+                        <a class="dropdown-item" href="#">Sold tickets</a>
+                        <a class="dropdown-item" href="#">Income report</a>
+                      </div>
+                  </div>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn btn-danger" routerLink="/">Logout</button>
+            </li>
+        </ul>
+    </div>
+</nav>
