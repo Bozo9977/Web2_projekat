@@ -9,6 +9,8 @@ import { RentACarAdminComponent } from './components/rent-a-car-admin/rent-a-car
 import { LoggedInUserComponent } from './components/logged-in-user/logged-in-user.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { CarServiceInfoComponent } from './components/car-service-info/car-service-info.component';
+import { CarInfoComponent } from './components/car-info/car-info.component';
+import { CarChangeComponent } from './components/car-change/car-change.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { CarServiceInfoComponent } from './components/car-service-info/car-servi
     RentACarAdminComponent,
     LoggedInUserComponent,
     UserInfoComponent,
-    CarServiceInfoComponent
+    CarServiceInfoComponent,
+    CarInfoComponent,
+    CarChangeComponent
   ],
   imports: [
     BrowserModule,

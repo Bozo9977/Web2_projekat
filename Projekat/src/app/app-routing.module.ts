@@ -6,6 +6,8 @@ import { RentACarAdminComponent } from './components/rent-a-car-admin/rent-a-car
 import { LoggedInUserComponent } from './components/logged-in-user/logged-in-user.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { CarServiceInfoComponent } from './components/car-service-info/car-service-info.component';
+import { CarInfoComponent } from './components/car-info/car-info.component';
+import { CarChangeComponent } from './components/car-change/car-change.component';
 
 const routes: Routes = [
   {
@@ -39,6 +41,16 @@ const routes: Routes = [
   {
     path: 'carServiceInfo',
     component: CarServiceInfoComponent
+  },
+
+  {
+    path: 'carsInfo',
+    component: CarInfoComponent
+  },
+  
+  {
+    path: 'carChange',
+    component: CarChangeComponent
   }
 ];
 
