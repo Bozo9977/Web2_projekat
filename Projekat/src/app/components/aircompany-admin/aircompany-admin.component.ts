@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AircompanyAdminComponent implements OnInit {
   destinationClicked: boolean = true;
-  
+  flightClicked: boolean = true;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -15,5 +16,9 @@ export class AircompanyAdminComponent implements OnInit {
   
   newDestinationClicked(){
     this.destinationClicked = !this.destinationClicked;
+  }
+
+  newFlightClicked(){
+    this.flightClicked = !this.flightClicked;
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-flight-info',
@@ -6,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./flight-info.component.css']
 })
 export class FlightInfoComponent implements OnInit {
+  model: NgbDateStruct;
 
   constructor() { }
 

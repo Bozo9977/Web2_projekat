@@ -27,7 +27,7 @@
                 <div class="dropdown mr-sm-2">
                     <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Flights</button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" routerLink="/flight_info">Add flight</a>
+                        <button class="dropdown-item" (click)="newFlightClicked()">Add flight</button>
                         <a class="dropdown-item" href="#">Quick reservations</a>
                         <a class="dropdown-item" href="#">Flight seats</a>
                         <a class="dropdown-item" href="#">Price list</a>
@@ -57,4 +57,10 @@
         <span aria-hidden="true" style="font-size: 25px;">&times;</span>
       </button>
     <app-destinations></app-destinations>
+</div>
+<div [hidden]="flightClicked">
+    <button type="button" class="close mr-sm-5" data-dismiss="alert" aria-label="Close" (click)="newFlightClicked()">
+        <span aria-hidden="true" style="font-size: 25px;">&times;</span>
+      </button>
+    <app-flight-info></app-flight-info>
 </div>

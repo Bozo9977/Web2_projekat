@@ -12,4 +12,8 @@ export class AddAdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onAddAdmin(){
+    
+  }
+
 }
