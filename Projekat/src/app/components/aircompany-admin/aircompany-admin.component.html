@@ -9,7 +9,7 @@
                 <button type="button" class="btn btn-outline-primary ml-auto" routerLink="/companyInfo">Company info</button>
             </li>
             <li class="nav-item">
-                <button type="button" class="btn btn-outline-primary">Destinations</button>
+                <button type="button" class="btn btn-outline-primary" (click)="newDestinationClicked()">Destinations</button>
             </li>
         </ul>
     </div>
@@ -27,7 +27,7 @@
                 <div class="dropdown mr-sm-2">
                     <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Flights</button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item"  routerLink="/flight_info">Add flight</a>
+                        <a class="dropdown-item" routerLink="/flight_info">Add flight</a>
                         <a class="dropdown-item" href="#">Quick reservations</a>
                         <a class="dropdown-item" href="#">Flight seats</a>
                         <a class="dropdown-item" href="#">Price list</a>
@@ -51,3 +51,10 @@
         </ul>
     </div>
 </nav>
+
+<div [hidden]="destinationClicked">
+    <button type="button" class="close mr-sm-5" data-dismiss="alert" aria-label="Close" (click)="newDestinationClicked()">
+        <span aria-hidden="true" style="font-size: 25px;">&times;</span>
+      </button>
+    <app-destinations></app-destinations>
+</div>

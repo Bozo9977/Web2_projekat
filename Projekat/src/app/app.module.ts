@@ -16,6 +16,7 @@ import { FlightInfoComponent } from './components/flight-info/flight-info.compon
 import { BranchOfficeComponent } from './components/branch-office/branch-office.component';
 import { PricelistComponent } from './components/pricelist/pricelist.component';
 import { AddPriceComponent } from './components/add-price/add-price.component';
+import { DestinationsComponent } from './components/destinations/destinations.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AddPriceComponent } from './components/add-price/add-price.component';
     FlightInfoComponent,
     BranchOfficeComponent,
     PricelistComponent,
-    AddPriceComponent
+    AddPriceComponent,
+    DestinationsComponent
   ],
   imports: [
     BrowserModule,
