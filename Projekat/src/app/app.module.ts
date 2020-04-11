@@ -17,6 +17,9 @@ import { BranchOfficeComponent } from './components/branch-office/branch-office.
 import { PricelistComponent } from './components/pricelist/pricelist.component';
 import { AddPriceComponent } from './components/add-price/add-price.component';
 import { DestinationsComponent } from './components/destinations/destinations.component';
+import { AdministratorComponent } from './components/administrator/administrator.component';
+import { RegistrationCompanyComponent } from './components/registration-company/registration-company.component';
+import { AddAdminComponent } from './components/add-admin/add-admin.component';
 
 
 @NgModule({
@@ -35,7 +38,10 @@ import { DestinationsComponent } from './components/destinations/destinations.co
     BranchOfficeComponent,
     PricelistComponent,
     AddPriceComponent,
-    DestinationsComponent
+    DestinationsComponent,
+    AdministratorComponent,
+    RegistrationCompanyComponent,
+    AddAdminComponent
   ],
   imports: [
     BrowserModule,

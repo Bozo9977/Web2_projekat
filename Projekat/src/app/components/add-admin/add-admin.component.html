@@ -1,0 +1,26 @@
+<div class="signup-form">
+    <form [formGroup]="addAdminForm" (ngSubmit)="onAddAdmin()">
+    <h2>Administrator</h2>
+        <div class="form-group">
+            <input type="emailAdmin" class="form-control" name="emailAdmin" placeholder="Email" formControlName = "addAdminEmail">
+        </div>
+        <div class="form-group">
+            <input type="firstNameAdmin" class="form-control" name="firstNameAdmin" placeholder="First Name" formControlName = "addAdminFirstName">
+        </div>        
+        <div class="form-group">
+          <input type="lastNameAdmin" class="form-control" name="lastNameAdmin" placeholder="Last Name" formControlName = "addAdminLastName">
+        </div>   
+       <div class="form-group">
+         <input type="cityAdmin" class="form-control" name="cityAdmin" placeholder="City" formControlName = "addAdminCity">
+        </div>   
+        <div class="form-group">
+          <input type="passwordAdmin" class="form-control" name="passwordAdmin" placeholder="Password" formControlName = "addAdminPassword">
+        </div>   
+        <div class="form-group">
+          <input type="password2Admin" class="form-control" name="password2Admin" placeholder="Confirm Password" formControlName = "addAdminConfirmPassword">
+        </div>  
+      <div>
+        <button type="button" class="btn btn-secondary btn-lg btn-block">Add</button>
+      </div>
+    </form>
+  </div>

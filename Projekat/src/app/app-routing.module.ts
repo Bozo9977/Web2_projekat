@@ -13,6 +13,9 @@ import { AircompanyAdminComponent } from './components/aircompany-admin/aircompa
 import { BranchOfficeComponent } from './components/branch-office/branch-office.component';
 import { PricelistComponent } from './components/pricelist/pricelist.component';
 import { AddPriceComponent } from './components/add-price/add-price.component';
+import { AdministratorComponent } from './components/administrator/administrator.component';
+import { RegistrationCompanyComponent } from './components/registration-company/registration-company.component';
+import { AddAdminComponent } from './components/add-admin/add-admin.component';
 
 const routes: Routes = [
   {
@@ -75,7 +78,23 @@ const routes: Routes = [
   {
     path: 'addPrice',
     component: AddPriceComponent
+  },
+
+  {
+    path: 'administrator',
+    component: AdministratorComponent
+  },
+
+  {
+    path: 'registration',
+    component: RegistrationCompanyComponent
+  },
+
+  {
+    path: 'addAdmin-path',
+    component: AddAdminComponent
   }
+
 ];
 
 @NgModule({
