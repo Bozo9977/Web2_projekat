@@ -13,6 +13,9 @@ import { CarChangeComponent } from './components/car-change/car-change.component
 import { CompanyInfoComponent } from './components/company-info/company-info.component';
 import { AircompanyAdminComponent } from './components/aircompany-admin/aircompany-admin.component';
 import { FlightInfoComponent } from './components/flight-info/flight-info.component';
+import { BranchOfficeComponent } from './components/branch-office/branch-office.component';
+import { PricelistComponent } from './components/pricelist/pricelist.component';
+import { AddPriceComponent } from './components/add-price/add-price.component';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import { FlightInfoComponent } from './components/flight-info/flight-info.compon
     CarChangeComponent,
     CompanyInfoComponent,
     AircompanyAdminComponent,
-    FlightInfoComponent
+    FlightInfoComponent,
+    BranchOfficeComponent,
+    PricelistComponent,
+    AddPriceComponent
   ],
   imports: [
     BrowserModule,

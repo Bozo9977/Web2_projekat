@@ -10,6 +10,9 @@ import { CarChangeComponent } from './components/car-change/car-change.component
 import { CompanyInfoComponent } from './components/company-info/company-info.component';
 import { FlightInfoComponent } from './components/flight-info/flight-info.component';
 import { AircompanyAdminComponent } from './components/aircompany-admin/aircompany-admin.component';
+import { BranchOfficeComponent } from './components/branch-office/branch-office.component';
+import { PricelistComponent } from './components/pricelist/pricelist.component';
+import { AddPriceComponent } from './components/add-price/add-price.component';
 
 const routes: Routes = [
   {
@@ -57,6 +60,21 @@ const routes: Routes = [
   {
     path: 'flight_info',
     component: FlightInfoComponent
+  },
+
+  {
+    path: 'branchOffice',
+    component: BranchOfficeComponent
+  },
+
+  {
+    path: 'priceList-path',
+    component: PricelistComponent
+  },
+
+  {
+    path: 'addPrice',
+    component: AddPriceComponent
   }
 ];
 
