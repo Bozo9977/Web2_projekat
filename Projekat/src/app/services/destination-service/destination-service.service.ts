@@ -18,12 +18,14 @@ export class DestinationServiceService {
     const d1 = new Destination(1, 'Munich');
     const d2 = new Destination(2, 'Washington');
     const d3 = new Destination(3, 'Belgrade');
-    const d4 = new Destination(4, 'London');
+    const d4 = new Destination(40, 'London');
+    const d5 = new Destination(400, 'Paris');
 
     allDest.push(d1);
     allDest.push(d2);
     allDest.push(d3);
     allDest.push(d4);
+    allDest.push(d5);
 
     return allDest;
   }

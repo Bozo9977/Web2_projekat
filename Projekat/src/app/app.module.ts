@@ -20,7 +20,7 @@ import { DestinationsComponent } from './components/destinations/destinations.co
 import { AdministratorComponent } from './components/administrator/administrator.component';
 import { RegistrationCompanyComponent } from './components/registration-company/registration-company.component';
 import { AddAdminComponent } from './components/add-admin/add-admin.component';
-
+import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,9 @@ import { AddAdminComponent } from './components/add-admin/add-admin.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DlDateTimeDateModule,  // <--- Determines the data type of the model
+    DlDateTimePickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

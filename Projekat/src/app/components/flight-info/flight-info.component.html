@@ -11,15 +11,80 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form>
-                            <div class="form-inline row">
-                                <label for="code" class="col-4 col-form-label">City</label> 
+                            <div class="form-group row">
+                                <label for="departure" class="col-4 col-form-label" style="font-size: large;">City of departure</label> 
                                 <div class="col-8">
-                                    <input id="code" name="code" placeholder="City" class="form-control here" type="text">
-                                    <button type="button" class="btn btn-outline-primary">Add</button>
+                                    <select id="destinations"  class="fomr-control" size="3" style="width: inherit;">
+                                        <option *ngFor="let dest of destinationsSelect">
+                                         {{dest.city}}
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="form-inline row">
-                                
+                            <div class="form-group row">
+                                <label for="arrival" class="col-4 col-form-label" style="font-size: large;">City of arrival</label> 
+                                <div class="col-8">
+                                    <select id="destinations"  class="fomr-control" size="3" style="width: inherit;">
+                                        <option *ngFor="let dest of destinationsSelect">
+                                         {{dest.city}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="takeoff" class="col-4 col-form-label" style="font-size: large;">Take-off date and time</label> 
+                                <div class="col-8">
+                                    <dl-date-time-picker
+                                        startView="day"
+                                        maxView="year"
+                                        minView="minute"
+                                        minuteStep="5"
+                                        [(ngModel)]="takeoff" name="takeoff"
+                                    >
+                                    </dl-date-time-picker>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="touchdown" class="col-4 col-form-label" style="font-size: large;">Touchdown date and time</label> 
+                                <div class="col-8">
+                                    <dl-date-time-picker
+                                        startView="day"
+                                        maxView="year"
+                                        minView="minute"
+                                        minuteStep="5"
+                                        [(ngModel)]="touchdown" name="touchdown"
+                                    >
+                                    </dl-date-time-picker>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="length" class="col-4 col-form-label" style="font-size: large;">Travel length</label> 
+                                <div class="col-8">
+                                    <input id="length" name="length" placeholder="Km" class="form-control " type="number">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="length" class="col-4 col-form-label" style="font-size: large;">Connections</label> 
+                                <div class="col-8">
+                                <select id="destinations" multiple class="fomr-control" size="3" style="width: inherit;">
+                                    <option *ngFor="let dest of destinationsSelect">
+                                     {{dest.city}}
+                                    </option>
+                                </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="length" class="col-4 col-form-label" style="font-size: large;">Price</label> 
+                                <div class="col-8">
+                                    <input id="length" name="length" placeholder="€" class="form-control " type="number">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <button type="button" class="btn btn-outline-primary btn-lg btn-block">Add</button>
                             </div>
                         </form>
                     </div>
