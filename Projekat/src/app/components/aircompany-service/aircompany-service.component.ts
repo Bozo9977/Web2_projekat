@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Aircompany } from 'src/app/entities/aircompany/aircompany';
+import { CompanyService } from 'src/app/services/company-service/company.service';
 
 @Component({
   selector: 'app-aircompany-service',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aircompany-service.component.css']
 })
 export class AircompanyServiceComponent implements OnInit {
-
-  constructor() { }
+  airCompanies: Array<Aircompany>;
+  
+  constructor(private airService: CompanyService) { }
 
   ngOnInit(): void {
+    this.airCompanies = this.airService.loadAircompanies();
   }
 
 }

@@ -1,6 +1,6 @@
 
 <div class= "signup-form">
-    <button type="button" style="background-color: white;" aria-label="Close" routerLink="/home">
+    <button type="button" class="btn btn-outline-primary" style="background-color: white;" aria-label="Close" routerLink="/home">
         <img src="assets/images/back.png" height="25px" width="25px">   
         <img src="assets/images/logo1.png" class="rounded-circle mr-auto" data-holder-rendered="true" height="45px" width="45px">         
     </button>
@@ -8,25 +8,27 @@
 
 
 
-    <table class="table table-bordered" style="background-color: white;" > 
+    <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);" > 
         <thead>
             <tr>
             <th></th>
             <th scope="col">Name of service</th>
             <th scope="col">Address</th>
             <th scope="col">Description</th>
-            <th scope="col">Average rating</th>
+            <th scope="col">Rating</th>
             <th>Available flights</th>
             <th>Destinations</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-            <th scope="row">1</th>
-            <td>Bozic trans</td>
-            <td>Bastovanska 2a</td>
-            <td>Nesto</td>
-            <td>10,00</td>
+            <tr *ngFor="let comp of airCompanies">
+                <th scope="row">{{comp.id}}</th>
+                <td>{{comp.name}}</td>
+                <td>{{comp.address}}</td>
+                <td>{{comp.description}}</td>
+                <td>
+                    <ngb-rating [(rate)]="comp.rating" readonly="readonly" max="5" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.rating}}/5)</span>
+                </td>
             <td>
                 <button style="background-color: white" routerLink= "/availableFlight">
                         <img src="assets/images/airplan.png" data-holder-rendered="true" height="25px" width="25px" >                  

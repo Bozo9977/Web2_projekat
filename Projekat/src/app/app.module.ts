@@ -28,6 +28,7 @@ import { UserViewComponent } from './components/user-view/user-view.component';
 import { AircompanyServiceComponent } from './components/aircompany-service/aircompany-service.component';
 import { AvailableFlightComponent } from './components/available-flight/available-flight.component';
 import { DestinationViewComponent } from './components/destination-view/destination-view.component';
+import { NgbModule, NgbRating } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { DestinationViewComponent } from './components/destination-view/destinat
     ReactiveFormsModule,
     DlDateTimeDateModule,  // <--- Determines the data type of the model
     DlDateTimePickerModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

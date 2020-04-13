@@ -5,13 +5,13 @@
                 <button type="button" class="btn btn-info" routerLink="/userInfo">User profile</button>
             </li>
             <li class="nav-item">
-                <button type="button" class="btn btn-outline-primary ml-auto">Book flight</button>
+                <button type="button" class="btn btn-outline-primary ml-auto" (click)="flightClicked()">Book flight</button>
             </li>
             <li class="nav-item">
                 <button type="button" class="btn btn-outline-primary">Cancel flight</button>
             </li>
             <li class="nav-item">
-                <button type="button" class="btn btn-outline-primary">Rate aircompany</button>
+                <button type="button" class="btn btn-outline-primary" (click)="aircompanyClicked()">Rate aircompany</button>
             </li>
         </ul>
     </div>
@@ -26,13 +26,13 @@
     <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
         <ul class="navbar-nav ml-auto text-center nav-fill w-100">
             <li class="nav-item">
-                <button type="button" class="btn btn-outline-primary">Rent car</button>
+                <button type="button" class="btn btn-outline-primary" (click)="carClicked()">Rent car</button>
             </li>
             <li class="nav-item">
                 <button type="button" class="btn btn-outline-primary">Cancel car</button>
             </li>
             <li class="nav-item">
-                <button type="button" class="btn btn-outline-primary mr-auto">Rate car company</button>
+                <button type="button" class="btn btn-outline-primary mr-auto" (click)="carcompanyClicked()">Rate car company</button>
             </li>
             <li class="nav-item">
                 <button type="button" class="btn btn-dark" routerLink="/">Logout</button>
@@ -40,3 +40,31 @@
         </ul>
     </div>
 </nav>
+
+<div [hidden]="bookFlight">
+    <button type="button" class="close mr-sm-5" data-dismiss="alert" aria-label="Close" (click)="flightClicked()">
+        <span aria-hidden="true" style="font-size: 25px;">&times;</span>
+      </button>
+    <app-aircompany-service></app-aircompany-service>
+</div>
+
+<div [hidden]="aircompany">
+    <button type="button" class="close mr-sm-5" data-dismiss="alert" aria-label="Close" (click)="aircompanyClicked()">
+        <span aria-hidden="true" style="font-size: 25px;">&times;</span>
+      </button>
+    <app-aircompany-service></app-aircompany-service>
+</div>
+
+<div [hidden]="rentCar">
+    <button type="button" class="close mr-sm-5" data-dismiss="alert" aria-label="Close" (click)="carClicked()">
+        <span aria-hidden="true" style="font-size: 25px;">&times;</span>
+      </button>
+      <app-rent-a-car-services></app-rent-a-car-services>
+</div>
+
+<div [hidden]="carcompany">
+    <button type="button" class="close mr-sm-5" data-dismiss="alert" aria-label="Close" (click)="carcompanyClicked()">
+        <span aria-hidden="true" style="font-size: 25px;">&times;</span>
+      </button>
+      <app-rent-a-car-services></app-rent-a-car-services>
+</div>
