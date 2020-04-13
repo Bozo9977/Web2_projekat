@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
+  rentACarClicked: boolean = true;
+
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+newRentACarClicked(){
+    this.rentACarClicked = !this.rentACarClicked;
   }
 
 }

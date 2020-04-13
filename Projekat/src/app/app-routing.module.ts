@@ -16,6 +16,12 @@ import { AddPriceComponent } from './components/add-price/add-price.component';
 import { AdministratorComponent } from './components/administrator/administrator.component';
 import { RegistrationCompanyComponent } from './components/registration-company/registration-company.component';
 import { AddAdminComponent } from './components/add-admin/add-admin.component';
+import { RentACarServicesComponent } from './components/rent-a-car-services/rent-a-car-services.component';
+import { AvailableCarsComponent } from './components/available-cars/available-cars.component';
+import { BranchOfficeViewComponent } from './components/branch-office-view/branch-office-view.component';
+import { AircompanyServiceComponent } from './components/aircompany-service/aircompany-service.component';
+import { AvailableFlightComponent } from './components/available-flight/available-flight.component';
+import { DestinationViewComponent } from './components/destination-view/destination-view.component';
 
 const routes: Routes = [
   {
@@ -93,6 +99,36 @@ const routes: Routes = [
   {
     path: 'addAdmin-path',
     component: AddAdminComponent
+  },
+
+  {
+    path: 'rentACarServices',
+    component: RentACarServicesComponent
+  },
+
+  {
+    path: 'branchOfficeView',
+    component: BranchOfficeViewComponent
+  },
+
+  {
+    path: 'availableCars',
+    component: AvailableCarsComponent
+  },
+
+  {
+    path: 'aircompanyService',
+    component: AircompanyServiceComponent
+  },
+
+  {
+    path: 'availableFlight',
+    component: AvailableFlightComponent
+  },
+
+  {
+    path: 'destinationView',
+    component: DestinationViewComponent
   }
 
 ];

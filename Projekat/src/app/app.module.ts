@@ -21,6 +21,13 @@ import { AdministratorComponent } from './components/administrator/administrator
 import { RegistrationCompanyComponent } from './components/registration-company/registration-company.component';
 import { AddAdminComponent } from './components/add-admin/add-admin.component';
 import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
+import { RentACarServicesComponent } from './components/rent-a-car-services/rent-a-car-services.component';
+import { AvailableCarsComponent } from './components/available-cars/available-cars.component';
+import { BranchOfficeViewComponent } from './components/branch-office-view/branch-office-view.component';
+import { UserViewComponent } from './components/user-view/user-view.component';
+import { AircompanyServiceComponent } from './components/aircompany-service/aircompany-service.component';
+import { AvailableFlightComponent } from './components/available-flight/available-flight.component';
+import { DestinationViewComponent } from './components/destination-view/destination-view.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +48,14 @@ import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-
     DestinationsComponent,
     AdministratorComponent,
     RegistrationCompanyComponent,
-    AddAdminComponent
+    AddAdminComponent,
+    RentACarServicesComponent,
+    AvailableCarsComponent,
+    BranchOfficeViewComponent,
+    UserViewComponent,
+    AircompanyServiceComponent,
+    AvailableFlightComponent,
+    DestinationViewComponent
   ],
   imports: [
     BrowserModule,
