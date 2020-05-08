@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-car-info',
@@ -7,9 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarInfoComponent implements OnInit {
 
+  addCarForm: FormGroup;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  private initForm() {
+    this.addCarForm = new FormGroup({
+      'code': new FormControl(''),
+      'mark': new FormControl(''),
+      'yearProduction': new FormControl(''),
+      'fuel': new FormControl(''),
+      'gearshift': new FormControl(''),
+      'seat': new FormControl(''),
+      'door': new FormControl(''),
+      'airConditioning': new FormControl(''),
+      'status': new FormControl(''),
+      'imageCar': new FormControl(''),
+    });
+  }
+
+  onAddCar() {
+    console.log(this.addCarForm.value);
+    console.log(this.addCarForm);
   }
 
 }

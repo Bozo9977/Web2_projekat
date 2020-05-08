@@ -1,26 +1,26 @@
 <div class="signup-form">
-    <form  (ngSubmit)="onAddAdmin()">
+    <form [formGroup]="addAdminForm" (ngSubmit)="onAddAdmin()">
     <h2>Administrator</h2>
         <div class="form-group">
-            <input type="emailAdmin" class="form-control" name="emailAdmin" placeholder="Email" formControlName = "addAdminEmail">
+            <input type="emailAdmin" class="form-control" name="emailAdmin" placeholder="Email" formControlName = "emailAdmin">
         </div>
         <div class="form-group">
-            <input type="firstNameAdmin" class="form-control" name="firstNameAdmin" placeholder="First Name" formControlName = "addAdminFirstName">
+            <input type="firstNameAdmin" class="form-control" name="firstNameAdmin" placeholder="First Name" formControlName = "firstNameAdmin">
         </div>        
         <div class="form-group">
-          <input type="lastNameAdmin" class="form-control" name="lastNameAdmin" placeholder="Last Name" formControlName = "addAdminLastName">
+          <input type="lastNameAdmin" class="form-control" name="lastNameAdmin" placeholder="Last Name" formControlName = "lastNameAdmin">
         </div>   
        <div class="form-group">
-         <input type="cityAdmin" class="form-control" name="cityAdmin" placeholder="City" formControlName = "addAdminCity">
+         <input type="cityAdmin" class="form-control" name="cityAdmin" placeholder="City" formControlName = "cityAdmin">
         </div>   
         <div class="form-group">
-          <input type="passwordAdmin" class="form-control" name="passwordAdmin" placeholder="Password" formControlName = "addAdminPassword">
+          <input type="password" class="form-control" name="passwordAdmin" placeholder="Password" formControlName = "passwordAdmin">
         </div>   
         <div class="form-group">
-          <input type="password2Admin" class="form-control" name="password2Admin" placeholder="Confirm Password" formControlName = "addAdminConfirmPassword">
+          <input type="password" class="form-control" name="password2Admin" placeholder="Confirm Password" formControlName = "password2Admin">
         </div>  
-      <div>
-        <button type="button" class="btn btn-secondary btn-lg btn-block">Add</button>
+      <div class="form-group">
+        <button type="submit" class="btn btn-secondary btn-lg btn-block">Add</button>
       </div>
     </form>
   </div>

@@ -1,5 +1,5 @@
 <div class="signup-form">
-    <form>
+    <form [formGroup]="priceForm" (ngSubmit)="addPrice()">
     <h2>Add price</h2>
         <div class="form-group">
           <div class="row">
@@ -7,15 +7,15 @@
         </div>
         <div class="form-group">
           <div class="col-xs-6">
-            <input type="text" class="form-control" name="priceDay" placeholder="Price per day" formControlName="registerPriceDay">
+            <input type="text" class="form-control" name="priceDay" placeholder="Price per day" formControlName="priceDay">
           </div>
         </div>   
         <div class="form-group">
           <div class="col-xs-6">
-            <input type="text" class="form-control" name="priceDay" placeholder="Hourly rent" formControlName="registerPriceHour">
+            <input type="text" class="form-control" name="priceHour" placeholder="Hourly rent" formControlName="priceHour">
           </div>
         </div>   
         <div>
-          <button type="button" class="btn btn-secondary btn-lg btn-block">Add</button>
+          <button type="submit" class="btn btn-secondary btn-lg btn-block">Add</button>
         </div>
   </div>

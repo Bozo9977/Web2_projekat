@@ -10,28 +10,28 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <form>
+                        <form [formGroup]="companyInfoForm" (ngSubmit)="changeCompany()">
                           <div class="form-group row">
                             <label for="nameService" class="col-4 col-form-label">Name</label> 
                             <div class="col-8">
-                              <input id="nameService" name="nameService" placeholder="NameService" class="form-control here" type="text">
+                              <input id="nameService" name="nameService" placeholder="NameService" formControlName = "nameService" class="form-control here" type="text">
                             </div>
                           </div>
                               <div class="form-group row">
                                 <label for="address" class="col-4 col-form-label">Address</label> 
                                 <div class="col-8">
-                                  <input id="address" name="address" placeholder="Address" class="form-control here" type="text">
+                                  <input id="address" name="address" placeholder="Address" formControlName = "address" class="form-control  here" type="text">
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="description" class="col-4 col-form-label">Description</label> 
                                 <div class="col-8">
-                                  <input id="description" name="description" placeholder="Description" class="form-control here" type="text">
+                                  <input id="description" name="description" placeholder="Description" formControlName = "description" class="form-control here" type="text">
                                 </div>
                               </div>
   
                               <div>
-                                <button type="button" class="btn btn-secondary btn-lg btn-block">Change</button>
+                                <button type="submit" class="btn btn-secondary btn-lg btn-block">Change</button>
                               </div>
                             </form>
                     </div>
