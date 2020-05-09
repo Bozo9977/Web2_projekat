@@ -56,7 +56,7 @@ import { NgbModule, NgbRating } from '@ng-bootstrap/ng-bootstrap';
     UserViewComponent,
     AircompanyServiceComponent,
     AvailableFlightComponent,
-    DestinationViewComponent
+    DestinationViewComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,9 +16,13 @@ export class AircompanyAdminComponent implements OnInit {
   
   newDestinationClicked(){
     this.destinationClicked = !this.destinationClicked;
+    if(!this.flightClicked)
+      this.flightClicked = !this.flightClicked;
   }
 
   newFlightClicked(){
     this.flightClicked = !this.flightClicked;
+    if(!this.destinationClicked)
+      this.destinationClicked = !this.destinationClicked;
   }
 }

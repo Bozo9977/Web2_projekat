@@ -1,17 +1,5 @@
 import { DatePipe } from '@angular/common';
 
-export enum TripType{
-    ROUND_TRIP,
-    ONE_WAY,
-    MULTY_CITY
-}
-
-export enum Class{
-    ECONOMY,
-    BUSINESS,
-    FIRST
-}
-
 export class Flight {
     departureCity: string;
     arrivalCity: string;
@@ -20,10 +8,8 @@ export class Flight {
     travelLength: number;
     connections: string[];
     price: number;
-    tripTipe: TripType;
-    class: Class;
 
-    constructor(departure: string, arrival: string, takeoff: DatePipe, touchdown: DatePipe, length: number, connections: string[], price: number, type: TripType, tripClass: Class){
+    constructor(departure: string, arrival: string, takeoff: DatePipe, touchdown: DatePipe, length: number, connections: string[], price: number){
         this.departureCity = departure;
         this.arrivalCity = arrival;
         this.takeOff = takeoff;
@@ -31,8 +17,6 @@ export class Flight {
         this.travelLength = length;
         this.connections = connections;
         this.price = price;
-        this.tripTipe = type;
-        this.class = tripClass;
     }
 
 }

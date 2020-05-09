@@ -3,6 +3,8 @@ import { DlDateTimeCoreModule } from 'angular-bootstrap-datetimepicker';
 import { DatePipe } from '@angular/common';
 import { DestinationServiceService } from 'src/app/services/destination-service/destination-service.service';
 import { Destination } from 'src/app/entities/destination/destination';
+import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { Flight} from 'src/app/entities/flight/flight';
 
 @Component({
   selector: 'app-flight-info',
@@ -11,8 +13,8 @@ import { Destination } from 'src/app/entities/destination/destination';
 })
 export class FlightInfoComponent implements OnInit {
  
-  touchdown: DatePipe;
-  takeoff: DatePipe;
+  flightForm: FormGroup;
+
   destinationsSelect: Array<Destination>;
 
   constructor(private destService: DestinationServiceService) { 
@@ -20,10 +22,28 @@ export class FlightInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.destinationsSelect = this.destService.loadDestinations();
+    this.initForm();
   }
 
-  printDest(){
+  private initForm(){
+    this.flightForm = new FormGroup({
+      'departure': new FormControl(null, [Validators.required]) ,
+      'arrival':new FormControl(null, [Validators.required]),
+      'takeOff': new FormControl(null,[Validators.required]),
+      'touchDown': new FormControl(null, [Validators.required]),
+      'length': new FormControl('', [Validators.required]),
+      'connections': new FormControl(''),
+      'price': new FormControl('',[Validators.required])
+    });
+  }
+  submit(){
+    let flight: Flight = this.flightForm.value;
+    console.log(flight);
+    this.resetForm(this.flightForm);
+  }
 
+  resetForm(form: FormGroup){
+    form.reset();
   }
 
 }
