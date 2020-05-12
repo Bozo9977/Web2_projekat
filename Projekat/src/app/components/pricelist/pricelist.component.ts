@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Pricelist } from 'src/app/entities/pricelist/pricelist';
+import { PricelistService } from 'src/app/services/pricelist-service/pricelist.service';
 
 @Component({
   selector: 'app-pricelist',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PricelistComponent implements OnInit {
 
-  constructor() { }
+  pricelist: Array<Pricelist>;
+  constructor(private price: PricelistService) { }
 
   ngOnInit(): void {
+    this.pricelist = this.price.loadPricelist();
   }
 
 }

@@ -16,12 +16,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Bozic trans</td>
-              <td>Novi Sad</td>
-              <td>Bastovanska 2a</td>
-              <td>0643385848</td>
+            <tr *ngFor="let comp of branchOffices">
+              <th scope="row">{{comp.id}}</th>
+              <td>{{comp.name}}</td>
+              <td>{{comp.city}}</td>
+              <td>{{comp.address}}</td>
+              <td>{{comp.telephone}}</td>
             </tr>
           </tbody>
         </table>  

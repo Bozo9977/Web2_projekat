@@ -29,6 +29,7 @@ import { AircompanyServiceComponent } from './components/aircompany-service/airc
 import { AvailableFlightComponent } from './components/available-flight/available-flight.component';
 import { DestinationViewComponent } from './components/destination-view/destination-view.component';
 import { NgbModule, NgbRating } from '@ng-bootstrap/ng-bootstrap';
+import { CarInfoChangeComponent } from './components/car-info-change/car-info-change.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { NgbModule, NgbRating } from '@ng-bootstrap/ng-bootstrap';
     AircompanyServiceComponent,
     AvailableFlightComponent,
     DestinationViewComponent,
+    CarInfoChangeComponent,
   ],
   imports: [
     BrowserModule,
