@@ -32,7 +32,7 @@ export class CarInfoComponent implements OnInit {
   }
 
   onAddCar() {
-    console.log(this.addCarForm.value);
+    //.log(id);
     console.log(this.addCarForm);
   }
 

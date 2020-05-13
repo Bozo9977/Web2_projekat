@@ -22,6 +22,7 @@ import { BranchOfficeViewComponent } from './components/branch-office-view/branc
 import { AircompanyServiceComponent } from './components/aircompany-service/aircompany-service.component';
 import { AvailableFlightComponent } from './components/available-flight/available-flight.component';
 import { DestinationViewComponent } from './components/destination-view/destination-view.component';
+import { CarInfoChangeComponent } from './components/car-info-change/car-info-change.component';
 
 const routes: Routes = [
   {
@@ -58,10 +59,7 @@ const routes: Routes = [
     path: 'carsInfo',
     component: CarInfoComponent
   },
-  {
-    path: 'carChange',
-    component: CarChangeComponent
-  },
+
   {
     path: 'companyInfo',
     component: CompanyInfoComponent
@@ -129,8 +127,14 @@ const routes: Routes = [
   {
     path: 'destinationView',
     component: DestinationViewComponent
-  }
-
+  },
+  {
+    path: "carChange",
+    children: [
+      { path: "", component: CarChangeComponent },
+      { path: ":id/carInfoChange", component: CarInfoChangeComponent },
+    ]
+  },
 ];
 
 @NgModule({

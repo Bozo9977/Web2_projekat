@@ -12,13 +12,13 @@ export class CarChangeComponent implements OnInit {
   carsList: Array<Cars>;
   
   constructor(private cars: CarsServiceService) { }
+  
 
   ngOnInit(): void {
     this.carsList = this.cars.loadCars();
   }
 
   deleteCar(idCar: number) {
-    //alert('Open ' + idCar);
     this.carsList.splice(this.carsList.findIndex(x => x.id == idCar), 1);
     //window.location.reload();
     console.log(idCar);

@@ -32,23 +32,23 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
+            <tr  *ngFor="let comp of carsList">
+              <th scope="row">{{comp.id}}</th>
               
               <td>
-                <img src="assets/images/audi.jpg" height="55px" width="85px" data-holder-rendered="true">
+                <img src="{{comp.image}}" height="55px" width="85px" data-holder-rendered="true">
               </td>
-              <td>5554</td>
-              <td>Audi A4</td>
-              <td>2010.</td>
-              <td>Disel</td>
-              <td>Manual</td>
-              <td>5</td>
-              <td>4/5</td>
-              <td>Yes</td>
-              <td>2</td>
-              <td>1200</td>
-              <td>500</td>
+              <td>{{comp.code}}</td>
+              <td>{{comp.mark}}</td>
+              <td>{{comp.yearOfProduction}}</td>
+              <td>{{comp.fuel}}</td>
+              <td>{{comp.gearshift}}</td>
+              <td>{{comp.seat}}</td>
+              <td>{{comp.door}}</td>
+              <td>{{comp.airConditioning}}</td>
+              <td>{{comp.bags}}</td>
+              <td>{{comp.rentPerDay}}</td>
+              <td>{{comp.hourlyRent}}</td>
             </tr>
           </tbody>
         </table>  

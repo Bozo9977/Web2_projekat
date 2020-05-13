@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Pricelist } from 'src/app/entities/pricelist/pricelist';
-import { PricelistService } from 'src/app/services/pricelist-service/pricelist.service';
+import { Cars } from 'src/app/entities/cars/cars';
+import { CarsServiceService } from 'src/app/services/cars-service/cars-service.service';
 
 @Component({
   selector: 'app-pricelist',
@@ -9,11 +9,11 @@ import { PricelistService } from 'src/app/services/pricelist-service/pricelist.s
 })
 export class PricelistComponent implements OnInit {
 
-  pricelist: Array<Pricelist>;
-  constructor(private price: PricelistService) { }
+  carsList: Array<Cars>;
+  constructor(private price: CarsServiceService) { }
 
   ngOnInit(): void {
-    this.pricelist = this.price.loadPricelist();
+    this.carsList = this.price.loadCars();
   }
 
 }
