@@ -30,6 +30,7 @@ import { AvailableFlightComponent } from './components/available-flight/availabl
 import { DestinationViewComponent } from './components/destination-view/destination-view.component';
 import { NgbModule, NgbRating } from '@ng-bootstrap/ng-bootstrap';
 import { CarInfoChangeComponent } from './components/car-info-change/car-info-change.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { CarInfoChangeComponent } from './components/car-info-change/car-info-ch
     ReactiveFormsModule,
     DlDateTimeDateModule,  // <--- Determines the data type of the model
     DlDateTimePickerModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
