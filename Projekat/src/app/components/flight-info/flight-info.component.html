@@ -68,7 +68,7 @@
                             <div class="form-group row">
                                 <label for="length" class="col-4 col-form-label" style="font-size: large;">Connections</label> 
                                 <div class="col-8">
-                                <select id="destinations" multiple class="fomr-control" size="3" style="width: inherit;" formControlName="connections">
+                                <select id="destinations" multiple class="form-control" size="3" style="width: inherit;" formControlName="connections">
                                     <option *ngFor="let dest of destinationsSelect">
                                      {{dest.city}}
                                     </option>
@@ -78,9 +78,21 @@
 
 
                             <div class="form-group row">
-                                <label for="length" class="col-4 col-form-label" style="font-size: large;">Price</label> 
-                                <div class="col-8">
-                                    <input id="length" name="length" placeholder="€" class="form-control " type="number" formControlName="price">
+                                <label for="price" class="col-4 col-form-label" style="font-size: large;">Price & seats</label> 
+                                <div class="col-8 row">
+                                    <!-- <div class="row"> -->
+                                        <label class="col-4 col-form-label" style="font-size: medium;">First class</label>
+                                        <input id="length" name="length" placeholder="€" class="form-control " type="number" formControlName="priceFirst">
+                                        <input type="number" formControlName="numberFirst" class="form-control" placeholder="number of seats">
+                                    <!-- </div> -->
+                                    <label class="col-4 col-form-label" style="font-size: medium;">Business class</label>
+                                        <input id="length" name="length" placeholder="€" class="form-control " type="number" formControlName="priceBusiness">
+                                        <input type="number" formControlName="numberBusiness" class="form-control" placeholder="number of seats">
+                                    <!-- </div> -->
+                                    <label class="col-4 col-form-label" style="font-size: medium;">Economy class</label>
+                                        <input id="length" name="length" placeholder="€" class="form-control " type="number" formControlName="priceEconomy">
+                                        <input type="number" formControlName="numberEconomy" class="form-control" placeholder="number of seats">
+                                    <!-- </div> -->
                                 </div>
                             </div>
 

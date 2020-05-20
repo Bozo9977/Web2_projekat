@@ -11,5 +11,7 @@ namespace ProjekatApi.Model
         [Key]
         public int Id { get; set; }
         public string City { get; set; }
+
+        //dodati listu aviokompanije koje mogu operisati na ovoj poziciji, ili aviokomp koja je dodala ovu dest
     }
 }

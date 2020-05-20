@@ -15,5 +15,9 @@ namespace ProjekatApi
         }
 
         public DbSet<Destination> Destinations { get; set; }
+
+        public DbSet<FlightSeat> FlightSeats { get; set; }
+
+        public DbSet<Flight> Flights { get; set; }
     }
 }

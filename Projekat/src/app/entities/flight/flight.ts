@@ -1,22 +1,36 @@
 import { DatePipe } from '@angular/common';
+import { Destination } from '../destination/destination';
 
 export class Flight {
-    departureCity: string;
-    arrivalCity: string;
+    departure: string;
+    arrival: string;
     takeOff: DatePipe;
     touchDown: DatePipe;
-    travelLength: number;
-    connections: string[];
-    price: number;
-
-    constructor(departure: string, arrival: string, takeoff: DatePipe, touchdown: DatePipe, length: number, connections: string[], price: number){
-        this.departureCity = departure;
-        this.arrivalCity = arrival;
+    length: number;
+    connections: Destination[];
+    priceFirst: number;
+    numberFirst: number;
+    priceBusiness: number;
+    numberBusiness: number;
+    priceEconomy: number;
+    numberEconomy: number;
+    
+    constructor(departure: string, arrival: string, takeoff: DatePipe, touchdown: DatePipe, length: number, connections: string[], pricefirst: number, numberfirst: number, pricebusiness: number, numberbusiness: number, priceeconomy: number, numbereconomy: number){
+        this.departure = departure;
+        this.arrival = arrival;
         this.takeOff = takeoff;
         this.touchDown = touchdown;
-        this.travelLength = length;
-        this.connections = connections;
-        this.price = price;
+        this.length = length;
+        for(let dest in connections){
+            this.connections.push(new Destination(0, dest));
+        }
+        //this.connections = connections;
+        this.priceFirst = pricefirst;
+        this.numberFirst = numberfirst;
+        this.priceBusiness = pricebusiness;
+        this.numberBusiness = numberbusiness;
+        this.priceEconomy = priceeconomy;
+        this.numberEconomy = numbereconomy;
     }
 
 }

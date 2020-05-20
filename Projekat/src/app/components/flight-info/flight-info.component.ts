@@ -5,6 +5,7 @@ import { DestinationServiceService } from 'src/app/services/destination-service/
 import { Destination } from 'src/app/entities/destination/destination';
 import { FormGroup, Validators, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { Flight} from 'src/app/entities/flight/flight';
+import { FlightService } from 'src/app/services/flight-service/flight.service';
 
 @Component({
   selector: 'app-flight-info',
@@ -17,11 +18,18 @@ export class FlightInfoComponent implements OnInit {
 
   destinationsSelect: Array<Destination>;
 
-  constructor(private destService: DestinationServiceService) { 
+  constructor(private destService: DestinationServiceService, private flightService: FlightService) { 
   }
 
   ngOnInit(): void {
-    this.destinationsSelect = this.destService.loadDestinations();
+    this.destService.getDestinations().subscribe(
+      (res: any) => { 
+        this.destinationsSelect = res as Destination[] 
+      },
+      err => {
+        console.log(err);
+      }
+    );
     this.initForm();
   }
 
@@ -33,17 +41,30 @@ export class FlightInfoComponent implements OnInit {
       'touchDown': new FormControl(null, [Validators.required]),
       'length': new FormControl('', [Validators.required]),
       'connections': new FormControl(''),
-      'price': new FormControl('',[Validators.required])
+      'priceFirst': new FormControl('',[Validators.required]),
+      'numberFirst': new FormControl('',[Validators.required]),
+      'priceBusiness': new FormControl('',[Validators.required]),
+      'numberBusiness':new FormControl('',[Validators.required]),
+      'priceEconomy': new FormControl('',[Validators.required]),
+      'numberEconomy': new FormControl('',[Validators.required])
     });
   }
   submit(){
     let flight: Flight = this.flightForm.value;
     console.log(flight);
-    this.resetForm(this.flightForm);
+
+    this.flightService.addFlight(this.flightForm.value).subscribe(
+      (res: any) => {
+        console.log(res);
+        
+      },
+      err =>{
+        console.log(err);
+      }
+    );
+
+    this.flightForm.reset();
   }
 
-  resetForm(form: FormGroup){
-    form.reset();
-  }
 
 }
