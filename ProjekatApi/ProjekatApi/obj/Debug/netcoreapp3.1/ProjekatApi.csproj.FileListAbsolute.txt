@@ -126,3 +126,4 @@ C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\De
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.dll
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.pdb
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.genruntimeconfig.cache
+C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csprojAssemblyReference.cache

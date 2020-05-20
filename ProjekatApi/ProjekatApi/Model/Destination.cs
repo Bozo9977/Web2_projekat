@@ -10,8 +10,11 @@ namespace ProjekatApi.Model
     {
         [Key]
         public int Id { get; set; }
+        
         public string City { get; set; }
 
         //dodati listu aviokompanije koje mogu operisati na ovoj poziciji, ili aviokomp koja je dodala ovu dest
+
+        public ICollection<FlightDestination> FlightDestinations { get; set; }
     }
 }

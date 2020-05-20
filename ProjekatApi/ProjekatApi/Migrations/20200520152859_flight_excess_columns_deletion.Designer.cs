@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjekatApi;
 
 namespace ProjekatApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200520152859_flight_excess_columns_deletion")]
+    partial class flight_excess_columns_deletion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,13 +29,14 @@ namespace ProjekatApi.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("FlightId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("City")
-                        .IsUnique()
-                        .HasFilter("[City] IS NOT NULL");
+                    b.HasIndex("FlightId");
 
                     b.ToTable("Destinations");
                 });
@@ -65,21 +68,6 @@ namespace ProjekatApi.Migrations
                     b.ToTable("Flights");
                 });
 
-            modelBuilder.Entity("ProjekatApi.Model.FlightDestination", b =>
-                {
-                    b.Property<int>("DestinationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FlightId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DestinationId", "FlightId");
-
-                    b.HasIndex("FlightId");
-
-                    b.ToTable("FlightDestinations");
-                });
-
             modelBuilder.Entity("ProjekatApi.Model.FlightSeat", b =>
                 {
                     b.Property<int>("Id")
@@ -93,8 +81,8 @@ namespace ProjekatApi.Migrations
                     b.Property<int?>("FlightId")
                         .HasColumnType("int");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Reserved")
                         .HasColumnType("bit");
@@ -108,19 +96,11 @@ namespace ProjekatApi.Migrations
                     b.HasCheckConstraint("CK_FlightSeats_Class_Enum_Constraint", "[Class] IN(0, 1, 2)");
                 });
 
-            modelBuilder.Entity("ProjekatApi.Model.FlightDestination", b =>
+            modelBuilder.Entity("ProjekatApi.Model.Destination", b =>
                 {
-                    b.HasOne("ProjekatApi.Model.Destination", "Destination")
-                        .WithMany("FlightDestinations")
-                        .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjekatApi.Model.Flight", "Flight")
-                        .WithMany("FlightDestinations")
-                        .HasForeignKey("FlightId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("ProjekatApi.Model.Flight", null)
+                        .WithMany("Connections")
+                        .HasForeignKey("FlightId");
                 });
 
             modelBuilder.Entity("ProjekatApi.Model.FlightSeat", b =>

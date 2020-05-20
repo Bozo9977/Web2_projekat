@@ -14,10 +14,29 @@ namespace ProjekatApi
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<FlightDestination>().HasKey(fd => new { fd.DestinationId, fd.FlightId });
+
+            modelBuilder.Entity<FlightDestination>()
+                .HasOne<Flight>(fd => fd.Flight)
+                .WithMany(f => f.FlightDestinations)
+                .HasForeignKey(fd => fd.FlightId);
+
+            modelBuilder.Entity<FlightDestination>()
+                .HasOne<Destination>(fd => fd.Destination)
+                .WithMany(d => d.FlightDestinations)
+                .HasForeignKey(fd => fd.DestinationId);
+
+            modelBuilder.Entity<Destination>().HasIndex(d => d.City).IsUnique();
+        }
+
+
+
         public DbSet<Destination> Destinations { get; set; }
-
         public DbSet<FlightSeat> FlightSeats { get; set; }
-
         public DbSet<Flight> Flights { get; set; }
+        public DbSet<FlightDestination> FlightDestinations { get; set; }
+
     }
 }

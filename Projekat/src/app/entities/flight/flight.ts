@@ -1,5 +1,4 @@
 import { DatePipe } from '@angular/common';
-import { Destination } from '../destination/destination';
 
 export class Flight {
     departure: string;
@@ -7,7 +6,7 @@ export class Flight {
     takeOff: DatePipe;
     touchDown: DatePipe;
     length: number;
-    connections: Destination[];
+    connections: string[];
     priceFirst: number;
     numberFirst: number;
     priceBusiness: number;
@@ -21,9 +20,7 @@ export class Flight {
         this.takeOff = takeoff;
         this.touchDown = touchdown;
         this.length = length;
-        for(let dest in connections){
-            this.connections.push(new Destination(0, dest));
-        }
+        this.connections = connections;
         //this.connections = connections;
         this.priceFirst = pricefirst;
         this.numberFirst = numberfirst;

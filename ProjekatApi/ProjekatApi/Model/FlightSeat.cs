@@ -23,9 +23,9 @@ namespace ProjekatApi.Model
 
         //dodati instancu usera koji je rezervisao sediste
         
-        public int Price { get; set; }
+        public double Price { get; set; }
         public Class Class { get; set; }
-
+        public Flight Flight { get; set; }
 
     }
 }

@@ -15,17 +15,11 @@ namespace ProjekatApi.Model
         public DateTime TakeOff { get; set; }
         public DateTime TouchDown { get; set; }
         public int Length { get; set; }
-        public ICollection<Destination> Connections { get; set; }
-        public double PriceFirst { get; set; }
-        public int NumberFirst { get; set; }
-
-        public double PriceBusiness { get; set; }
-        public int NumberBusiness { get; set; }
-
-        public double PriceEconomy { get; set; }
-        public int NumberEconomy { get; set; }
+        public ICollection<FlightDestination> FlightDestinations { get; set; }
+        
 
         //dodati instancu aviokompanije
         //dodati kolekciju sedista?
+        public List<FlightSeat> Seats { get; set; }
     }
 }
