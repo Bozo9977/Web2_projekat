@@ -2,14 +2,12 @@
     <form [formGroup]="registrationForm" (ngSubmit)="onRegistration()">
     <h2>Registration</h2>
     <div class="custom-control custom-radio custom-control-inline">
-      <input type="radio" class="custom-control-input" id="defaultInline1" name="company" formControlName = "company">
-      <label class="custom-control-label" for="defaultInline1">Rent-a-car</label>
+      <input type="radio"  id="defaultChecked" value="carcompany" name="company" checked formControlName="company">&nbsp;Rent-a-car
     </div>
     
     <!-- Default inline 2-->
     <div class="custom-control custom-radio custom-control-inline">
-      <input type="radio" class="custom-control-input" id="defaultInline1" name="company" formControlName = "company">
-      <label class="custom-control-label" for="defaultInline2">Aircompany</label>
+      <input type="radio"id="defaultUnchecked" value="aircompany" name="company" formControlName="company">&nbsp;Aircompany
     </div>
   
         <div class="form-group">

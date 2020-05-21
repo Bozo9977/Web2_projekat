@@ -11,4 +11,9 @@ export class FlightService {
   addFlight(flight){
     return this.http.post(this.BasURI + '/Flights/AddFlight',flight);
   }
+
+  getFlights(){
+    return this.http.get<any[]>(this.BasURI +'/Flights/GetFlights');
+
+  }
 }

@@ -39,21 +39,18 @@ namespace ProjekatApi.Controllers
     {
 
         private readonly DatabaseContext context;
+        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public FlightsController(DatabaseContext _context)
+        public FlightsController(DatabaseContext _context, IHttpContextAccessor _httpContextAccessor)
         {
             context = _context;
+            httpContextAccessor = _httpContextAccessor;
         }
 
         [HttpPost]
         [Route("AddFlight")]
         public async Task<IActionResult> AddFlight(FlightTemp flight)
         {
-            //context.Destinations.Add(destination);
-
-            //await context.SaveChangesAsync();
-
-            string check = flight.Arrival;
 
             Flight f = new Flight()
             {
@@ -91,11 +88,6 @@ namespace ProjekatApi.Controllers
             for (int i = 0; i < flight.Connections.Count; i++)
             {
                 Destination dest = await context.Destinations.SingleOrDefaultAsync(d => d.City == flight.Connections[i]);
-                //f.FlightDestinations.Add(new FlightDestination()
-                //{
-                //    Flight = f,
-                //    Destination = d
-                //});
                 await context.FlightDestinations.AddAsync(new FlightDestination() { 
                     FlightId = flightAdded.Id,
                     DestinationId = dest.Id
@@ -106,6 +98,14 @@ namespace ProjekatApi.Controllers
             await context.SaveChangesAsync();
 
             return Ok();
+        }
+
+
+        [HttpGet]
+        [Route("GetFlights")]
+        public async Task<ActionResult<IEnumerable<Flight>>> GetFlights()
+        {
+            return await context.Flights.Include(f =>f.Seats).Include(f=>f.FlightDestinations).ThenInclude(d=>d.Destination).ToListAsync();
         }
 
         

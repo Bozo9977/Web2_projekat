@@ -18,7 +18,7 @@ export class RegistrationCompanyComponent implements OnInit {
 
   private initForm() {
     this.registrationForm = new FormGroup({
-      'company': new FormControl(''),
+      'company': new FormControl('', [Validators.required]),
       'registrationNameService': new FormControl(''),
       'registrationEmail': new FormControl(''),
       'registrationFirstName': new FormControl(''),

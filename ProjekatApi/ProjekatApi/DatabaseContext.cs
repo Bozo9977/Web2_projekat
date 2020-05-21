@@ -29,6 +29,7 @@ namespace ProjekatApi
                 .HasForeignKey(fd => fd.DestinationId);
 
             modelBuilder.Entity<Destination>().HasIndex(d => d.City).IsUnique();
+            modelBuilder.Entity<Company>().HasIndex(c => c.Name).IsUnique();
         }
 
 
@@ -37,6 +38,9 @@ namespace ProjekatApi
         public DbSet<FlightSeat> FlightSeats { get; set; }
         public DbSet<Flight> Flights { get; set; }
         public DbSet<FlightDestination> FlightDestinations { get; set; }
+
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Aircompany> Aircompanies { get; set; }
 
     }
 }

@@ -18,17 +18,41 @@ export class LoggedInUserComponent implements OnInit {
 
   flightClicked(){
     this.bookFlight = !this.bookFlight;
+    if(!this.aircompany)
+      this.aircompany = !this.aircompany;
+    if(!this.rentCar)
+      this.rentCar = !this.rentCar;
+    if(!this.carcompany)
+      this.carcompany = !this.carcompany;
   }
 
   aircompanyClicked(){
     this.aircompany = !this.aircompany;
+    if(!this.bookFlight)
+      this.bookFlight= !this.bookFlight;
+    if(!this.rentCar)
+      this.rentCar = !this.rentCar;
+    if(!this.carcompany)
+      this.carcompany = !this.carcompany;
   }
 
   carClicked(){
     this.rentCar = !this.rentCar;
+    if(!this.carcompany)
+      this.carcompany=!this.carcompany;
+    if(!this.aircompany)
+      this.aircompany = !this.aircompany;
+    if(!this.bookFlight)
+      this.bookFlight = !this.bookFlight;
   }
 
   carcompanyClicked(){
     this.carcompany = !this.carcompany;
+    if(!this.aircompany)
+      this.aircompany=!this.aircompany;
+    if(!this.rentCar)
+      this.rentCar = !this.rentCar;
+    if(!this.bookFlight)
+      this.bookFlight=!this.bookFlight;
   }
 }
