@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjekatApi;
 
 namespace ProjekatApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200522203547_fixing_EF_mistake")]
+    partial class fixing_EF_mistake
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,9 +28,6 @@ namespace ProjekatApi.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AirConditioning")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Bags")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CarCompanyId")

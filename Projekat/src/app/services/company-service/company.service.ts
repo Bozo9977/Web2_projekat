@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { CarCompany } from 'src/app/entities/car-company/car-company';
 import { Aircompany } from 'src/app/entities/aircompany/aircompany';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
+  readonly BasURI = "https://localhost:44314/api";
   loadCarCompanies(){
     return this.mockedCarCompanies();
   }
@@ -16,6 +19,19 @@ export class CompanyService {
   loadAircompanies(){
     return this.mockedAircompanies();
   }
+
+  addCompany(formData){
+    if(formData.company == "carcompany")
+    {
+      return this.http.post(this.BasURI + '/CarCompany/AddCarCompany',formData);
+    }
+    else 
+    {
+      return this.http.post(this.BasURI + '/AirCompany/AddAirCompany',formData);
+    }
+    
+  }
+
 
   mockedCarCompanies():Array<CarCompany>{
     let allComp = new Array<CarCompany>();

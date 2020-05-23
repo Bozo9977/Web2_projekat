@@ -18,19 +18,18 @@ export class CarInfoChangeComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private cars: CarsServiceService, private routerPrim: Router) {
     route.params.subscribe(params => { this.id = params['id']; });
-    this.carPom = this.cars.loadCars().find(x => x.id == this.id);
+    //this.carPom = this.cars.loadCars().find(x => x.id == this.id);
     
    }
 
   ngOnInit(): void {
     this.initForm();
     this.carsList = this.cars.loadCars();
-    this.changeCarForm.setValue({code: this.carPom.code, mark: this.carPom.mark, yearProduction: this.carPom.yearOfProduction, fuel: this.carPom.fuel, gearshift: this.carPom.gearshift, seat: this.carPom.seat, door: this.carPom.door, airConditioning: this.carPom.airConditioning, status: this.carPom.airConditioning, imageCar: ""});
+    //this.changeCarForm.setValue({code: this.carPom.code, mark: this.carPom.mark, yearProduction: this.carPom.yearOfProduction, fuel: this.carPom.fuel, gearshift: this.carPom.gearshift, seat: this.carPom.seat, door: this.carPom.door, airConditioning: this.carPom.airConditioning, status: this.carPom.airConditioning, imageCar: ""});
   }
 
   private initForm() {
     this.changeCarForm = new FormGroup({
-      'code': new FormControl(''),
       'mark': new FormControl(''),
       'yearProduction': new FormControl(''),
       'fuel': new FormControl(''),
@@ -49,8 +48,8 @@ export class CarInfoChangeComponent implements OnInit {
 
     console.log(this.carPom);
     console.log("usao");
-    let index = this.carsList.findIndex(x => x.id == this.id);
-    this.carsList[index] = this.carPom;
+    //let index = this.carsList.findIndex(x => x.id == this.id);
+   // this.carsList[index] = this.carPom;
     //this.cars.loadCars().find(x => x.id == this.id).id = this.carPom.id;
    // this.cars.loadCars().find(x => x.id == this.id).bags = this.carPom.bags;
    // this.cars.loadCars().find(x => x.id == this.id).code = this.carPom.code;

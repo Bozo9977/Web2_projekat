@@ -15,13 +15,21 @@ export class CarChangeComponent implements OnInit {
   
 
   ngOnInit(): void {
-    this.carsList = this.cars.loadCars();
+      this.loadCars();
   }
 
   deleteCar(idCar: number) {
-    this.carsList.splice(this.carsList.findIndex(x => x.id == idCar), 1);
-    //window.location.reload();
-    console.log(idCar);
+    this.cars.deleteCar(idCar).subscribe();
     }
 
+    private loadCars(){
+      this.cars.getCars().subscribe(
+        (res: any) => { 
+          this.carsList = res as Cars[] 
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    } 
 }

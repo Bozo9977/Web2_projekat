@@ -3,73 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjekatApi;
 
 namespace ProjekatApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200522164215_Company-podela")]
+    partial class Companypodela
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.0-preview.3.20181.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ProjekatApi.Model.Car", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AirConditioning")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Bags")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CarCompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Door")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Fuel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gearshift")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HourlyRent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageCar")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Mark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RentPerDay")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Seat")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("YearProduction")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarCompanyId");
-
-                    b.ToTable("Cars");
-                });
 
             modelBuilder.Entity("ProjekatApi.Model.Company", b =>
                 {
@@ -213,13 +163,6 @@ namespace ProjekatApi.Migrations
                     b.HasBaseType("ProjekatApi.Model.Company");
 
                     b.HasDiscriminator().HasValue("CarCompany");
-                });
-
-            modelBuilder.Entity("ProjekatApi.Model.Car", b =>
-                {
-                    b.HasOne("ProjekatApi.Model.CarCompany", "CarCompany")
-                        .WithMany("Cars")
-                        .HasForeignKey("CarCompanyId");
                 });
 
             modelBuilder.Entity("ProjekatApi.Model.Destination", b =>

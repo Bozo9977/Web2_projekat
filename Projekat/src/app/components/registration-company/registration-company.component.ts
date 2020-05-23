@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CompanyService } from 'src/app/services/company-service/company.service';
 
 @Component({
   selector: 'app-registration-company',
@@ -10,7 +11,7 @@ export class RegistrationCompanyComponent implements OnInit {
 
   registrationForm: FormGroup;
 
-  constructor() { }
+  constructor(private company: CompanyService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -31,7 +32,16 @@ export class RegistrationCompanyComponent implements OnInit {
 
   onRegistration() {
     console.log(this.registrationForm.value);
-    console.log(this.registrationForm);
+    this.company.addCompany(this.registrationForm.value).subscribe(
+      (res: any) => {
+        console.log(res);
+        
+      },
+      err =>{
+        console.log(err);
+      }
+    );
+    this.registrationForm.reset();
   }
 
 }

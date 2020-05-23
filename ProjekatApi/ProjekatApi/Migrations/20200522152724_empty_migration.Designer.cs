@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjekatApi;
 
 namespace ProjekatApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200522152724_empty_migration")]
+    partial class empty_migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,67 +21,12 @@ namespace ProjekatApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ProjekatApi.Model.Car", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AirConditioning")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Bags")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CarCompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Door")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Fuel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gearshift")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HourlyRent")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageCar")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Mark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RentPerDay")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Seat")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("YearProduction")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarCompanyId");
-
-                    b.ToTable("Cars");
-                });
-
             modelBuilder.Entity("ProjekatApi.Model.Company", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -206,20 +153,6 @@ namespace ProjekatApi.Migrations
                     b.HasBaseType("ProjekatApi.Model.Company");
 
                     b.HasDiscriminator().HasValue("Aircompany");
-                });
-
-            modelBuilder.Entity("ProjekatApi.Model.CarCompany", b =>
-                {
-                    b.HasBaseType("ProjekatApi.Model.Company");
-
-                    b.HasDiscriminator().HasValue("CarCompany");
-                });
-
-            modelBuilder.Entity("ProjekatApi.Model.Car", b =>
-                {
-                    b.HasOne("ProjekatApi.Model.CarCompany", "CarCompany")
-                        .WithMany("Cars")
-                        .HasForeignKey("CarCompanyId");
                 });
 
             modelBuilder.Entity("ProjekatApi.Model.Destination", b =>

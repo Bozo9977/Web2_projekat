@@ -42,5 +42,9 @@ namespace ProjekatApi
         public DbSet<Company> Companies { get; set; }
         public DbSet<Aircompany> Aircompanies { get; set; }
 
+        public DbSet<CarCompany> Carcompanies { get; set; }
+
+        public DbSet<Car> Cars { get; set; }
+
     }
 }

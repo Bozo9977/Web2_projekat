@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjekatApi;
 
 namespace ProjekatApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200522174954_car-addKey")]
+    partial class caraddKey
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,13 +24,9 @@ namespace ProjekatApi.Migrations
             modelBuilder.Entity("ProjekatApi.Model.Car", b =>
                 {
                     b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AirConditioning")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Bags")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CarCompanyId")
@@ -217,7 +215,7 @@ namespace ProjekatApi.Migrations
 
             modelBuilder.Entity("ProjekatApi.Model.Car", b =>
                 {
-                    b.HasOne("ProjekatApi.Model.CarCompany", "CarCompany")
+                    b.HasOne("ProjekatApi.Model.CarCompany", null)
                         .WithMany("Cars")
                         .HasForeignKey("CarCompanyId");
                 });
