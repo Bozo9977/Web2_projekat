@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import { BranchOffice } from 'src/app/entities/branch-office/branch-office';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BranchOfficeService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  readonly BasURI = "https://localhost:44314/api";
 
   loadBranchOffices(){
     return this.mockedBranchOffices();
   }
 
+  addBranchOffices(formData){
+    return this.http.post(this.BasURI + '/BranchOffices/AddBranchOffice', formData);
+  }
 
   mockedBranchOffices():Array<BranchOffice>{
     let allComp = new Array<BranchOffice>();

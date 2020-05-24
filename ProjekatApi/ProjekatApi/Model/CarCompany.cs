@@ -8,5 +8,7 @@ namespace ProjekatApi.Model
     public class CarCompany : Company
     {
         public ICollection<Car> Cars { get; set; }
+
+        public ICollection<BranchOffices> BranchOffices { get; set; }
     }
 }

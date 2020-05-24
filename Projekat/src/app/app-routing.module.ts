@@ -23,6 +23,7 @@ import { AircompanyServiceComponent } from './components/aircompany-service/airc
 import { AvailableFlightComponent } from './components/available-flight/available-flight.component';
 import { DestinationViewComponent } from './components/destination-view/destination-view.component';
 import { CarInfoChangeComponent } from './components/car-info-change/car-info-change.component';
+import { AddBranchOfficeComponent } from './components/add-branch-office/add-branch-office.component';
 
 const routes: Routes = [
   {
@@ -134,6 +135,11 @@ const routes: Routes = [
       { path: "", component: CarChangeComponent },
       { path: ":id/carInfoChange", component: CarInfoChangeComponent },
     ]
+  },
+
+  {
+    path: "add-BranchOffice",
+    component: AddBranchOfficeComponent
   },
 ];
 

@@ -31,6 +31,7 @@ import { DestinationViewComponent } from './components/destination-view/destinat
 import { NgbModule, NgbRating } from '@ng-bootstrap/ng-bootstrap';
 import { CarInfoChangeComponent } from './components/car-info-change/car-info-change.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddBranchOfficeComponent } from './components/add-branch-office/add-branch-office.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { HttpClientModule } from '@angular/common/http';
     AvailableFlightComponent,
     DestinationViewComponent,
     CarInfoChangeComponent,
+    AddBranchOfficeComponent,
   ],
   imports: [
     BrowserModule,

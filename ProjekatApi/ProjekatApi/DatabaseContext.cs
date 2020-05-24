@@ -46,5 +46,7 @@ namespace ProjekatApi
 
         public DbSet<Car> Cars { get; set; }
 
+        public DbSet<BranchOffices> BranchOffices { get; set; }
+
     }
 }
