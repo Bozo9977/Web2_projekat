@@ -26,6 +26,7 @@ export class CarInfoComponent implements OnInit {
       'seat': new FormControl(''),
       'door': new FormControl(''),
       'airConditioning': new FormControl(''),
+      'bags': new FormControl(''),
       'status': new FormControl(''),
       'hourlyRent': new FormControl(''),
       'rentPerDay': new FormControl(''),

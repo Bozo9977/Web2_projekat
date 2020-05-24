@@ -18,8 +18,10 @@ export class CarChangeComponent implements OnInit {
       this.loadCars();
   }
 
-  deleteCar(idCar: number) {
+  deleteCar(idCar: string) {
+    console.log(idCar);
     this.cars.deleteCar(idCar).subscribe();
+    this.loadCars();
     }
 
     private loadCars(){

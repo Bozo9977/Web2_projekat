@@ -45,37 +45,45 @@ namespace ProjekatApi.Controllers
         [Route("AddCar")]
         public async Task<IActionResult> AddCar(Car car)
         {
+
             CarCompany carCompany = new CarCompany();
-            carCompany = context.Carcompanies.Find(4);
+
+            carCompany = context.Carcompanies.Find(1);
+
             carCompany.Cars = new List<Car>();
+
             car.CarCompany = carCompany;
+
             carCompany.Cars.Add(car);
 
-            //await context.Cars.AddAsync(car);
+
+
 
             await context.SaveChangesAsync();
+
             context.Entry(carCompany).State = EntityState.Modified;
 
 
-            await context.SaveChangesAsync();
 
-            CarCompany cc = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == 4);
+
+
+            await context.SaveChangesAsync();
 
             return Ok();
         }
 
         [HttpDelete]
         [Route("DeleteCar/{id}")]
-        public async Task<ActionResult<List<Car>>> DeleteCar(int id)
+        public async Task<ActionResult<List<Car>>> DeleteCar(string id)
         {
-           CarCompany cc = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == 4);
+           CarCompany cc = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == 1);
             List<Car> ListPom = cc.Cars.ToList();
-            for (int i=1; i < cc.Cars.Count(); i++)
+
+            foreach(var pom in ListPom)
             {
-                if(i == id)
+                if(pom.Id == id)
                 {
-                    
-                    cc.Cars.Remove(ListPom[i]);
+                    cc.Cars.Remove(pom);
                 }
             }
             
@@ -90,7 +98,43 @@ namespace ProjekatApi.Controllers
         public async Task<ActionResult<IEnumerable<Car>>> GetCars()
         {
 
-            return context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == 4).Cars.ToList();
+            return context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == 1).Cars.ToList();
+        }
+
+        [HttpGet]
+        [Route("GetOneCar/{id}")]
+        public async Task<ActionResult<Car>> GetOneCar(string id)
+        {
+
+            var car = await context.Cars.FindAsync(id);
+
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            return car;
+        }
+
+        [Route("UpdateCar")]
+        public async Task<IActionResult> UpdateCar(Car car)
+        {
+
+            //var carPom = await context.Cars.FindAsync(car.Id);
+
+
+            context.Entry(car).State = EntityState.Modified;
+
+            try
+            {
+                await context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
     }
 }

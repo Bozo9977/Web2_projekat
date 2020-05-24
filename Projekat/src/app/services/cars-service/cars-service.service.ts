@@ -16,18 +16,34 @@ export class CarsServiceService {
     return this.mockedCars();
   }
 
-  addCar(formData){
-      return this.http.post(this.BasURI + '/CarCompany/AddCar', formData);
+  addCar(car: Cars){
+      return this.http.post(this.BasURI + '/CarCompany/AddCar', car);
   }
 
-  deleteCar(id: number): Observable<{}>{
-    return this.http.delete(this.BasURI + '/CarCompany/DeleteCar/'+id);
+  deleteCar(id: string): Observable<{}>{
+    return this.http.delete(this.BasURI + '/CarCompany/DeleteCar/' + id);
+
   }
 
   getCars(): Observable<Cars[]>{
+    
     return this.http.get<Cars[]>(this.BasURI + '/CarCompany/GetCars');
+    
   }
 
+  getOneCar(id: string): Observable<Cars>{
+    
+    return this.http.get<Cars>(this.BasURI + '/CarCompany/GetOneCar/' + id);
+    
+  }
+
+
+  updateCar(formData){
+    
+    return this.http.put<Cars>(this.BasURI + '/CarCompany/UpdateCar', formData);
+    
+  }
+  
   mockedCars():Array<Cars>{
     let allComp = new Array<Cars>();
 

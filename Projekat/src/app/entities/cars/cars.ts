@@ -12,7 +12,8 @@ export class Cars {
     hourlyRent: string;
     rentPerDay: string;
     imageCar: string;
-    constructor(imageCar: string, id: string, code: string, mark: string, yearProduction: string, fuel: string, gearshift:string, seat: string, door: string, airConditioning: string, bags: string, status: string, rentPerDay: string, hourlyRent: string){
+
+    constructor(imageCar: string, id: string, mark: string, yearProduction: string, fuel: string, gearshift:string, seat: string, door: string, airConditioning: string, bags: string, status: string, rentPerDay: string, hourlyRent: string){
         this.imageCar = imageCar;
         this.id=id;
         this.mark = mark;

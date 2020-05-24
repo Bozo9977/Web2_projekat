@@ -10,71 +10,89 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <form [formGroup]="changeCarForm" (ngSubmit)="onChangeCar()">
-                          <div class="form-group row">
-                            <label for="mark" class="col-4 col-form-label">Mark</label> 
-                            <div class="col-8">
-                              <input id="mark" name="mark"  formControlName="mark" class="form-control here" type="text">
-                            </div>
+                      <form [formGroup]="changeCarForm" (ngSubmit)="onChangeCar()">
+                        <div class="form-group row">
+                          <label for="mark" class="col-4 col-form-label">Mark</label> 
+                          <div class="col-8">
+                            <input id="mark" name="mark" placeholder="Mark" formControlName="mark" class="form-control here" type="text">
                           </div>
-                              <div class="form-group row">
-                                <label for="yearProduction" class="col-4 col-form-label">Year of production</label> 
-                                <div class="col-8">
-                                  <input id="yearProduction" name="yearProduction" formControlName="yearProduction" placeholder="Year of production" class="form-control here" type="text">
-                                </div>
+                        </div>
+                            <div class="form-group row">
+                              <label for="yearProduction" class="col-4 col-form-label">Year of production</label> 
+                              <div class="col-8">
+                                <input id="yearProduction" name="yearProduction" formControlName="yearProduction" placeholder="Year of production" class="form-control here" type="text">
                               </div>
-                              <div class="form-group row">
-                                <label for="fuel" class="col-4 col-form-label">Fuel</label> 
-                                <div class="col-8">
-                                  <input id="fuel" name="fuel"  formControlName="fuel" class="form-control here" type="text">
-                                </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="fuel" class="col-4 col-form-label">Fuel</label> 
+                              <div class="col-8">
+                                <input id="fuel" name="fuel" placeholder="Fuel" formControlName="fuel" class="form-control here" type="text">
                               </div>
-                              <div class="form-group row">
-                                <label for="gearshift" class="col-4 col-form-label">Gearshift</label> 
-                                <div class="col-8">
-                                  <input id="gearshift" name="gearshift" placeholder="Gearshift" formControlName="gearshift" class="form-control here" type="text">
-                                </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="gearshift" class="col-4 col-form-label">Gearshift</label> 
+                              <div class="col-8">
+                                <input id="gearshift" name="gearshift" placeholder="Gearshift" formControlName="gearshift" class="form-control here" type="text">
                               </div>
-                              <div class="form-group row">
-                                <label for="seat" class="col-4 col-form-label">Seat</label> 
-                                <div class="col-8">
-                                  <input id="seat" name="seat" placeholder="Seat" formControlName="seat" class="form-control here" type="text">
-                                </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="seat" class="col-4 col-form-label">Seat</label> 
+                              <div class="col-8">
+                                <input id="seat" name="seat" placeholder="Seat" formControlName="seat" class="form-control here" type="text">
                               </div>
-                              <div class="form-group row">
-                                <label for="door" class="col-4 col-form-label">Door</label> 
-                                <div class="col-8">
-                                  <input id="door" name="door" placeholder="Door" formControlName="door" class="form-control here" type="text">
-                                </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="door" class="col-4 col-form-label">Door</label> 
+                              <div class="col-8">
+                                <input id="door" name="door" placeholder="Door" formControlName="door" class="form-control here" type="text">
                               </div>
-                              <div class="form-group row">
-                                <label for="airConditioning" class="col-4 col-form-label">Air conditioning</label> 
-                                <div class="col-8">
-                                  <input id="airConditioning" name="airConditioning" formControlName="airConditioning" placeholder="Air conditioning" class="form-control here" type="text">
-                                </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="airConditioning" class="col-4 col-form-label">Air conditioning</label> 
+                              <div class="col-8">
+                                <input id="airConditioning" name="airConditioning" formControlName="airConditioning" placeholder="Air conditioning" class="form-control here" type="text">
                               </div>
-                              <div class="form-group row">
-                                <label for="status" class="col-4 col-form-label">Status</label> 
-                                <div class="col-8">
-                                  <input id="status" name="status" placeholder="Status" formControlName="status" class="form-control here" type="text">
-                                </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="bags" class="col-4 col-form-label">Bags</label> 
+                              <div class="col-8">
+                                <input id="bags" name="bags" formControlName="bags" placeholder="Bags" class="form-control here" type="text">
                               </div>
-                              <div class="form-group row">
-                                <label for="color" class="col-4 col-form-label">
-                                  <svg class="bi bi-image" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M14.002 2h-12a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1V3a1 1 0 00-1-1zm-12-1a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V3a2 2 0 00-2-2h-12z" clip-rule="evenodd"/>
-                                    <path d="M10.648 7.646a.5.5 0 01.577-.093L15.002 9.5V14h-14v-2l2.646-2.354a.5.5 0 01.63-.062l2.66 1.773 3.71-3.71z"/>
-                                    <path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" clip-rule="evenodd"/>
-                                  </svg>
-                                </label> 
-                                <div class="col-8">
-                                    <input type="file" name="imageCar" formControlName="imageCar" class="form-control-file">
-                                </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="status" class="col-4 col-form-label">Status</label> 
+                              <div class="col-8">
+                                <input id="status" name="status" placeholder="Status" formControlName="status" class="form-control here" type="text">
                               </div>
-                                <div>
-                                  <button type="submit" class="btn btn-secondary btn-lg btn-block">Change</button>
-                                </div>
-                            </form>
+                            </div>
+                            <div class="form-group row">
+                              <label for="rentPerDay" class="col-4 col-form-label">Rent per day</label> 
+                              <div class="col-8">
+                                <input id="rentPerDay" name="rentPerDay" placeholder="Rent per day" formControlName="rentPerDay" class="form-control here" type="text">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="hourlyRent" class="col-4 col-form-label">Hourly rent</label> 
+                              <div class="col-8">
+                                <input id="hourlyRent" name="hourlyRent" placeholder="Hourly rent" formControlName="hourlyRent" class="form-control here" type="text">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="color" class="col-4 col-form-label">
+                                <svg class="bi bi-image" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                  <path fill-rule="evenodd" d="M14.002 2h-12a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1V3a1 1 0 00-1-1zm-12-1a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V3a2 2 0 00-2-2h-12z" clip-rule="evenodd"/>
+                                  <path d="M10.648 7.646a.5.5 0 01.577-.093L15.002 9.5V14h-14v-2l2.646-2.354a.5.5 0 01.63-.062l2.66 1.773 3.71-3.71z"/>
+                                  <path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" clip-rule="evenodd"/>
+                                </svg>
+                              </label> 
+                              <div class="col-8">
+                                  <input type="file" name="imageCar" formControlName="imageCar" class="form-control-file">
+                              </div>
+                            </div>
+                              <div>
+                                <button type="submit" class="btn btn-secondary btn-lg btn-block">Change</button>
+                              </div>
+                          </form>
                     </div>
                 </div>
                 
