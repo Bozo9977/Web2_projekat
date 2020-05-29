@@ -16,7 +16,7 @@ namespace ProjekatApi.Model
         public DateTime TouchDown { get; set; }
         public int Length { get; set; }
         public ICollection<FlightDestination> FlightDestinations { get; set; }
-        
+        public int NumberOfConnections { get; set; }
 
         //dodati instancu aviokompanije
         //dodati kolekciju sedista?

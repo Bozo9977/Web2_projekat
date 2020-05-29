@@ -127,7 +127,10 @@ const routes: Routes = [
 
   {
     path: 'destinationView',
-    component: DestinationViewComponent
+    children:[
+      {path: "", component: HomepageComponent},
+      {path: ":id", component: DestinationViewComponent}
+    ]
   },
   {
     path: "carChange",

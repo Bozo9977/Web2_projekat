@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProjekatApi.FormModel;
 using ProjekatApi.Model;
 
@@ -35,5 +36,14 @@ namespace ProjekatApi.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        [Route("GetAircompanies")]
+        public async Task<ActionResult<IEnumerable<Aircompany>>> GetAircompanies()
+        {
+            return await context.Aircompanies.ToListAsync();
+        }
+
+
     }
 }

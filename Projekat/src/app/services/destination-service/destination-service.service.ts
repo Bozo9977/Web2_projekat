@@ -24,6 +24,11 @@ export class DestinationServiceService {
     return this.http.post(this.BasURI + '/Destination/AddDestination',formData);
   }
 
+  getDestinationsForCompany(id: number){
+    console.log(id);
+    return this.http.get(this.BasURI + '/Destination/GetDestinations/'+id);
+  }
+
   deleteDestination(id: number): Observable<{}>{
     return this.http.delete(this.BasURI + '/Destination/DeleteDestination/'+id);
   }

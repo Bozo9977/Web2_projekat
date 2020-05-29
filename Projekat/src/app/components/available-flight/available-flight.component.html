@@ -13,7 +13,7 @@
         </button>
     </form>
   
-        <table class="table table-bordered table-dark" >
+        <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);">
             <thead>
               <tr>
                 <th>Id</th>
@@ -23,19 +23,17 @@
                 <th scope="col">Touchdown date and time</th>
                 <th scope="col">Travel length</th>
                 <th scope="col">Connections</th>
-                <th scope="col">Price</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Belgrade</td>
-                <td>Amsterdam</td>
-                <td>15.4.2020. 13:30</td>
-                <td>15.4.2020. 22:00</td>
-                <td>1345Km</td>
-                <td>0</td>
-                <td>500€</td>
+              <tr *ngFor="let f of flights">
+                <th scope="row">{{f.id}}</th>
+                <td>{{f.departure}}</td>
+                <td>{{f.arrival}}</td>
+                <td>{{f.takeOff}}</td>
+                <td>{{f.touchDown}}</td>
+                <td>{{f.length}}Km</td>
+                <td>{{f.numberOfConnections}}</td>
               </tr>
             </tbody>
           </table>  

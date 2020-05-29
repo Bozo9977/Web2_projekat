@@ -13,7 +13,7 @@ namespace ProjekatApi.Model
         
         public string City { get; set; }
 
-        //dodati listu aviokompanije koje mogu operisati na ovoj poziciji, ili aviokomp koja je dodala ovu dest
+        public Aircompany Aircompany { get; set; }
 
         public ICollection<FlightDestination> FlightDestinations { get; set; }
     }

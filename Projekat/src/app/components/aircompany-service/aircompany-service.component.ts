@@ -13,7 +13,15 @@ export class AircompanyServiceComponent implements OnInit {
   constructor(private airService: CompanyService) { }
 
   ngOnInit(): void {
-    this.airCompanies = this.airService.loadAircompanies();
+    this.airService.loadAircompanies().subscribe(
+      (res: any) =>{
+        console.log(res);
+        this.airCompanies = res as Aircompany[]
+      },
+      err =>{
+        console.log(err);
+      }
+    )
   }
 
 }

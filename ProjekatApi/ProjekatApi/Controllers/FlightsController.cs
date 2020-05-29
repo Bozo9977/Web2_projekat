@@ -39,12 +39,10 @@ namespace ProjekatApi.Controllers
     {
 
         private readonly DatabaseContext context;
-        private readonly IHttpContextAccessor httpContextAccessor;
 
-        public FlightsController(DatabaseContext _context, IHttpContextAccessor _httpContextAccessor)
+        public FlightsController(DatabaseContext _context)
         {
             context = _context;
-            httpContextAccessor = _httpContextAccessor;
         }
 
         [HttpPost]
@@ -105,9 +103,20 @@ namespace ProjekatApi.Controllers
         [Route("GetFlights")]
         public async Task<ActionResult<IEnumerable<Flight>>> GetFlights()
         {
-            return await context.Flights.Include(f =>f.Seats).Include(f=>f.FlightDestinations).ThenInclude(d=>d.Destination).ToListAsync();
+            return await context.Flights.ToListAsync();
         }
 
+        [HttpGet]
+        [Route("GetFlight/{id}")]
+        public async Task<ActionResult<Flight>> GetFlight(int id)
+        {
+            var flight = await context.Flights.FindAsync(id);
+            if(flight == null)
+            {
+                return NoContent();
+            }
+            return flight;
+        }
         
     }
 }

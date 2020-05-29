@@ -1,4 +1,5 @@
 import { DatePipe } from '@angular/common';
+import { Destination } from '../destination/destination';
 
 export class Flight {
     departure: string;
@@ -30,4 +31,20 @@ export class Flight {
         this.numberEconomy = numbereconomy;
     }
 
+}
+
+export class FlightReceive{
+    departure: string;
+    arrival: string;
+    takeOff: DatePipe;
+    touchDown: DatePipe;
+    length: number;
+    connections: Destination[];
+    priceFirst: number;
+    numberFirst: number;
+    priceBusiness: number;
+    numberBusiness: number;
+    priceEconomy: number;
+    numberEconomy: number;
+    numberOfConnections: number;
 }

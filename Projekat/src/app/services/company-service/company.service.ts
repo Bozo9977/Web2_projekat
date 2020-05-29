@@ -17,7 +17,7 @@ export class CompanyService {
   }
 
   loadAircompanies(){
-    return this.mockedAircompanies();
+    return this.http.get(this.BasURI + "/AirCompany/GetAircompanies");
   }
 
   addCompany(formData){

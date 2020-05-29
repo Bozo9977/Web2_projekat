@@ -55,7 +55,13 @@ namespace ProjekatApi.Controllers
             return destinations;
         }
 
-
+        [HttpGet]
+        [Route("GetDestinations/{id}")]
+        public async Task<ActionResult<IEnumerable<Destination>>> GetDestinationsForCompany(int id)
+        {
+            return await context.Destinations.Where(d => d.Aircompany.Id.Equals(id)).ToListAsync();
+            //return null;
+        }
 
 
     }
