@@ -32,6 +32,7 @@ import { NgbModule, NgbRating } from '@ng-bootstrap/ng-bootstrap';
 import { CarInfoChangeComponent } from './components/car-info-change/car-info-change.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddBranchOfficeComponent } from './components/add-branch-office/add-branch-office.component';
+import { FlightChangeComponent } from './components/flight-change/flight-change.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { AddBranchOfficeComponent } from './components/add-branch-office/add-bra
     DestinationViewComponent,
     CarInfoChangeComponent,
     AddBranchOfficeComponent,
+    FlightChangeComponent,
   ],
   imports: [
     BrowserModule,

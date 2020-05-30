@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AircompanyAdminComponent implements OnInit {
   destinationClicked: boolean = true;
   flightClicked: boolean = true;
+  flightsClicked: boolean = true;
 
   constructor() { }
 
@@ -18,11 +19,23 @@ export class AircompanyAdminComponent implements OnInit {
     this.destinationClicked = !this.destinationClicked;
     if(!this.flightClicked)
       this.flightClicked = !this.flightClicked;
+    if(!this.flightsClicked)
+    this.flightsClicked = !this.flightsClicked;
   }
 
   newFlightClicked(){
     this.flightClicked = !this.flightClicked;
     if(!this.destinationClicked)
       this.destinationClicked = !this.destinationClicked;
+    if(!this.flightsClicked)
+      this.flightsClicked = !this.flightsClicked;
+  }
+  getAllFlights(){
+    this.flightsClicked = !this.flightsClicked;
+    localStorage.setItem("userType", "admin");
+    if(!this.destinationClicked)
+      this.destinationClicked = !this.destinationClicked;
+    if(!this.flightClicked)
+      this.flightClicked = !this.flightClicked;
   }
 }

@@ -24,6 +24,7 @@ import { AvailableFlightComponent } from './components/available-flight/availabl
 import { DestinationViewComponent } from './components/destination-view/destination-view.component';
 import { CarInfoChangeComponent } from './components/car-info-change/car-info-change.component';
 import { AddBranchOfficeComponent } from './components/add-branch-office/add-branch-office.component';
+import { FlightChangeComponent } from './components/flight-change/flight-change.component';
 
 const routes: Routes = [
   {
@@ -139,7 +140,10 @@ const routes: Routes = [
       { path: ":id/carInfoChange", component: CarInfoChangeComponent },
     ]
   },
-
+  {
+    path: ":id/flightChange", 
+    component: FlightChangeComponent
+  },
   {
     path: "add-BranchOffice",
     component: AddBranchOfficeComponent

@@ -1,0 +1,110 @@
+<div class="container" style="display: flex; justify-content: center; align-items: center;">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>New flight</h4>
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form [formGroup]="flightForm" (ngSubmit)="submit()">
+                            <div class="form-group row">
+                                <label for="departure" class="col-4 col-form-label" style="font-size: large;">City of departure</label> 
+                                <div class="col-8">
+                                    <select id="destinations"  class="form-control" size="3" style="width: inherit;" formControlName="departure" >
+                                        <option *ngFor="let dest of destinationsSelect">
+                                         {{dest.city}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="arrival" class="col-4 col-form-label" style="font-size: large;">City of arrival</label> 
+                                <div class="col-8">
+                                    <select id="destinations"  class="form-control" size="3" style="width: inherit;" formControlName="arrival">
+                                        <option *ngFor="let dest of destinationsSelect">
+                                         {{dest.city}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="takeoff" class="col-4 col-form-label" style="font-size: large;">Take-off date and time</label> 
+                                <div class="col-8">
+                                    <dl-date-time-picker
+                                        startView="day"
+                                        maxView="year"
+                                        minView="minute"
+                                        minuteStep="5"
+                                        name="takeoff" formControlName="takeOff"
+                                    >
+                                    </dl-date-time-picker>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="touchdown" class="col-4 col-form-label" style="font-size: large;">Touchdown date and time</label> 
+                                <div class="col-8">
+                                    <dl-date-time-picker
+                                        startView="day"
+                                        maxView="year"
+                                        minView="minute"
+                                        minuteStep="5"
+                                        name="touchdown" formControlName="touchDown"
+                                    >
+                                    </dl-date-time-picker>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="length" class="col-4 col-form-label" style="font-size: large;">Travel length</label> 
+                                <div class="col-8">
+                                    <input id="length" name="length" placeholder="Km" class="form-control " type="number" formControlName="length">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="length" class="col-4 col-form-label" style="font-size: large;">Connections</label> 
+                                <div class="col-8">
+                                <select id="destinations" multiple class="form-control" size="3" style="width: inherit;" formControlName="connections">
+                                    <option *ngFor="let dest of destinationsSelect">
+                                     {{dest.city}}
+                                    </option>
+                                </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="price" class="col-4 col-form-label" style="font-size: large;">Price & seats</label> 
+                                <div class="col-8 row">
+                                    <!-- <div class="row"> -->
+                                        <label class="col-4 col-form-label" style="font-size: medium;">First class</label>
+                                        <input id="length" name="length" placeholder="€" class="form-control " type="number" formControlName="priceFirst">
+                                        <input type="number" formControlName="numberFirst" class="form-control" placeholder="number of seats">
+                                    <!-- </div> -->
+                                    <label class="col-4 col-form-label" style="font-size: medium;">Business class</label>
+                                        <input id="length" name="length" placeholder="€" class="form-control " type="number" formControlName="priceBusiness">
+                                        <input type="number" formControlName="numberBusiness" class="form-control" placeholder="number of seats">
+                                    <!-- </div> -->
+                                    <label class="col-4 col-form-label" style="font-size: medium;">Economy class</label>
+                                        <input id="length" name="length" placeholder="€" class="form-control " type="number" formControlName="priceEconomy">
+                                        <input type="number" formControlName="numberEconomy" class="form-control" placeholder="number of seats">
+                                    <!-- </div> -->
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <button type="button" class="btn btn-outline-primary btn-lg btn-block" type="submit">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+

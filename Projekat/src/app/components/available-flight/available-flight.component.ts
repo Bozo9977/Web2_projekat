@@ -10,10 +10,13 @@ import { FlightService } from 'src/app/services/flight-service/flight.service';
 export class AvailableFlightComponent implements OnInit {
 
   flights: Array<FlightReceive>
-
+  admin: boolean = false;
+  
   constructor(private flightService: FlightService) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem("userType")=="admin")
+      this.admin = true;
     this.flightService.getFlights().subscribe(
       (res: any)=>{
         console.log(res);
@@ -23,6 +26,10 @@ export class AvailableFlightComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  changeFlight(id: number){
+    console.log(id);
   }
 
 }
