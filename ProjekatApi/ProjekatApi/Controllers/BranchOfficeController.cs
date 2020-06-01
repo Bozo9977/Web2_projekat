@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProjekatApi.FormModel;
 using ProjekatApi.Model;
 
 namespace ProjekatApi.Controllers
@@ -48,11 +49,17 @@ namespace ProjekatApi.Controllers
             return Ok();
         }
 
+        [HttpPut]
         [Route("UpdateBranchOffice")]
-        public async Task<IActionResult> UpdateBranchOffice(BranchOffices branchOffices)
+        public async Task<IActionResult> UpdateBranchOffice(BranchOfficeForm branchOffices)
         {
-
-            context.Entry(branchOffices).State = EntityState.Modified;
+            BranchOffices branch = new BranchOffices();
+            branch.Id = Int32.Parse(branchOffices.Id);
+            branch.Name = branchOffices.Name;
+            branch.Telephone = branchOffices.Telephone;
+            branch.Address = branchOffices.Address;
+            branch.City = branchOffices.City;
+            context.Entry(branch).State = EntityState.Modified;
 
             try
             {
@@ -66,6 +73,13 @@ namespace ProjekatApi.Controllers
             return NoContent();
         }
 
+        [HttpGet]
+        [Route("GetBranchOffice")]
+        public async Task<ActionResult<IEnumerable<BranchOffices>>> GetBranchOffice()
+        {
+
+            return context.Carcompanies.Include(x => x.BranchOffices).ToList().SingleOrDefault(x => x.Id == 1).BranchOffices.ToList();
+        }
 
     }
 }

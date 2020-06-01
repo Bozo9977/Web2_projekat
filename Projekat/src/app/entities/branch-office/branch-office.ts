@@ -3,9 +3,9 @@ export class BranchOffice {
     name: string;
     city: string;
     address: string;
-    telephone: number;
+    telephone: string;
 
-    constructor(id: number, name: string, city: string, address:string, telephone: number){
+    constructor(id: number, name: string, city: string, address:string, telephone: string){
         this.id=id;
         this.name = name;
         this.city = city;

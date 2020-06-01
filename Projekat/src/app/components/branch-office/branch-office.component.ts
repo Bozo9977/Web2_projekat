@@ -13,8 +13,19 @@ export class BranchOfficeComponent implements OnInit {
   constructor(private offices: BranchOfficeService) { }
 
   ngOnInit(): void {
-    this.branchOffices = this.offices.loadBranchOffices();
+    this.loadBranchOffices();
     console.log(this.branchOffices);
   }
+
+  private loadBranchOffices(){
+    this.offices.getBranchOffice().subscribe(
+      (res: any) => { 
+        this.branchOffices = res as BranchOffice[] 
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  } 
   
 }

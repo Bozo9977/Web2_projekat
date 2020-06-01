@@ -13,6 +13,9 @@ export class AddBranchOfficeComponent implements OnInit {
 
   addBranchOfficeForm: FormGroup;
   ngOnInit(): void {
+    this.initForm();
+    console.log(this.addBranchOfficeForm.value);
+    
   }
 
   private initForm() {

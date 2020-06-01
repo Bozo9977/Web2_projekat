@@ -255,3 +255,4 @@ C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\n
 C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.dll
 C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.pdb
 C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.genruntimeconfig.cache
+C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csprojAssemblyReference.cache

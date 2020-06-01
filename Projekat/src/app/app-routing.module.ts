@@ -25,6 +25,7 @@ import { DestinationViewComponent } from './components/destination-view/destinat
 import { CarInfoChangeComponent } from './components/car-info-change/car-info-change.component';
 import { AddBranchOfficeComponent } from './components/add-branch-office/add-branch-office.component';
 import { FlightChangeComponent } from './components/flight-change/flight-change.component';
+import { ChangeBranchOfficeComponent } from './components/change-branch-office/change-branch-office.component';
 
 const routes: Routes = [
   {
@@ -71,10 +72,10 @@ const routes: Routes = [
     component: FlightInfoComponent
   },
 
-  {
-    path: 'branchOffice',
-    component: BranchOfficeComponent
-  },
+ // {
+  //  path: 'branchOffice',
+  //  component: BranchOfficeComponent
+ // },
 
   {
     path: 'priceList-path',
@@ -148,6 +149,16 @@ const routes: Routes = [
     path: "add-BranchOffice",
     component: AddBranchOfficeComponent
   },
+
+  {
+    path: "branchOffice",
+    children: [
+      { path: "", component: BranchOfficeComponent },
+      { path: ":id/change-BranchOffice", component: ChangeBranchOfficeComponent },
+    ]
+  },
+
+
 ];
 
 @NgModule({

@@ -33,6 +33,7 @@ import { CarInfoChangeComponent } from './components/car-info-change/car-info-ch
 import { HttpClientModule } from '@angular/common/http';
 import { AddBranchOfficeComponent } from './components/add-branch-office/add-branch-office.component';
 import { FlightChangeComponent } from './components/flight-change/flight-change.component';
+import { ChangeBranchOfficeComponent } from './components/change-branch-office/change-branch-office.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { FlightChangeComponent } from './components/flight-change/flight-change.
     CarInfoChangeComponent,
     AddBranchOfficeComponent,
     FlightChangeComponent,
+    ChangeBranchOfficeComponent,
   ],
   imports: [
     BrowserModule,
