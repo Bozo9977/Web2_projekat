@@ -25,13 +25,17 @@ namespace ProjekatApi.Controllers
         [HttpPost]
         [Route("Register")]
         //POST : /api/ApplicationUser/Register
-        public async Task<Object> PostApplicationUser(UserModel model)
+        public async Task<Object> Register(UserModel model)
         {
             var applicationUser = new ApplicationUser()
             {
+                UserName = model.Email,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                City = model.City
+                City = model.City,
+                Email = model.Email
+                
+                
             };
 
             try
