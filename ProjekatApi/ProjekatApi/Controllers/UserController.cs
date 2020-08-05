@@ -33,8 +33,7 @@ namespace ProjekatApi.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 City = model.City,
-                Email = model.Email
-                
+                Email = model.Email                
                 
             };
 

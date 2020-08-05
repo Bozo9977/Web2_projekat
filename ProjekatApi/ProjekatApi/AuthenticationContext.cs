@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ProjekatApi.Model;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProjekatApi
 {
-    public class AuthenticationContext : IdentityDbContext
+    public class AuthenticationContext : IdentityDbContext<ApplicationUser, AspNetRoles, string>
     {
         public AuthenticationContext(DbContextOptions<AuthenticationContext> options) : base(options)
         {
@@ -16,5 +17,9 @@ namespace ProjekatApi
         }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+
+
+       
     }
 }

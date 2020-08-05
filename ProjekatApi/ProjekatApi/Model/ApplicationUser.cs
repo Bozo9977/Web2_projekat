@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace ProjekatApi.Model
         [Column(TypeName = "nvarchar(150)")]
         public string City { get; set; }
 
-      
-
+        [AllowNull]
+        public string Discriminator { get; set; }
     }
 }
