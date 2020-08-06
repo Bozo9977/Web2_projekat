@@ -78,6 +78,58 @@ namespace ProjekatApi
                 }
             }
 
+
+            if (userManager.FindByNameAsync("milan.milanovic@gmail.com").Result == null)
+            {
+                ApplicationUser user = new ApplicationUser();
+                user.FirstName = "Milan";
+                user.LastName = "Milanovic";
+                user.City = "Beograd";
+                user.UserName = "milan.milanovic@gmail.com";
+                user.Email = "milan.milanovic@gmail.com";
+
+                IdentityResult result = userManager.CreateAsync(user, "milan").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "CarAdministrator").Wait();
+                }
+            }
+
+            if (userManager.FindByNameAsync("petar.petrovic@gmail.com").Result == null)
+            {
+                ApplicationUser user = new ApplicationUser();
+                user.FirstName = "Petar";
+                user.LastName = "Petrovic";
+                user.City = "Beograd";
+                user.UserName = "petar.petrovic@gmail.com";
+                user.Email = "petar.petrovic@gmail.com";
+
+                IdentityResult result = userManager.CreateAsync(user, "petar").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "AirlineAdministrator").Wait();
+                }
+            }
+
+            if (userManager.FindByNameAsync("marko.markovic@gmail.com").Result == null)
+            {
+                ApplicationUser user = new ApplicationUser();
+                user.FirstName = "Marko";
+                user.LastName = "Markovic";
+                user.City = "Beograd";
+                user.UserName = "marko.markovic@gmail.com";
+                user.Email = "marko.markovic@gmail.com";
+
+                IdentityResult result = userManager.CreateAsync(user, "marko").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "Administrator").Wait();
+                }
+            }
+
         }
     }
 

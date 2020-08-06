@@ -266,6 +266,7 @@ C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\n
 C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\AWSSDK.dll
 C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\AWSSDK.Core.dll
+C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csproj.CoreCompileInputs.cache
 C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\DRAGOJLA\Desktop\Web2\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cache

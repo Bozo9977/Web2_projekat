@@ -8,10 +8,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class UserService {
 
   constructor(private fb: FormBuilder, private http: HttpClient) { }
-  /* readonly BaseURI = 'https://localhost:44334/api';
+  readonly BaseURI = 'https://localhost:44314/api';
 
   login(formData){
     return this.http.post(this.BaseURI + '/User/Login', formData);
-  } */
+  } 
   
 }

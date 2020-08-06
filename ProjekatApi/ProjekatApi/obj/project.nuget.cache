@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "81WI7DTjlVJK7OxoCPEFJKkVxzk7fvH3RJ23n7O/rOhIRtl9+BiHuJySuzNlHyfH7vn/22yIxYoaDwOiscpunw==",
+  "dgSpecHash": "+zrNiDKYoDauVSrRO54a3nIqhqmL+fCj1eRAteAoDTjLyuaoHKduo3c/diACR2xf7qTQE4dlPaWLaZg427YWAg==",
   "success": true,
   "projectFilePath": "C:\\Users\\DRAGOJLA\\Desktop\\Web2\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\DRAGOJLA\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\DRAGOJLA\\.nuget\\packages\\microsoft.aspnetcore.authentication.cookies\\2.2.0\\microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",
     "C:\\Users\\DRAGOJLA\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
+    "C:\\Users\\DRAGOJLA\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.6\\microsoft.aspnetcore.authentication.jwtbearer.3.1.6.nupkg.sha512",
     "C:\\Users\\DRAGOJLA\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\DRAGOJLA\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.1\\microsoft.aspnetcore.cryptography.internal.3.1.1.nupkg.sha512",
     "C:\\Users\\DRAGOJLA\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.1\\microsoft.aspnetcore.cryptography.keyderivation.3.1.1.nupkg.sha512",
