@@ -30,10 +30,14 @@ import { AvailableFlightComponent } from './components/available-flight/availabl
 import { DestinationViewComponent } from './components/destination-view/destination-view.component';
 import { NgbModule, NgbRating } from '@ng-bootstrap/ng-bootstrap';
 import { CarInfoChangeComponent } from './components/car-info-change/car-info-change.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddBranchOfficeComponent } from './components/add-branch-office/add-branch-office.component';
 import { FlightChangeComponent } from './components/flight-change/flight-change.component';
 import { ChangeBranchOfficeComponent } from './components/change-branch-office/change-branch-office.component';
+import { AuthInterceptor } from './components/auth/auth.interceptor';
+import { CookieService } from 'ngx-cookie-service';
+import { TokenInterceptor } from './components/auth/TokenInterceptor';
+import { UserService} from 'src/app/services/user-service/user.service';
 
 @NgModule({
   declarations: [
@@ -77,7 +81,21 @@ import { ChangeBranchOfficeComponent } from './components/change-branch-office/c
     NgbModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    CookieService,
+    UserService, 
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+      },
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

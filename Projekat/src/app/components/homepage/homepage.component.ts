@@ -14,6 +14,7 @@ export class HomepageComponent implements OnInit {
 
   rentACarClicked: boolean = true;
   loginForm: FormGroup;
+  userDetails;
 
   formModel = {
     Username: '',
@@ -59,8 +60,16 @@ export class HomepageComponent implements OnInit {
         console.log(decode);
         console.log(givenName);
 
-      
-        // this.router.navigateByUrl('/mainPage');
+        this.userService.getUserProfile().subscribe(
+          res => {
+            this.userDetails = res;
+            console.log(this.userDetails);
+            console.log(this.userDetails.firstName);
+          },
+          err => {
+            console.log(err);
+          },
+        );
       },
       err =>{
         console.log(err.status);

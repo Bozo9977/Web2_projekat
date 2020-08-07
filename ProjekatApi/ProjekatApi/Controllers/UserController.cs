@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -85,6 +88,23 @@ namespace ProjekatApi.Controllers
             }
             else
                 return BadRequest(new { message = "Username or password is incorrect." });
+        }
+
+        [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("GetUserProfile")]
+        //GET : /api/UserProfile
+        public async Task<Object> GetUserProfile()
+        {
+            string userId = User.Claims.First(c => c.Type == "UserID").Value;
+            var user = await _userManager.FindByIdAsync(userId);
+            return new
+            {
+                user.FirstName,
+                user.LastName,
+                user.Email,
+                user.City
+            };
         }
     }
 }
