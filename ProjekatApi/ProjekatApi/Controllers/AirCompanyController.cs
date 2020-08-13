@@ -49,6 +49,21 @@ namespace ProjekatApi.Controllers
             return await context.Aircompanies.ToListAsync();
         }
 
+        [HttpGet]
+        [Route("GetAircompanyForUser/{UserID}")]
+        public async Task<IActionResult> GetAircompanyForUser(string UserID)
+        {
+            Aircompany ret;
+            if((ret = await context.Aircompanies.SingleOrDefaultAsync(x=>x.Administrator.Id == UserID)) != null)
+            {
+                return Ok(ret);
+            }
+            else
+            {
+                return NotFound("Aircompany for user not found.");
+            }
+            
+        }
 
     }
 }

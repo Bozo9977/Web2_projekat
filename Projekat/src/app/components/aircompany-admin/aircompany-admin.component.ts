@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Variable } from '@angular/compiler/src/render3/r3_ast';
+import { Aircompany } from 'src/app/entities/aircompany/aircompany';
 
 @Component({
   selector: 'app-aircompany-admin',
@@ -9,10 +11,12 @@ export class AircompanyAdminComponent implements OnInit {
   destinationClicked: boolean = true;
   flightClicked: boolean = true;
   flightsClicked: boolean = true;
-
+  company: Aircompany;
   constructor() { }
 
   ngOnInit(): void {
+    this.company = JSON.parse(localStorage.getItem('company'));
+    console.log(this.company.name);
   }
   
   newDestinationClicked(){
@@ -38,4 +42,6 @@ export class AircompanyAdminComponent implements OnInit {
     if(!this.flightClicked)
       this.flightClicked = !this.flightClicked;
   }
+
+
 }

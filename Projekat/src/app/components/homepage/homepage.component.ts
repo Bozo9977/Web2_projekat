@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as jwt_decode from 'jwt-decode';
+import { CompanyService } from 'src/app/services/company-service/company.service';
 
 @Component({
   selector: 'app-homepage',
@@ -21,7 +22,7 @@ export class HomepageComponent implements OnInit {
     Password : ''
   }
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private companyService: CompanyService, private router: Router) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -49,12 +50,27 @@ export class HomepageComponent implements OnInit {
         var decode = jwt_decode(res.token);
         var givenName = decode['Roles'];
 
+        var UserID = decode['UserID'];
+
         if(givenName == "RegisteredUser")
           this.router.navigateByUrl('/mainPage');
         else if(givenName == "Administrator")
           this.router.navigateByUrl('/administrator');
         else if(givenName == "AirlineAdministrator")
-          this.router.navigateByUrl('/aircompany_admin');
+        {
+          this.companyService.getAirCompanyForUser(UserID).subscribe(
+            (res:any)=>{
+              localStorage.setItem('company', JSON.stringify(res));
+              console.log(res);
+              this.router.navigateByUrl('/aircompany_admin');
+            },
+            err =>{
+              console.log(err.status);
+              console.log(err);
+            }
+          );
+          
+        }          
         else if(givenName == "CarAdministrator")
           this.router.navigateByUrl('/rent-a-car-Admin');
         console.log(decode);
@@ -63,6 +79,7 @@ export class HomepageComponent implements OnInit {
         this.userService.getUserProfile().subscribe(
           res => {
             this.userDetails = res;
+            localStorage.setItem('userDetails', JSON.stringify(res));
             console.log(this.userDetails);
             console.log(this.userDetails.firstName);
           },

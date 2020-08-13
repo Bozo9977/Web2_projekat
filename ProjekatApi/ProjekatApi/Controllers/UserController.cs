@@ -58,6 +58,37 @@ namespace ProjekatApi.Controllers
         }
 
         [HttpPost]
+        [Route("RegisterAircompanyAdmin")]
+        //POST : /api/ApplicationUser/Register
+        public async Task<Object> RegisterAircompanyAdmin(UserModel model)
+        {
+            var applicationUser = new ApplicationUser()
+            {
+                UserName = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                City = model.City,
+                Email = model.Email
+
+            };
+
+            try
+            {
+                var result = await _userManager.CreateAsync(applicationUser, model.Password);
+                if (result.Succeeded)
+                {
+                    _userManager.AddToRoleAsync(applicationUser, "AirlineAdministrator").Wait();
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        [HttpPost]
         [Route("Login")]
         //POST : /api/ApplicationUser/Login
         public async Task<IActionResult> Login(LoginModel model)

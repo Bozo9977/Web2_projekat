@@ -10,11 +10,15 @@ export class RegistrationService {
 
   constructor(private http: HttpClient) { }
 
-  readonly BasURI = "https://localhost:44314/api";
+  readonly BaseURI = "https://localhost:44314/api";
 
   addUser(formData){
-    return this.http.post(this.BasURI + '/User/Register', formData);
+    return this.http.post(this.BaseURI + '/User/Register', formData);
 }
+
+  addAircompanyAddmin(formData){
+    return this.http.post(this.BaseURI + '/User/RegisterAircompanyAdmin',formData);
+  }
 
 
 }

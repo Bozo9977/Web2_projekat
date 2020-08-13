@@ -32,6 +32,9 @@ export class CompanyService {
     
   }
 
+  getAirCompanyForUser(UserID: string){
+    return this.http.get(this.BasURI + "/AirCompany/GetAircompanyForUser/"+UserID);
+  }
 
   mockedCarCompanies():Array<CarCompany>{
     let allComp = new Array<CarCompany>();

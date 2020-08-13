@@ -37,8 +37,32 @@ export class RegistrationCompanyComponent implements OnInit {
   onRegistration() {
     console.log(this.companyRegistrationForm.value);
     
+    if(this.companyRegistrationForm.controls['company'].value != "carcompany"){
+      this.registrationService.addAircompanyAddmin(this.companyRegistrationForm.value).subscribe(
+        (res:any)=>{
+          console.log(res);
+  
+          this.companyService.addCompany(this.companyRegistrationForm.value).subscribe(
+            (res: any) => {
+              console.log(res);
+              this.router.navigate(['/administrator']);
+            },
+            err =>{
+              console.log(err);
+            }
+          );
+        },
+        err =>{
+          console.log(err);
+        }
+      );
+    }
+    else{
 
-    this.registrationService.addUser(this.companyRegistrationForm.value).subscribe(
+
+
+    // izmeniti za carcompany
+    this.registrationService.addAircompanyAddmin(this.companyRegistrationForm.value).subscribe(
       (res:any)=>{
         console.log(res);
 
@@ -58,6 +82,9 @@ export class RegistrationCompanyComponent implements OnInit {
     );
 
 
+    
+    }
+    
     
 
     
