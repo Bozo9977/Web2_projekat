@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjekatApi.FormModel;
@@ -15,10 +16,12 @@ namespace ProjekatApi.Controllers
     public class AirCompanyController : ControllerBase
     {
         private readonly DatabaseContext context;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public AirCompanyController(DatabaseContext _context)
+        public AirCompanyController(DatabaseContext _context, UserManager<ApplicationUser> _userManager)
         {
             context = _context;
+            userManager = _userManager;
         }
 
         [HttpPost]
@@ -30,6 +33,8 @@ namespace ProjekatApi.Controllers
             airCompanyPom.Description = null;
             airCompanyPom.Destinations = null;
             airCompanyPom.Flights = null;
+
+            airCompanyPom.Administrator = await userManager.FindByNameAsync(company.Email);
             context.Aircompanies.Add(airCompanyPom);
 
             await context.SaveChangesAsync();

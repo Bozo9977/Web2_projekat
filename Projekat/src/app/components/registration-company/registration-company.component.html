@@ -1,5 +1,5 @@
 <div class="signup-form">
-    <form [formGroup]="registrationForm" (ngSubmit)="onRegistration()">
+    <form [formGroup]="companyRegistrationForm" (ngSubmit)="onRegistration()">
     <h2>Registration</h2>
     <div class="custom-control custom-radio custom-control-inline">
       <input type="radio"  id="defaultChecked" value="carcompany" name="company" checked formControlName="company">&nbsp;Rent-a-car
@@ -15,22 +15,22 @@
         </div>   
         <p>ADMINISTRATOR</p>
         <div class="form-group">
-            <input type="email" class="form-control" name="emailRegistration" placeholder="Email" formControlName = "registrationEmail">
+            <input type="email" class="form-control" name="emailRegistration" placeholder="Email" formControlName = "Email">
         </div>
         <div class="form-group">
-            <input type="text" class="form-control" name="firstNameRegistration" placeholder="First Name" formControlName = "registrationFirstName">
+            <input type="text" class="form-control" name="firstNameRegistration" placeholder="First Name" formControlName = "FirstName">
         </div>        
         <div class="form-group">
-          <input type="text" class="form-control" name="lastNameRegistration" placeholder="Last Name" formControlName = "registrationLastName">
+          <input type="text" class="form-control" name="lastNameRegistration" placeholder="Last Name" formControlName = "LastName">
         </div>   
        <div class="form-group">
-         <input type="text" class="form-control" name="cityRegistration" placeholder="City" formControlName = "registrationCity">
+         <input type="text" class="form-control" name="cityRegistration" placeholder="City" formControlName = "City">
         </div>   
         <div class="form-group">
-          <input type="password" class="form-control" name="passwordRegistration" placeholder="Password" formControlName = "registrationPassword">
+          <input type="password" class="form-control" name="passwordRegistration" placeholder="Password" formControlName = "Password">
         </div>   
         <div class="form-group">
-          <input type="password" class="form-control" name="confirm_passwordRegistration" placeholder="Confirm Password" formControlName = "registrationConfirmPassword">
+          <input type="password" class="form-control" name="confirm_passwordRegistration" placeholder="Confirm Password" formControlName = "ConfirmPassword">
         </div>  
       <div>
         <button type="submit" class="btn btn-secondary btn-lg btn-block">Add</button>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CompanyService } from 'src/app/services/company-service/company.service';
+import { Router } from '@angular/router';
+import { RegistrationService } from 'src/app/services/registration-service/registration.service';
 
 @Component({
   selector: 'app-registration-company',
@@ -9,39 +11,59 @@ import { CompanyService } from 'src/app/services/company-service/company.service
 })
 export class RegistrationCompanyComponent implements OnInit {
 
-  registrationForm: FormGroup;
+  companyRegistrationForm: FormGroup;
 
-  constructor(private company: CompanyService) { }
+  constructor(private companyService: CompanyService, private registrationService: RegistrationService, private router: Router) { }
 
   ngOnInit(): void {
     this.initForm();
   }
 
   private initForm() {
-    this.registrationForm = new FormGroup({
+
+    this.companyRegistrationForm = new FormGroup({
       'company': new FormControl('', [Validators.required]),
       'registrationNameService': new FormControl(''),
-      'registrationEmail': new FormControl(''),
-      'registrationFirstName': new FormControl(''),
-      'registrationLastName': new FormControl(''),
-      'registrationCity': new FormControl(''),
-      'registrationPassword': new FormControl(''),
-      'registrationConfirmPassword': new FormControl(''),
+      'Email': new FormControl(''),
+      'FirstName': new FormControl(''),
+      'LastName': new FormControl(''),
+      'City': new FormControl(''),
+      'Password': new FormControl(''),
+      'ConfirmPassword': new FormControl(''),
     });
+
   }
 
   onRegistration() {
-    console.log(this.registrationForm.value);
-    this.company.addCompany(this.registrationForm.value).subscribe(
-      (res: any) => {
+    console.log(this.companyRegistrationForm.value);
+    
+
+    this.registrationService.addUser(this.companyRegistrationForm.value).subscribe(
+      (res:any)=>{
         console.log(res);
-        
+
+        this.companyService.addCompany(this.companyRegistrationForm.value).subscribe(
+          (res: any) => {
+            console.log(res);
+            this.router.navigate(['/administrator']);
+          },
+          err =>{
+            console.log(err);
+          }
+        );
       },
       err =>{
         console.log(err);
       }
     );
-    this.registrationForm.reset();
+
+
+    
+
+    
+
+    // this.router.navigate(['/administrator']);
+    // this.companyRegistrationForm.reset();
   }
 
 }

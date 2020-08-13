@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DRAGOJLA\\Desktop\\Web2\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj": {}
+    "C:\\Users\\Bozo\\Desktop\\Web2\\Projekat\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DRAGOJLA\\Desktop\\Web2\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj": {
+    "C:\\Users\\Bozo\\Desktop\\Web2\\Projekat\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DRAGOJLA\\Desktop\\Web2\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
+        "projectUniqueName": "C:\\Users\\Bozo\\Desktop\\Web2\\Projekat\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
         "projectName": "ProjekatApi",
-        "projectPath": "C:\\Users\\DRAGOJLA\\Desktop\\Web2\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
-        "packagesPath": "C:\\Users\\DRAGOJLA\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DRAGOJLA\\Desktop\\Web2\\Web2_projekat\\ProjekatApi\\ProjekatApi\\obj\\",
+        "projectPath": "C:\\Users\\Bozo\\Desktop\\Web2\\Projekat\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
+        "packagesPath": "C:\\Users\\Bozo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Bozo\\Desktop\\Web2\\Projekat\\Web2_projekat\\ProjekatApi\\ProjekatApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\DRAGOJLA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Bozo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,7 +25,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\Microsoft SDKs\\Azure\\.NET SDK\\v2.9\\packages": {},
+          "C:\\Users\\Bozo\\Desktop\\PaketiCloud": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

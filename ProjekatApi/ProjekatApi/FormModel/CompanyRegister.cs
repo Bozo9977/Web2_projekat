@@ -9,12 +9,12 @@ namespace ProjekatApi.FormModel
     {
         public string Company { get; set; }
         public string RegistrationNameService { get; set; }
-        public string RegistrationEmail { get; set; }
-        public string RegistrationFirstName { get; set; }
-        public string RegistrationLastName { get; set; }
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
-        public string RegistrationCity { get; set; }
-        public string RegistrationPassword { get; set; }
+        public string City { get; set; }
+        public string Password { get; set; }
 
     }
 }
