@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControlName, FormControl } from '@angular/forms';
+import { FormGroup, FormControlName, FormControl, NgForm } from '@angular/forms';
+import { User } from 'src/app/entities/user/user';
+
 
 @Component({
   selector: 'app-user-info',
@@ -9,11 +11,14 @@ import { FormGroup, FormControlName, FormControl } from '@angular/forms';
 export class UserInfoComponent implements OnInit {
 
 
+  loggedInUser : User;
   userInfoForm: FormGroup
 
   constructor() { }
 
   ngOnInit(): void {
+    this.loggedInUser = JSON.parse(localStorage.getItem('userDetails'));
+    console.log(this.loggedInUser);
     this.initForm()
   }
 
@@ -23,9 +28,11 @@ export class UserInfoComponent implements OnInit {
       'lastName': new FormControl(''),
       'email': new FormControl(''),
       'phone': new FormControl(''),
+      'city': new FormControl(''),
       'password': new FormControl(''),
       'passwordConfirm': new FormControl()
     });
+    this.userInfoForm.patchValue(this.loggedInUser);
   }
 
   changeUserInfo(){
@@ -37,5 +44,10 @@ export class UserInfoComponent implements OnInit {
   resetForm(){
     console.log('reset successfull');
     this.userInfoForm.reset();
+  }
+
+
+  checkPassword(){
+    
   }
 }
