@@ -175,6 +175,33 @@ namespace ProjekatApi.Controllers
             return NoContent();
         }
 
+        [HttpPut]
+        [Route("ChangeUserInfo")]
+        public async Task<IActionResult> ChangeUserInfo(UserModel user)
+        {
+            ApplicationUser appUser = await _userManager.FindByNameAsync(user.Email);
+            appUser.City = user.City;
+            appUser.FirstName = user.FirstName;
+            appUser.LastName = user.LastName;
+            appUser.PhoneNumber = user.PhoneNumber;
+            
+
+            try
+            {
+                await _userManager.UpdateAsync(appUser);
+            }catch(Exception e)
+            {
+                return NoContent();
+            }
+
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(appUser);
+
+            var result = await _userManager.ResetPasswordAsync(appUser, token, user.Password);
+
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("Login")]
         //POST : /api/ApplicationUser/Login

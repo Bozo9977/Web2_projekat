@@ -15,7 +15,7 @@ export class AircompanyAdminComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
+    this.company = JSON.parse(localStorage.getItem('company'));
   }
   
   newDestinationClicked(){

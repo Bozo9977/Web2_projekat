@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { User } from 'src/app/entities/user/user';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,9 @@ export class UserService {
   
   getUserProfile() {
     return this.http.get(this.BaseURI + '/User/GetUserProfile');
+  }
+
+  changeUserInfo(user: User){
+    return this.http.put<User>(this.BaseURI + '/User/ChangeUserInfo', user);
   }
 }

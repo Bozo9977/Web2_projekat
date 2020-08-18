@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControlName, FormControl, NgForm } from '@angular/forms';
 import { User } from 'src/app/entities/user/user';
-
+import { UserService } from 'src/app/services/user-service/user.service';
+import * as jwt_decode from 'jwt-decode';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-user-info',
@@ -14,7 +17,7 @@ export class UserInfoComponent implements OnInit {
   loggedInUser : User;
   userInfoForm: FormGroup
 
-  constructor() { }
+  constructor(private userService: UserService, private location: Location) { }
 
   ngOnInit(): void {
     this.loggedInUser = JSON.parse(localStorage.getItem('userDetails'));
@@ -37,8 +40,30 @@ export class UserInfoComponent implements OnInit {
 
   changeUserInfo(){
     console.log(this.userInfoForm.value);
-    console.log(this.userInfoForm);
-    this.resetForm();
+    
+    var user: User = this.userInfoForm.value;
+    
+    var decode = jwt_decode(localStorage.getItem('token'));
+    user.id = decode['UserID'];
+
+    console.log("User info change: " + user);
+
+    if(this.userInfoForm.get('password').value != this.userInfoForm.get('passwordConfirm').value)
+    {
+      console.log("PAssword mismatch");
+    }else
+    {
+      this.userService.changeUserInfo(user).subscribe(
+        (res: any) => {
+          this.location.back();
+        },
+        err =>{
+          console.log(err);
+        }
+      )
+    }
+
+    
   }
 
   resetForm(){
