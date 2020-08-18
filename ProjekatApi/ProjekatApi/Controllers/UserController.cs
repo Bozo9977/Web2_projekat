@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ProjekatApi.FormModel;
@@ -24,10 +25,12 @@ namespace ProjekatApi.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private readonly ApplicationSettings _appSettings;
-        public UserController(UserManager<ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings)
+        private readonly DatabaseContext context;
+        public UserController(UserManager<ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings, DatabaseContext _context)
         {
             _userManager = userManager;
             _appSettings = appSettings.Value;
+            context = _context;
         }
 
         [HttpPost]
@@ -143,6 +146,33 @@ namespace ProjekatApi.Controllers
                 }
             }
             return Ok();
+        }
+
+        [HttpPut]
+        [Route("UpdateCompanyService")]
+        public async Task<Object> UpdateCompanyService(CompanyChange company)
+        {
+
+            //var carPom = await context.Cars.FindAsync(car.Id);
+
+            Company comPom = await context.Companies.FindAsync(company.Id);
+
+            comPom.Name = company.Name;
+            comPom.Address = company.Address;
+            comPom.Description = company.Description;
+
+            context.Entry(comPom).State = EntityState.Modified;
+
+            try
+            {
+                await context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
 
         [HttpPost]

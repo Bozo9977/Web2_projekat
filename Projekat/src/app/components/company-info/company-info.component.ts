@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/entities/user/user';
 import { CarCompany } from 'src/app/entities/car-company/car-company';
+import { CompanyService } from 'src/app/services/company-service/company.service';
 
 @Component({
   selector: 'app-company-info',
@@ -13,17 +14,13 @@ export class CompanyInfoComponent implements OnInit {
   companyInfoForm: FormGroup;
   loggedInUser : User;
   company;
+  companyPom: CarCompany;
 
-  constructor() { }
+  constructor(private companyService: CompanyService) { }
 
   ngOnInit(): void {
 
     this.company = JSON.parse(localStorage.getItem('company'));
-    /*this.companyPom.name = JSON.parse(this.company.name);
-    this.companyPom.address = JSON.parse(this.company.address);
-    this.companyPom.description = JSON.parse(this.company.description);
-    this.companyPom.id = JSON.parse(this.company.id);
-    this.companyPom.rating = 10;*/
     console.log(this.company);
     this.initForm();
   }
@@ -39,8 +36,22 @@ export class CompanyInfoComponent implements OnInit {
   }
 
   changeCompany() {
-    console.log(this.companyInfoForm.value);
-    console.log(this.companyInfoForm);
+    console.log("IZMENA: ", this.companyInfoForm.value);
+
+    
+    this.companyPom = this.companyInfoForm.value;
+    this.companyPom.id = this.company.id;
+    
+
+    this.companyService.updateCompanyService(this.companyPom).subscribe(
+      (res: any) => {
+        console.log(res);
+      },
+      err =>{
+        console.log(err);
+      }
+    );
+    this.companyInfoForm.reset();
   }
 
 }

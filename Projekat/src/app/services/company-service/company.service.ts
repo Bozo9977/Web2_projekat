@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CompanyService {
-
+  companyPom2: CarCompany;
+  pom: FormData;
   constructor(private http: HttpClient) { }
 
   readonly BasURI = "https://localhost:44314/api";
@@ -40,11 +41,24 @@ export class CompanyService {
     return this.http.get(this.BasURI + "/CarCompany/GetCarcompanyForUser/"+UserID);
   }
 
+  updateCompanyService(carCompany: CarCompany){
+  //  this.companyPom2 = new CarCompany(formData.id, formData.name, formData.address, formData.description, formData.rating);
+   //console.log("COMPANIPOM", this.companyPom2);
+  /*  this. pom = new FormData();
+    this.pom.append("id", carCompany.id.toString());
+    this.pom.append("name", carCompany.name);
+    this.pom.append("address", carCompany.address);
+    this.pom.append("description", carCompany.description);
+    console.log("SERVIS: ", this.pom);
+    return this.http.post(this.BasURI + '/UserController/UpdateCompanyService', this.pom);*/
+    return this.http.put<CarCompany>(this.BasURI + '/User/UpdateCompanyService', carCompany);
+  }
+
   mockedCarCompanies():Array<CarCompany>{
     let allComp = new Array<CarCompany>();
 
-    const c1 = new CarCompany(1, 'Bozic trans', 'Bastovanska 2a', 'Very OK company', 3.42);
-    const c2 = new CarCompany(2, 'Maric tours', 'Marsala Tita 1', 'Excellent internationall company', 5);
+    const c1 = new CarCompany(1, 'Bozic trans', 'Bastovanska 2a', 'Very OK company');
+    const c2 = new CarCompany(2, 'Maric tours', 'Marsala Tita 1', 'Excellent internationall company');
 
     allComp.push(c1);
     allComp.push(c2);
@@ -55,8 +69,8 @@ export class CompanyService {
   mockedAircompanies():Array<Aircompany>{
     let allComp = new Array<CarCompany>();
 
-    const c1 = new CarCompany(1, 'Bozic trans', 'Bastovanska 2a', 'Very OK company', 3.42);
-    const c2 = new CarCompany(2, 'Maric tours', 'Marsala Tita 1', 'Excellent internationall company', 5);
+    const c1 = new CarCompany(1, 'Bozic trans', 'Bastovanska 2a', 'Very OK company');
+    const c2 = new CarCompany(2, 'Maric tours', 'Marsala Tita 1', 'Excellent internationall company');
 
     allComp.push(c1);
     allComp.push(c2);

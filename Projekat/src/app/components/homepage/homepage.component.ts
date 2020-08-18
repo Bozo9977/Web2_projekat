@@ -63,7 +63,7 @@ export class HomepageComponent implements OnInit {
         {
           this.companyService.getAirCompanyForUser(UserID).subscribe(
             (res:any)=>{
-              this.aircompany = new Aircompany(res.id, res.name, res.address, res.description, 10);
+              this.aircompany = new Aircompany(res.id, res.name, res.address, res.description);
               console.log("AIRCOMPANY: ", this.aircompany)
               localStorage.setItem('company', JSON.stringify(this.aircompany));
               console.log(res);
@@ -81,7 +81,7 @@ export class HomepageComponent implements OnInit {
           this.companyService.getCarCompanyForUser(UserID).subscribe(
             (res:any)=>{
 
-              this.company = new CarCompany(res.id, res.name, res.address, res.description, 10);
+              this.company = new CarCompany(res.id, res.name, res.address, res.description);
 
               console.log("CARCOMPANY: ", this.company );
               localStorage.setItem('company', JSON.stringify(this.company));
