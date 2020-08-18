@@ -20,6 +20,10 @@ export class RegistrationService {
     return this.http.post(this.BaseURI + '/User/RegisterAircompanyAdmin',formData);
   }
 
+  addCarAddmin(formData){
+    return this.http.post(this.BaseURI + '/User/RegisterCarcompanyAdmin',formData);
+  }
+
 
 }
 

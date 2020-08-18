@@ -27,7 +27,7 @@ export class UserInfoComponent implements OnInit {
       'firstName': new FormControl(''),
       'lastName': new FormControl(''),
       'email': new FormControl(''),
-      'phone': new FormControl(''),
+      'phoneNumber': new FormControl(''),
       'city': new FormControl(''),
       'password': new FormControl(''),
       'passwordConfirm': new FormControl()

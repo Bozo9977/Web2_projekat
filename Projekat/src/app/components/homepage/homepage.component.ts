@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as jwt_decode from 'jwt-decode';
 import { CompanyService } from 'src/app/services/company-service/company.service';
+import { CarCompany } from 'src/app/entities/car-company/car-company';
+import { Aircompany } from 'src/app/entities/aircompany/aircompany';
 
 @Component({
   selector: 'app-homepage',
@@ -16,6 +18,8 @@ export class HomepageComponent implements OnInit {
   rentACarClicked: boolean = true;
   loginForm: FormGroup;
   userDetails;
+  company: CarCompany;
+  aircompany: Aircompany;
 
   formModel = {
     Username: '',
@@ -26,7 +30,6 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-
 
   }
 
@@ -60,7 +63,9 @@ export class HomepageComponent implements OnInit {
         {
           this.companyService.getAirCompanyForUser(UserID).subscribe(
             (res:any)=>{
-              localStorage.setItem('company', JSON.stringify(res));
+              this.aircompany = new Aircompany(res.id, res.name, res.address, res.description, 10);
+              console.log("AIRCOMPANY: ", this.aircompany)
+              localStorage.setItem('company', JSON.stringify(this.aircompany));
               console.log(res);
               this.router.navigateByUrl('/aircompany_admin');
             },
@@ -72,9 +77,23 @@ export class HomepageComponent implements OnInit {
           
         }          
         else if(givenName == "CarAdministrator")
-          this.router.navigateByUrl('/rent-a-car-Admin');
-        console.log(decode);
-        console.log(givenName);
+        {
+          this.companyService.getCarCompanyForUser(UserID).subscribe(
+            (res:any)=>{
+
+              this.company = new CarCompany(res.id, res.name, res.address, res.description, 10);
+
+              console.log("CARCOMPANY: ", this.company );
+              localStorage.setItem('company', JSON.stringify(this.company));
+              
+              this.router.navigateByUrl('/rent-a-car-Admin');
+            },
+            err =>{
+              console.log(err.status);
+              console.log(err);
+            }
+          );
+        }
 
         this.userService.getUserProfile().subscribe(
           res => {

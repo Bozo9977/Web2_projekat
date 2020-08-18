@@ -14,7 +14,7 @@ namespace ProjekatApi
 
         public static void GenerateRoles(RoleManager<AspNetRoles> roleManager)
         {
-           // if(!roleManager.RoleExistsAsync("RegisteredUser").Result)
+            if(!roleManager.RoleExistsAsync("RegisteredUser").Result)
             {
                 AspNetRoles role = new AspNetRoles();
                 role.Name = "RegisteredUser";

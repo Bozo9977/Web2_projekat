@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjekatApi.FormModel;
@@ -15,11 +16,11 @@ namespace ProjekatApi.Controllers
     public class CarCompanyController : ControllerBase
     {
         private readonly DatabaseContext context;
-
-        public CarCompanyController(DatabaseContext _context)
+        private readonly UserManager<ApplicationUser> userManager;
+        public CarCompanyController(DatabaseContext _context, UserManager<ApplicationUser> _userManager)
         {
             context = _context;
-            
+            userManager = _userManager;
         }
 
         [HttpPost]
@@ -30,15 +31,33 @@ namespace ProjekatApi.Controllers
             {
                 Cars = new List<Car>(),
                 Name = company.RegistrationNameService,
-                Address = null,
-                Description = null
+                Address = company.Address,
+                Description = company.Description
+            };
 
-        };
 
+            carCompany.Administrator = await userManager.FindByNameAsync(company.Email);
             context.Carcompanies.Add(carCompany);
+
             await context.SaveChangesAsync();
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("GetCarcompanyForUser/{UserID}")]
+        public async Task<IActionResult> GetCarcompanyForUser(string UserID)
+        {
+            Company ret;
+            if ((ret = await context.Companies.SingleOrDefaultAsync(x => x.Administrator.Id == UserID)) != null)
+            {
+                return Ok(ret);
+            }
+            else
+            {
+                return NotFound("Carcompany for user not found.");
+            }
+
         }
 
         [HttpPost]

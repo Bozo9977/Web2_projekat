@@ -41,20 +41,35 @@ namespace ProjekatApi.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 City = model.City,
+                PhoneNumber = model.PhoneNumber,
                 Email = model.Email                
                 
             };
 
-            try
-            {
-                var result = await _userManager.CreateAsync(applicationUser, model.Password);
-                return Ok(result);
-            }
-            catch (Exception ex)
+            if (model.Password == model.ConfirmPassword)
             {
 
-                throw ex;
+
+                try
+                {
+                    var result = await _userManager.CreateAsync(applicationUser, model.Password);
+                    if (result.Succeeded)
+                    {
+                        _userManager.AddToRoleAsync(applicationUser, "RegisteredUser").Wait();
+                    }
+
+                    return Ok(result);
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
             }
+
+            return BadRequest(new { message = "Password is incorrect." });
         }
 
         [HttpPost]
@@ -68,24 +83,66 @@ namespace ProjekatApi.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 City = model.City,
+                PhoneNumber = model.PhoneNumber,
                 Email = model.Email
 
             };
 
-            try
-            {
-                var result = await _userManager.CreateAsync(applicationUser, model.Password);
-                if (result.Succeeded)
-                {
-                    _userManager.AddToRoleAsync(applicationUser, "AirlineAdministrator").Wait();
-                }
-                return Ok(result);
-            }
-            catch (Exception ex)
+            if (model.Password == model.ConfirmPassword)
             {
 
-                throw ex;
+                try
+                {
+                    var result = await _userManager.CreateAsync(applicationUser, model.Password);
+                    if (result.Succeeded)
+                    {
+                        _userManager.AddToRoleAsync(applicationUser, "AirlineAdministrator").Wait();
+                    }
+                    return Ok(result);
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
             }
+            return Ok();
+        }
+
+
+        [HttpPost]
+        [Route("RegisterCarcompanyAdmin")]
+        public async Task<Object> RegisterCarcompanyAdmin(UserModel model)
+        {
+            var applicationUser = new ApplicationUser()
+            {
+                UserName = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                City = model.City,
+                PhoneNumber = model.PhoneNumber,
+                Email = model.Email
+
+            };
+
+            if (model.Password == model.ConfirmPassword)
+            {
+                try
+                {
+                    var result = await _userManager.CreateAsync(applicationUser, model.Password);
+                    if (result.Succeeded)
+                    {
+                        _userManager.AddToRoleAsync(applicationUser, "CarAdministrator").Wait();
+                    }
+                    return Ok(result);
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+            }
+            return Ok();
         }
 
         [HttpPost]
@@ -134,7 +191,8 @@ namespace ProjekatApi.Controllers
                 user.FirstName,
                 user.LastName,
                 user.Email,
-                user.City
+                user.City,
+                user.PhoneNumber
             };
         }
     }

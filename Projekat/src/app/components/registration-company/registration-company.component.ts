@@ -24,6 +24,9 @@ export class RegistrationCompanyComponent implements OnInit {
     this.companyRegistrationForm = new FormGroup({
       'company': new FormControl('', [Validators.required]),
       'registrationNameService': new FormControl(''),
+      'address': new FormControl(''),
+      'description': new FormControl(''),
+      'phoneNumber' : new FormControl(''),
       'Email': new FormControl(''),
       'FirstName': new FormControl(''),
       'LastName': new FormControl(''),
@@ -57,12 +60,10 @@ export class RegistrationCompanyComponent implements OnInit {
         }
       );
     }
+
     else{
-
-
-
     // izmeniti za carcompany
-    this.registrationService.addAircompanyAddmin(this.companyRegistrationForm.value).subscribe(
+    this.registrationService.addCarAddmin(this.companyRegistrationForm.value).subscribe(
       (res:any)=>{
         console.log(res);
 

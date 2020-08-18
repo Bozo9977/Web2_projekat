@@ -30,7 +30,8 @@ namespace ProjekatApi.Controllers
          {
             Aircompany airCompanyPom = new Aircompany();
             airCompanyPom.Name = company.RegistrationNameService;
-            airCompanyPom.Description = null;
+            airCompanyPom.Address = company.Address;
+            airCompanyPom.Description = company.Description;
             airCompanyPom.Destinations = null;
             airCompanyPom.Flights = null;
 
