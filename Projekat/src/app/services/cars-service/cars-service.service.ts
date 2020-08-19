@@ -25,9 +25,9 @@ export class CarsServiceService {
 
   }
 
-  getCars(): Observable<Cars[]>{
-    
-    return this.http.get<Cars[]>(this.BasURI + '/CarCompany/GetCars');
+  getCars(id: number): Observable<Cars[]>{
+    console.log("SERVIS: COMPANYID: ", + id);
+    return this.http.get<Cars[]>(this.BasURI + '/CarCompany/GetCars/' + id);
     
   }
 

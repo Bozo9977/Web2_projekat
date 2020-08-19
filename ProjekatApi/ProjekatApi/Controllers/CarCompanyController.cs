@@ -62,29 +62,37 @@ namespace ProjekatApi.Controllers
 
         [HttpPost]
         [Route("AddCar")]
-        public async Task<IActionResult> AddCar(Car car)
+        public async Task<IActionResult> AddCar(CarFromModel car)
         {
 
-            CarCompany carCompany = new CarCompany();
+            Car carPom = new Car()
+            {
+                Mark = car.Mark,
+                AirConditioning = car.AirConditioning,
+                Bags = car.Bags,
+                Door = car.Door,
+                Fuel = car.Fuel,
+                Gearshift = car.Gearshift,
+                HourlyRent = car.HourlyRent,
+                ImageCar = car.ImageCar,
+                RentPerDay = car.RentPerDay,
+                Seat = car.Seat,
+                Status = car.Status,
+                YearProduction = car.YearProduction
+            };
 
-            carCompany = context.Carcompanies.Find(1);
+            var company = await context.Companies.FindAsync(car.IdCompany);
 
-            carCompany.Cars = new List<Car>();
+            carPom.CarCompany = (CarCompany)company;
 
-            car.CarCompany = carCompany;
+            //   carCompany.Cars = new List<Car>();
 
-            carCompany.Cars.Add(car);
+            // car.CarCompany = carCompany;
 
-
-
-
-            await context.SaveChangesAsync();
-
-            context.Entry(carCompany).State = EntityState.Modified;
+            //  carCompany.Cars.Add(car);
 
 
-
-
+            context.Cars.Add(carPom);
 
             await context.SaveChangesAsync();
 
@@ -92,32 +100,32 @@ namespace ProjekatApi.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteCar/{id}")]
-        public async Task<ActionResult<List<Car>>> DeleteCar(string id)
+        [Route("DeleteCar/{id}/idCompany")]
+        public async Task<ActionResult<List<Car>>> DeleteCar(string id, int idCompany)
         {
-           CarCompany cc = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == 1);
+            CarCompany cc = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == 1);
             List<Car> ListPom = cc.Cars.ToList();
 
-            foreach(var pom in ListPom)
+            foreach (var pom in ListPom)
             {
-                if(pom.Id == id)
+                if (pom.Id == id)
                 {
                     cc.Cars.Remove(pom);
                 }
             }
-            
+
 
             await context.SaveChangesAsync();
 
-           return cc.Cars.ToList();
+            return cc.Cars.ToList();
         }
 
         [HttpGet]
-        [Route("GetCars")]
-        public async Task<ActionResult<IEnumerable<Car>>> GetCars()
+        [Route("GetCars/{id}")]
+        public async Task<ActionResult<IEnumerable<Car>>> GetCars(string id)
         {
 
-            return context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == 1).Cars.ToList();
+            return context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == Int32.Parse(id)).Cars.ToList();
         }
 
         [HttpGet]

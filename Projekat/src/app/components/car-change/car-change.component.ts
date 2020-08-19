@@ -10,12 +10,16 @@ import { CarsServiceService } from 'src/app/services/cars-service/cars-service.s
 export class CarChangeComponent implements OnInit {
 
   carsList: Array<Cars>;
-  
+  company;
+  idCompany: number;
   constructor(private cars: CarsServiceService) { }
   
 
   ngOnInit(): void {
-      this.loadCars();
+    this.company = JSON.parse(localStorage.getItem('company'));
+    console.log(this.company);
+    this.idCompany = this.company.id;
+    this.loadCars();
   }
 
   deleteCar(idCar: string) {
@@ -25,7 +29,7 @@ export class CarChangeComponent implements OnInit {
     }
 
     private loadCars(){
-      this.cars.getCars().subscribe(
+      this.cars.getCars(this.idCompany).subscribe(
         (res: any) => { 
           this.carsList = res as Cars[] 
         },

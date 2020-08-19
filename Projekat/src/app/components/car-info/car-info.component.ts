@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CarsServiceService } from 'src/app/services/cars-service/cars-service.service';
+import { Cars } from 'src/app/entities/cars/cars';
 
 @Component({
   selector: 'app-car-info',
@@ -10,10 +11,13 @@ import { CarsServiceService } from 'src/app/services/cars-service/cars-service.s
 export class CarInfoComponent implements OnInit {
 
   addCarForm: FormGroup;
-
+  company;
+  carToSend: Cars;
   constructor(private cars: CarsServiceService) { }
 
   ngOnInit(): void {
+    this.company = JSON.parse(localStorage.getItem('company'));
+    console.log("CAR-INFO: ", this.company);
     this.initForm();
   }
 
@@ -35,8 +39,11 @@ export class CarInfoComponent implements OnInit {
   }
 
   onAddCar() {
-    console.log(this.addCarForm);
-    this.cars.addCar(this.addCarForm.value).subscribe(
+    console.log(this.addCarForm.value);
+    this.carToSend = this.addCarForm.value;
+    this.carToSend.idCompany = this.company.id;
+    console.log("ADD CAR:", this.carToSend);
+    this.cars.addCar(this.carToSend).subscribe(
       (res: any) => {
         console.log(res);
       },

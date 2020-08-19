@@ -9370,23 +9370,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bozo\\.nuget\\packages\\": {},
+    "C:\\Users\\DRAGOJLA\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Bozo\\Desktop\\Web2\\Projekat\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
+      "projectUniqueName": "C:\\Users\\DRAGOJLA\\Desktop\\Web-poslednja verzija\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
       "projectName": "ProjekatApi",
-      "projectPath": "C:\\Users\\Bozo\\Desktop\\Web2\\Projekat\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
-      "packagesPath": "C:\\Users\\Bozo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Bozo\\Desktop\\Web2\\Projekat\\Web2_projekat\\ProjekatApi\\ProjekatApi\\obj\\",
+      "projectPath": "C:\\Users\\DRAGOJLA\\Desktop\\Web-poslednja verzija\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
+      "packagesPath": "C:\\Users\\DRAGOJLA\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\DRAGOJLA\\Desktop\\Web-poslednja verzija\\Web2_projekat\\ProjekatApi\\ProjekatApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Bozo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DRAGOJLA\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -9394,7 +9394,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\Bozo\\Desktop\\PaketiCloud": {},
+        "C:\\Program Files\\Microsoft SDKs\\Azure\\.NET SDK\\v2.9\\packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
