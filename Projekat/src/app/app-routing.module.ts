@@ -113,7 +113,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'availableCars',
+    path: ":id/availableCars",
     component: AvailableCarsComponent
   },
 

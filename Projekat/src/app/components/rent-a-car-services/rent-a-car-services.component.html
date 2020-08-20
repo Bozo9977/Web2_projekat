@@ -1,45 +1,27 @@
 
 <div class= "signup-form">
-    <button type="button" class="btn btn-outline-primary" style="background-color: white;" aria-label="Close" routerLink="/home">
-        <img src="assets/images/back.png" height="25px" width="25px">   
-        <img src="assets/images/logo1.png" class="rounded-circle mr-auto" data-holder-rendered="true" height="45px" width="45px">         
-    </button>
-
-
-
 
     <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);" > 
         <thead>
             <tr>
-            <th>Id</th>
             <th scope="col">Name of service</th>
-            <th scope="col">Address</th>
-            <th scope="col">Description</th>
+            <th scope="col">Location</th>
             <th scope="col">Rating</th>
-            <th>Available cars</th>
-            <th>Branch officies</th>
+            <th>Book a car</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let comp of carCompanies">
-            <th scope="row">{{comp.id}}</th>
+            <tr *ngFor="let comp of branchPom">
             <td>{{comp.name}}</td>
             <td>{{comp.address}}</td>
-            <td>{{comp.description}}</td>
-            <td>
+           <td>
                 <ngb-rating [(rate)]="comp.rating" readonly="readonly" max="5" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.rating}}/5)</span>
             </td>
             <td>
-                <button class="btn btn-outline-info" style="background-color: white" routerLink="/availableCars">
+                <button class="btn btn-outline-info" style="background-color: white" routerLink="/{{comp.id}}/availableCars">
                         <img src="assets/images/car.png" data-holder-rendered="true" height="25px" width="25px" >                  
                 </button>
             </td>
-            <td>
-                <button class="btn btn-outline-info" style="background-color: white" routerLink="/branchOfficeView">
-                    <img src="assets/images/building2.png" data-holder-rendered="true" height="25px" width="25px">                  
-                </button>
-            </td>
-
             </tr>
         </tbody>
         </table>

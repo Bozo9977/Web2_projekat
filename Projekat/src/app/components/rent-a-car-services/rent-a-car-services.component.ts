@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarCompany } from 'src/app/entities/car-company/car-company';
 import { CompanyService } from 'src/app/services/company-service/company.service';
+import { BranchOfficeService } from 'src/app/services/branchOffice-service/branch-office.service';
+import { BranchOffice } from 'src/app/entities/branch-office/branch-office';
 
 @Component({
   selector: 'app-rent-a-car-services',
@@ -9,16 +11,26 @@ import { CompanyService } from 'src/app/services/company-service/company.service
 })
 export class RentACarServicesComponent implements OnInit {
 
-  carCompanies: Array<CarCompany>;
+  branchPom: Array<BranchOffice>;
 
-  constructor(private carService: CompanyService) { }
+  constructor(private branch: BranchOfficeService) { }
 
 
 
   ngOnInit(): void {
-    this.carCompanies = this.carService.loadCarCompanies();
+    this.loadBranchOffice();
   }
 
-
+  private loadBranchOffice(){
+    this.branch.getAllBO().subscribe(
+      (res: any) => { 
+        this.branchPom = res as BranchOffice[]
+        console.log(this.branchPom);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  } 
 
 }

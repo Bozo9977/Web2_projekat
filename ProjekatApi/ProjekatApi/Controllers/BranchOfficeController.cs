@@ -90,6 +90,14 @@ namespace ProjekatApi.Controllers
         }
 
         [HttpGet]
+        [Route("GetAllBranchOffices")]
+        public async Task<ActionResult<IEnumerable<BranchOffices>>> GetAllBranchOffices()
+        {
+
+            return context.BranchOffices.ToList();
+        }
+
+        [HttpGet]
         [Route("GetBranchOfficeForCompany/{IdCompany}")]
         public async Task<ActionResult<IEnumerable<BranchOffices>>> GetBranchOfficeForCompany(int IdCompany)
         {

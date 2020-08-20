@@ -32,6 +32,10 @@ export class BranchOfficeService {
     return this.http.get<BranchOffice>(this.BasURI + '/BranchOffice/GetBranchOffice/' + id); 
   }
 
+  getAllBO(){
+    return this.http.get<BranchOffice[]>(this.BasURI + '/BranchOffice/GetAllBranchOffices');
+  }
+
   addBranchOffices(branchOffice: BranchOffice){
     return this.http.post(this.BasURI + '/BranchOffice/AddBranchOffice', branchOffice);
   }
