@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BranchOfficeService } from 'src/app/services/branchOffice-service/branch-office.service';
+import { BranchOffice } from 'src/app/entities/branch-office/branch-office';
 
 @Component({
   selector: 'app-add-branch-office',
@@ -11,8 +12,14 @@ export class AddBranchOfficeComponent implements OnInit {
 
   constructor(private branch: BranchOfficeService) { }
 
+  company;
   addBranchOfficeForm: FormGroup;
+  idCompany: number;
+  branchOfficeToSend: BranchOffice;
+
   ngOnInit(): void {
+    this.company = JSON.parse(localStorage.getItem('company'));
+    this.idCompany = this.company.id;
     this.initForm();
     console.log(this.addBranchOfficeForm.value);
     
@@ -28,8 +35,10 @@ export class AddBranchOfficeComponent implements OnInit {
   }
 
   onBranchOffice() {
-    console.log(this.addBranchOfficeForm.value);
-    this.branch.addBranchOffices(this.addBranchOfficeForm.value).subscribe(
+    this.branchOfficeToSend = this.addBranchOfficeForm.value;
+    this.branchOfficeToSend.idCompany = this.idCompany;
+    console.log(this.branchOfficeToSend);
+    this.branch.addBranchOffices(this.branchOfficeToSend).subscribe(
       (res: any) => {
         console.log(res);
         

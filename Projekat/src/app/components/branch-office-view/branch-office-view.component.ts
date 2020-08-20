@@ -9,9 +9,11 @@ import { BranchOfficeService } from 'src/app/services/branchOffice-service/branc
 })
 export class BranchOfficeViewComponent implements OnInit {
   branchOffices: Array<BranchOffice>;
+
   constructor(private offices: BranchOfficeService) { }
 
   ngOnInit(): void {
+
     this.branchOffices = this.offices.loadBranchOffices();
     console.log(this.branchOffices);
   }

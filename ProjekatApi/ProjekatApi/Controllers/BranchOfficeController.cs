@@ -23,28 +23,29 @@ namespace ProjekatApi.Controllers
 
         [HttpPost]
         [Route("AddBranchOffice")]
-        public async Task<IActionResult> AddBranchOffice(BranchOffices branchOffices)
+        public async Task<IActionResult> AddBranchOffice(BranchOfficeForm branchOffices)
         {
-
+            BranchOffices bo = new BranchOffices()
+            {
+                Name = branchOffices.Name,
+                Address = branchOffices.Address,
+                City = branchOffices.City,
+                Telephone = branchOffices.Telephone
+            };
 
             CarCompany carCompany = new CarCompany();
 
-            carCompany = context.Carcompanies.Find(1);
+            carCompany = context.Carcompanies.Find(branchOffices.IdCompany);
 
-            carCompany.BranchOffices = new List<BranchOffices>();
-
-            branchOffices.Id_company = carCompany;
-
-            carCompany.BranchOffices.Add(branchOffices);
+            bo.Id_company = carCompany;
 
 
 
+            context.BranchOffices.Add(bo);
 
             await context.SaveChangesAsync();
 
             context.Entry(carCompany).State = EntityState.Modified;
-
-            await context.SaveChangesAsync();
 
             return Ok();
         }
@@ -74,11 +75,26 @@ namespace ProjekatApi.Controllers
         }
 
         [HttpGet]
-        [Route("GetBranchOffice")]
-        public async Task<ActionResult<IEnumerable<BranchOffices>>> GetBranchOffice()
+        [Route("GetBranchOffice/{id}")]
+        public async Task<ActionResult<BranchOffices>> GetBranchOffice(int id)
         {
 
-            return context.Carcompanies.Include(x => x.BranchOffices).ToList().SingleOrDefault(x => x.Id == 1).BranchOffices.ToList();
+            var bo = await context.BranchOffices.FindAsync(id);
+
+            if (bo == null)
+            {
+                return NotFound();
+            }
+
+            return bo;
+        }
+
+        [HttpGet]
+        [Route("GetBranchOfficeForCompany/{IdCompany}")]
+        public async Task<ActionResult<IEnumerable<BranchOffices>>> GetBranchOfficeForCompany(int IdCompany)
+        {
+            return context.Carcompanies.Include(x => x.BranchOffices).ToList().SingleOrDefault(x => x.Id == IdCompany).BranchOffices.ToList();
+
         }
 
     }

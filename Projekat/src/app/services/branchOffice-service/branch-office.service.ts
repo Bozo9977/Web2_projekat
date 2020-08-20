@@ -22,14 +22,18 @@ export class BranchOfficeService {
     
   }
 
-  getBranchOffice(): Observable<BranchOffice[]>{
+  getBranchOfficeForCompany(idCompany: number): Observable<BranchOffice[]>{
     
-    return this.http.get<BranchOffice[]>(this.BasURI + '/BranchOffice/GetBranchOffice');
+    return this.http.get<BranchOffice[]>(this.BasURI + '/BranchOffice/GetBranchOfficeForCompany/' + idCompany);
     
   }
 
-  addBranchOffices(formData){
-    return this.http.post(this.BasURI + '/BranchOffice/AddBranchOffice', formData);
+  getOneBO(id: number){
+    return this.http.get<BranchOffice>(this.BasURI + '/BranchOffice/GetBranchOffice/' + id); 
+  }
+
+  addBranchOffices(branchOffice: BranchOffice){
+    return this.http.post(this.BasURI + '/BranchOffice/AddBranchOffice', branchOffice);
   }
 
   mockedBranchOffices():Array<BranchOffice>{

@@ -100,24 +100,26 @@ namespace ProjekatApi.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteCar/{id}/idCompany")]
-        public async Task<ActionResult<List<Car>>> DeleteCar(string id, int idCompany)
+        [Route("DeleteCar/{id}")]
+        public async Task<ActionResult<List<Car>>> DeleteCar(string id)
         {
-            CarCompany cc = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == 1);
-            List<Car> ListPom = cc.Cars.ToList();
+            var car = await context.Cars.Include(x=>x.CarCompany).SingleOrDefaultAsync(x=>x.Id == id);
 
-            foreach (var pom in ListPom)
-            {
-                if (pom.Id == id)
-                {
-                    cc.Cars.Remove(pom);
-                }
-            }
+            Car carPom = new Car();
 
+            carPom = car;
+
+            int idCompany = carPom.CarCompany.Id;
+
+            context.Cars.Remove(carPom);
 
             await context.SaveChangesAsync();
 
-            return cc.Cars.ToList();
+            List<Car> listCars = new List<Car>();
+
+            return context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == idCompany).Cars.ToList();
+
+
         }
 
         [HttpGet]

@@ -10,15 +10,19 @@ import { BranchOfficeService } from 'src/app/services/branchOffice-service/branc
 export class BranchOfficeComponent implements OnInit {
 
   branchOffices: Array<BranchOffice>;
+  company;
+  idCompany: number;
   constructor(private offices: BranchOfficeService) { }
 
   ngOnInit(): void {
+    this.company = JSON.parse(localStorage.getItem('company'));
+    this.idCompany = this.company.id;
     this.loadBranchOffices();
     console.log(this.branchOffices);
   }
 
   private loadBranchOffices(){
-    this.offices.getBranchOffice().subscribe(
+    this.offices.getBranchOfficeForCompany(this.idCompany).subscribe(
       (res: any) => { 
         this.branchOffices = res as BranchOffice[] 
       },

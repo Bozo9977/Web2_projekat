@@ -20,10 +20,13 @@ export class ChangeBranchOfficeComponent implements OnInit {
   constructor(private branch: BranchOfficeService, private route: ActivatedRoute, private routerPrim: Router) { 
     route.params.subscribe(params => { this.id = params['id']; });
     console.log(this.id);
+    this.loadBranchOffice();
   }
 
   ngOnInit(): void {
+    
     this.initForm();
+
   }
 
   private initForm() {
@@ -55,5 +58,18 @@ export class ChangeBranchOfficeComponent implements OnInit {
     );
     this.changeBranchOfficeForm.reset();
   }
+
+  private loadBranchOffice(){
+    this.branch.getOneBO(this.id).subscribe(
+      (res: any) => { 
+        this.branchPom = res as BranchOffice
+        console.log(this.branchPom);
+        this.changeBranchOfficeForm.setValue({name: this.branchPom.name, address: this.branchPom.address, city: this.branchPom.city, telephone: this.branchPom.telephone});
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  } 
 
 }

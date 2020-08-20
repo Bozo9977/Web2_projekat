@@ -12,5 +12,7 @@ namespace ProjekatApi.FormModel
         public string City { get; set; }
         public string Address { get; set; }
         public string Telephone { get; set; }
+
+        public int IdCompany { get; set; }
     }
 }
