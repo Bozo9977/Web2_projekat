@@ -20,7 +20,7 @@ export class AvailableCarsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.carsList = this.cars.loadCars();
+    this.loadCars();
   }
 
   private loadCars(){

@@ -31,7 +31,7 @@ export class CarsServiceService {
     
   }
 
-  getAllCars(id:number){
+  getAllCars(id:string){
     return this.http.get<Cars[]>(this.BasURI + '/CarCompany/GetAllCars/' + id);  
   }
 
@@ -40,7 +40,6 @@ export class CarsServiceService {
     return this.http.get<Cars>(this.BasURI + '/CarCompany/GetOneCar/' + id);
     
   }
-
 
   updateCar(formData){
     

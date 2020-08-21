@@ -105,5 +105,55 @@ namespace ProjekatApi.Controllers
 
         }
 
+        [HttpPost]
+        [Route("SearchCompany")]
+        public async Task<ActionResult<IEnumerable<BranchOffices>>> SearchCompany(SearchCompany searchCompany)
+        {
+            List<BranchOffices> listOffice = new List<BranchOffices>();
+            //var pom = context.Carcompanies.Include(x => x.BranchOffices).ToList();
+            // var pom1 = context.BranchOffices.Include(x=>x.Id_company).ToList().SingleOrDefault(x => x.Name == searchCompany.ServiceName);
+           // var pom1 = "";
+            if (searchCompany.ServiceName != "" && searchCompany.Location == "")
+            {
+                if(context.Carcompanies.Include(x => x.BranchOffices).ToList().SingleOrDefault(x => x.Name.ToLower() == searchCompany.ServiceName.ToLower()) != null)
+                {
+                    var pom1 = context.Carcompanies.Include(x => x.BranchOffices).ToList().SingleOrDefault(x => x.Name.ToLower() == searchCompany.ServiceName.ToLower()).BranchOffices.ToList();
+                    listOffice = pom1;
+                }
+                else
+                {
+                    
+                    listOffice = null;
+                }
+                
+            }
+            else if(searchCompany.ServiceName == "" && searchCompany.Location != "")
+            {
+                var pom = context.BranchOffices.ToList();
+
+                var pom1 = pom.FindAll(x => x.City.ToLower() == searchCompany.Location.ToLower()).ToList();
+                listOffice = pom1;
+            }
+
+            else if(searchCompany.ServiceName != "" && searchCompany.Location != "")
+            {
+              
+                if(context.Carcompanies.Include(x => x.BranchOffices).ToList().SingleOrDefault(x => x.Name.ToLower() == searchCompany.ServiceName.ToLower()) != null)
+                {
+                    var pom1 = context.Carcompanies.Include(x => x.BranchOffices).ToList().SingleOrDefault(x => x.Name.ToLower() == searchCompany.ServiceName.ToLower()).BranchOffices.ToList();
+                    var pom = pom1.FindAll(x => x.City.ToLower() == searchCompany.Location.ToLower()).ToList();
+
+                    listOffice = pom;
+                }
+                else
+                {
+                    listOffice = null;
+                }
+
+            }
+
+            return listOffice;
+        }
+
     }
 }

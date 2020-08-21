@@ -146,18 +146,27 @@ namespace ProjekatApi.Controllers
         }
 
 
-       /* [HttpGet]
+        [HttpGet]
         [Route("GetAllCars/{id}")]
         public async Task<ActionResult<IEnumerable<Car>>> GetAllCars(string id)
         {
 
-          //  var pom = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == idCompany).Cars.ToList();
+            //  var pom = context.Carcompanies.Include(x => x.BranchOffices).ToList().SingleOrDefault(x => x.Id == id).ToList();
 
+            List<Car> listCars = new List<Car>();
 
-            var car = await context.Cars.FindAsync(id);
+            CarCompany cc = new CarCompany();
 
+            var pom = context.BranchOffices.Include(x => x.Id_company).ToList().SingleOrDefault(x => x.Id == Int32.Parse(id));
 
-        }*/
+            cc = pom.Id_company;
+
+            var pomCar = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == cc.Id).Cars.ToList();
+
+            
+
+            return pomCar;
+        }
 
         [Route("UpdateCar")]
         public async Task<IActionResult> UpdateCar(Car car)

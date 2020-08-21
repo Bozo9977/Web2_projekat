@@ -1,11 +1,22 @@
 
 <div class= "signup-form">
 
+    <form class="form-inline " [formGroup]="searchCompanyForm" (ngSubmit)="onSearchCompany()">
+        <div class="md-form my-0">
+          <input class="form-control" type="text" placeholder="Service name" formControlName="serviceName" aria-label="Search">
+          <input class="form-control" type="text" placeholder="Location" formControlName= "location" aria-label="Search">
+        </div>
+        <button  type="submit">
+            <img src="assets/images/search.png" height="35px" width="35px" data-holder-rendered="true">
+        </button>
+    </form>
+
     <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);" > 
         <thead>
             <tr>
             <th scope="col">Name of service</th>
             <th scope="col">Location</th>
+            <th scope="col">Address</th>
             <th scope="col">Rating</th>
             <th>Book a car</th>
             </tr>
@@ -13,6 +24,7 @@
         <tbody>
             <tr *ngFor="let comp of branchPom">
             <td>{{comp.name}}</td>
+            <td>{{comp.city}}</td>
             <td>{{comp.address}}</td>
            <td>
                 <ngb-rating [(rate)]="comp.rating" readonly="readonly" max="5" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.rating}}/5)</span>
