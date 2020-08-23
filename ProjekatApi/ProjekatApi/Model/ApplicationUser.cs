@@ -23,10 +23,9 @@ namespace ProjekatApi.Model
         [Column(TypeName = "nvarchar(150)")]
         public string City { get; set; }
 
-        //[AllowNull]
-        //public int CompanyId { get; set; }
-
         [AllowNull]
         public string Discriminator { get; set; }
+
+        public ICollection<ReservationCar> ReservationCars { get; set; }
     }
 }

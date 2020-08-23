@@ -1,4 +1,5 @@
-export class Cars {
+
+export class AvailableCar {
     id: string;
     mark: string;
     yearProduction: string;
@@ -9,12 +10,12 @@ export class Cars {
     airConditioning: string;
     bags: string;
     status: string;
-    hourlyRent: string;
-    rentPerDay: string;
     imageCar: string;
     idCompany: number;
+    rating: number;
+    price: number;
 
-    constructor(imageCar: string, id: string, mark: string, yearProduction: string, fuel: string, gearshift:string, seat: string, door: string, airConditioning: string, bags: string, status: string, rentPerDay: string, hourlyRent: string, idCompany: number){
+    constructor(imageCar: string, id: string, mark: string, yearProduction: string, fuel: string, gearshift:string, seat: string, door: string, airConditioning: string, bags: string, status: string, idCompany: number, rating: number, price:number){
         this.imageCar = imageCar;
         this.id=id;
         this.mark = mark;
@@ -26,9 +27,10 @@ export class Cars {
         this.airConditioning = airConditioning;
         this.bags = bags;
         this.status = status;
-        this.rentPerDay = rentPerDay;
-        this.hourlyRent = hourlyRent;
         this.idCompany = idCompany;
+        this.price = price;
+        this.rating = rating;
     }
-
 }
+
+

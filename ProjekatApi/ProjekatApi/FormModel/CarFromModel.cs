@@ -19,6 +19,8 @@ namespace ProjekatApi.FormModel
         public string Status { get; set; }
         public string HourlyRent { get; set; }
         public string RentPerDay { get; set; }
+
+        public string Price { get; set; }
         public string ImageCar { get; set; }
         public int IdCompany { get; set; }
     }

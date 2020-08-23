@@ -105,6 +105,19 @@ namespace ProjekatApi.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetBranchOfficeForSelect/{IdBO}")]
+        public async Task<ActionResult<IEnumerable<BranchOffices>>> GetBranchOfficeForSelect(string IdBO)
+        {
+            var pom = context.BranchOffices.Include(x => x.Id_company).ToList().SingleOrDefault(x => x.Id == Int32.Parse(IdBO));
+
+            CarCompany cc = new CarCompany();
+            cc = pom.Id_company;
+
+            return context.Carcompanies.Include(x => x.BranchOffices).ToList().SingleOrDefault(x => x.Id == cc.Id).BranchOffices.ToList();
+
+        }
+
         [HttpPost]
         [Route("SearchCompany")]
         public async Task<ActionResult<IEnumerable<BranchOffices>>> SearchCompany(SearchCompany searchCompany)

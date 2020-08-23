@@ -48,5 +48,7 @@ namespace ProjekatApi
 
         public DbSet<BranchOffices> BranchOffices { get; set; }
 
+        public DbSet<ReservationCar> ReservationCar { get; set; }
+
     }
 }

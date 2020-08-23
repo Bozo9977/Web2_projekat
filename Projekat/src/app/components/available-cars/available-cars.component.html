@@ -4,14 +4,53 @@
     <img src="assets/images/back.png" height="25px" width="25px">            
   </button>
 
-  <form class="form-inline ">
-    <div class="md-form my-0">
-      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-      <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+  <form class="form-inline " [formGroup]="searchAvailableCarsForm" (ngSubmit)="onSearchAvailableCars()">
+      
+    <div class="form-group" style="padding-left: 1em;">
+        <label >Pick-up date: </label>
+        <pre style="padding-left: 10px;"></pre>
+        <input type="datetime-local" 
+               id="startDay" 
+               max="3000-12-31" 
+               min="1000-01-01" 
+               class="form-control"
+               value="2020-06-13"
+               formControlName="startDay">
+        <label style="padding-left: 10px;">City: </label>
+        <select id="City1"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="City1" >
+            <option *ngFor="let select of selectedCities">
+                  {{select.city}}
+            </option>
+        </select>
+        <label style="padding-left: 10px;">Drop-off date: </label>
+        <pre style="padding-left: 10px;"></pre>
+        <input type="datetime-local"
+               id="endDay" 
+               max="3000-12-31" 
+               min="1000-01-01" 
+               class="form-control"
+               value="2020-06-14 14:00"
+               formControlName="endDay">
+        <label style="padding-left: 10px;">City: </label>
+            <select id="City2"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="City2" >
+                <option *ngFor="let select of selectedCities">
+                    {{select.city}}
+                </option>
+            </select>
+
     </div>
-    <button  type="submit">
-        <img src="assets/images/search.png" height="35px" width="35px" data-holder-rendered="true">
-    </button>
+
+
+    <div>
+      <tr>
+        <input class="form-control" type="text" placeholder="Mark" formControlName="Mark" aria-label="Search">
+
+        <input class="form-control"  type="text" placeholder="Number of passengers" formControlName="Number" aria-label="Search">
+        <button  type="submit">
+          <img src="assets/images/search.png" height="35px" width="35px" data-holder-rendered="true">
+        </button>
+      </tr>
+    </div>
   </form>
 
       <table class="table table-bordered table-dark" >
@@ -27,8 +66,8 @@
               <th scope="col">Air conditioning</th>
               <th scope="col">Bags</th>
               <th scope="col">Status</th>
-              <th scope="col">Price per day</th>
-              <th scope="col">Hourly rent</th>
+              <th scope="col">Price</th>
+              <th scope="col">Rating</th>
             </tr>
           </thead>
           <tbody>
@@ -45,8 +84,11 @@
               <td>{{comp.airConditioning}}</td>
               <td>{{comp.bags}}</td>
               <td>{{comp.status}}</td>
-              <td>{{comp.rentPerDay}}</td>
-              <td>{{comp.hourlyRent}}</td>
+              <td></td>
+              <td></td>
+              <td>
+                  <button type="submit" style="color: red;">Make a rezervation</button>
+              </td>
             </tr>
           </tbody>
         </table>  

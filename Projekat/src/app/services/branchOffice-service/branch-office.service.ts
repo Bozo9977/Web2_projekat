@@ -28,6 +28,12 @@ export class BranchOfficeService {
     
   }
 
+  getBranchOfficeForSelect(idBO: string): Observable<BranchOffice[]>{
+    
+    return this.http.get<BranchOffice[]>(this.BasURI + '/BranchOffice/GetBranchOfficeForSelect/' + idBO);
+    
+  }
+
   getOneBO(id: number){
     return this.http.get<BranchOffice>(this.BasURI + '/BranchOffice/GetBranchOffice/' + id); 
   }

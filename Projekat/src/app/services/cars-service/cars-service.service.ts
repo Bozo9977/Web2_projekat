@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Cars } from 'src/app/entities/cars/cars';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AvailableCar } from 'src/app/entities/available-car';
+import { ReservationCars } from 'src/app/entities/reservationCar/reservation-cars';
 
 @Injectable({
   providedIn: 'root'
@@ -32,13 +34,17 @@ export class CarsServiceService {
   }
 
   getAllCars(id:string){
-    return this.http.get<Cars[]>(this.BasURI + '/CarCompany/GetAllCars/' + id);  
+    return this.http.get<AvailableCar[]>(this.BasURI + '/CarCompany/GetAllCars/' + id);  
   }
 
   getOneCar(id: string): Observable<Cars>{
     
     return this.http.get<Cars>(this.BasURI + '/CarCompany/GetOneCar/' + id);
     
+  }
+
+  searchAvailableCars(formData: ReservationCars){
+    return this.http.post<AvailableCar[]>(this.BasURI + '/Reservation/SearchAvailableCar', formData);
   }
 
   updateCar(formData){
