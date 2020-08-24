@@ -27,5 +27,6 @@ namespace ProjekatApi.Model
         public string Discriminator { get; set; }
 
         public ICollection<ReservationCar> ReservationCars { get; set; }
+        
     }
 }

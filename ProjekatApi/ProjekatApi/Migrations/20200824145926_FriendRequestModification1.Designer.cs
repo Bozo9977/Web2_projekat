@@ -3,129 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjekatApi;
 
-namespace ProjekatApi.Migrations.Authentication
+namespace ProjekatApi.Migrations
 {
-    [DbContext(typeof(AuthenticationContext))]
-    partial class AuthenticationContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DatabaseContext))]
+    [Migration("20200824145926_FriendRequestModification1")]
+    partial class FriendRequestModification1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.0-preview.3.20181.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens");
-                });
 
             modelBuilder.Entity("ProjekatApi.Model.ApplicationUser", b =>
                 {
@@ -135,19 +29,20 @@ namespace ProjekatApi.Migrations.Authentication
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Discriminator")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -165,12 +60,10 @@ namespace ProjekatApi.Migrations.Authentication
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -188,47 +81,13 @@ namespace ProjekatApi.Migrations.Authentication
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("ProjekatApi.Model.AspNetRoles", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
-
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("ApplicationUser");
                 });
 
             modelBuilder.Entity("ProjekatApi.Model.BranchOffices", b =>
@@ -309,10 +168,10 @@ namespace ProjekatApi.Migrations.Authentication
 
                     b.HasIndex("CarCompanyId");
 
-                    b.ToTable("Car");
+                    b.ToTable("Cars");
                 });
 
-            modelBuilder.Entity("ProjekatApi.Model.CarCompany", b =>
+            modelBuilder.Entity("ProjekatApi.Model.Company", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -328,14 +187,156 @@ namespace ProjekatApi.Migrations.Authentication
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AdministratorId");
 
-                    b.ToTable("CarCompany");
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
+
+                    b.ToTable("Companies");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Company");
+                });
+
+            modelBuilder.Entity("ProjekatApi.Model.Destination", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AircompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AircompanyId");
+
+                    b.HasIndex("City")
+                        .IsUnique()
+                        .HasFilter("[City] IS NOT NULL");
+
+                    b.ToTable("Destinations");
+                });
+
+            modelBuilder.Entity("ProjekatApi.Model.Flight", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AircompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Arrival")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Departure")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Length")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfConnections")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TakeOff")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TouchDown")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AircompanyId");
+
+                    b.ToTable("Flights");
+                });
+
+            modelBuilder.Entity("ProjekatApi.Model.FlightDestination", b =>
+                {
+                    b.Property<int>("DestinationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FlightId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DestinationId", "FlightId");
+
+                    b.HasIndex("FlightId");
+
+                    b.ToTable("FlightDestinations");
+                });
+
+            modelBuilder.Entity("ProjekatApi.Model.FlightSeat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Class")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FlightId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("Reserved")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlightId");
+
+                    b.ToTable("FlightSeats");
+
+                    b.HasCheckConstraint("CK_FlightSeats_Class_Enum_Constraint", "[Class] IN(0, 1, 2)");
+                });
+
+            modelBuilder.Entity("ProjekatApi.Model.FriendRequest", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Accepted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ReceiverID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderFirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderLastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("FriendRequests");
                 });
 
             modelBuilder.Entity("ProjekatApi.Model.ReservationCar", b =>
@@ -371,55 +372,25 @@ namespace ProjekatApi.Migrations.Authentication
                     b.ToTable("ReservationCar");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("ProjekatApi.Model.Aircompany", b =>
                 {
-                    b.HasOne("ProjekatApi.Model.AspNetRoles", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasBaseType("ProjekatApi.Model.Company");
+
+                    b.HasDiscriminator().HasValue("Aircompany");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("ProjekatApi.Model.CarCompany", b =>
                 {
-                    b.HasOne("ProjekatApi.Model.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasBaseType("ProjekatApi.Model.Company");
+
+                    b.HasDiscriminator().HasValue("CarCompany");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("ProjekatApi.Model.ApplicationUser", b =>
                 {
                     b.HasOne("ProjekatApi.Model.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("ProjekatApi.Model.AspNetRoles", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjekatApi.Model.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("ProjekatApi.Model.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Friends")
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("ProjekatApi.Model.BranchOffices", b =>
@@ -436,11 +407,47 @@ namespace ProjekatApi.Migrations.Authentication
                         .HasForeignKey("CarCompanyId");
                 });
 
-            modelBuilder.Entity("ProjekatApi.Model.CarCompany", b =>
+            modelBuilder.Entity("ProjekatApi.Model.Company", b =>
                 {
                     b.HasOne("ProjekatApi.Model.ApplicationUser", "Administrator")
                         .WithMany()
                         .HasForeignKey("AdministratorId");
+                });
+
+            modelBuilder.Entity("ProjekatApi.Model.Destination", b =>
+                {
+                    b.HasOne("ProjekatApi.Model.Aircompany", "Aircompany")
+                        .WithMany("Destinations")
+                        .HasForeignKey("AircompanyId");
+                });
+
+            modelBuilder.Entity("ProjekatApi.Model.Flight", b =>
+                {
+                    b.HasOne("ProjekatApi.Model.Aircompany", null)
+                        .WithMany("Flights")
+                        .HasForeignKey("AircompanyId");
+                });
+
+            modelBuilder.Entity("ProjekatApi.Model.FlightDestination", b =>
+                {
+                    b.HasOne("ProjekatApi.Model.Destination", "Destination")
+                        .WithMany("FlightDestinations")
+                        .HasForeignKey("DestinationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjekatApi.Model.Flight", "Flight")
+                        .WithMany("FlightDestinations")
+                        .HasForeignKey("FlightId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProjekatApi.Model.FlightSeat", b =>
+                {
+                    b.HasOne("ProjekatApi.Model.Flight", "Flight")
+                        .WithMany("Seats")
+                        .HasForeignKey("FlightId");
                 });
 
             modelBuilder.Entity("ProjekatApi.Model.ReservationCar", b =>

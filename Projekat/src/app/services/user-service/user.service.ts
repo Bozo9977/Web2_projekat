@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, Validators, FormGroup} from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'src/app/entities/user/user';
+import { FriendRequest } from 'src/app/entities/friend-request/friend-request';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,13 @@ export class UserService {
 
   changeUserInfo(user: User){
     return this.http.put<User>(this.BaseURI + '/User/ChangeUserInfo', user);
+  }
+
+  searchForFriends(formData){
+    return this.http.post(this.BaseURI + '/User/GetUsersSearhced', formData);
+  }
+
+  addFriend(friendRequest: FriendRequest){
+    return this.http.post(this.BaseURI + '/User/AddFriend', friendRequest);
   }
 }

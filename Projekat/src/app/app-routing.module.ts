@@ -26,6 +26,7 @@ import { CarInfoChangeComponent } from './components/car-info-change/car-info-ch
 import { AddBranchOfficeComponent } from './components/add-branch-office/add-branch-office.component';
 import { FlightChangeComponent } from './components/flight-change/flight-change.component';
 import { ChangeBranchOfficeComponent } from './components/change-branch-office/change-branch-office.component';
+import { UserViewComponent } from './components/user-view/user-view.component';
 
 const routes: Routes = [
   {
@@ -105,6 +106,11 @@ const routes: Routes = [
   {
     path: 'rentACarServices',
     component: RentACarServicesComponent
+  },
+  
+  {
+    path: 'friends',
+    component: UserViewComponent
   },
 
   {

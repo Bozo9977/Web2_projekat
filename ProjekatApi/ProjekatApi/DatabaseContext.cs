@@ -50,5 +50,6 @@ namespace ProjekatApi
 
         public DbSet<ReservationCar> ReservationCar { get; set; }
 
+        public DbSet<FriendRequest> FriendRequests { get; set; }
     }
 }

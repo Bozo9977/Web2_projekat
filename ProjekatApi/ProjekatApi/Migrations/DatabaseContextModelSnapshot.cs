@@ -27,6 +27,9 @@ namespace ProjekatApi.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(150)");
 
@@ -79,6 +82,8 @@ namespace ProjekatApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("ApplicationUser");
                 });
@@ -302,6 +307,36 @@ namespace ProjekatApi.Migrations
                     b.HasCheckConstraint("CK_FlightSeats_Class_Enum_Constraint", "[Class] IN(0, 1, 2)");
                 });
 
+            modelBuilder.Entity("ProjekatApi.Model.FriendRequest", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Accepted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ReceiverID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderFirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderLastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("FriendRequests");
+                });
+
             modelBuilder.Entity("ProjekatApi.Model.ReservationCar", b =>
                 {
                     b.Property<string>("Id")
@@ -347,6 +382,13 @@ namespace ProjekatApi.Migrations
                     b.HasBaseType("ProjekatApi.Model.Company");
 
                     b.HasDiscriminator().HasValue("CarCompany");
+                });
+
+            modelBuilder.Entity("ProjekatApi.Model.ApplicationUser", b =>
+                {
+                    b.HasOne("ProjekatApi.Model.ApplicationUser", null)
+                        .WithMany("Friends")
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("ProjekatApi.Model.BranchOffices", b =>

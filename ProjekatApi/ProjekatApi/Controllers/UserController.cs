@@ -252,5 +252,45 @@ namespace ProjekatApi.Controllers
                 user.PhoneNumber
             };
         }
+
+
+
+        [HttpPost]
+        [Route("GetUsersSearhced")]
+        public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetUsersSearhced(SearchFriend friendSearched)
+        {
+            if(!String.IsNullOrEmpty(friendSearched.FirstName) && !String.IsNullOrEmpty(friendSearched.LastName))
+            {
+                return  _userManager.Users.Where(x => x.LastName.ToLower() == friendSearched.LastName.ToLower() && x.FirstName.ToLower() == friendSearched.FirstName.ToLower()).ToList();
+            }
+            else if(!String.IsNullOrEmpty(friendSearched.FirstName) && String.IsNullOrEmpty(friendSearched.LastName))
+            {
+                return _userManager.Users.Where(x => x.FirstName.ToLower() == friendSearched.FirstName.ToLower()).ToList();
+            }
+            else if(!String.IsNullOrEmpty(friendSearched.LastName) && String.IsNullOrEmpty(friendSearched.FirstName))
+            {
+                return _userManager.Users.Where(x => x.LastName.ToLower() == friendSearched.LastName.ToLower()).ToList();
+            }
+            else
+            {
+                return new List<ApplicationUser>();
+            }
+        }
+
+        [HttpPost]
+        [Route("AddFriend")]
+        public async Task<IActionResult> AddFriend(FriendRequest friendRequest)
+        {
+            try
+            {
+                context.FriendRequests.Add(friendRequest);
+                await context.SaveChangesAsync();
+                return Ok();
+
+            }catch(Exception e)
+            {
+                return NoContent();
+            }
+        }
     }
 }
