@@ -24,7 +24,9 @@ namespace ProjekatApi.Model
         public string HourlyRent { get; set; }
         public string RentPerDay { get; set; }
         public string ImageCar { get; set; }
+        public float AverageRating { get; set; }
         [JsonIgnore]
         public CarCompany CarCompany { get; set; }
+
     } 
 }

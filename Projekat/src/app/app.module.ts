@@ -38,6 +38,8 @@ import { AuthInterceptor } from './components/auth/auth.interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { TokenInterceptor } from './components/auth/TokenInterceptor';
 import { UserService} from 'src/app/services/user-service/user.service';
+import { RateACarComponent } from './components/rate-acar/rate-acar.component';
+import { RatingComponent } from './components/rating/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,8 @@ import { UserService} from 'src/app/services/user-service/user.service';
     AddBranchOfficeComponent,
     FlightChangeComponent,
     ChangeBranchOfficeComponent,
+    RateACarComponent,
+    RatingComponent,
   ],
   imports: [
     BrowserModule,

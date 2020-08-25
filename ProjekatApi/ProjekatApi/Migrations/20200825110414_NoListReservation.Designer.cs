@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjekatApi;
 
 namespace ProjekatApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200825110414_NoListReservation")]
+    partial class NoListReservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,9 +123,6 @@ namespace ProjekatApi.Migrations
                     b.Property<string>("AirConditioning")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("AverageRating")
-                        .HasColumnType("real");
-
                     b.Property<string>("Bags")
                         .HasColumnType("nvarchar(max)");
 
@@ -179,9 +178,6 @@ namespace ProjekatApi.Migrations
 
                     b.Property<string>("AdministratorId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<float>("AverageRating")
-                        .HasColumnType("real");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -336,27 +332,6 @@ namespace ProjekatApi.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("FriendRequests");
-                });
-
-            modelBuilder.Entity("ProjekatApi.Model.Rating", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Descriminator")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IdService")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Mark")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Rating");
-
-                    b.HasCheckConstraint("CK_Rating_Descriminator_Enum_Constraint", "[Descriminator] IN(0, 1, 2)");
                 });
 
             modelBuilder.Entity("ProjekatApi.Model.ReservationCar", b =>

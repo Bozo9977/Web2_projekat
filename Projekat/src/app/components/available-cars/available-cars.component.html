@@ -84,10 +84,13 @@
               <td>{{comp.airConditioning}}</td>
               <td>{{comp.bags}}</td>
               <td>{{comp.status}}</td>
-              <td></td>
+              <td>{{comp.price}}</td>
               <td></td>
               <td>
-                  <button type="submit" style="color: red;">Make a rezervation</button>
+                <div>
+                  <button type="button"  style="color: red;" (click)="newReservation(comp.id)">Make a rezervation</button>
+                </div>
+                  
               </td>
             </tr>
           </tbody>

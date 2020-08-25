@@ -24,6 +24,7 @@ export class AvailableCarsComponent implements OnInit {
   idCompany:number;
   reservationCar: ReservationCars;
   selectedCities: Array<BranchOffice>;
+  user;
 
   constructor(private route: ActivatedRoute, private cars: CarsServiceService, private routerPrim: Router, private branch: BranchOfficeService) {
     route.params.subscribe(params => { this.id = params['id']; });
@@ -31,8 +32,10 @@ export class AvailableCarsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadCars();
+    //this.loadCars();
     this.selectCity();
+    this.user = JSON.parse(localStorage.getItem('userDetails'));
+    console.log(this.user);
     this.searchAvailableCarsForm = new FormGroup({
       'City1': new FormControl(''),
       'City2': new FormControl(''),
@@ -71,8 +74,9 @@ export class AvailableCarsComponent implements OnInit {
   {
     console.log(this.searchAvailableCarsForm.value);
     this.reservationCar = this.searchAvailableCarsForm.value;
+    //id branchOffic-a
     console.log(this.idCompany);
-    this.reservationCar.idCompany = this.id;
+    this.reservationCar.id = this.id;
     this.cars.searchAvailableCars(this.reservationCar).subscribe(
       (res: any) => { 
         this.carsList = res as AvailableCar[]
@@ -82,6 +86,27 @@ export class AvailableCarsComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  newReservation(idCar: string){
+    console.log(idCar);
+    console.log(this.searchAvailableCarsForm.value);
+    this.reservationCar = this.searchAvailableCarsForm.value;
+    console.log(this.idCompany);
+    this.reservationCar.id = idCar;
+    this.reservationCar.idUser = this.user.id;
+    this.cars.newReservationCar(this.reservationCar).subscribe(
+      
+      (res: any) => { 
+        console.log(res);
+       },
+      err => {
+        console.log(err);
+      }
+    );
+
+    this.searchAvailableCarsForm.reset();
+    this.routerPrim.navigateByUrl('/rentACarServices');
   }
 
 }

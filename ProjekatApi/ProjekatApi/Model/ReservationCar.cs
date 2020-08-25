@@ -15,8 +15,9 @@ namespace ProjekatApi.Model
         public string City1 { get; set; }
         public DateTime Day2 { get; set; }
         public string City2 { get; set; }
-        public ApplicationUser User { get; set; }
-        public Car Car { get; set; }
+
+        public string IdUser { get; set; }
+        public string IdCar { get; set; }
 
     }
 }

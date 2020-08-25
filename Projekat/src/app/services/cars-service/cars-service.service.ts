@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AvailableCar } from 'src/app/entities/available-car';
 import { ReservationCars } from 'src/app/entities/reservationCar/reservation-cars';
+import { Rate } from 'src/app/entities/rate/rate';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +52,16 @@ export class CarsServiceService {
     
     return this.http.put<Cars>(this.BasURI + '/CarCompany/UpdateCar', formData);
     
+  }
+
+  newReservationCar(formData: ReservationCars)
+  {
+    return this.http.post(this.BasURI + '/Reservation/CreateReservation', formData);
+  }
+
+  getReservations(id: string)
+  {
+    return this.http.get<Rate[]>(this.BasURI + '/Reservation/GetReservations/' + id);  
   }
   
   mockedCars():Array<Cars>{

@@ -1,6 +1,10 @@
 
 <div class= "signup-form">
 
+    <button type="button" style="background-color: white;" aria-label="Close" routerLink="/mainPage">
+        <img src="assets/images/back.png" height="25px" width="25px">            
+      </button>
+
     <form class="form-inline " [formGroup]="searchCompanyForm" (ngSubmit)="onSearchCompany()">
         <div class="md-form my-0">
           <input class="form-control" type="text" placeholder="Service name" formControlName="serviceName" aria-label="Search">

@@ -249,7 +249,8 @@ namespace ProjekatApi.Controllers
                 user.LastName,
                 user.Email,
                 user.City,
-                user.PhoneNumber
+                user.PhoneNumber,
+                user.Id
             };
         }
 

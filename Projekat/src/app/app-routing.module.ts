@@ -27,6 +27,8 @@ import { AddBranchOfficeComponent } from './components/add-branch-office/add-bra
 import { FlightChangeComponent } from './components/flight-change/flight-change.component';
 import { ChangeBranchOfficeComponent } from './components/change-branch-office/change-branch-office.component';
 import { UserViewComponent } from './components/user-view/user-view.component';
+import { RateACarComponent } from './components/rate-acar/rate-acar.component';
+import { RatingComponent } from './components/rating/rating/rating.component';
 
 const routes: Routes = [
   {
@@ -162,6 +164,16 @@ const routes: Routes = [
       { path: "", component: BranchOfficeComponent },
       { path: ":id/change-BranchOffice", component: ChangeBranchOfficeComponent },
     ]
+  },
+
+  {
+    path: "rateACar",
+    component: RateACarComponent
+  },
+
+  {
+    path: ":id/rating",
+    component: RatingComponent
   },
 
 

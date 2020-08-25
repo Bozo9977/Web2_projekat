@@ -13,7 +13,9 @@ namespace ProjekatApi.FormModel
        public string Number { get; set; }
        public DateTime endDay { get; set; }
        public DateTime startDay { get; set; }
-       public string IdCompany { get; set; }
+       public string Id { get; set; }
+       public string IdUser { get; set; }
+
 
     }
 }
