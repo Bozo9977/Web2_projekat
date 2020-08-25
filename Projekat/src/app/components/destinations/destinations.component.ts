@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Destination } from 'src/app/entities/destination/destination';
 import { DestinationServiceService } from 'src/app/services/destination-service/destination-service.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-destinations',
@@ -24,19 +24,24 @@ export class DestinationsComponent implements OnInit {
 
   private initForm(){
     this.destinationForm = new FormGroup({
-      'city': new FormControl('')
+      'city': new FormControl('', Validators.required),
+      'Aircompany': new FormControl()
     });    
   }
 
   private loadDests(){
-    this.destService.getDestinations().subscribe(
-      (res: any) => { 
-        this.destinations = res as Destination[] 
-      },
-      err => {
-        console.log(err);
-      }
-    );
+
+      var company = JSON.parse(localStorage.getItem('company'));
+      this.destService.getDestinationsForCompany(company.id).subscribe(
+        (res: any) => { 
+          this.destinations = res as Destination[] 
+        },
+        err => {
+          console.log(err);
+        }
+      );
+
+    
   }
 
   deleteDest(id:number){
@@ -47,16 +52,28 @@ export class DestinationsComponent implements OnInit {
 
   destSubmit(){
     console.log(this.destinationForm.value);
-    this.destService.addDestination(this.destinationForm.value).subscribe(
-      (res: any) => {
-        console.log(res);
-        
-      },
-      err =>{
-        console.log(err);
-      }
-    );
+    if(!this.destinationForm.valid){
+      alert("Must enter city name")
+    }
+    else
+    {
+      var company = JSON.parse(localStorage.getItem('company'));
+
+      this.destinationForm.patchValue({'Aircompany': company.id})
+
+      this.destService.addDestination(this.destinationForm.value).subscribe(
+        (res: any) => {
+          console.log(res);
+          
+        },
+        err =>{
+          console.log(err);
+        }
+      );
+    }
+    
     this.destinationForm.reset();
+    this.ngOnInit()
   }
 
 }

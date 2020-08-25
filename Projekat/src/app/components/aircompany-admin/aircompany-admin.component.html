@@ -53,11 +53,11 @@
     </div>
 </nav>
 
-<div [hidden]="destinationClicked">
+<div  *ngIf="destinationClicked">
     <button type="button" class="close mr-sm-5" data-dismiss="alert" aria-label="Close" (click)="newDestinationClicked()">
         <span aria-hidden="true" style="font-size: 25px;">&times;</span>
       </button>
-    <app-destinations></app-destinations>
+    <app-destinations *ngIf="destinationClicked"></app-destinations>
 </div>
 <div [hidden]="flightClicked">
     <button type="button" class="close mr-sm-5" data-dismiss="alert" aria-label="Close" (click)="newFlightClicked()">

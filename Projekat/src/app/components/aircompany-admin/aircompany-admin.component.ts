@@ -8,7 +8,7 @@ import { Aircompany } from 'src/app/entities/aircompany/aircompany';
   styleUrls: ['./aircompany-admin.component.css']
 })
 export class AircompanyAdminComponent implements OnInit {
-  destinationClicked: boolean = true;
+  destinationClicked: boolean = false;
   flightClicked: boolean = true;
   flightsClicked: boolean = true;
   company: Aircompany;
@@ -28,15 +28,14 @@ export class AircompanyAdminComponent implements OnInit {
 
   newFlightClicked(){
     this.flightClicked = !this.flightClicked;
-    if(!this.destinationClicked)
+    if(this.destinationClicked)
       this.destinationClicked = !this.destinationClicked;
     if(!this.flightsClicked)
       this.flightsClicked = !this.flightsClicked;
   }
   getAllFlights(){
     this.flightsClicked = !this.flightsClicked;
-    localStorage.setItem("userType", "admin");
-    if(!this.destinationClicked)
+    if(this.destinationClicked)
       this.destinationClicked = !this.destinationClicked;
     if(!this.flightClicked)
       this.flightClicked = !this.flightClicked;

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProjekatApi.FormModel;
 using ProjekatApi.Model;
 
 namespace ProjekatApi.Controllers
@@ -22,11 +23,15 @@ namespace ProjekatApi.Controllers
 
         [HttpPost]
         [Route("AddDestination")]
-        public async Task<IActionResult> AddDestination(Destination destination)
+        public async Task<IActionResult> AddDestination(DestinationModel destination)
         {
-            context.Destinations.Add(destination);
+            //context.Destinations.Add(destination);
+            Aircompany company =  context.Aircompanies.Include(x=>x.Destinations).SingleOrDefault(x=>x.Id ==destination.Aircompany);
+
+            company.Destinations.Add(new Destination() { City = destination.City });
 
             await context.SaveChangesAsync();
+            //await context.SaveChangesAsync();
 
             return Ok();
         }

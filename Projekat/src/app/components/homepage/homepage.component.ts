@@ -54,7 +54,8 @@ export class HomepageComponent implements OnInit {
         var givenName = decode['Roles'];
 
         var UserID = decode['UserID'];
-
+        localStorage.setItem('userType', givenName);
+        
         if(givenName == "RegisteredUser")
           this.router.navigateByUrl('/mainPage');
         else if(givenName == "Administrator")

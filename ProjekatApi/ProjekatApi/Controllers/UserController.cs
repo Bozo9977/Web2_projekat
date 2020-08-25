@@ -189,17 +189,20 @@ namespace ProjekatApi.Controllers
             try
             {
                 await _userManager.UpdateAsync(appUser);
-            }catch(Exception e)
+                
+                var token = await _userManager.GeneratePasswordResetTokenAsync(appUser);
+
+                var result = await _userManager.ResetPasswordAsync(appUser, token, user.Password);
+
+                return Ok(result);
+            }
+            catch(Exception e)
             {
                 return NoContent();
             }
 
 
-            var token = await _userManager.GeneratePasswordResetTokenAsync(appUser);
-
-            var result = await _userManager.ResetPasswordAsync(appUser, token, user.Password);
-
-            return Ok(result);
+            
         }
 
         [HttpPost]
