@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { CarsServiceService } from 'src/app/services/cars-service/cars-service.service';
+import { Rate } from 'src/app/entities/rate/rate';
 
 @Component({
   selector: 'app-rating',
@@ -12,6 +13,7 @@ import { CarsServiceService } from 'src/app/services/cars-service/cars-service.s
 export class RatingComponent implements OnInit {
 
   id: string;
+  ratingSend: Rate;
 
   constructor(private route: ActivatedRoute, private rating: CarsServiceService, private routerPrim: Router) { 
     route.params.subscribe(params => { this.id = params['id']; });
@@ -28,9 +30,10 @@ export class RatingComponent implements OnInit {
 
   onRating() {
     console.log(this.ratingForm.value);
-    this.ratingForm.reset();
-
-   /* this.registration.addUser(this.registerForm.value).subscribe(
+    this.ratingSend = this.ratingForm.value; 
+    this.ratingSend.id = this.id;
+    console.log(this.ratingSend);
+    this.rating.CreateRate(this.ratingSend).subscribe(
       (res: any) => {
         console.log(res);
       },
@@ -38,7 +41,7 @@ export class RatingComponent implements OnInit {
         console.log(err);
       }
     );
-    this.registerForm.reset();*/
+    this.ratingForm.reset();
   }
 
 }

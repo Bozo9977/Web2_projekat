@@ -63,6 +63,10 @@ export class CarsServiceService {
   {
     return this.http.get<Rate[]>(this.BasURI + '/Reservation/GetReservations/' + id);  
   }
+
+  CreateRate(rate: Rate){
+    return this.http.post(this.BasURI + '/Reservation/CreateRate', rate);
+  }
   
   mockedCars():Array<Cars>{
     let allComp = new Array<Cars>();

@@ -14,7 +14,7 @@ export class CompanyService {
 
   readonly BasURI = "https://localhost:44314/api";
   loadCarCompanies(){
-    return this.mockedCarCompanies();
+    return this.http.get(this.BasURI + "/CarCompany/GetCarcompanies");
   }
 
   loadAircompanies(){
@@ -54,27 +54,6 @@ export class CompanyService {
     return this.http.put<CarCompany>(this.BasURI + '/User/UpdateCompanyService', carCompany);
   }
 
-  mockedCarCompanies():Array<CarCompany>{
-    let allComp = new Array<CarCompany>();
 
-    const c1 = new CarCompany(1, 'Bozic trans', 'Bastovanska 2a', 'Very OK company');
-    const c2 = new CarCompany(2, 'Maric tours', 'Marsala Tita 1', 'Excellent internationall company');
 
-    allComp.push(c1);
-    allComp.push(c2);
-
-    return allComp;
-  }
-
-  mockedAircompanies():Array<Aircompany>{
-    let allComp = new Array<CarCompany>();
-
-    const c1 = new CarCompany(1, 'Bozic trans', 'Bastovanska 2a', 'Very OK company');
-    const c2 = new CarCompany(2, 'Maric tours', 'Marsala Tita 1', 'Excellent internationall company');
-
-    allComp.push(c1);
-    allComp.push(c2);
-
-    return allComp;
-  }
 }

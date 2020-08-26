@@ -21,6 +21,8 @@ namespace ProjekatApi.FormModel
         public string RentPerDay { get; set; }
 
         public string Price { get; set; }
+
+        public string Rating { get; set; }
         public string ImageCar { get; set; }
         public int IdCompany { get; set; }
     }

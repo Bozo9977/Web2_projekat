@@ -85,7 +85,9 @@
               <td>{{comp.bags}}</td>
               <td>{{comp.status}}</td>
               <td>{{comp.price}}</td>
-              <td></td>
+              <td>
+                <ngb-rating [(rate)]="comp.rating" readonly="readonly" max="5" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.rating}}/5)</span>
+            </td>
               <td>
                 <div>
                   <button type="button"  style="color: red;" (click)="newReservation(comp.id)">Make a rezervation</button>

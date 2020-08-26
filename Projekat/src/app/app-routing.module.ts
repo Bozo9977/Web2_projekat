@@ -29,6 +29,8 @@ import { ChangeBranchOfficeComponent } from './components/change-branch-office/c
 import { UserViewComponent } from './components/user-view/user-view.component';
 import { RateACarComponent } from './components/rate-acar/rate-acar.component';
 import { RatingComponent } from './components/rating/rating/rating.component';
+import { CarServiceViewComponent } from './components/carServiceView/car-service-view/car-service-view.component';
+import { AvailableCarsViewComponent } from './components/availableCarsView/available-cars-view/available-cars-view.component';
 
 const routes: Routes = [
   {
@@ -116,7 +118,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'branchOfficeView',
+    path: ':id/branchOfficeView',
     component: BranchOfficeViewComponent
   },
 
@@ -176,7 +178,15 @@ const routes: Routes = [
     component: RatingComponent
   },
 
+  {
+    path: "carSeviceView",
+    component: CarServiceViewComponent
+  },
 
+  {
+    path: ":id/availableCarsView",
+    component: AvailableCarsViewComponent
+  },
 ];
 
 @NgModule({

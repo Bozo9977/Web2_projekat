@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjekatApi;
 
 namespace ProjekatApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200826090808_KeyRating")]
+    partial class KeyRating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,9 +244,6 @@ namespace ProjekatApi.Migrations
 
                     b.Property<string>("Arrival")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("AverageRating")
-                        .HasColumnType("real");
 
                     b.Property<string>("Departure")
                         .HasColumnType("nvarchar(max)");

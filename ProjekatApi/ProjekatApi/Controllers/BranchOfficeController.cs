@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Amazon.EC2.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -91,10 +92,28 @@ namespace ProjekatApi.Controllers
 
         [HttpGet]
         [Route("GetAllBranchOffices")]
-        public async Task<ActionResult<IEnumerable<BranchOffices>>> GetAllBranchOffices()
+        public async Task<ActionResult<IEnumerable<BranchOfficeForm>>> GetAllBranchOffices()
         {
+            List<BranchOfficeForm> bf = new List<BranchOfficeForm>();
 
-            return context.BranchOffices.ToList();
+            var pom = context.BranchOffices.Include(x => x.Id_company).ToList();
+
+            foreach(var v in pom)
+            {
+                BranchOfficeForm b = new BranchOfficeForm()
+                {
+                    Id = v.Id.ToString(),
+                    Name = v.Name,
+                    Address = v.Address,
+                    City = v.City,
+                    Rating = v.Id_company.AverageRating.ToString(),
+                    Telephone = v.Telephone,
+                    IdCompany = v.Id_company.Id
+                };
+                bf.Add(b);
+            }
+
+            return bf;
         }
 
         [HttpGet]

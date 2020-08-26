@@ -99,6 +99,13 @@ namespace ProjekatApi.Controllers
             return Ok();
         }
 
+        [HttpGet]
+        [Route("GetCarcompanies")]
+        public async Task<ActionResult<IEnumerable<CarCompany>>> GetCarcompanies()
+        {
+            return await context.Carcompanies.ToListAsync();
+        }
+
         [HttpDelete]
         [Route("DeleteCar/{id}")]
         public async Task<ActionResult<List<Car>>> DeleteCar(string id)
@@ -127,7 +134,9 @@ namespace ProjekatApi.Controllers
         public async Task<ActionResult<IEnumerable<Car>>> GetCars(string id)
         {
 
-            return context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == Int32.Parse(id)).Cars.ToList();
+            var ret = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == Int32.Parse(id)).Cars.ToList();
+
+            return ret;
         }
 
         [HttpGet]

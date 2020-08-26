@@ -12,8 +12,8 @@ export class BranchOfficeService {
 
   readonly BasURI = "https://localhost:44314/api";
 
-  loadBranchOffices(){
-    return this.mockedBranchOffices();
+  loadBranchOffices(id: number){
+    return this.http.get<BranchOffice[]>(this.BasURI + '/BranchOffice/GetBranchOfficeForCompany/' + id);
   }
 
   updateBranchOffice(branch: BranchOffice){

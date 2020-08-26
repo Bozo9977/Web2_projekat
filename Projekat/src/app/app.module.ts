@@ -40,6 +40,8 @@ import { TokenInterceptor } from './components/auth/TokenInterceptor';
 import { UserService} from 'src/app/services/user-service/user.service';
 import { RateACarComponent } from './components/rate-acar/rate-acar.component';
 import { RatingComponent } from './components/rating/rating/rating.component';
+import { CarServiceViewComponent } from './components/carServiceView/car-service-view/car-service-view.component';
+import { AvailableCarsViewComponent } from './components/availableCarsView/available-cars-view/available-cars-view.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +76,8 @@ import { RatingComponent } from './components/rating/rating/rating.component';
     ChangeBranchOfficeComponent,
     RateACarComponent,
     RatingComponent,
+    CarServiceViewComponent,
+    AvailableCarsViewComponent,
   ],
   imports: [
     BrowserModule,

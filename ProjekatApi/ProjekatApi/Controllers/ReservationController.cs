@@ -71,6 +71,7 @@ namespace ProjekatApi.Controllers
                             cfm.Seat = cars.Seat;
                             cfm.Status = cars.Status;
                             cfm.YearProduction = cars.YearProduction;
+                            cfm.Rating = cars.AverageRating.ToString();
                             carFromModels.Add(cfm);
     
                         }
@@ -190,6 +191,7 @@ namespace ProjekatApi.Controllers
                                 cfm.Status = cars.Status;
                                 cfm.YearProduction = cars.YearProduction;
                                 cfm.Price = price.ToString();
+                                cfm.Rating = cars.AverageRating.ToString();
                                 carFromModels.Add(cfm);
 
                             }
@@ -212,6 +214,7 @@ namespace ProjekatApi.Controllers
                                     cfm.Seat = car.Seat;
                                     cfm.Status = car.Status;
                                     cfm.YearProduction = car.YearProduction;
+                                    cfm.Rating = cars.AverageRating.ToString();
                                     carFromModels.Add(cfm);
 
                                 }
@@ -310,6 +313,124 @@ namespace ProjekatApi.Controllers
             return listRate;
         }
 
+
+        [HttpPost]
+        [Route("CreateRate")]
+        public async Task<IActionResult> CreateRate(CreateRate createRate)
+        {
+            var reservation = context.ReservationCar.Find(createRate.id);
+
+            var carId = reservation.IdCar;
+
+            var cc = context.Cars.Include(x => x.CarCompany).ToList().SingleOrDefault(x => x.Id == carId).CarCompany;
+
+            var car = context.Cars.Find(carId);
+
+            var companyId = cc.Id;
+
+            Rating ratingCompany = new Rating();
+
+
+            ratingCompany.IdService = companyId.ToString();
+            ratingCompany.Mark = Int32.Parse(createRate.serviceRating);
+            ratingCompany.Descriminator = ServiceType.Company;
+
+
+            context.Rating.Add(ratingCompany);
+
+            await context.SaveChangesAsync();
+
+            ProsecnaOcena(companyId.ToString(), createRate.serviceRating, cc);
+
+            Rating ratingCar = new Rating();
+            ratingCar.IdService = carId;
+            ratingCar.Mark = Int32.Parse(createRate.vehicleRating);
+            ratingCar.Descriminator = ServiceType.Car;
+
+            context.Rating.Add(ratingCar);
+            await context.SaveChangesAsync();
+
+            ProsecnaOcena(carId, createRate.vehicleRating, car);
+
+            return Ok();
+        }
+
+        public void ProsecnaOcena(string id, string ocena, object serviceToSend)
+        {
+            var pom = context.Rating.ToList();
+
+            var service = pom.FindAll(x => x.IdService == id);
+
+            var naziv = service[0].Descriminator;
+
+            float prosek = 0;
+            float ukupuno = 0;
+
+            if(naziv == ServiceType.Car)
+            {
+                foreach(var ret in service)
+                {
+                    ukupuno += ret.Mark;
+                }
+               // ukupuno += float.Parse(ocena);
+                prosek = ukupuno / (service.Count());
+                Car c = (Car)serviceToSend;
+                c.AverageRating = prosek;
+                context.Entry(c).State = EntityState.Modified;
+
+                try
+                {
+                    context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    NotFound();
+                }
+
+            }
+            else if(naziv == ServiceType.Company)
+            {
+                foreach (var ret in service)
+                {
+                    ukupuno += ret.Mark;
+                }
+                // ukupuno += float.Parse(ocena);
+                prosek = ukupuno / (service.Count());
+                Company c = (Company)serviceToSend;
+                c.AverageRating = prosek;
+                context.Entry(c).State = EntityState.Modified;
+
+                try
+                {
+                    context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    NotFound();
+                }
+            }
+            else if(naziv == ServiceType.Flight)
+            {
+                foreach (var ret in service)
+                {
+                    ukupuno += ret.Mark;
+                }
+                // ukupuno += float.Parse(ocena);
+                prosek = ukupuno / (service.Count());
+                Flight c = (Flight)serviceToSend;
+              //  c.AverageRating = prosek;
+                context.Entry(c).State = EntityState.Modified;
+
+                try
+                {
+                    context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    NotFound();
+                }
+            }
+        }
 
     }
 }
