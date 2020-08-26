@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Cars } from 'src/app/entities/cars/cars';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { SearchCar } from 'src/app/entities/searchCar/search-car';
 
 @Component({
   selector: 'app-available-cars-view',
@@ -15,6 +16,7 @@ export class AvailableCarsViewComponent implements OnInit {
   id:number;
   availableCars: Array<Cars>
   availableCarsForm: FormGroup;
+  car: SearchCar;
 
   constructor(private route: ActivatedRoute, private cars: CarsServiceService, private routerPrim: Router) { 
     route.params.subscribe(params => { this.id = params['id']; });
@@ -43,19 +45,18 @@ export class AvailableCarsViewComponent implements OnInit {
 
   onSearchAvailableCars(){
     console.log(this.availableCarsForm.value);
-    /*this.reservationCar = this.searchAvailableCarsForm.value;
-    //id branchOffic-a
-    console.log(this.id);
-    this.reservationCar.id = this.id;
-    this.cars.searchAvailableCars(this.reservationCar).subscribe(
+    this.car = this.availableCarsForm.value;
+    this.car.id = this.id;
+    console.log(this.car);
+    this.cars.searchCars(this.car).subscribe(
       (res: any) => { 
-        this.carsList = res as AvailableCar[]
+        this.availableCars = res as Cars[]
         console.log(this.availableCars);
        },
       err => {
         console.log(err);
       }
-    );*/
+    );
   }
 
 }

@@ -21,6 +21,10 @@ export class CompanyService {
     return this.http.get(this.BasURI + "/AirCompany/GetAircompanies");
   }
 
+  getAverageForCompany(id: number): Observable<CarCompany[]>{
+    return this.http.get<CarCompany[]>(this.BasURI + "/CarCompany/GetAverageForCompany/" + id);
+  }
+
   addCompany(formData){
     if(formData.company == "carcompany")
     {

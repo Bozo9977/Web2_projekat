@@ -197,5 +197,58 @@ namespace ProjekatApi.Controllers
 
             return NoContent();
         }
+
+        [HttpGet]
+        [Route("GetAverageForCompany/{id}")]
+        public async Task<ActionResult<IEnumerable<CarCompany>>> GetAverageForCompany(int id)
+        {
+            List<CarCompany> listCC = new List<CarCompany>();
+            var cc = await context.Carcompanies.FindAsync(id);
+
+            if (cc == null)
+            {
+                return NotFound();
+            }
+
+            listCC.Add(cc);
+
+            return listCC;
+        }
+
+        [HttpGet]
+        [Route("GetAverageForCar/{id}")]
+        public async Task<ActionResult<IEnumerable<Car>>> GetAverageForCar(int id)
+        {
+            var cc =  context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == id).Cars.ToList();
+
+            if (cc == null)
+            {
+                return NotFound();
+            }
+            return cc;
+        }
+
+        [HttpPost]
+        [Route("SearchCars")]
+        public async Task<ActionResult<IEnumerable<Car>>> SearchCars(SearchCarForm searchCar)
+        {
+            List<Car> carList = new List<Car>();
+
+            if(searchCar.kategorija == "Mark")
+            {
+                carList = context.Cars.ToList().FindAll(x => x.Mark.ToLower() == searchCar.search.ToLower());
+            }
+            else if(searchCar.kategorija == "Bags")
+            {
+                carList = context.Cars.ToList().FindAll(x => x.Bags.ToLower() == searchCar.search.ToLower());
+            }
+
+            else if(searchCar.kategorija == "Seat")
+            {
+                carList = context.Cars.ToList().FindAll(x => x.Seat.ToLower() == searchCar.search.ToLower());
+            }
+
+            return carList;
+        }
     }
 }

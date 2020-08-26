@@ -42,6 +42,8 @@ import { RateACarComponent } from './components/rate-acar/rate-acar.component';
 import { RatingComponent } from './components/rating/rating/rating.component';
 import { CarServiceViewComponent } from './components/carServiceView/car-service-view/car-service-view.component';
 import { AvailableCarsViewComponent } from './components/availableCarsView/available-cars-view/available-cars-view.component';
+import { AverageCompanyComponent } from './components/averageCompany/average-company/average-company.component';
+import { AverageCarComponent } from './components/averageCar/average-car/average-car.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import { AvailableCarsViewComponent } from './components/availableCarsView/avail
     RatingComponent,
     CarServiceViewComponent,
     AvailableCarsViewComponent,
+    AverageCompanyComponent,
+    AverageCarComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,7 @@ export class AvailableCar {
     status: string;
     imageCar: string;
     idCompany: number;
-    rating: number;
+    averageRating: number;
     price: number;
 
     constructor(imageCar: string, id: string, mark: string, yearProduction: string, fuel: string, gearshift:string, seat: string, door: string, airConditioning: string, bags: string, status: string, idCompany: number, rating: number, price:number){
@@ -29,7 +29,7 @@ export class AvailableCar {
         this.status = status;
         this.idCompany = idCompany;
         this.price = price;
-        this.rating = rating;
+        this.averageRating = rating;
     }
 }
 

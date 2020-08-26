@@ -16,8 +16,8 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="#">Car occupation report</a>
           <a class="dropdown-item" href="#">Business report</a>
-          <a class="dropdown-item" href="#">Service rating</a>
-          <a class="dropdown-item" href="#">Car rating</a>
+          <a class="dropdown-item" (click)="carcompanyClicked()">Service rating</a>
+          <a class="dropdown-item" (click)="carsClicked()">Car rating</a>
           <a class="dropdown-item" href="#">Income report</a>
         </div>
     </div>
@@ -34,3 +34,17 @@
       <button type="button" class="btn btn-dark" routerLink="/home">Log out</button>
     </div>
 </nav>
+
+<div [hidden]="carcompany">
+  <button type="button" class="close mr-sm-5" data-dismiss="alert" aria-label="Close" (click)="carcompanyClicked()">
+      <span aria-hidden="true" style="font-size: 25px;">&times;</span>
+    </button>
+    <app-average-company></app-average-company>
+</div>
+
+<div [hidden]="cars">
+  <button type="button" class="close mr-sm-5" data-dismiss="alert" aria-label="Close" (click)="carsClicked()">
+      <span aria-hidden="true" style="font-size: 25px;">&times;</span>
+    </button>
+    <app-average-car></app-average-car>
+</div>

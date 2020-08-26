@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AvailableCar } from 'src/app/entities/available-car';
 import { ReservationCars } from 'src/app/entities/reservationCar/reservation-cars';
 import { Rate } from 'src/app/entities/rate/rate';
+import { SearchCar } from 'src/app/entities/searchCar/search-car';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,13 @@ export class CarsServiceService {
     
   }
 
+  getAverageForCar(id: number){
+    return this.http.get<AvailableCar[]>(this.BasURI + '/CarCompany/GetAverageForCar/' + id);   
+  }
+
+  searchCars(formData: SearchCar){
+    return this.http.post<Cars[]>(this.BasURI + '/CarCompany/SearchCars', formData);
+  }
   searchAvailableCars(formData: ReservationCars){
     return this.http.post<AvailableCar[]>(this.BasURI + '/Reservation/SearchAvailableCar', formData);
   }

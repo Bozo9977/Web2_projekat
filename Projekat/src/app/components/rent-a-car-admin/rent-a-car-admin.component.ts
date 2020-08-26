@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rent-a-car-admin.component.css']
 })
 export class RentACarAdminComponent implements OnInit {
-
+  carcompany: boolean = true;
+  cars: boolean = true;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+
+  carcompanyClicked(){
+    this.carcompany = !this.carcompany;
+  }
+
+  carsClicked(){
+    this.cars = !this.cars;
+  }
 }

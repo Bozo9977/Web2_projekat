@@ -1,0 +1,18 @@
+<div class= "signup-form">
+    <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);" > 
+        <thead>
+            <tr>
+            <th scope="col">Average rating for company:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let comp of companyPom">
+                <td>
+                    <ngb-rating [(rate)]="comp.averageRating" readonly="readonly" max="5" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.averageRating}}/5)</span>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+
+</div>
+
