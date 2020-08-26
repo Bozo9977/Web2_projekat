@@ -4,7 +4,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <h4>New flight</h4>
+                        <h4>Change flight</h4>
                         <hr>
                     </div>
                 </div>
@@ -34,27 +34,30 @@
                             <div class="form-group row">
                                 <label for="takeoff" class="col-4 col-form-label" style="font-size: large;">Take-off date and time</label> 
                                 <div class="col-8">
-                                    <dl-date-time-picker
+                                    <!-- <dl-date-time-picker
                                         startView="day"
                                         maxView="year"
                                         minView="minute"
                                         minuteStep="5"
-                                        name="takeoff" formControlName="takeOff"
+                                        name="takeoff" formControlName="takeOff" 
                                     >
-                                    </dl-date-time-picker>
+                                    </dl-date-time-picker> -->
+                                    <!-- <datetimepicker  data-datetimepicker-config="{ startView:'day', minView:'day' }"></datetimepicker> -->
+                                    <input type="datetime-local" class="form-control" formControlName="takeOff"> 
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="touchdown" class="col-4 col-form-label" style="font-size: large;">Touchdown date and time</label> 
                                 <div class="col-8">
-                                    <dl-date-time-picker
+                                    <!-- <dl-date-time-picker
                                         startView="day"
                                         maxView="year"
                                         minView="minute"
                                         minuteStep="5"
-                                        name="touchdown" formControlName="touchDown"
+                                        name="touchdown" formControlName="touchDown" 
                                     >
-                                    </dl-date-time-picker>
+                                    </dl-date-time-picker> -->
+                                    <input type="datetime-local" class="form-control" formControlName="touchDown"> 
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -68,6 +71,7 @@
                             <div class="form-group row">
                                 <label for="length" class="col-4 col-form-label" style="font-size: large;">Connections</label> 
                                 <div class="col-8">
+                                    Selected:&nbsp;<input type="text" formControlName="existingConnections" readonly>
                                 <select id="destinations" multiple class="form-control" size="3" style="width: inherit;" formControlName="connections">
                                     <option *ngFor="let dest of destinationsSelect">
                                      {{dest.city}}
@@ -97,7 +101,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <button type="button" class="btn btn-outline-primary btn-lg btn-block" type="submit">Add</button>
+                                <button type="button" class="btn btn-outline-primary btn-lg btn-block" type="submit">Change</button>
                             </div>
                         </form>
                     </div>

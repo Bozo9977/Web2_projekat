@@ -14,6 +14,7 @@ export class Flight {
     numberBusiness: number;
     priceEconomy: number;
     numberEconomy: number;
+    id:number;
     
     constructor(departure: string, arrival: string, takeoff: DatePipe, touchdown: DatePipe, length: number, connections: string[], pricefirst: number, numberfirst: number, pricebusiness: number, numberbusiness: number, priceeconomy: number, numbereconomy: number){
         this.departure = departure;

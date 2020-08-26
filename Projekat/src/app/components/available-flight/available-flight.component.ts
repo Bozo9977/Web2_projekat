@@ -17,7 +17,10 @@ export class AvailableFlightComponent implements OnInit {
   ngOnInit(): void {
     if(localStorage.getItem("userType")=="admin")
       this.admin = true;
-    this.flightService.getFlights().subscribe(
+
+    var company = JSON.parse(localStorage.getItem('company'));
+
+    this.flightService.getFlightsForCompany(company.id).subscribe(
       (res: any)=>{
         console.log(res);
         this.flights = res as FlightReceive[];
