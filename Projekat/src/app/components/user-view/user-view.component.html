@@ -4,7 +4,7 @@
     <img src="assets/images/logo1.png" class="rounded-circle mr-auto" data-holder-rendered="true" height="45px" width="45px">         
 </button>
 
-
+<div class="container">
 <form class="form-inline " [formGroup]="searchFriendsForm" (ngSubmit)="onSearchFriends()">
     <div class="md-form my-0">
       <input class="form-control" type="text" placeholder="First Name" formControlName="firstName" aria-label="Search">
@@ -13,7 +13,11 @@
     <button  type="submit" class="btn btn-outline-primary">
         <img src="assets/images/search.png" height="35px" width="35px" data-holder-rendered="true">
     </button>
+    
 </form>
+<button style="align-content: right;" class="btn btn-outline-primary" (click)="myRequests()">Requests</button>
+</div>
+
 
 <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);" > 
     
@@ -25,13 +29,31 @@
         <th></th>
     </tr>
 </thead>
-<tbody>
+<tbody *ngIf="searched">
     <tr *ngFor="let friend of friends">
         <th>{{friend.firstName}}</th>
         <th>{{friend.lastName}}</th>
         <th>{{friend.city}}</th>
-        <th *ngIf="!searched"><button class="btn btn-outline-primary" >Remove</button></th>
-        <th *ngIf="searched"><button class="btn btn-outline-primary" (click)="addFriend(friend.id)">Add</button></th>
+        <!-- <th *ngIf="!searched"><button class="btn btn-outline-primary" >Remove</button></th> -->
+        <th ><button class="btn btn-outline-primary" (click)="addFriend(friend.id)">Add</button></th>
+    </tr>
+</tbody>
+<tbody *ngIf="requested">
+    <tr *ngFor="let friend of friends">
+        <th>{{friend.firstName}}</th>
+        <th>{{friend.lastName}}</th>
+        <th>{{friend.city}}</th>
+        <th ><button class="btn btn-outline-primary" (click)="acceptFriend(friend.id)">Accept</button></th>
+        <!-- <th *ngIf="searched"><button class="btn btn-outline-primary" (click)="addFriend(friend.id)">Add</button></th> -->
+    </tr>
+</tbody>
+<tbody *ngIf="nothing">
+    <tr *ngFor="let friend of friends">
+        <th>{{friend.firstName}}</th>
+        <th>{{friend.lastName}}</th>
+        <th>{{friend.city}}</th>
+        <!-- <th ><button class="btn btn-outline-primary" (click)="acceptFriend(friend.id)">Accept</button></th> -->
+        <!-- <th *ngIf="searched"><button class="btn btn-outline-primary" (click)="addFriend(friend.id)">Add</button></th> -->
     </tr>
 </tbody>
 

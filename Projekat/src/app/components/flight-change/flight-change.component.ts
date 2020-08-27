@@ -90,7 +90,7 @@ export class FlightChangeComponent implements OnInit {
     
     //var company = JSON.parse(localStorage.getItem('company'));
     let flightID: number = this.id as number;
-    //this.flightForm.controls['Id'].setValue(flightID);
+    //  this.flightForm.controls['Id'].setValue(flightID);
 
     console.log(this.flightForm.value);
     // let flight: Flight = this.flightForm.value;

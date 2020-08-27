@@ -23,6 +23,7 @@ export class RegisterComponent implements OnInit {
       'lastName': new FormControl(''),
       'city': new FormControl(''),
       'email': new FormControl(''),
+      'phoneNumber': new FormControl(''),
       'password': new FormControl(''),
       'confirmPassword': new FormControl(''),
     });

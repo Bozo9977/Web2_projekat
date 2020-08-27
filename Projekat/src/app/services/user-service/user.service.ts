@@ -31,4 +31,17 @@ export class UserService {
   addFriend(friendRequest: FriendRequest){
     return this.http.post(this.BaseURI + '/User/AddFriend', friendRequest);
   }
+
+  getRequestsForUser(id: string){
+    return this.http.get(this.BaseURI +'/User/RequestsForUser/'+id);
+  }
+
+  acceptFriend(id: string){
+    alert(id);
+    return this.http.put(this.BaseURI +'/User/AcceptFriend/'+id, id);
+  }
+
+  getFriendsForUser(id: string){
+    return this.http.get(this.BaseURI +'/User/FriendsForUser/'+id);
+  }
 }

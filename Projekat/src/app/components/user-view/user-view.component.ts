@@ -4,6 +4,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { UserService } from 'src/app/services/user-service/user.service';
 import * as jwt_decode from 'jwt-decode';
 import { FriendRequest } from 'src/app/entities/friend-request/friend-request';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-view',
@@ -14,7 +15,10 @@ export class UserViewComponent implements OnInit {
 
   friends: User[];
   searchFriendsForm: FormGroup;
+
   searched: boolean = false;
+  requested: boolean = false;
+  nothing: boolean = true;
 
   constructor(private userService: UserService) { }
 
@@ -23,10 +27,25 @@ export class UserViewComponent implements OnInit {
       'firstName': new FormControl(''),
       'lastName': new FormControl('')
     });
+
+    var decode = jwt_decode(localStorage.getItem('token'));
+    var UserID = decode['UserID'];
+    this.userService.getFriendsForUser(UserID).subscribe(
+      (res:any)=>{
+        this.friends = res as User[];
+        console.log(this.friends);
+      },
+      err=>{
+        console.log(err);
+      }
+    )
   }
 
   onSearchFriends(){
     this.searched = true;
+    this.requested = false;
+    this.nothing= false;
+
     if(this.searchFriendsForm.get('firstName').value != "" || this.searchFriendsForm.get('lastName').value != ""){
       
       this.userService.searchForFriends(this.searchFriendsForm.value).subscribe(
@@ -60,10 +79,50 @@ export class UserViewComponent implements OnInit {
       (res:any)=>{
         console.log(res);
       },
-      err => {
-        console.log(err);
+      (err: HttpErrorResponse) => {
+        alert(err.error);
       }
     )
     
   }
+
+
+  myRequests(){
+    this.requested = true;
+    this.searched = false;
+    this.nothing = false;
+
+    var decode = jwt_decode(localStorage.getItem('token'));
+    var UserID = decode['UserID'];
+    this.userService.getRequestsForUser(UserID).subscribe(
+      (res:any)=>{
+        console.log(res);
+        this.friends = res as User[];
+      },
+      err=>
+      {
+        console.log(err);
+      }
+    )
+  }
+
+  acceptFriend(id: string){
+    var decode = jwt_decode(localStorage.getItem('token'));
+    var UserID = decode['UserID'];
+
+    var ids: string;
+    ids = id + '_' + UserID;
+    //console.log(ids);
+
+    this.userService.acceptFriend(ids).subscribe(
+      (res:any)=> {
+        console.log(res);
+      },
+      err=> {
+        console.log(err);
+      }
+    )
+
+  }
+
 }

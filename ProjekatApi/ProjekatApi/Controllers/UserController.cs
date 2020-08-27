@@ -6,6 +6,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Amazon.AutoScaling.Model;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -287,14 +288,79 @@ namespace ProjekatApi.Controllers
         {
             try
             {
-                context.FriendRequests.Add(friendRequest);
-                await context.SaveChangesAsync();
-                return Ok();
+                List<FriendRequest> reqs = context.FriendRequests.ToList();
+
+                if (reqs.SingleOrDefault(x => (x.SenderID == friendRequest.SenderID && x.ReceiverID == friendRequest.ReceiverID) || (x.SenderID == friendRequest.ReceiverID && x.ReceiverID == friendRequest.SenderID)) != null)
+                {
+                    return BadRequest("This request already exists, check your requests.");
+                }
+                else
+                {
+                    context.FriendRequests.Add(friendRequest);
+                    await context.SaveChangesAsync();
+                    return Ok();
+                }
+                
 
             }catch(Exception e)
             {
                 return NoContent();
             }
+        }
+
+
+        [HttpGet]
+        [Route("RequestsForUser/{id}")]
+        public async Task<ActionResult<IEnumerable<ApplicationUser>>> RequestsForUser(string id)
+        {
+            List<FriendRequest> reqs =  context.FriendRequests.Where(x => x.ReceiverID == id && x.Accepted==false).ToList();
+
+            List<ApplicationUser> retVal = new List<ApplicationUser>();
+
+            foreach(var item in reqs)
+            {
+                retVal.Add(await _userManager.FindByIdAsync(item.SenderID));
+            }
+
+            return retVal;
+        }
+
+        [HttpGet]
+        [Route("FriendsForUser/{id}")]
+        public async Task<ActionResult<IEnumerable<ApplicationUser>>> FriendsForUser(string id)
+        {
+            List<FriendRequest> reqs = context.FriendRequests.Where(x => (x.ReceiverID == id || x.SenderID==id) && x.Accepted == true).ToList();
+
+            List<ApplicationUser> retVal = new List<ApplicationUser>();
+
+            foreach (var item in reqs)
+            {
+                retVal.Add(await _userManager.FindByIdAsync(item.SenderID));
+            }
+
+            return retVal;
+        }
+
+        [Route("AcceptFriend/{Id}")]
+        public async Task<IActionResult> AcceptFriend(string Id)
+        {
+            try
+            {
+                string senderId = Id.Split('_')[0];
+                string receiverId = Id.Split('_')[1];
+
+                FriendRequest req = context.FriendRequests.SingleOrDefault(x => x.SenderID == senderId && x.ReceiverID == receiverId);
+
+                req.Accepted = true;
+
+                await context.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return NoContent();
+            }
+            
         }
     }
 }

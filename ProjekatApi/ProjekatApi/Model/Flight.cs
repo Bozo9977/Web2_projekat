@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjekatApi.Model
 {
+   public enum FlightTypes { ONEWAY, ROUNDTRIP};
     public class Flight
     {
         [Key]
@@ -18,8 +19,9 @@ namespace ProjekatApi.Model
         public ICollection<FlightDestination> FlightDestinations { get; set; }
         public int NumberOfConnections { get; set; }
         public float AverageRating { get; set; }
-        //dodati instancu aviokompanije
-        //dodati kolekciju sedista?
+
+        public FlightTypes Tip { get; set; }
+
         public List<FlightSeat> Seats { get; set; }
     }
 }

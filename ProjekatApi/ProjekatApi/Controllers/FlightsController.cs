@@ -39,9 +39,19 @@ namespace ProjekatApi.Controllers
                 TakeOff = flight.TakeOff,
                 TouchDown = flight.TouchDown,
                 Length = flight.Length,
+                
                 Seats = new List<FlightSeat>(),
                 FlightDestinations = new List<FlightDestination>()
             };
+
+            if (flight.Type == "Round trip")
+            {
+                f.Tip = FlightTypes.ROUNDTRIP;
+            }
+            else
+            {
+                f.Tip = FlightTypes.ONEWAY;
+            }
 
             for (int i = 0; i < flight.NumberFirst; i++)
             {
@@ -59,9 +69,11 @@ namespace ProjekatApi.Controllers
                 f.Seats.Add(new FlightSeat() { Class = Class.ECONOMY, Price = flight.PriceEconomy, Reserved = false, Flight = f });
             }
 
+            
             //await context.Flights.AddAsync(f);
 
             aircomp.Flights.Add(f);
+            
 
             context.Aircompanies.Update(aircomp);
 
@@ -78,7 +90,7 @@ namespace ProjekatApi.Controllers
                 });
             }
 
-            
+            f.NumberOfConnections = f.FlightDestinations.Count();
             await context.SaveChangesAsync();
 
             return Ok();

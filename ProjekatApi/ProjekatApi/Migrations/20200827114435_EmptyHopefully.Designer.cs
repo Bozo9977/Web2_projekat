@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjekatApi;
 
 namespace ProjekatApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200827114435_EmptyHopefully")]
+    partial class EmptyHopefully
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -258,9 +260,6 @@ namespace ProjekatApi.Migrations
                     b.Property<DateTime>("TakeOff")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Tip")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("TouchDown")
                         .HasColumnType("datetime2");
 
@@ -269,8 +268,6 @@ namespace ProjekatApi.Migrations
                     b.HasIndex("AircompanyId");
 
                     b.ToTable("Flights");
-
-                    b.HasCheckConstraint("CK_Flights_Tip_Enum_Constraint", "[Tip] IN(0, 1)");
                 });
 
             modelBuilder.Entity("ProjekatApi.Model.FlightDestination", b =>

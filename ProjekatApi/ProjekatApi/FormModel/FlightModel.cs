@@ -35,5 +35,7 @@ namespace ProjekatApi.FormModel
         public int NumberEconomy { get; set; }
         [Required]
         public int Aircompany { get; set; }
+        [Required]
+        public string Type { get; set; }
     }
 }

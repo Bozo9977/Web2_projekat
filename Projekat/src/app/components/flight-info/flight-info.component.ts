@@ -47,28 +47,34 @@ export class FlightInfoComponent implements OnInit {
       'numberBusiness':new FormControl('',[Validators.required]),
       'priceEconomy': new FormControl('',[Validators.required]),
       'numberEconomy': new FormControl('',[Validators.required]),
+      'type':new FormControl('',[Validators.required]),
       'Aircompany': new FormControl('')
     });
   }
   submit(){
 
-    var company = JSON.parse(localStorage.getItem('company'));
-    this.flightForm.patchValue({'Aircompany':company.id});
-    console.log(this.flightForm.value);
-    let flight: Flight = this.flightForm.value;
-    console.log(flight);
+    if(this.flightForm.valid){
+      var company = JSON.parse(localStorage.getItem('company'));
+      this.flightForm.patchValue({'Aircompany':company.id});
+      console.log(this.flightForm.value);
+      let flight: Flight = this.flightForm.value;
+      console.log(flight);
+  
+      this.flightService.addFlight(this.flightForm.value).subscribe(
+        (res: any) => {
+          console.log(res);
+          
+        },
+        err =>{
+          console.log(err);
+        }
+      );
+    }else{
+      alert("Information not imputed correctly try again!");
+      this.flightForm.reset();
+    }
 
-    this.flightService.addFlight(this.flightForm.value).subscribe(
-      (res: any) => {
-        console.log(res);
-        
-      },
-      err =>{
-        console.log(err);
-      }
-    );
-
-    this.flightForm.reset();
+    
   }
 
 
