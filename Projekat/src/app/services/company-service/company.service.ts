@@ -4,6 +4,7 @@ import { BusinessReport } from 'src/app/entities/businessReport/business-report'
 import { Aircompany } from 'src/app/entities/aircompany/aircompany';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Luggage } from 'src/app/entities/luggage/luggage';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,10 @@ export class CompanyService {
     return this.http.put<CarCompany>(this.BasURI + '/User/UpdateCompanyService', carCompany);
   }
 
+  addLuggage(formData: Luggage){
+    console.log(formData)
+    return this.http.post(this.BasURI + '/AirCompany/AddLuggage', formData);
+  }
 
 
 }

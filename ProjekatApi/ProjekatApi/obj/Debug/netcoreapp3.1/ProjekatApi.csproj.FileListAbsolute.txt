@@ -115,8 +115,6 @@ C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\De
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csproj.CoreCompileInputs.cache
-C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.AssemblyInfoInputs.cache
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.AssemblyInfo.cs
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.RazorTargetAssemblyInfo.cache
@@ -285,7 +283,6 @@ C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\De
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
-C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\DRAGOJLA\Desktop\Web-poslednja verzija\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\DRAGOJLA\Desktop\Web-poslednja verzija\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\DRAGOJLA\Desktop\Web-poslednja verzija\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
@@ -573,3 +570,8 @@ C:\Users\DRAGOJLA\Desktop\WEB\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\ne
 C:\Users\DRAGOJLA\Desktop\WEB\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.dll
 C:\Users\DRAGOJLA\Desktop\WEB\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.pdb
 C:\Users\DRAGOJLA\Desktop\WEB\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.genruntimeconfig.cache
+C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
+C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csproj.CoreCompileInputs.cache
+C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cache

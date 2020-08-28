@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using ProjekatApi.FormModel;
 using ProjekatApi.Model;
 
@@ -64,6 +66,37 @@ namespace ProjekatApi.Controllers
                 return NotFound("Aircompany for user not found.");
             }
             
+        }
+
+        [HttpGet]
+        [Route("GetLuggageInfoForCompany/{id}")]
+        public async Task<ActionResult<IEnumerable<FlightLuggage>>> GetLuggageInfoForCompany(int id)
+        {
+            return context.Luggages.Where(x => x.IdCompany == id).ToList();
+        }
+
+        [HttpPost]
+        [Route("AddLuggage")]
+        public async Task<IActionResult> AddLuggage(object luggage)
+        {
+            Luggage l = new Luggage();
+
+            string objStr = luggage.ToString();
+            string[] obj1 = objStr.Split(':');
+            string[] obj2 = null;
+
+            for (int i = 1; i<obj1.Count();  i += 2)
+            {
+                //obj2. (obj1[i].Split('\\'));
+            }
+             //= obj1.Split('\\');
+
+            var tip = luggage.GetType();
+
+            
+
+            return Ok();
+          
         }
 
     }

@@ -31,7 +31,7 @@
                         <button class="dropdown-item" (click)="getAllFlights()">Flights</button>
                         <a class="dropdown-item" href="#">Quick reservations</a>
                         
-                        <a class="dropdown-item" href="#">Baggage info</a>
+                        <button class="dropdown-item" (click)="showBaggageInfo()">Baggage info</button>
                       </div>
                   </div>
             </li>
@@ -70,4 +70,63 @@
         <span aria-hidden="true" style="font-size: 25px;">&times;</span>
       </button>
     <app-available-flight></app-available-flight>
+</div>
+
+<div class="container" style="display: flex; justify-content: center; align-items: center;" *ngIf="baggageClicked">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                <form [formGroup]="baggageForm" (ngSubmit)="baggageSubmit()">
+                    <div class="row">
+                        <div class="col-md-12">
+                    <label for="code" class="col-4 col-form-label">Carry on price</label> 
+                    <input type="number" id="carryOnPrice" name="carryOnPrice" class="form-control" placeholder="Price of carry on" formControlName="carryOnPrice">
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                    <label for="code" class="col-4 col-form-label">Duffel price</label> 
+                    <input type="number" class="form-control" id="duffelPrice" name="duffelPrice" placeholder="Price of duffel" formControlName="duffelPrice">
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                        
+                    <input type="submit" value="Add baggage" class="btn btn-outline-primary" style="display: flex; justify-content: center; align-items: center;">
+                        </div>
+                    
+
+                </form>
+            </div>
+            </div>
+            </div>
+        </div>
+        <span style="font-size: 30px; font-family:fantasy; margin-left: 50px;">Luggage info</span>
+        <table class="table table-hover" style="background-color: rgba(255, 255, 255, .65);">
+        <thead>
+            <tr>
+            <th>#</th>
+            <th scope="col">Price carry on</th>
+            <th scope="col">Price duffel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let lugg of luggages'>
+            <th scope="row">{{lugg.Id}}</th>
+            <td>{{lugg.CarryOnPrice}}</td>
+            <td>{{lugg.DuffelPrice}}</td>
+            <td>
+                <button class="btn btn-outline-danger" (click)="deleteLugg(lugg.Id)">
+                <svg class="bi bi-trash btn-outline-danger" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z"/>
+                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" clip-rule="evenodd"/>
+                </svg>
+                </button>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    
 </div>

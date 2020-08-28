@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjekatApi;
 
 namespace ProjekatApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200828101251_LuggageMig")]
+    partial class LuggageMig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -295,11 +297,11 @@ namespace ProjekatApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("CarryOnPrice")
-                        .HasColumnType("float");
+                    b.Property<float>("CarryOnPrice")
+                        .HasColumnType("real");
 
-                    b.Property<double>("DuffelPrice")
-                        .HasColumnType("float");
+                    b.Property<float>("DuffelPrice")
+                        .HasColumnType("real");
 
                     b.Property<int>("IdCompany")
                         .HasColumnType("int");

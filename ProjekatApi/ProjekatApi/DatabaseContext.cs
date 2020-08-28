@@ -53,5 +53,6 @@ namespace ProjekatApi
         public DbSet<FriendRequest> FriendRequests { get; set; }
 
         public DbSet<Rating> Rating { get; set; }
+        public DbSet<FlightLuggage> Luggages { get; set; }
     }
 }
