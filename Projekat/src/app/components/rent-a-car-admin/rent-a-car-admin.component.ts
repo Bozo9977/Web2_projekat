@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class RentACarAdminComponent implements OnInit {
   carcompany: boolean = true;
   cars: boolean = true;
+  business: boolean = true;
   constructor() { }
 
   ngOnInit(): void {
@@ -20,5 +21,9 @@ export class RentACarAdminComponent implements OnInit {
 
   carsClicked(){
     this.cars = !this.cars;
+  }
+
+  businessClicked(){
+    this.business = !this.business;
   }
 }

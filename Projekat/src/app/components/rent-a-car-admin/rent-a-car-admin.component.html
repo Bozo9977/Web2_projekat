@@ -15,7 +15,7 @@
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="#">Car occupation report</a>
-          <a class="dropdown-item" href="#">Business report</a>
+          <a class="dropdown-item" (click)="businessClicked()">Business report</a>
           <a class="dropdown-item" (click)="carcompanyClicked()">Service rating</a>
           <a class="dropdown-item" (click)="carsClicked()">Car rating</a>
           <a class="dropdown-item" href="#">Income report</a>
@@ -47,4 +47,11 @@
       <span aria-hidden="true" style="font-size: 25px;">&times;</span>
     </button>
     <app-average-car></app-average-car>
+</div>
+
+<div [hidden]="business">
+  <button type="button" class="close mr-sm-5" data-dismiss="alert" aria-label="Close" (click)="businessClicked()">
+      <span aria-hidden="true" style="font-size: 25px;">&times;</span>
+    </button>
+    <app-business-report></app-business-report>
 </div>

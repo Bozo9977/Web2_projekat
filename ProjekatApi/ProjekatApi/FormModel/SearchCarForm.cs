@@ -7,8 +7,9 @@ namespace ProjekatApi.FormModel
 {
     public class SearchCarForm
     {
-        public string kategorija { get; set; }
-        public string search { get; set; }
-        public int id { get; set; }
+        public string Kategorija { get; set; }
+        public string Search { get; set; }
+
+        public string IdComp { get; set; }
     }
 }

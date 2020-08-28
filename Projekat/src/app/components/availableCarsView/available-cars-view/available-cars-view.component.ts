@@ -17,6 +17,7 @@ export class AvailableCarsViewComponent implements OnInit {
   availableCars: Array<Cars>
   availableCarsForm: FormGroup;
   car: SearchCar;
+  carPom: SearchCar;
 
   constructor(private route: ActivatedRoute, private cars: CarsServiceService, private routerPrim: Router) { 
     route.params.subscribe(params => { this.id = params['id']; });
@@ -45,10 +46,14 @@ export class AvailableCarsViewComponent implements OnInit {
 
   onSearchAvailableCars(){
     console.log(this.availableCarsForm.value);
+    this.carPom = new SearchCar();
     this.car = this.availableCarsForm.value;
-    this.car.id = this.id;
+    this.car.IdComp = this.id;
+    this.carPom.kategorija = this.car.kategorija;
+    this.carPom.search = this.car.search;
+    this.carPom.IdComp = this.car.IdComp;
     console.log(this.car);
-    this.cars.searchCars(this.car).subscribe(
+    this.cars.searchCarsFunction(this.carPom).subscribe(
       (res: any) => { 
         this.availableCars = res as Cars[]
         console.log(this.availableCars);

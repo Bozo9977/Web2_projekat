@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -228,27 +229,86 @@ namespace ProjekatApi.Controllers
             return cc;
         }
 
+
         [HttpPost]
-        [Route("SearchCars")]
-        public async Task<ActionResult<IEnumerable<Car>>> SearchCars(SearchCarForm searchCar)
+        [Route("SearchAvailableCar")]
+        public async Task<ActionResult<IEnumerable<Car>>> SearchAvailableCar(SearchCarForm searchCar)
         {
             List<Car> carList = new List<Car>();
+            List<CarFromModel> carList1 = new List<CarFromModel>();
 
-            if(searchCar.kategorija == "Mark")
+            if (searchCar.Kategorija == "Mark")
+
             {
-                carList = context.Cars.ToList().FindAll(x => x.Mark.ToLower() == searchCar.search.ToLower());
+
+                var pom = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == Int32.Parse(searchCar.IdComp)).Cars.ToList();
+                carList = pom.FindAll(x => x.Mark.ToLower() == searchCar.Search.ToLower());
             }
-            else if(searchCar.kategorija == "Bags")
+            else if (searchCar.Kategorija == "Bags")
             {
-                carList = context.Cars.ToList().FindAll(x => x.Bags.ToLower() == searchCar.search.ToLower());
+                var pom = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == Int32.Parse(searchCar.IdComp)).Cars.ToList();
+                carList = pom.FindAll(x => x.Bags.ToLower() == searchCar.Search.ToLower());
             }
 
-            else if(searchCar.kategorija == "Seat")
+            else if (searchCar.Kategorija == "Seat")
             {
-                carList = context.Cars.ToList().FindAll(x => x.Seat.ToLower() == searchCar.search.ToLower());
+                var pom = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == Int32.Parse(searchCar.IdComp)).Cars.ToList();
+                carList = pom.FindAll(x => x.Seat.ToLower() == searchCar.Search.ToLower());
             }
 
             return carList;
         }
+
+        [HttpGet]
+        [Route("GetBusinessAverageForCompany/{id}")]
+        public async Task<ActionResult<IEnumerable<BusinessReport>>> GetBusinessAverageForCompany(int id)
+        {
+            List<BusinessReport> listCC = new List<BusinessReport>();
+            BusinessReport br = new BusinessReport();
+
+            var cc = context.Carcompanies.Include(x=>x.Cars).ToList().SingleOrDefault(x=>x.Id == id).Cars.ToList();
+
+            var rez = context.ReservationCar.ToList();
+
+            List<ReservationCar> listReservationDay = new List<ReservationCar>();
+            List<ReservationCar> listReservationMonth = new List<ReservationCar>();
+
+            var danasnjiDatum = DateTime.Now;
+ 
+           
+            
+            int rezDan = 0;
+            int rezMesec = 0;
+
+            foreach (var pom in rez)
+            {
+                if (DateTime.Compare(danasnjiDatum.Date, pom.Day1.Date) == 0)
+                {
+                    listReservationDay.Add(pom);
+                }
+            }
+
+            foreach(var list in listReservationDay)
+            {
+                foreach(var c in cc)
+                {
+                    if(list.IdCar == c.Id)
+                    {
+                        rezDan++;
+                    }
+                }
+            }
+
+            br.ratingPerDay = rezDan.ToString();
+            br.Today = danasnjiDatum;
+            listCC.Add(br);
+
+            Calendar calendar;
+            CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+            
+
+            return listCC;
+        }
+
     }
 }

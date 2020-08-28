@@ -265,7 +265,15 @@ namespace ProjekatApi.Controllers
 
                 rc.IdCar = pomCar.Id;
                 rc.IdUser = pomUser.Id;
+                rc.IdCompany = pomCar.CarCompany.Id.ToString();
 
+                TimeSpan t = filterCar.endDay - filterCar.startDay;
+
+                var elapsedDays = t.Days;
+
+                var price = elapsedDays * Int32.Parse(pomCar.RentPerDay);
+
+                rc.Price = price;
 
                 context.ReservationCar.Add(rc);
 

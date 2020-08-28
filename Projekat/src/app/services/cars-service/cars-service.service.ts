@@ -49,9 +49,17 @@ export class CarsServiceService {
     return this.http.get<AvailableCar[]>(this.BasURI + '/CarCompany/GetAverageForCar/' + id);   
   }
 
-  searchCars(formData: SearchCar){
-    return this.http.post<Cars[]>(this.BasURI + '/CarCompany/SearchCars', formData);
+  searchCarsFun(formData){
+    console.log("SERVIS: ", formData);
+    return this.http.post<Cars[]>(this.BasURI + '/CarCompany/SearchAvailableCar', formData);
   }
+
+  searchCarsFunction(formData: SearchCar){
+    console.log("SERVIS: ", formData);
+    return this.http.post<AvailableCar[]>(this.BasURI + '/CarCompany/SearchAvailableCar', formData);
+  }
+
+
   searchAvailableCars(formData: ReservationCars){
     return this.http.post<AvailableCar[]>(this.BasURI + '/Reservation/SearchAvailableCar', formData);
   }

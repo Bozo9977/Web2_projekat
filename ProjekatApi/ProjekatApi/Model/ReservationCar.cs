@@ -17,6 +17,10 @@ namespace ProjekatApi.Model
         public string City2 { get; set; }
 
         public string IdUser { get; set; }
+
+        public string IdCompany { get; set; }
+
+        public float Price { get; set; }
         public string IdCar { get; set; }
 
     }
