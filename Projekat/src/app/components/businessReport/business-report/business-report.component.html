@@ -6,12 +6,28 @@
             </tr>
         </thead>
         <tbody>
+            <tr>Rating per day</tr>
             <tr *ngFor="let comp of companyPom">
-                <td>{{comp.Today}}</td>
+                <td>{{comp.today}}</td>
                 <td>
-                    <ngb-rating [(rate)]="comp.ratingPerDay" readonly="readonly" max="5" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.ratingPerDay}}/5)</span>
+                    <ngb-rating [(rate)]="comp.ratingPerDay" readonly="readonly" max="{{comp.carsCount}}" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.ratingPerDay}}/{{comp.carsCount}})</span>
                 </td>
             </tr>
+            <tr>Rating per week</tr>
+            <tr *ngFor="let comp of companyPom">
+                <td>{{comp.startDayOdWeek}}</td>
+                <td>{{comp.endDayOdWeek}}</td>
+                <td>
+                    <ngb-rating [(rate)]="comp.ratingPerWeek" readonly="readonly" max="{{comp.carsCount}}" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.ratingPerWeek}}/{{comp.carsCount}})</span>
+                </td>
+            </tr>  
+            <tr>Rating per month</tr>     
+            <tr *ngFor="let comp of companyPom">
+                <td>{{comp.month}}</td>
+                <td>
+                    <ngb-rating [(rate)]="comp.ratingPerMonth" readonly="readonly" max="{{comp.carsCount}}" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.ratingPerMonth}}/{{comp.carsCount}})</span>
+                </td>
+            </tr>    
         </tbody>
         </table>
 

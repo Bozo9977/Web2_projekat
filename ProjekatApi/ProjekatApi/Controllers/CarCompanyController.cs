@@ -266,48 +266,156 @@ namespace ProjekatApi.Controllers
             List<BusinessReport> listCC = new List<BusinessReport>();
             BusinessReport br = new BusinessReport();
 
-            var cc = context.Carcompanies.Include(x=>x.Cars).ToList().SingleOrDefault(x=>x.Id == id).Cars.ToList();
+            var cc = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == id).Cars.ToList();
+
+            int brojAutomobila = cc.Count();
+
+            var idCompany = cc[0].CarCompany.Id;
 
             var rez = context.ReservationCar.ToList();
-
+            DateTimeFormatInfo mfi = new DateTimeFormatInfo();
             List<ReservationCar> listReservationDay = new List<ReservationCar>();
+            List<ReservationCar> listReservationWeek = new List<ReservationCar>();
             List<ReservationCar> listReservationMonth = new List<ReservationCar>();
 
             var danasnjiDatum = DateTime.Now;
- 
-           
-            
+
+
+
+            var dt = DateTime.Now.DayOfWeek;
+
+            DateTime startOfWeek = danasnjiDatum.AddDays(1 - (int)danasnjiDatum.DayOfWeek);
+            DateTime endOfWeek = startOfWeek.AddDays(4);
+
+            var mesec = danasnjiDatum.Month;
+            var nazivMeseca = mfi.GetMonthName(mesec).ToString();
             int rezDan = 0;
             int rezMesec = 0;
+            var nedeljaTrenutna = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
 
             foreach (var pom in rez)
             {
+                var nedelja = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(pom.Day1, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
+
+                if (nedelja == nedeljaTrenutna)
+                {
+                    listReservationWeek.Add(pom);
+                }
+
                 if (DateTime.Compare(danasnjiDatum.Date, pom.Day1.Date) == 0)
                 {
                     listReservationDay.Add(pom);
                 }
-            }
 
-            foreach(var list in listReservationDay)
-            {
-                foreach(var c in cc)
+                else if (DateTime.Compare(danasnjiDatum.Date, pom.Day1.Date) > 0)
                 {
-                    if(list.IdCar == c.Id)
+                    if (DateTime.Compare(danasnjiDatum.Date, pom.Day1.Date) <= 0)
                     {
-                        rezDan++;
+                        listReservationDay.Add(pom);
                     }
+                }
+
+                if (mesec == pom.Day1.Month)
+                {
+                    listReservationMonth.Add(pom);
                 }
             }
 
-            br.ratingPerDay = rezDan.ToString();
-            br.Today = danasnjiDatum;
+            var companyListDay = listReservationDay.FindAll(x => x.IdCompany == idCompany.ToString());
+            var companyListMonth = listReservationMonth.FindAll(x => x.IdCompany == idCompany.ToString());
+            var companyListWeek = listReservationWeek.FindAll(x => x.IdCompany == idCompany.ToString());
+
+            br.ratingPerDay = companyListDay.Count().ToString();
+            string[] parsiraj = danasnjiDatum.ToString().Split(" ");
+            br.Today = parsiraj[0];
+            br.ratingPerMonth = companyListMonth.Count().ToString();
+            br.Month = nazivMeseca;
+            br.ratingPerWeek = listReservationWeek.Count().ToString();
+            br.StartDayOdWeek = startOfWeek.ToString().Split(" ")[0];
+            br.EndDayOdWeek = endOfWeek.ToString().Split(" ")[0];
+            br.CarsCount = brojAutomobila.ToString();
             listCC.Add(br);
 
-            Calendar calendar;
-            CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstDay, DayOfWeek.Monday);
-            
+
+
+
 
             return listCC;
+        }
+
+        [HttpGet]
+        [Route("GetIncomeReportForCompany/{id}")]
+        public async Task<ActionResult<IEnumerable<IncomeReport>>> GetIncomeReportForCompany(int id)
+        {
+            List<IncomeReport> listIncomeReport = new List<IncomeReport>();
+            IncomeReport ir = new IncomeReport();
+            DateTimeFormatInfo mfi = new DateTimeFormatInfo();
+
+            var rez = context.ReservationCar.ToList();
+
+            var varRezKomp = rez.FindAll(x => x.IdCompany == id.ToString());
+            var today = DateTime.Today;
+            var godina = CultureInfo.InvariantCulture.Calendar.GetYear(DateTime.Now);
+            var mesec = new DateTime(today.Year, today.Month, 1);
+
+            var nazivMeseca3start = mfi.GetMonthName(mesec.AddMonths(-3).Month).ToString();
+            var nazivMeseca3end = mfi.GetMonthName(mesec.AddMonths(-1).Month).ToString();
+            float godisnjiPrihod = 0;
+            float TriMesecaPrihod = 0;
+            float tekuciMesec = 0;
+            float SestMesecaPrihod = 0;
+
+
+            var month = new DateTime(today.Year, today.Month, 1);
+            var previous = month.AddMonths(-1);
+            var previous2 = month.AddMonths(-10);
+            var n = previous.Month;
+
+            foreach (var pom in varRezKomp)
+            {
+                if (godina == pom.Day1.Year)
+                {
+                    if (godina == pom.Day2.Year)
+                    {
+                        godisnjiPrihod += pom.Price;
+                    }
+                }
+
+                if (pom.Day1.Month == month.AddMonths(-1).Month || pom.Day1.Month == month.AddMonths(-2).Month || pom.Day1.Month == month.AddMonths(-3).Month)
+                {
+                    if (pom.Day2.Month == month.AddMonths(-1).Month || pom.Day2.Month == month.AddMonths(-2).Month || pom.Day2.Month == month.AddMonths(-3).Month)
+                    {
+                        TriMesecaPrihod += pom.Price;
+                    }
+                }
+
+                if (pom.Day1.Month == month.AddMonths(-1).Month || pom.Day1.Month == month.AddMonths(-2).Month || pom.Day1.Month == month.AddMonths(-3).Month || pom.Day1.Month == month.AddMonths(-4).Month || pom.Day1.Month == month.AddMonths(-5).Month || pom.Day1.Month == month.AddMonths(-6).Month)
+                {
+                    if (pom.Day2.Month == month.AddMonths(-1).Month || pom.Day2.Month == month.AddMonths(-1).Month || pom.Day2.Month == month.AddMonths(-1).Month || pom.Day2.Month == month.AddMonths(-4).Month || pom.Day2.Month == month.AddMonths(-5).Month || pom.Day2.Month == month.AddMonths(-6).Month)
+                    {
+                        SestMesecaPrihod += pom.Price;
+                    }
+                }
+
+                if (pom.Day1.Month == month.Month && pom.Day2.Month == month.Month)
+                {
+                    tekuciMesec += pom.Price;
+                }
+            }
+
+            ir.IncomePerYear = godisnjiPrihod.ToString();
+            ir.Year = godina.ToString();
+            ir.IncomePer3Month = TriMesecaPrihod.ToString();
+            ir.start3 = nazivMeseca3start;
+            ir.end3 = nazivMeseca3end;
+            ir.IncomePerMonth = tekuciMesec.ToString();
+            ir.Month = mfi.GetMonthName(month.Month).ToString();
+            ir.start6 = mfi.GetMonthName(mesec.AddMonths(-6).Month).ToString();
+            ir.end6 = mfi.GetMonthName(mesec.AddMonths(-1).Month).ToString();
+            ir.IncomePer6Month = SestMesecaPrihod.ToString();
+            listIncomeReport.Add(ir);
+
+            return listIncomeReport;
         }
 
     }

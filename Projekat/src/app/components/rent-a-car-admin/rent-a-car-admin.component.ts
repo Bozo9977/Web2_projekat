@@ -9,6 +9,7 @@ export class RentACarAdminComponent implements OnInit {
   carcompany: boolean = true;
   cars: boolean = true;
   business: boolean = true;
+  income: boolean = true;
   constructor() { }
 
   ngOnInit(): void {
@@ -25,5 +26,9 @@ export class RentACarAdminComponent implements OnInit {
 
   businessClicked(){
     this.business = !this.business;
+  }
+
+  incomeClicked(){
+    this.income = !this.income;
   }
 }

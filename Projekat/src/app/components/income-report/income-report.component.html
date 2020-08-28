@@ -1,0 +1,35 @@
+<div class= "signup-form">
+    <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);" > 
+        <thead style="width: 100px;">
+            <tr>
+            <th scope="col">Income report:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="color:red">Current year</tr>
+            <tr *ngFor="let comp of companyPom">
+                <td style="color: yellow">{{comp.year}}</td>
+                <td style="color: blue"> {{comp.incomePerYear}}</td>
+            </tr>
+            <tr style="color:red">Last 6 month</tr>
+            <tr *ngFor="let comp of companyPom">
+                <td style="color: yellow">{{comp.start6}}</td>
+                <td style="color: yellow">{{comp.end6}}</td>
+                <td style="color: blue">{{comp.incomePer6Month}}</td>
+            </tr> 
+            <tr style="color:red">Last 3 month</tr>
+            <tr *ngFor="let comp of companyPom">
+                <td style="color: yellow">{{comp.start3}}</td>
+                <td style="color: yellow">{{comp.end3}}</td>
+                <td style="color: blue">{{comp.incomePer3Month}}</td>
+            </tr>  
+            <tr style="color:red">Current Month</tr>
+            <tr *ngFor="let comp of companyPom">
+                <td style="color: yellow">{{comp.month}}</td>
+                <td style="color: blue">{{comp.incomePerMonth}}</td>
+            </tr> 
+       </tbody>
+    </table>
+
+</div>
+

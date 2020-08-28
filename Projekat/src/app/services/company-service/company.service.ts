@@ -5,6 +5,7 @@ import { Aircompany } from 'src/app/entities/aircompany/aircompany';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Luggage } from 'src/app/entities/luggage/luggage';
+import { Income } from 'src/app/entities/income/income';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,11 @@ export class CompanyService {
   getBusinessAverageForCompany(id: number): Observable<BusinessReport[]>{
     console.log("USAOOOOOOO");
     return this.http.get<BusinessReport[]>(this.BasURI + "/CarCompany/GetBusinessAverageForCompany/" + id);
+  }
+
+  getIncomeReportForCompany(id: number): Observable<Income[]>{
+    console.log("USAOOOOOOO INCOMEREPORT", id);
+    return this.http.get<Income[]>(this.BasURI + "/CarCompany/GetIncomeReportForCompany/" + id);
   }
 
   addCompany(formData){

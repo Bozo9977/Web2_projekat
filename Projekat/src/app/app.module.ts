@@ -45,6 +45,7 @@ import { AvailableCarsViewComponent } from './components/availableCarsView/avail
 import { AverageCompanyComponent } from './components/averageCompany/average-company/average-company.component';
 import { AverageCarComponent } from './components/averageCar/average-car/average-car.component';
 import { BusinessReportComponent } from './components/businessReport/business-report/business-report.component';
+import { IncomeReportComponent } from './components/income-report/income-report.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { BusinessReportComponent } from './components/businessReport/business-re
     AverageCompanyComponent,
     AverageCarComponent,
     BusinessReportComponent,
+    IncomeReportComponent,
   ],
   imports: [
     BrowserModule,
