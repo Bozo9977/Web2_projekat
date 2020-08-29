@@ -60,9 +60,14 @@ namespace ProjekatApi.Controllers
                     if (result.Succeeded)
                     {
                         _userManager.AddToRoleAsync(applicationUser, "RegisteredUser").Wait();
+                        return Ok(result);
+                    }
+                    else
+                    {
+                        return BadRequest(new { message = "User already exist!." });
                     }
 
-                    return Ok(result);
+                    
 
 
                 }
@@ -71,10 +76,67 @@ namespace ProjekatApi.Controllers
 
                     throw ex;
                 }
+
+                
+            }
+            else
+            {
+                return BadRequest(new { message = "Password is incorrect." });
             }
 
-            return BadRequest(new { message = "Password is incorrect." });
+            
         }
+
+        [HttpPost]
+        [Route("RegisterSistemAdmin")]
+        //POST : /api/ApplicationUser/Register
+        public async Task<Object> RegisterSistemAdmin(UserModel model)
+        {
+            var applicationUser = new ApplicationUser()
+            {
+                UserName = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                City = model.City,
+                PhoneNumber = model.PhoneNumber,
+                Email = model.Email
+
+            };
+
+            if (model.Password == model.ConfirmPassword)
+            {
+
+
+                try
+                {
+                    var result = await _userManager.CreateAsync(applicationUser, model.Password);
+                    if (result.Succeeded)
+                    {
+                        _userManager.AddToRoleAsync(applicationUser, "Administrator").Wait();
+                        return Ok(result);
+                    }
+                    else
+                    {
+                        return BadRequest(new { message = "User already exist!." });
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+
+
+            }
+            else
+            {
+                return BadRequest(new { message = "Password is incorrect." });
+            }
+
+        }
+        
+
 
         [HttpPost]
         [Route("RegisterAircompanyAdmin")]

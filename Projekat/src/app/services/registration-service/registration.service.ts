@@ -16,6 +16,9 @@ export class RegistrationService {
     return this.http.post(this.BaseURI + '/User/Register', formData);
 }
 
+  addSistemUser(formData){
+    return this.http.post(this.BaseURI + '/User/RegisterSistemAdmin', formData);
+  }
   addAircompanyAddmin(formData){
     return this.http.post(this.BaseURI + '/User/RegisterAircompanyAdmin',formData);
   }

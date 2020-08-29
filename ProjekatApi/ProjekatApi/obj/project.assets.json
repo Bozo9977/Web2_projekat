@@ -9433,11 +9433,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DRAGOJLA\\Desktop\\WEB\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
+      "projectUniqueName": "C:\\Users\\DRAGOJLA\\Desktop\\WEB-Klone\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
       "projectName": "ProjekatApi",
-      "projectPath": "C:\\Users\\DRAGOJLA\\Desktop\\WEB\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
+      "projectPath": "C:\\Users\\DRAGOJLA\\Desktop\\WEB-Klone\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
       "packagesPath": "C:\\Users\\DRAGOJLA\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DRAGOJLA\\Desktop\\WEB\\Web2_projekat\\ProjekatApi\\ProjekatApi\\obj\\",
+      "outputPath": "C:\\Users\\DRAGOJLA\\Desktop\\WEB-Klone\\Web2_projekat\\ProjekatApi\\ProjekatApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -26,6 +26,8 @@ export class HomepageComponent implements OnInit {
     Password : ''
   }
 
+  submitted = false;
+
   constructor(private userService: UserService, private companyService: CompanyService, private router: Router) { }
 
   ngOnInit(): void {
@@ -33,15 +35,23 @@ export class HomepageComponent implements OnInit {
 
   }
 
+ get f() { return this.loginForm.controls; }
 
   private initForm() {
     this.loginForm = new FormGroup({
-      'Username': new FormControl(''),
-      'Password': new FormControl('')
+      'Username': new FormControl(null, [Validators.required, Validators.email]),
+      'Password': new FormControl(null, [Validators.required, Validators.minLength(5)])
     });
   }
 
   onSubmit(){
+
+    this.submitted = true;
+
+    if (this.loginForm.invalid) {
+      return;
+    }
+
     console.log("started submit");
     console.log(this.loginForm.value);
     
@@ -73,6 +83,7 @@ export class HomepageComponent implements OnInit {
             err =>{
               console.log(err.status);
               console.log(err);
+              alert("Username or password is incorrect.");
             }
           );
           
@@ -114,6 +125,9 @@ export class HomepageComponent implements OnInit {
       }
     ); 
     console.log("Ended submit");
+
+    this.submitted = false;
+    this.loginForm.reset();   
   }
 
   newRentACarClicked(){

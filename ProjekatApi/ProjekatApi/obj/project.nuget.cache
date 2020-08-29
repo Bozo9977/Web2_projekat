@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "C2JtkSmIX++/kbRHAhLlJS7ceN+IM0YXuYRbZ1J7tr6+D3V8aupEcbV2tj/ppvXG5RTcAiv8UYQxYUlQJBZTTg==",
+  "dgSpecHash": "yVq/Xt9z1iX9sKybIFqj3Foez+P7URHVtgyiu83DXCiP9Ia7KHgXudZe3BO50JZqt6zQb0J0smS7OahK0um2dw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DRAGOJLA\\Desktop\\WEB\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
+  "projectFilePath": "C:\\Users\\DRAGOJLA\\Desktop\\WEB-Klone\\Web2_projekat\\ProjekatApi\\ProjekatApi\\ProjekatApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DRAGOJLA\\.nuget\\packages\\awssdk\\2.3.55.2\\awssdk.2.3.55.2.nupkg.sha512",
     "C:\\Users\\DRAGOJLA\\.nuget\\packages\\awssdk.core\\3.3.107.34\\awssdk.core.3.3.107.34.nupkg.sha512",

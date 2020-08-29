@@ -3,8 +3,15 @@
       <img src="assets/images/info.png" class="rounded-circle"  data-holder-rendered="true" height="25px" width="25px"> 
     </button>
     <form class="form-inline" #form='ngForm' [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <input class="form-control mr-sm-2" type="email" placeholder="Email" aria-label="Email" name="username" formControlName="Username" required>
-      <input type="password" class="form-control mr-sm-2" placeholder="Password" name="password" formControlName="Password" required>
+      <input class="form-control mr-sm-2" type="email" placeholder="Email" aria-label="Email" name="username" formControlName="Username" [ngClass]="{ 'is-invalid': submitted && f.Username.errors }">
+      <div *ngIf="submitted && f.Username.errors" class="alert alert-danger">
+        <div *ngIf="f.Username.errors.required">Username is required</div>
+      </div>
+      <input type="password" class="form-control mr-sm-2" placeholder="Password" name="password" formControlName="Password" [ngClass]="{ 'is-invalid': submitted && f.Password.errors }">
+      <div *ngIf="submitted && f.Password.errors" class="alert alert-danger">
+        <div *ngIf="f.Password.errors.required">Password is required</div>
+        <div *ngIf="f.Password.errors.minlength">Password must be at least 5 characters</div>
+      </div>    
       <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Log in</button>
       <a class="btn btn-outline-light my-2 my-sm-0" type="btn" routerLink="/register">Register</a>
     </form>
