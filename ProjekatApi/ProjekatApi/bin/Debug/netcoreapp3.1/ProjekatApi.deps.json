@@ -26,6 +26,7 @@
         "dependencies": {
           "AWSSDK": "2.3.55.2",
           "AWSSDK.Core": "3.3.107.34",
+          "DataAnnotationsExtensions": "5.0.1.27",
           "Microsoft.AspNet.WebApi.Client": "5.2.7",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "3.1.6",
           "Microsoft.AspNetCore.Cors": "2.2.0",
@@ -329,6 +330,17 @@
         },
         "compile": {
           "lib/netstandard2.0/AWSSDK.Core.dll": {}
+        }
+      },
+      "DataAnnotationsExtensions/5.0.1.27": {
+        "runtime": {
+          "lib/NETFramework40/DataAnnotationsExtensions.dll": {
+            "assemblyVersion": "5.0.1.27",
+            "fileVersion": "5.0.1.27"
+          }
+        },
+        "compile": {
+          "lib/NETFramework40/DataAnnotationsExtensions.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.7": {
@@ -4103,6 +4115,13 @@
       "sha512": "sha512-FdQvZeojltEkHuMycb+Mm/5RMt5YnCgNY9CvfYBH7WmnYEClIUe6IRrQxciUGMQUvV/khjaEV9CuQtZK9D2AoQ==",
       "path": "awssdk.core/3.3.107.34",
       "hashPath": "awssdk.core.3.3.107.34.nupkg.sha512"
+    },
+    "DataAnnotationsExtensions/5.0.1.27": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lw4n4XzY62raAOrrlPdkh4h3PXenReARIazAPzs8AvlkKDAK9pe7kcUL3dh3T095/Q9+LezoXCfjEgDPslmGyg==",
+      "path": "dataannotationsextensions/5.0.1.27",
+      "hashPath": "dataannotationsextensions.5.0.1.27.nupkg.sha512"
     },
     "Microsoft.AspNet.WebApi.Client/5.2.7": {
       "type": "package",

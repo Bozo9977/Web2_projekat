@@ -1,20 +1,18 @@
 export class Cars {
     id: string;
     mark: string;
-    yearProduction: string;
+    yearProduction: number;
     fuel: string;
     gearshift: string;
-    seat: string;
-    door: string;
+    seat: number;
+    door: number;
     airConditioning: string;
-    bags: string;
-    status: string;
-    hourlyRent: string;
-    rentPerDay: string;
+    bags: number;
+    rentPerDay: number;
     imageCar: string;
     idCompany: number;
 
-    constructor(imageCar: string, id: string, mark: string, yearProduction: string, fuel: string, gearshift:string, seat: string, door: string, airConditioning: string, bags: string, status: string, rentPerDay: string, hourlyRent: string, idCompany: number){
+    constructor(imageCar: string, id: string, mark: string, yearProduction: number, fuel: string, gearshift:string, seat: number, door: number, airConditioning: string, bags: number, rentPerDay: number, idCompany: number){
         this.imageCar = imageCar;
         this.id=id;
         this.mark = mark;
@@ -25,9 +23,7 @@ export class Cars {
         this.door = door;
         this.airConditioning = airConditioning;
         this.bags = bags;
-        this.status = status;
         this.rentPerDay = rentPerDay;
-        this.hourlyRent = hourlyRent;
         this.idCompany = idCompany;
     }
 

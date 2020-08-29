@@ -711,10 +711,6 @@ C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\bin\De
 C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csprojAssemblyReference.cache
-C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csproj.CoreCompileInputs.cache
-C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.AssemblyInfoInputs.cache
 C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.AssemblyInfo.cs
 C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.RazorTargetAssemblyInfo.cache
@@ -724,3 +720,8 @@ C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\De
 C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.dll
 C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.pdb
 C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.genruntimeconfig.cache
+C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csproj.CoreCompileInputs.cache
+C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\DataAnnotationsExtensions.dll
+C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csprojAssemblyReference.cache

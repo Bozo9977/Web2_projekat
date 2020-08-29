@@ -59,18 +59,16 @@ namespace ProjekatApi.Controllers
                         {
                             CarFromModel cfm = new CarFromModel();
                             cfm.AirConditioning = cars.AirConditioning;
-                            cfm.Bags = cars.Bags;
-                            cfm.Door = cars.Door;
+                            cfm.Bags = Int32.Parse(cars.Bags);
+                            cfm.Door = Int32.Parse(cars.Door);
                             cfm.Fuel = cars.Fuel;
                             cfm.Gearshift = cars.Gearshift;
                             cfm.Id = cars.Id;
-                            cfm.HourlyRent = cars.HourlyRent;
                             cfm.ImageCar = cars.ImageCar;
                             cfm.Mark = cars.Mark;
-                            cfm.RentPerDay = cars.RentPerDay;
-                            cfm.Seat = cars.Seat;
-                            cfm.Status = cars.Status;
-                            cfm.YearProduction = cars.YearProduction;
+                            cfm.RentPerDay = Int32.Parse(cars.RentPerDay);
+                            cfm.Seat = Int32.Parse(cars.Seat);
+                            cfm.YearProduction = Int32.Parse(cars.YearProduction);
                             cfm.Rating = cars.AverageRating.ToString();
                             carFromModels.Add(cfm);
     
@@ -178,18 +176,16 @@ namespace ProjekatApi.Controllers
 
                                 CarFromModel cfm = new CarFromModel();
                                 cfm.AirConditioning = cars.AirConditioning;
-                                cfm.Bags = cars.Bags;
-                                cfm.Door = cars.Door;
+                                cfm.Bags = Int32.Parse(cars.Bags);
+                                cfm.Door = Int32.Parse(cars.Door);
                                 cfm.Fuel = cars.Fuel;
                                 cfm.Gearshift = cars.Gearshift;
                                 cfm.Id = cars.Id;
-                                cfm.HourlyRent = cars.HourlyRent;
                                 cfm.ImageCar = cars.ImageCar;
                                 cfm.Mark = cars.Mark;
-                                cfm.RentPerDay = cars.RentPerDay;
-                                cfm.Seat = cars.Seat;
-                                cfm.Status = cars.Status;
-                                cfm.YearProduction = cars.YearProduction;
+                                cfm.RentPerDay = Int32.Parse(cars.RentPerDay);
+                                cfm.Seat = Int32.Parse(cars.Seat);
+                                cfm.YearProduction = Int32.Parse(cars.YearProduction);
                                 cfm.Price = price.ToString();
                                 cfm.Rating = cars.AverageRating.ToString();
                                 carFromModels.Add(cfm);
@@ -202,18 +198,16 @@ namespace ProjekatApi.Controllers
                                 {
                                     CarFromModel cfm = new CarFromModel();
                                     cfm.AirConditioning = car.AirConditioning;
-                                    cfm.Bags = car.Bags;
-                                    cfm.Door = car.Door;
+                                    cfm.Bags = Int32.Parse(car.Bags);
+                                    cfm.Door = Int32.Parse(car.Door);
                                     cfm.Fuel = car.Fuel;
                                     cfm.Gearshift = car.Gearshift;
                                     cfm.Id = car.Id;
-                                    cfm.HourlyRent = car.HourlyRent;
                                     cfm.ImageCar = car.ImageCar;
                                     cfm.Mark = car.Mark;
-                                    cfm.RentPerDay = car.RentPerDay;
-                                    cfm.Seat = car.Seat;
-                                    cfm.Status = car.Status;
-                                    cfm.YearProduction = car.YearProduction;
+                                    cfm.RentPerDay = Int32.Parse(car.RentPerDay);
+                                    cfm.Seat = Int32.Parse(car.Seat);
+                                    cfm.YearProduction = Int32.Parse(car.YearProduction);
                                     cfm.Rating = cars.AverageRating.ToString();
                                     carFromModels.Add(cfm);
 

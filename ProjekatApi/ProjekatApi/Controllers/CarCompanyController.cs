@@ -70,16 +70,14 @@ namespace ProjekatApi.Controllers
             {
                 Mark = car.Mark,
                 AirConditioning = car.AirConditioning,
-                Bags = car.Bags,
-                Door = car.Door,
+                Bags = car.Bags.ToString(),
+                Door = car.Door.ToString(),
                 Fuel = car.Fuel,
                 Gearshift = car.Gearshift,
-                HourlyRent = car.HourlyRent,
                 ImageCar = car.ImageCar,
-                RentPerDay = car.RentPerDay,
-                Seat = car.Seat,
-                Status = car.Status,
-                YearProduction = car.YearProduction
+                RentPerDay = car.RentPerDay.ToString(),
+                Seat = car.Seat.ToString(),
+                YearProduction = car.YearProduction.ToString()
             };
 
             var company = await context.Companies.FindAsync(car.IdCompany);
@@ -142,17 +140,34 @@ namespace ProjekatApi.Controllers
 
         [HttpGet]
         [Route("GetOneCar/{id}")]
-        public async Task<ActionResult<Car>> GetOneCar(string id)
+        public async Task<ActionResult<CarFromModel>> GetOneCar(string id)
         {
 
+
+
             var car = await context.Cars.FindAsync(id);
+
+            CarFromModel carSend = new CarFromModel()
+            {
+                Id = car.Id,
+                Mark = car.Mark,
+                AirConditioning = car.AirConditioning,
+                Fuel = car.Fuel,
+                Gearshift = car.Gearshift,
+                Seat = Int32.Parse(car.Seat),
+                Door = Int32.Parse(car.Door),
+                YearProduction = Int32.Parse(car.YearProduction),
+                Bags = Int32.Parse(car.Bags),
+                RentPerDay = Int32.Parse(car.RentPerDay),
+                ImageCar = car.ImageCar
+            };
 
             if (car == null)
             {
                 return NotFound();
             }
 
-            return car;
+            return carSend;
         }
 
 
@@ -179,13 +194,28 @@ namespace ProjekatApi.Controllers
         }
 
         [Route("UpdateCar")]
-        public async Task<IActionResult> UpdateCar(Car car)
+        public async Task<IActionResult> UpdateCar(CarFromModel car)
         {
 
             //var carPom = await context.Cars.FindAsync(car.Id);
 
+            Car carSave = new Car()
+            {
+                Id = car.Id,
+                Mark = car.Mark,
+                AirConditioning = car.AirConditioning,
+                Fuel = car.Fuel,
+                Gearshift = car.Gearshift,
+                Seat = car.Seat.ToString(),
+                Door = car.Door.ToString(),
+                YearProduction = car.YearProduction.ToString(),
+                Bags = car.Bags.ToString(),
+                RentPerDay = car.RentPerDay.ToString(),
+                ImageCar = car.ImageCar
+            };
 
-            context.Entry(car).State = EntityState.Modified;
+
+            context.Entry(carSave).State = EntityState.Modified;
 
             try
             {

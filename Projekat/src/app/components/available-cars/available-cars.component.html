@@ -65,7 +65,6 @@
               <th scope="col">Door</th>
               <th scope="col">Air conditioning</th>
               <th scope="col">Bags</th>
-              <th scope="col">Status</th>
               <th scope="col">Price</th>
               <th scope="col">Rating</th>
             </tr>
@@ -83,7 +82,6 @@
               <td>{{comp.door}}</td>
               <td>{{comp.airConditioning}}</td>
               <td>{{comp.bags}}</td>
-              <td>{{comp.status}}</td>
               <td>{{comp.price}}</td>
               <td>
                 <ngb-rating [(rate)]="comp.rating" readonly="readonly" max="5" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.rating}}/5)</span>

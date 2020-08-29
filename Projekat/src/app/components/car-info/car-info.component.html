@@ -14,67 +14,92 @@
                           <div class="form-group row">
                             <label for="mark" class="col-4 col-form-label">Mark</label> 
                             <div class="col-8">
-                              <input id="mark" name="mark" placeholder="Mark" formControlName="mark" class="form-control here" type="text">
+                              <input id="mark" name="mark" placeholder="Mark" formControlName="mark" class="form-control here" type="text" [ngClass]="{ 'is-invalid': submitted && f.mark.errors }">
+                              <div *ngIf="submitted && f.mark.errors" class="invalid-feedback">
+                                <div *ngIf="f.mark.errors.required">Mark is required</div>
+                              </div>
                             </div>
                           </div>
                               <div class="form-group row">
                                 <label for="yearProduction" class="col-4 col-form-label">Year of production</label> 
                                 <div class="col-8">
-                                  <input id="yearProduction" name="yearProduction" formControlName="yearProduction" placeholder="Year of production" class="form-control here" type="text">
+                                  <input id="yearProduction" name="yearProduction" formControlName="yearProduction" placeholder="Year of production" class="form-control here" type="number" required [ngClass]="{ 'is-invalid': submitted && f.yearProduction.errors }">
+                                  <div *ngIf="submitted && f.yearProduction.errors" class="invalid-feedback">
+                                    <div *ngIf="f.yearProduction.errors.required">Year of production is required</div>
+                                  </div>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="fuel" class="col-4 col-form-label">Fuel</label> 
                                 <div class="col-8">
-                                  <input id="fuel" name="fuel" placeholder="Fuel" formControlName="fuel" class="form-control here" type="text">
+                                  <select id="fuel"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="fuel" [ngClass]="{ 'is-invalid': submitted && f.fuel.errors }">
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Gas">Gas</option>
+                                    <option value="Petrol">Petrol</option>
+                                  </select>
+                                  <div *ngIf="submitted && f.fuel.errors" class="invalid-feedback">
+                                    <div *ngIf="f.fuel.errors.required">Fuel is required</div>
+                                  </div>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="gearshift" class="col-4 col-form-label">Gearshift</label> 
                                 <div class="col-8">
-                                  <input id="gearshift" name="gearshift" placeholder="Gearshift" formControlName="gearshift" class="form-control here" type="text">
+                                  <select id="gearshift"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="gearshift" [ngClass]="{ 'is-invalid': submitted && f.gearshift.errors }">
+                                    <option value="Manual">Manual</option>
+                                    <option value="Automatic">Automatic</option>
+                                  </select>
+                                  <div *ngIf="submitted && f.gearshift.errors" class="invalid-feedback">
+                                    <div *ngIf="f.gearshift.errors.required">Gearshift is required</div>
+                                  </div>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="seat" class="col-4 col-form-label">Seat</label> 
                                 <div class="col-8">
-                                  <input id="seat" name="seat" placeholder="Seat" formControlName="seat" class="form-control here" type="text">
+                                  <input id="seat" name="seat" placeholder="Seat" formControlName="seat" class="form-control here" type="number" required [ngClass]="{ 'is-invalid': submitted && f.seat.errors }">
+                                  <div *ngIf="submitted && f.seat.errors" class="invalid-feedback">
+                                    <div *ngIf="f.seat.errors.required">Seat is required</div>
+                                  </div>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="door" class="col-4 col-form-label">Door</label> 
                                 <div class="col-8">
-                                  <input id="door" name="door" placeholder="Door" formControlName="door" class="form-control here" type="text">
+                                  <input id="door" name="door" placeholder="Door" formControlName="door" class="form-control here" type="number" required [ngClass]="{ 'is-invalid': submitted && f.door.errors }">
+                                  <div *ngIf="submitted && f.door.errors" class="invalid-feedback">
+                                    <div *ngIf="f.door.errors.required">Door is required</div>
+                                  </div>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="airConditioning" class="col-4 col-form-label">Air conditioning</label> 
                                 <div class="col-8">
-                                  <input id="airConditioning" name="airConditioning" formControlName="airConditioning" placeholder="Air conditioning" class="form-control here" type="text">
+                                  <select id="airConditioning"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="airConditioning" [ngClass]="{ 'is-invalid': submitted && f.airConditioning.errors }">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                  </select>
+                                  <div *ngIf="submitted && f.airConditioning.errors" class="invalid-feedback">
+                                    <div *ngIf="f.airConditioning.errors.required">AirConditioning is required</div>
+                                  </div>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="bags" class="col-4 col-form-label">Bags</label> 
                                 <div class="col-8">
-                                  <input id="bags" name="bags" formControlName="bags" placeholder="Bags" class="form-control here" type="text">
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="status" class="col-4 col-form-label">Status</label> 
-                                <div class="col-8">
-                                  <input id="status" name="status" placeholder="Status" formControlName="status" class="form-control here" type="text">
+                                  <input id="bags" name="bags" formControlName="bags" placeholder="Bags" class="form-control here" type="number" required [ngClass]="{ 'is-invalid': submitted && f.bags.errors }">
+                                  <div *ngIf="submitted && f.bags.errors" class="invalid-feedback">
+                                    <div *ngIf="f.bags.errors.required">Bags is required</div>
+                                  </div>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="rentPerDay" class="col-4 col-form-label">Rent per day</label> 
                                 <div class="col-8">
-                                  <input id="rentPerDay" name="rentPerDay" placeholder="Rent per day" formControlName="rentPerDay" class="form-control here" type="text">
-                                </div>
-                              </div>
-                              <div class="form-group row">
-                                <label for="hourlyRent" class="col-4 col-form-label">Hourly rent</label> 
-                                <div class="col-8">
-                                  <input id="hourlyRent" name="hourlyRent" placeholder="Hourly rent" formControlName="hourlyRent" class="form-control here" type="text">
+                                  <input id="rentPerDay" name="rentPerDay" placeholder="Rent per day" formControlName="rentPerDay" class="form-control here" type="number" [ngClass]="{ 'is-invalid': submitted && f.rentPerDay.errors }">
+                                  <div *ngIf="submitted && f.rentPerDay.errors" class="invalid-feedback">
+                                    <div *ngIf="f.rentPerDay.errors.required">RentPerDay is required</div>
+                                  </div>
                                 </div>
                               </div>
                               <div class="form-group row">
@@ -86,8 +111,11 @@
                                   </svg>
                                 </label> 
                                 <div class="col-8">
-                                    <input type="file" name="imageCar" formControlName="imageCar" class="form-control-file">
-                                </div>
+                                    <input type="file" name="imageCar" formControlName="imageCar" class="form-control-file" [ngClass]="{ 'is-invalid': submitted && f.imageCar.errors }">
+                                    <div *ngIf="submitted && f.imageCar.errors" class="invalid-feedback">
+                                      <div *ngIf="f.imageCar.errors.required">ImageCar is required</div>
+                                    </div>
+                                  </div>
                               </div>
                                 <div>
                                   <button type="submit" class="btn btn-secondary btn-lg btn-block">Add</button>

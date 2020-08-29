@@ -31,7 +31,7 @@ namespace ProjekatApi.Controllers
                 Name = branchOffices.Name,
                 Address = branchOffices.Address,
                 City = branchOffices.City,
-                Telephone = branchOffices.Telephone
+                Telephone = branchOffices.Telephone.ToString()
             };
 
             CarCompany carCompany = new CarCompany();
@@ -58,7 +58,7 @@ namespace ProjekatApi.Controllers
             BranchOffices branch = new BranchOffices();
             branch.Id = Int32.Parse(branchOffices.Id);
             branch.Name = branchOffices.Name;
-            branch.Telephone = branchOffices.Telephone;
+            branch.Telephone = branchOffices.Telephone.ToString();
             branch.Address = branchOffices.Address;
             branch.City = branchOffices.City;
             context.Entry(branch).State = EntityState.Modified;
@@ -77,17 +77,26 @@ namespace ProjekatApi.Controllers
 
         [HttpGet]
         [Route("GetBranchOffice/{id}")]
-        public async Task<ActionResult<BranchOffices>> GetBranchOffice(int id)
+        public async Task<ActionResult<BranchOfficeForm>> GetBranchOffice(int id)
         {
 
             var bo = await context.BranchOffices.FindAsync(id);
+
+            BranchOfficeForm bof = new BranchOfficeForm()
+            {
+                Name = bo.Name,
+                City = bo.City,
+                Address = bo.Address,
+                Id = bo.Id.ToString(),
+                Telephone = Int32.Parse(bo.Telephone)
+            };
 
             if (bo == null)
             {
                 return NotFound();
             }
 
-            return bo;
+            return bof;
         }
 
         [HttpGet]
@@ -107,7 +116,7 @@ namespace ProjekatApi.Controllers
                     Address = v.Address,
                     City = v.City,
                     Rating = v.Id_company.AverageRating.ToString(),
-                    Telephone = v.Telephone,
+                    Telephone = Int32.Parse(v.Telephone),
                     IdCompany = v.Id_company.Id
                 };
                 bf.Add(b);

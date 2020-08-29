@@ -14,19 +14,28 @@
                           <div class="form-group row">
                             <label for="nameService" class="col-4 col-form-label">Name</label> 
                             <div class="col-8">
-                              <input name="name" formControlName = "name" class="form-control here" type="text">
+                              <input name="name" formControlName = "name" class="form-control here" type="text" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                              <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Name is required</div>
+                              </div>
                             </div>
                           </div>
                               <div class="form-group row">
                                 <label for="address" class="col-4 col-form-label">Address</label> 
                                 <div class="col-8">
-                                  <input name="address" formControlName = "address" class="form-control  here" type="text">
+                                  <input name="address" formControlName = "address" class="form-control  here" type="text" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+                                  <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                                    <div *ngIf="f.address.errors.required">Address is required</div>
+                                  </div>
                                 </div>
                               </div>
                               <div class="form-group row">
                                 <label for="description" class="col-4 col-form-label">Description</label> 
                                 <div class="col-8">
-                                  <input name="description" formControlName = "description" class="form-control here" type="text">
+                                  <input name="description" formControlName = "description" class="form-control here" type="text" [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+                                  <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                                    <div *ngIf="f.description.errors.required">Description is required</div>
+                                  </div>
                                 </div>
                               </div>
   

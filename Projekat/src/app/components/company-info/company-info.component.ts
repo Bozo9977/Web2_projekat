@@ -13,14 +13,29 @@ export class CompanyInfoComponent implements OnInit {
 
   companyInfoForm: FormGroup;
   loggedInUser : User;
-  company;
+  user;
   companyPom: CarCompany;
-
+  submitted = false;
+  company: CarCompany;
   constructor(private companyService: CompanyService) { }
 
   ngOnInit(): void {
 
-    this.company = JSON.parse(localStorage.getItem('company'));
+    this.user = JSON.parse(localStorage.getItem('userDetails'));
+
+    this.companyService.getCarCompanyForUser(this.user.id).subscribe(
+      (res: any) =>{
+        console.log(res);
+        this.company = res as CarCompany
+        console.log("VRACENA KOMPANIJA: ", this.company);
+        this.companyInfoForm.setValue({ name: this.company.name, address: this.company.address, description: this.company.description});
+      },
+      err =>{
+        console.log(err);
+      }
+    )
+
+   
     console.log(this.company);
     this.initForm();
   }
@@ -28,14 +43,25 @@ export class CompanyInfoComponent implements OnInit {
 
   private initForm() {
     this.companyInfoForm = new FormGroup({
-      'name': new FormControl(''),
-      'address': new FormControl(''),
-      'description': new FormControl(''),
+      'name': new FormControl(null, [Validators.required]),
+      'address': new FormControl(null, [Validators.required]),
+      'description': new FormControl(null, [Validators.required]),
     });
-    this.companyInfoForm.patchValue(this.company);
+    //this.companyInfoForm.patchValue(this.company);
+    
   }
 
+  get f() { return this.companyInfoForm.controls; }
+
   changeCompany() {
+
+    
+  this.submitted = true;
+
+  if (this.companyInfoForm.invalid) {
+      return;
+  }
+
     console.log("IZMENA: ", this.companyInfoForm.value);
 
     
@@ -51,6 +77,7 @@ export class CompanyInfoComponent implements OnInit {
         console.log(err);
       }
     );
+    this.submitted = false;
     this.companyInfoForm.reset();
   }
 

@@ -21,6 +21,7 @@ export class CarsServiceService {
   }
 
   addCar(car: Cars){
+     console.log("CARS SERVIC:", car);
       return this.http.post(this.BasURI + '/CarCompany/AddCar', car);
   }
 

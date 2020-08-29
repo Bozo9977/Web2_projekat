@@ -10,6 +10,7 @@ import { Cars } from 'src/app/entities/cars/cars';
 })
 export class CarInfoComponent implements OnInit {
 
+  submitted = false;
   addCarForm: FormGroup;
   company;
   carToSend: Cars;
@@ -23,22 +24,28 @@ export class CarInfoComponent implements OnInit {
 
   private initForm() {
     this.addCarForm = new FormGroup({
-      'mark': new FormControl(''),
-      'yearProduction': new FormControl(''),
-      'fuel': new FormControl(''),
-      'gearshift': new FormControl(''),
-      'seat': new FormControl(''),
-      'door': new FormControl(''),
-      'airConditioning': new FormControl(''),
-      'bags': new FormControl(''),
-      'status': new FormControl(''),
-      'hourlyRent': new FormControl(''),
-      'rentPerDay': new FormControl(''),
-      'imageCar': new FormControl(''),
+      'mark': new FormControl(null, [Validators.required]),
+      'yearProduction': new FormControl(null, [Validators.required, Validators.max(2020), Validators.min(2005) ]),
+      'fuel': new FormControl(null, [Validators.required]),
+      'gearshift': new FormControl(null, [Validators.required]),
+      'seat': new FormControl(null, [Validators.required, Validators.max(8), Validators.min(2)]),
+      'door': new FormControl(null, [Validators.required, Validators.max(5), Validators.min(2)]),
+      'airConditioning': new FormControl(null, [Validators.required]),
+      'bags': new FormControl(null, [Validators.required, Validators.max(8), Validators.min(1)]),
+      'rentPerDay': new FormControl(null, [Validators.required, Validators.max(15000), Validators.min(1500)]),
+      'imageCar': new FormControl(null, [Validators.required]),
     });
   }
 
+  get f() { return this.addCarForm.controls; }
+
   onAddCar() {
+    this.submitted = true;
+
+    if (this.addCarForm.invalid) {
+      return;
+  }
+
     console.log(this.addCarForm.value);
     this.carToSend = this.addCarForm.value;
     this.carToSend.idCompany = this.company.id;
@@ -51,6 +58,7 @@ export class CarInfoComponent implements OnInit {
         console.log(err);
       }
     );
+    this.submitted = false;
     this.addCarForm.reset();
   }
 
