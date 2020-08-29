@@ -72,10 +72,16 @@ export class CompanyService {
     return this.http.put<CarCompany>(this.BasURI + '/User/UpdateCompanyService', carCompany);
   }
 
-  addLuggage(formData: Luggage){
-    console.log(formData)
-    return this.http.post(this.BasURI + '/AirCompany/AddLuggage', formData);
+  addLuggage(formData){
+    return this.http.post<any>(this.BasURI + '/AirCompany/AddLuggage', formData);
   }
 
+  getLuggageInfo(id:number){
+    return this.http.get<Luggage[]>(this.BasURI + '/AirCompany/GetLuggageInfoForCompany/'+id);
+  }
 
+  changeLuggage(formData){
+    console.log(formData)
+     return this.http.put(this.BasURI + '/AirCompany/ChangeLuggageForCompany',formData);
+  }
 }

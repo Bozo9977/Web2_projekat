@@ -77,26 +77,37 @@ namespace ProjekatApi.Controllers
 
         [HttpPost]
         [Route("AddLuggage")]
-        public async Task<IActionResult> AddLuggage(object luggage)
+        public async Task<IActionResult> AddLuggage(FlightLuggage lugg)
         {
-            Luggage l = new Luggage();
-
-            string objStr = luggage.ToString();
-            string[] obj1 = objStr.Split(':');
-            string[] obj2 = null;
-
-            for (int i = 1; i<obj1.Count();  i += 2)
+            try
             {
-                //obj2. (obj1[i].Split('\\'));
+                await context.Luggages.AddAsync(lugg);
+                await context.SaveChangesAsync();
+                return Ok();
             }
-             //= obj1.Split('\\');
+            catch (Exception e)
+            {
+                return NoContent();
+            }
 
-            var tip = luggage.GetType();
+        }
 
-            
-
-            return Ok();
-          
+        [Route("ChangeLuggageForCompany")]
+        public async Task<IActionResult> ChangeLuggageForCompany(FlightLuggage lugg)
+        {
+            try
+            {
+                FlightLuggage fl = await context.Luggages.SingleOrDefaultAsync(x => x.IdCompany == lugg.IdCompany);
+                fl.CarryOnPrice = lugg.CarryOnPrice;
+                fl.DuffelPrice = lugg.DuffelPrice;
+                context.Luggages.Update(fl);
+                await context.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return NoContent();
+            }
         }
 
     }

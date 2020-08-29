@@ -572,9 +572,6 @@ C:\Users\DRAGOJLA\Desktop\WEB\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\ne
 C:\Users\DRAGOJLA\Desktop\WEB\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.genruntimeconfig.cache
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
-C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csproj.CoreCompileInputs.cache
-C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\DRAGOJLA\Desktop\WEB\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 C:\Users\DRAGOJLA\Desktop\WEB\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\DRAGOJLA\Desktop\WEB\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csprojAssemblyReference.cache
@@ -725,3 +722,7 @@ C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\De
 C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\DataAnnotationsExtensions.dll
 C:\Users\DRAGOJLA\Desktop\WEB-Klone\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csprojAssemblyReference.cache
+C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\bin\Debug\netcoreapp3.1\DataAnnotationsExtensions.dll
+C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.csproj.CoreCompileInputs.cache
+C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Bozo\Desktop\Web2\Projekat\Web2_projekat\ProjekatApi\ProjekatApi\obj\Debug\netcoreapp3.1\ProjekatApi.MvcApplicationPartsAssemblyInfo.cache

@@ -18,6 +18,7 @@ export class AircompanyAdminComponent implements OnInit {
   baggageClicked: boolean = false;
   baggageForm: FormGroup;
   luggages: Luggage[];
+  luggageButton: string;
   
   lugg: Luggage;
 
@@ -25,9 +26,23 @@ export class AircompanyAdminComponent implements OnInit {
   constructor(private companyService: CompanyService) { }
 
   ngOnInit(): void {
+    this.luggageButton = "Add luggage"
     this.company = JSON.parse(localStorage.getItem('company'));
     this.luggages = new Array<Luggage>();
+    
     this.initForm();
+
+    var company = JSON.parse(localStorage.getItem('company'));
+    this.companyService.getLuggageInfo(company.id).subscribe(
+      (res:Luggage[])=>
+      {
+        this.luggages=res;
+        console.log(this.luggages);
+      },
+      err=>{
+        alert((err as HttpErrorResponse).error);
+      }
+    )
   }
   
   newDestinationClicked(){
@@ -44,9 +59,11 @@ export class AircompanyAdminComponent implements OnInit {
     this.baggageForm = new FormGroup({
       'carryOnPrice': new FormControl(null,Validators.required),
       'duffelPrice': new FormControl(null,Validators.required),
-      'id': new FormControl(''),
+      // 'id': new FormControl(''),
       'idCompany': new FormControl()
     });
+    var company = JSON.parse(localStorage.getItem('company'));
+    this.baggageForm.patchValue({'idCompany':company.id});
   }
 
   newFlightClicked(){
@@ -81,36 +98,42 @@ export class AircompanyAdminComponent implements OnInit {
   baggageSubmit(){
     if(this.baggageForm.valid){
       
-      var company = JSON.parse(localStorage.getItem('company'));
+      
 
-      //this.baggageForm.controls['idCompany'].setValue(company.id);
+    if(this.luggageButton!="Change" && this.luggages.length === 0){
 
-      this.baggageForm.patchValue({'idCompany': company.id});
+      this.companyService.addLuggage(this.baggageForm.value).subscribe(
 
-      console.log(this.baggageForm.value);
-
-     // var lugg: Luggage = new Luggage(this.baggageForm.value);
-     this.lugg=this.baggageForm.value;
-      console.log(this.lugg);
-
-    
-
-      this.companyService.addLuggage(this.lugg).subscribe(
         (res:any)=>{
           console.log(res);
         },
         err=>{
-          alert((err as HttpErrorResponse).message);
+          alert((err as HttpErrorResponse).error);
         }
       )
+    }else{
+      this.companyService.changeLuggage(this.baggageForm.value).subscribe(
+        (res:any)=>{
+          alert("Luggage info changed!")
+        },
+        err=>
+        {
+          alert((err as HttpErrorResponse).error);
+        }
+      )
+    }
 
+    this.baggageForm.reset();
+    this.baggageClicked=false;
 
     }else{
       alert("You must enter all the fields correctly");
     }
   }
 
-  deleteLugg(Id:number){
-    alert(Id);
+  changeLugg(id: number){
+    //alert(id);
+    this.baggageForm.patchValue(this.luggages[0]);
+    this.luggageButton="Change";
   }
 }

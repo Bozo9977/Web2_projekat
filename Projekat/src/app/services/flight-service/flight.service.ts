@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Flight } from 'src/app/entities/flight/flight';
+import { FlightSeat } from 'src/app/entities/flight-seats/flight-seat';
 
 @Injectable({
   providedIn: 'root'
@@ -27,4 +28,21 @@ export class FlightService {
   changeFlight(formData){
     return this.http.put(this.BasURI+"/Flights/ChangeFlight", formData);
   }
+
+  searchFlights(formData){
+    return this.http.post(this.BasURI +'/Flights/GetSearchedFlights',formData);
+  }
+
+  getFirstClassSeatsForFlight(id:number){
+    return this.http.get<FlightSeat[]>(this.BasURI + '/Flights/GetFirstClassSeatsForFlight/' + id);
+  }
+
+  getBusinessClassSeatsForFlight(id:number){
+    return this.http.get<FlightSeat[]>(this.BasURI + '/Flights/GetBusinessClassSeatsForFlight/' + id);
+  }
+
+  getEconomyClassSeatsForFlight(id:number){
+    return this.http.get<FlightSeat[]>(this.BasURI + '/Flights/GetEconomyClassSeatsForFlight/' + id);
+  }
+
 }

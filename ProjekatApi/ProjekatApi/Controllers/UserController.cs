@@ -326,17 +326,24 @@ namespace ProjekatApi.Controllers
         [Route("GetUsersSearhced")]
         public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetUsersSearhced(SearchFriend friendSearched)
         {
-            if(!String.IsNullOrEmpty(friendSearched.FirstName) && !String.IsNullOrEmpty(friendSearched.LastName))
+            List<ApplicationUser> result = new List<ApplicationUser>();
+            //            result = _userManager.GetRolesAsync
+            //_userManager.GetUsersInRoleAsync              
+
+            var res = await _userManager.GetUsersInRoleAsync("RegisteredUser");
+            result = res.ToList();
+
+            if (!String.IsNullOrEmpty(friendSearched.FirstName) && !String.IsNullOrEmpty(friendSearched.LastName))
             {
-                return  _userManager.Users.Where(x => x.LastName.ToLower() == friendSearched.LastName.ToLower() && x.FirstName.ToLower() == friendSearched.FirstName.ToLower()).ToList();
+                return result.Where(x => x.LastName.ToLower() == friendSearched.LastName.ToLower() && x.FirstName.ToLower() == friendSearched.FirstName.ToLower()).ToList();
             }
             else if(!String.IsNullOrEmpty(friendSearched.FirstName) && String.IsNullOrEmpty(friendSearched.LastName))
             {
-                return _userManager.Users.Where(x => x.FirstName.ToLower() == friendSearched.FirstName.ToLower()).ToList();
+                return result.Where(x => x.FirstName.ToLower() == friendSearched.FirstName.ToLower()).ToList();
             }
             else if(!String.IsNullOrEmpty(friendSearched.LastName) && String.IsNullOrEmpty(friendSearched.FirstName))
             {
-                return _userManager.Users.Where(x => x.LastName.ToLower() == friendSearched.LastName.ToLower()).ToList();
+                return result.Where(x => x.LastName.ToLower() == friendSearched.LastName.ToLower()).ToList();
             }
             else
             {

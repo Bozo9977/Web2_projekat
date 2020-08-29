@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient.Server;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using ProjekatApi.FormModel;
 using ProjekatApi.Model;
 
@@ -203,6 +204,142 @@ namespace ProjekatApi.Controllers
             }
             return fTemp;
         }
-        
+
+        [HttpPost]
+        [Route("GetSearchedFlights")]
+        public async Task<ActionResult<IEnumerable<Flight>>> GetSearchedFlights(object form)
+        {
+            try
+            {
+                var jsonString = form.ToString();
+                SearchFlightsForm f = JsonConvert.DeserializeObject<SearchFlightsForm>(jsonString);
+
+                Aircompany company = context.Aircompanies.Include(x => x.Flights).SingleOrDefault(x => x.Id == f.Aircompany);
+
+                List<Flight> result = new List<Flight>();
+                result = company.Flights;
+
+
+                if (!String.IsNullOrEmpty(f.Arrival))
+                    result.RemoveAll(x => x.Arrival.ToLower() != f.Arrival.ToLower());
+                if (!String.IsNullOrEmpty(f.Departure))
+                    result.RemoveAll(x => x.Departure.ToLower() != f.Departure.ToLower());
+                if (!String.IsNullOrEmpty(f.StartDay))
+                {
+                    DateTime d = Convert.ToDateTime(f.StartDay);
+                    result.RemoveAll(x => x.TakeOff.Day != d.Day);
+                }
+                if (!String.IsNullOrEmpty(f.EndDay))
+                {
+                    DateTime d = Convert.ToDateTime(f.EndDay);
+                    result.RemoveAll(x => x.TouchDown.Day != d.Day);
+                }
+                if (!String.IsNullOrEmpty(f.Type))
+                {
+                    if (!f.Type.Contains("One"))
+                        result.RemoveAll(x => x.Tip != FlightTypes.ONEWAY);
+                    else
+                        result.RemoveAll(x => x.Tip != FlightTypes.ROUNDTRIP);
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return new List<Flight>();
+        }
+
+
+        [HttpGet]
+        [Route("GetFirstClassSeatsForFlight/{id}")]
+        public async Task<ActionResult<IEnumerable<FlightSeatForm>>> GetFirstClassSeatsForFlight(int id)
+        {
+            try
+            {
+                List<FlightSeat> list =  context.FlightSeats.Include(x=>x.Flight).Where(x => x.Flight.Id == id && x.Class==Class.FIRST).ToList();
+                List<FlightSeatForm> retVal = new List<FlightSeatForm>();
+                
+                foreach(var item in list)
+                {
+                    retVal.Add(new FlightSeatForm()
+                    {
+                        Id = item.Id,
+                        Price = item.Price,
+                        Class = item.Class,
+                        Flight = item.Flight.Id,
+                        Reserved = item.Reserved
+                    });
+
+                }
+
+                return retVal;
+            }catch(Exception e)
+            {
+                return NoContent();
+            }
+        }
+
+        [HttpGet]
+        [Route("GetBusinessClassSeatsForFlight/{id}")]
+        public async Task<ActionResult<IEnumerable<FlightSeatForm>>> GetBusinessClassSeatsForFlight(int id)
+        {
+            try
+            {
+                List<FlightSeat> list = context.FlightSeats.Include(x => x.Flight).Where(x => x.Flight.Id == id && x.Class == Class.BUSINESS).ToList();
+                List<FlightSeatForm> retVal = new List<FlightSeatForm>();
+
+                foreach (var item in list)
+                {
+                    retVal.Add(new FlightSeatForm()
+                    {
+                        Id = item.Id,
+                        Price = item.Price,
+                        Class = item.Class,
+                        Flight = item.Flight.Id,
+                        Reserved = item.Reserved
+                    });
+
+                }
+
+                return retVal;
+            }
+            catch (Exception e)
+            {
+                return NoContent();
+            }
+        }
+
+        [HttpGet]
+        [Route("GetEconomyClassSeatsForFlight/{id}")]
+        public async Task<ActionResult<IEnumerable<FlightSeatForm>>> GetEconomyClassSeatsForFlight(int id)
+        {
+            try
+            {
+                List<FlightSeat> list = context.FlightSeats.Include(x => x.Flight).Where(x => x.Flight.Id == id && x.Class == Class.ECONOMY).ToList();
+                List<FlightSeatForm> retVal = new List<FlightSeatForm>();
+
+                foreach (var item in list)
+                {
+                    retVal.Add(new FlightSeatForm()
+                    {
+                        Id = item.Id,
+                        Price = item.Price,
+                        Class = item.Class,
+                        Flight = item.Flight.Id,
+                        Reserved = item.Reserved
+                    });
+
+                }
+
+                return retVal;
+            }
+            catch (Exception e)
+            {
+                return NoContent();
+            }
+        }
     }
 }

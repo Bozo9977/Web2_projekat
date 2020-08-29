@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user-service/user.service';
 import * as jwt_decode from 'jwt-decode';
 import { FriendRequest } from 'src/app/entities/friend-request/friend-request';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-user-view',
@@ -20,7 +21,7 @@ export class UserViewComponent implements OnInit {
   requested: boolean = false;
   nothing: boolean = true;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private location: Location) { }
 
   ngOnInit(): void {
     this.searchFriendsForm = new FormGroup({
@@ -51,6 +52,8 @@ export class UserViewComponent implements OnInit {
       this.userService.searchForFriends(this.searchFriendsForm.value).subscribe(
         (res: any) => {
           this.friends = res as User[];
+          if(this.friends.length===0)
+            alert("No user matches your search.")
         },
         err =>{
           console.log(err);
@@ -98,6 +101,9 @@ export class UserViewComponent implements OnInit {
       (res:any)=>{
         console.log(res);
         this.friends = res as User[];
+
+        if(this.friends.length===0)
+          alert("No new requests");
       },
       err=>
       {
@@ -125,4 +131,8 @@ export class UserViewComponent implements OnInit {
 
   }
 
+
+  goBack(){
+    this.location.back();
+  }
 }

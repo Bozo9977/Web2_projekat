@@ -1,48 +1,98 @@
 <div class= "signup-form">
 
-    <!-- <button type="button" style="background-color: white;" aria-label="Close" routerLink="/aircompanyService">
-      <img src="assets/images/back.png" height="25px" width="25px">            
-    </button> -->
+  <!-- <button type="button" style="background-color: white;" aria-label="Close" routerLink="/aircompanyService">
+    <img src="assets/images/back.png" height="25px" width="25px">            
+  </button> -->
+
+  <form class="form-inline " [formGroup]="searchAvailableFlightsForm" (ngSubmit)="searchAvailableFlights()">
+    <!-- <form class="form-inline " [formGroup]="searchAvailableCarsForm" (ngSubmit)="onSearchAvailableCars()"> -->
+    
+      <div class="form-group" style="padding-left: 1em;">
+          <label >Flight date: </label>
+          <pre style="padding-left: 10px;"></pre>
+          <input type="datetime-local" 
+                 id="startDay" 
+                 max="3000-12-31" 
+                 min="1000-01-01" 
+                 class="form-control"
+                 value="2020-06-13"
+                 formControlName="startDay">
+          <label style="padding-left: 10px;">Airport: </label>
+          <select id="City1"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="Departure" >
+              <option *ngFor="let dest of destinations">
+                    {{dest.city}}
+              </option>
+          </select>
+          <label style="padding-left: 10px;">Return date: </label>
+          <pre style="padding-left: 10px;"></pre>
+          <input type="datetime-local"
+                 id="endDay" 
+                 max="3000-12-31" 
+                 min="1000-01-01" 
+                 class="form-control"
+                 value="2020-06-14 14:00"
+                 formControlName="endDay">
+          <label style="padding-left: 10px;">Airport: </label>
+              <select id="City2"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="Arrival" >
+                  <option *ngFor="let dest of destinations">
+                      {{dest.city}}
+                  </option>
+              </select>
+      </div>
+      <div>
+        <tr>
+          <select class="form-control" type="text" placeholder="Mark" formControlName="Type" aria-label="Search">
+            <option>Round_trip</option>
+            <option>One Way</option>
   
-    <form class="form-inline ">
-        <div class="md-form my-0">
-          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-        </div>
-        <button  type="submit">
+          </select>
+          <!-- <input class="form-control"  type="number" placeholder="Number of passengers" formControlName="Number" aria-label="Search"> -->
+          <input class="form-control"  type="number" hidden formControlName="Aircompany" aria-label="Search">
+          <button  type="submit" class="btn btn-outline-primary">
             <img src="assets/images/search.png" height="35px" width="35px" data-holder-rendered="true">
-        </button>
-    </form>
-  
-        <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th scope="col">City of departure</th>
-                <th scope="col">City of arrival</th>
-                <th scope="col">Tak-off date and time</th>
-                <th scope="col">Touchdown date and time</th>
-                <th scope="col">Travel length</th>
-                <th scope="col">Connections</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let f of flights">
-                <th scope="row">{{f.id}}</th>
-                <td>{{f.departure}}</td>
-                <td>{{f.arrival}}</td>
-                <td>{{f.takeOff}}</td>
-                <td>{{f.touchDown}}</td>
-                <td>{{f.length}}Km</td>
-                <td>{{f.numberOfConnections}}</td>
-                <td *ngIf="admin">
-                  <button  class="btn btn-outline-primary" routerLink="/{{f.id}}/flightChange">
-                  <svg class="bi bi-pencil-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15.502 1.94a.5.5 0 010 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 01.707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 00-.121.196l-.805 2.414a.25.25 0 00.316.316l2.414-.805a.5.5 0 00.196-.12l6.813-6.814z"/>
-                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-6a.5.5 0 00-1 0v6a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5H9a.5.5 0 000-1H2.5A1.5 1.5 0 001 2.5v11z" clip-rule="evenodd"/>
-                  </svg>
-                </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>  
-    </div>
+          </button>
+        </tr>
+      </div>
+    <!-- </form> -->
+      <!-- <button  type="submit">
+          <img src="assets/images/search.png" height="35px" width="35px" data-holder-rendered="true">
+      </button> -->
+  </form>
+
+      <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th scope="col">City of departure</th>
+              <th scope="col">City of arrival</th>
+              <th scope="col">Tak-off date and time</th>
+              <th scope="col">Touchdown date and time</th>
+              <th scope="col">Travel length</th>
+              <th scope="col">Connections</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of flights">
+              <th scope="row">{{f.id}}</th>
+              <td>{{f.departure}}</td>
+              <td>{{f.arrival}}</td>
+              <td>{{f.takeOff}}</td>
+              <td>{{f.touchDown}}</td>
+              <td>{{f.length}}Km</td>
+              <td>{{f.numberOfConnections}}</td>
+              <td *ngIf="admin">
+                <button  class="btn btn-outline-primary" routerLink="/{{f.id}}/flightChange">
+                <svg class="bi bi-pencil-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15.502 1.94a.5.5 0 010 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 01.707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 00-.121.196l-.805 2.414a.25.25 0 00.316.316l2.414-.805a.5.5 0 00.196-.12l6.813-6.814z"/>
+                  <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 002.5 15h11a1.5 1.5 0 001.5-1.5v-6a.5.5 0 00-1 0v6a.5.5 0 01-.5.5h-11a.5.5 0 01-.5-.5v-11a.5.5 0 01.5-.5H9a.5.5 0 000-1H2.5A1.5 1.5 0 001 2.5v11z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+              </td>
+              <td *ngIf="!admin">
+                <button class="btn btn-outline-primary" routerLink="/{{f.id}}/bookFlight">Book</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>  
+  </div>
