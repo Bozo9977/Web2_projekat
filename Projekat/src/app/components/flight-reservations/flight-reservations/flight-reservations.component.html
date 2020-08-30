@@ -1,24 +1,144 @@
 
+<div class="container" style="display: flex; justify-content: center; align-items: center;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+                <label for="code" class="col-4 col-form-label"><h6 style="display: flex; justify-content: center; align-items: center;">Flight info</h6></label> 
+                <div class="row" >
+                    <div class="col-md-12">
+                        <div class="form-inline row">
+                            <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);" > 
+                
+                                <thead>
+                                    <tr>
+                                      <th scope="col">Departure</th>
+                                      <th scope="col">Arrival</th>
+                                      <th scope="col">Take-off</th>
+                                      <th scope="col">Touchdown</th>
+                                      <th scope="col">Travel length</th>
+                                      <th scope="col">Connections</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let f of flights">
+                                      <td>{{f.departure}}</td>
+                                      <td>{{f.arrival}}</td>
+                                      <td>{{f.takeOff}}</td>
+                                      <td>{{f.touchDown}}</td>
+                                      <td>{{f.length}}Km</td>
+                                      <td>{{f.connections.length}}</td>
+                                    </tr>
+                                  </tbody>          
+                                  </table>
+                        </div>
+                    </div>
+                </div>
+<div class="row">
+    <div class="col-md-12">
+          <div class="form-inline row">
+            <label for="code" class="col-4 col-form-label"><h6>Number of reserved seats</h6></label> 
+            <div class="col-8">
+              <input id="code" readonly name="code" placeholder="City" class="form-control here" value="{{seatsChecked.length}}" type="text">
+              <button type="submit" class="btn btn-outline-primary" *ngIf="seatsChecked.length > 1" (click)="showFriends()">Invite Friends</button>
+            </div>
+          </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+          <div class="form-inline row">
+            <label for="code" class="col-4 col-form-label"><h6>Price:</h6></label> 
+            <div class="col-8">
+                <input id="code" readonly name="code"  class="form-control here" value="{{price}} €" type="text">
+                    
+            </div>
+            </div>
+            </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-inline row">
+            <hr>
+            </div>
+            </div>
+</div>
+
+
+
+<div class="row" *ngIf="inviteClicked">
+    <div class="col-md-12">
+        <div class="form-inline row">
+            <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);" > 
+    
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>City</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                
+                <tbody >
+                    <tr *ngFor="let friend of friends">
+                        <th>{{friend.firstName}}</th>
+                        <th>{{friend.lastName}}</th>
+                        <th>{{friend.city}}</th>
+                        <th *ngIf="invitedFriends.indexOf(friend) === -1"><button class="btn btn-outline-primary" (click)="inviteFriend(friend)">Invite</button></th>
+                        <!-- <th ><button class="btn btn-outline-primary" (click)="acceptFriend(friend.id)">Accept</button></th> -->
+                        <!-- <th *ngIf="searched"><button class="btn btn-outline-primary" (click)="addFriend(friend.id)">Add</button></th> -->
+                    </tr>
+                </tbody>
+                
+                </table>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-inline row">
+            <label for="code" class="col-4 col-form-label"><h6>Rent car?</h6></label> 
+            <div class="col-8">
+                <form [formGroup]="reservationForm" (ngSubmit)="makeReservation()">
+                    <input type="text" class="form-control here" placeholder="Passport No." formControlName="passport">
+                    
+                    <input id="rCar" name="rCar" type="checkbox" class="form-control here"  style="display: flex; justify-content: center; align-items: center;" formControlName="rentCar">
+                   
+                    <button type="submit" class="btn btn-primary">Reserve</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
 <div class="container"><h1>First class seats:</h1></div>
 <div class="container">
     <div *ngFor="let i of firstClass">
         <div *ngIf="i==4" style="display: inline;"></div>
     <span width="30px" style="float: left;">
-        <div *ngIf="!i.Reserved ; then thenBlock1 else elseBlock1"></div>
+        <div *ngIf="!i.reserved ; then thenBlock1 else elseBlock1"></div>
         <ng-template #thenBlock1>
             
                 <img src="../assets/images/chair.png"
-                    class="rounded-circle"  id=z{{i}} width="30px" alt="reserved"  
-                    data-toggle="tooltip" data-placement="right" title="reserved"
-                    style="background-color: turquoise;" (click)="checkSeat(i.id)"  > &nbsp; {{i.Id}}
+                    class="rounded-circle"  id=z{{i}} width="30px" alt="book"  
+                    data-toggle="tooltip" data-placement="right" title="book"
+                    style="background-color: turquoise;" (click)="checkSeat(i)"  > &nbsp; {{i.Id}}
            
         </ng-template>
         <ng-template #elseBlock1>
             
                 <img src="../assets/images/chair.png"
-                    class="rounded-circle"  id={{i}} width="30px" alt="disabled"  
-                    data-toggle="tooltip" data-placement="right" title="disabled"
-                    style="background-color: gray;" >
+                    class="rounded-circle"  id={{i}} width="30px" alt="reserved"  
+                    data-toggle="tooltip" data-placement="right" title="reserved"
+                    style="background-color: red;" >
             
         </ng-template>
     </span>
@@ -33,21 +153,21 @@
     <div *ngFor="let i of businessClass">
         <div *ngIf="i==4" style="display: inline;"></div>
     <span width="30px" style="float: left;">
-        <div *ngIf="!i.Reserved ; then thenBlock1 else elseBlock1"></div>
+        <div *ngIf="!i.reserved ; then thenBlock1 else elseBlock1"></div>
         <ng-template #thenBlock1>
            
                 <img src="../assets/images/chair.png"
-                    class="rounded-circle"  id=z{{i}} width="30px" alt="reserved"  
-                    data-toggle="tooltip" data-placement="right" title="reserved"
-                    style="background-color: yellowgreen;" (click)="checkSeat(i.id)"  > &nbsp; {{i.Id}}
+                    class="rounded-circle"  id=z{{i}} width="30px" alt="book"  
+                    data-toggle="tooltip" data-placement="right" title="book"
+                    style="background-color: yellowgreen;" (click)="checkSeat(i)"  > &nbsp; {{i.Id}}
             
         </ng-template>
         <ng-template #elseBlock1>
             
                 <img src="../assets/images/chair.png"
-                    class="rounded-circle"  id={{i}} width="30px" alt="disabled"  
-                    data-toggle="tooltip" data-placement="right" title="disabled"
-                    style="background-color: gray;" >
+                    class="rounded-circle"  id={{i}} width="30px" alt="reserved"  
+                    data-toggle="tooltip" data-placement="right" title="reserved"
+                    style="background-color: red;" >
             
         </ng-template>
     </span>
@@ -63,21 +183,21 @@
     <div *ngFor="let i of economyClass">
         <div *ngIf="i==4" style="display: inline;"></div>
     <span width="30px" style="float: left;">
-        <div *ngIf="!i.Reserved ; then thenBlock1 else elseBlock1"></div>
+        <div *ngIf="!i.reserved ; then thenBlock1 else elseBlock1"></div>
         <ng-template #thenBlock1>
             
                 <img src="../assets/images/chair.png"
-                    class="rounded-circle"  id=z{{i}} width="30px" alt="reserved"  
-                    data-toggle="tooltip" data-placement="right" title="reserved"
-                    style="background-color: yellow;" (click)="checkSeat(i.id)"  > &nbsp; {{i.Id}}
+                    class="rounded-circle"  id=z{{i}} width="30px" alt="book"  
+                    data-toggle="tooltip" data-placement="right" title="book"
+                    style="background-color: yellow;" (click)="checkSeat(i)"  > &nbsp; {{i.Id}}
             
         </ng-template>
         <ng-template #elseBlock1>
             
                 <img src="../assets/images/chair.png"
-                    class="rounded-circle"  id={{i}} width="30px" alt="disabled"  
-                    data-toggle="tooltip" data-placement="right" title="disabled"
-                    style="background-color: gray;" >
+                    class="rounded-circle"  id={{i}} width="30px" alt="reserved"  
+                    data-toggle="tooltip" data-placement="right" title="reserved"
+                    style="background-color: red;" >
             
         </ng-template>
     </span>

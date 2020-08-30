@@ -8,7 +8,7 @@
                 <button type="button" class="btn btn-outline-primary ml-auto" (click)="flightClicked()">Book flight</button>
             </li>
             <li class="nav-item">
-                <button type="button" class="btn btn-outline-primary">Cancel flight</button>
+                <button type="button" class="btn btn-outline-primary" (click)="flightReservationsClicked()" >Cancel flight</button>
             </li>
             <li class="nav-item">
                 <button type="button" class="btn btn-outline-primary" (click)="aircompanyClicked()">Rate aircompany</button>
@@ -67,4 +67,39 @@
         <span aria-hidden="true" style="font-size: 25px;">&times;</span>
       </button>
       <app-rate-acar></app-rate-acar>
+</div>
+
+<div [hidden]="flightReservations" class="container" style="display: flex; justify-content: center; align-items: center;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" >
+                    <div class="col-md-12">
+                        <div class="form-inline row">
+                            <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);" > 
+                
+                                <thead>
+                                    <tr>
+                                        <th>Date of departure:</th>
+                                        <th>From:</th>
+                                        <th>To:</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let res of myReservations">
+                                        <th>{{res.departureDate}}</th>
+                                        <th>{{res.from}}</th>
+                                        <th>{{res.to}}</th>
+                                        <td *ngIf="res.canBeErased"><button class="btn btn-outline-danger" (click)="cancelFlight(res.idReservation)">Cancel</button></td>
+                                    </tr>
+
+                                </tbody>    
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

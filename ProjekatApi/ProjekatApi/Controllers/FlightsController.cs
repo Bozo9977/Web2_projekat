@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -367,5 +369,137 @@ namespace ProjekatApi.Controllers
                 return NoContent();
             }
         }
+
+
+        [HttpPost]
+        [Route("MakeReservation")]
+        public async Task<IActionResult> MakeReservation(object res)
+        {
+            try
+            {
+
+
+                var jsonStr = res.ToString();
+
+                FlightReservationForm form = new FlightReservationForm();
+
+                form = JsonConvert.DeserializeObject<FlightReservationForm>(jsonStr);
+
+                if (form.InvitedFriends.Count != (form.Seats.Count - 1))
+                    return NoContent();
+
+                FlightReservation fRes;
+                FlightSeat seat = new FlightSeat();
+
+                foreach (var item in form.Seats)
+                {
+                    seat = context.FlightSeats.Find(item.Id);
+                    seat.Reserved = true;
+
+                    context.FlightSeats.Update(seat);
+                    await context.SaveChangesAsync();
+                }
+
+                for (int i = 0; i < form.InvitedFriends.Count; i++)
+                {
+                    ///if(form.User != form.InvitedFriends)
+                    fRes = new FlightReservation()
+                    {
+                        SeatId = form.Seats[i].Id,
+                        FlightId = form.FlightId,
+                        UserId = form.InvitedFriends[i].Id,
+                        Accepted = false
+                    };
+                    context.FlightReservations.Add(fRes);
+                    await context.SaveChangesAsync();
+                }
+
+                context.FlightReservations.Add(new FlightReservation()
+                {
+                    FlightId = form.FlightId,
+                    SeatId = form.Seats.Last().Id,
+                    Accepted = true,
+                    UserId = form.User
+                });
+
+
+                await context.SaveChangesAsync();
+
+                foreach (var item in form.InvitedFriends)
+                {
+                    string to = "bokimaric97@gmail.com";
+                    string from = "bokimaric97@gmail.com";
+                    string subject = "Poziv za let";
+                    string body = $"Postovani ,\n" +
+                        $"Pozvani ste na let\n" +
+                        $"\n" +
+                        $"Kliknite na link http://localhost:4200/mainPage kako biste pristupili stranici " +
+                        $"za prihavatanje ili odbijanje ponude.";
+                    using (MailMessage mailMessage = new MailMessage(from, to, subject, body))
+                    {
+                        try
+                        {
+                            using (SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587))
+                            {
+                                smtpClient.EnableSsl = true;
+                                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                                smtpClient.UseDefaultCredentials = false;
+                                smtpClient.Credentials = new NetworkCredential(from, "Geografija9977");
+                                smtpClient.Send(mailMessage);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            return BadRequest();
+                        }
+                    }
+                }
+
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return NoContent();
+            }
+
+        }
+
+        [HttpGet]
+        [Route("GetMyReservations/{id}")]
+        public async Task<ActionResult<IEnumerable<MyFlightReservation>>> GetMyReservations(string id)
+        {
+            try
+            {
+                List<MyFlightReservation> retVal = new List<MyFlightReservation>();
+                List<FlightReservation> reservations = context.FlightReservations.Where(x => x.UserId == id).ToList();
+
+                Flight flight = new Flight();
+                TimeSpan timeSpan = new TimeSpan();
+
+                foreach (var item in reservations)
+                {
+                    flight = await context.Flights.Include(x => x.FlightDestinations).ThenInclude(x => x.Destination).SingleOrDefaultAsync(x => x.Id == item.FlightId);
+
+                    timeSpan = flight.TakeOff - DateTime.Now;
+
+                    retVal.Add(new MyFlightReservation()
+                    {
+                        DepartureDate = flight.TakeOff,
+                        From = flight.Departure,
+                        To = flight.Arrival,
+                        IdReservation = item.FlightId,
+                        CanBeErased = timeSpan.TotalHours >= 3
+                    });
+                }
+
+
+                return retVal;
+            }catch(Exception e)
+            {
+                return new List<MyFlightReservation>();
+            }
+        }
+
     }
 }

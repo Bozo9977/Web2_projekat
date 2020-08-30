@@ -9,8 +9,8 @@ export enum Class{
 export class FlightSeat {
 
     Id:number; 
-    Reserved: boolean;
-    Price: number; 
+    reserved: boolean;
+    price: number; 
     Class : Class;
     Flight: number; 
 }

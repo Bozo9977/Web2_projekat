@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FlightService } from 'src/app/services/flight-service/flight.service';
+import { MyFlightReservation } from 'src/app/entities/my-flight-reservation/my-flight-reservation';
+import * as jwt_decode from 'jwt-decode';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-logged-in-user',
@@ -10,10 +14,27 @@ export class LoggedInUserComponent implements OnInit {
   aircompany: boolean = true;
   rentCar: boolean = true;
   carcompany: boolean = true;
+  flightReservations: boolean = true;
 
-  constructor() { }
+  myReservations: MyFlightReservation[] = [];
+
+  constructor(private flightService: FlightService)
+  {
+     
+  }
 
   ngOnInit(): void {
+    var decode = jwt_decode(localStorage.getItem('token'));
+    var UserID = decode['UserID'];
+    this.flightService.getFlightReservationsForUser(UserID).subscribe(
+      (res:MyFlightReservation[])=>{
+        this.myReservations = res;
+      },
+      err=>
+      {
+        console.log((err as HttpErrorResponse).message);
+      }
+    )
   }
 
   flightClicked(){
@@ -24,6 +45,8 @@ export class LoggedInUserComponent implements OnInit {
       this.rentCar = !this.rentCar;
     if(!this.carcompany)
       this.carcompany = !this.carcompany;
+    if(!this.flightReservations)
+      this.flightReservations = !this.flightReservations;
   }
 
   aircompanyClicked(){
@@ -34,6 +57,8 @@ export class LoggedInUserComponent implements OnInit {
       this.rentCar = !this.rentCar;
     if(!this.carcompany)
       this.carcompany = !this.carcompany;
+    if(!this.flightReservations)
+      this.flightReservations = !this.flightReservations;
   }
 
   carClicked(){
@@ -44,6 +69,8 @@ export class LoggedInUserComponent implements OnInit {
       this.aircompany = !this.aircompany;
     if(!this.bookFlight)
       this.bookFlight = !this.bookFlight;
+    if(!this.flightReservations)
+      this.flightReservations = !this.flightReservations;
   }
 
   carcompanyClicked(){
@@ -54,5 +81,26 @@ export class LoggedInUserComponent implements OnInit {
       this.rentCar = !this.rentCar;
     if(!this.bookFlight)
       this.bookFlight=!this.bookFlight;
+    if(!this.flightReservations)
+      this.flightReservations = !this.flightReservations;
   }
+
+  flightReservationsClicked(){
+    this.flightReservations = !this.flightReservations;
+    if(!this.aircompany)
+      this.aircompany=!this.aircompany;
+    if(!this.rentCar)
+      this.rentCar = !this.rentCar;
+    if(!this.bookFlight)
+      this.bookFlight=!this.bookFlight;
+    if(!this.carcompany)
+      this.carcompany = !this.carcompany;
+
+
+  }
+
+  cancelFlight(id:number){
+
+  }
+
 }

@@ -12,6 +12,8 @@ import { Luggage } from 'src/app/entities/luggage/luggage';
   styleUrls: ['./aircompany-admin.component.css']
 })
 export class AircompanyAdminComponent implements OnInit {
+
+  
   destinationClicked: boolean = false;
   flightClicked: boolean = true;
   flightsClicked: boolean = true;

@@ -9,10 +9,15 @@ import { CompanyService } from 'src/app/services/company-service/company.service
 })
 export class AircompanyServiceComponent implements OnInit {
   airCompanies: Array<Aircompany>;
-  
+  loggedIn:boolean = false;
+
   constructor(private airService: CompanyService) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem('userDetails')!==null)
+      this.loggedIn = true;
+
+      console.log()
     this.airService.loadAircompanies().subscribe(
       (res: any) =>{
         console.log(res);

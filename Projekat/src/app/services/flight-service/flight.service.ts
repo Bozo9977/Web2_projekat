@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Flight, FlightReceive } from 'src/app/entities/flight/flight';
 import { FlightSeat } from 'src/app/entities/flight-seats/flight-seat';
 import { SearchCar } from 'src/app/entities/searchCar/search-car';
+import { FlightReservation } from 'src/app/entities/flight-reservation/flight-reservation';
+import { MyFlightReservation } from 'src/app/entities/my-flight-reservation/my-flight-reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +52,14 @@ export class FlightService {
   searchFlightsFunction(formData: SearchCar){
     console.log("SERVIS: ", formData);
     return this.http.post<FlightReceive[]>(this.BasURI + '/Flights/SearchAvailableFlights', formData);
+  }
+
+  makeReservation(res: FlightReservation){
+    return this.http.post(this.BasURI + '/Flights/MakeReservation', res);
+  }
+
+  getFlightReservationsForUser(id: string){
+    return this.http.get<MyFlightReservation[]>(this.BasURI + '/Flights/GetMyReservations/'+id);
   }
 
 }

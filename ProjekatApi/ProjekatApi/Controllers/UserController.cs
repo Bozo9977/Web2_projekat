@@ -404,7 +404,10 @@ namespace ProjekatApi.Controllers
 
             foreach (var item in reqs)
             {
-                retVal.Add(await _userManager.FindByIdAsync(item.SenderID));
+                if (item.SenderID == id)
+                    retVal.Add(await _userManager.FindByIdAsync(item.ReceiverID));
+                else
+                    retVal.Add(await _userManager.FindByIdAsync(item.SenderID));
             }
 
             return retVal;
