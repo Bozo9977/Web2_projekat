@@ -1,0 +1,47 @@
+<div class= "signup-form">
+    <button type="button" style="background-color: white;" aria-label="Close" routerLink="/aircompanyService">
+        <img src="assets/images/back.png" height="25px" width="25px">            
+      </button>
+    <form class="form-inline " [formGroup]="availableFlightForm" (ngSubmit)="onSearchAvailableFlight()">
+      
+        <div class="form-group" style="padding-left: 1em;">
+            <label style="padding-left: 10px;">Category: </label>
+            <select id="kategorija"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="kategorija" [ngClass]="{ 'is-invalid': submitted && f.kategorija.errors }">
+                <option value="City of departure">City of departure</option>
+                <option value="City of arrival">City of arrival</option>
+            </select>
+            
+          <div *ngIf="submitted && f.kategorija.errors" class="invalid-feedback">
+          </div>
+            <input class="form-control" type="text" placeholder="search" formControlName="search" aria-label="Search" [ngClass]="{ 'is-invalid': submitted && f.search.errors }">
+            <div *ngIf="submitted && f.search.errors" class="invalid-feedback">
+            </div>
+            <button  type="submit">
+                <img src="assets/images/search.png" height="30px" width="30px" data-holder-rendered="true">
+            </button>
+        </div>
+    </form>
+
+        <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);">
+            <thead>
+              <tr>
+                <th scope="col">City of departure</th>
+                <th scope="col">City of arrival</th>
+                <th scope="col">Tak-off date and time</th>
+                <th scope="col">Touchdown date and time</th>
+                <th scope="col">Travel length</th>
+                <th scope="col">Connections</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let f of flights">
+                <td>{{f.departure}}</td>
+                <td>{{f.arrival}}</td>
+                <td>{{f.takeOff}}</td>
+                <td>{{f.touchDown}}</td>
+                <td>{{f.length}}Km</td>
+                <td>{{f.numberOfConnections}}</td>
+              </tr>
+            </tbody>
+          </table>  
+    </div>

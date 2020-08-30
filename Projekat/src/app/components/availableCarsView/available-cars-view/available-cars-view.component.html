@@ -7,12 +7,17 @@
       
         <div class="form-group" style="padding-left: 1em;">
             <label style="padding-left: 10px;">Category: </label>
-            <select id="kategorija"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="kategorija" >
+            <select id="kategorija"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="kategorija" [ngClass]="{ 'is-invalid': submitted && f.kategorija.errors }">
                 <option value="Mark">Mark</option>
                 <option value="Seat">Seat</option>
                 <option value="Bags">Bags</option>
             </select>
-            <input class="form-control" type="text" placeholder="search" formControlName="search" aria-label="Search">
+            
+          <div *ngIf="submitted && f.kategorija.errors" class="invalid-feedback">
+          </div>
+            <input class="form-control" type="text" placeholder="search" formControlName="search" aria-label="Search" [ngClass]="{ 'is-invalid': submitted && f.search.errors }">
+            <div *ngIf="submitted && f.search.errors" class="invalid-feedback">
+            </div>
             <button  type="submit">
                 <img src="assets/images/search.png" height="30px" width="30px" data-holder-rendered="true">
             </button>
@@ -31,7 +36,6 @@
                 <th scope="col">Door</th>
                 <th scope="col">Air conditioning</th>
                 <th scope="col">Bags</th>
-                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -47,7 +51,6 @@
                 <td>{{comp.door}}</td>
                 <td>{{comp.airConditioning}}</td>
                 <td>{{comp.bags}}</td>
-                <td>{{comp.status}}</td>
               </tr>
             </tbody>
           </table>  

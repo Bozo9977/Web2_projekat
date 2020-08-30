@@ -170,6 +170,32 @@ namespace ProjekatApi.Controllers
             return context.Aircompanies.Include(x => x.Flights).SingleOrDefault(x => x.Id == id).Flights.ToList();
         }
 
+
+
+        [HttpPost]
+        [Route("SearchAvailableFlights")]
+        public async Task<ActionResult<IEnumerable<Flight>>> SearchAvailableFlights(SearchCarForm searchCar)
+        {
+            List<Flight> nullList = new List<Flight>();
+            var pom = context.Aircompanies.Include(x => x.Flights).SingleOrDefault(x => x.Id == Int32.Parse(searchCar.IdComp)).Flights.ToList();
+
+            if (searchCar.Kategorija == "City of departure")
+
+            {
+                return pom.FindAll(x => x.Departure.ToLower() == searchCar.Search.ToLower());
+            }
+            else if (searchCar.Kategorija == "City of arrival")
+            {
+                foreach (char c in searchCar.Search)
+                {
+                    return pom.FindAll(x => x.Arrival.ToLower() == searchCar.Search.ToLower());
+                }
+            }
+
+                return nullList;
+        }
+
+
         [HttpGet]
         [Route("GetFlight/{id}")]
         public async Task<ActionResult<FlightModel>> GetFlight(int id)

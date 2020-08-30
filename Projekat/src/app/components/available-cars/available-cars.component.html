@@ -15,13 +15,19 @@
                min="1000-01-01" 
                class="form-control"
                value="2020-06-13"
-               formControlName="startDay">
-        <label style="padding-left: 10px;">City: </label>
-        <select id="City1"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="City1" >
-            <option *ngFor="let select of selectedCities">
+               formControlName="startDay" [ngClass]="{ 'is-invalid': submitted && f.startDay.errors }">
+               <div *ngIf="submitted && f.startDay.errors" class="invalid-feedback">
+              </div>
+      
+               <label style="padding-left: 10px;">City: </label>
+        <select id="City1"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="City1" [ngClass]="{ 'is-invalid': submitted && f.City1.errors }">
+          <option></option> 
+          <option *ngFor="let select of selectedCities">
                   {{select.city}}
             </option>
-        </select>
+          </select>
+          <div *ngIf="submitted && f.City1.errors" class="invalid-feedback">
+          </div>
         <label style="padding-left: 10px;">Drop-off date: </label>
         <pre style="padding-left: 10px;"></pre>
         <input type="datetime-local"
@@ -30,22 +36,35 @@
                min="1000-01-01" 
                class="form-control"
                value="2020-06-14 14:00"
-               formControlName="endDay">
+               formControlName="endDay" [ngClass]="{ 'is-invalid': submitted && f.endDay.errors }">
+               <div *ngIf="submitted && f.endDay.errors" class="invalid-feedback">
+              </div>
         <label style="padding-left: 10px;">City: </label>
-            <select id="City2"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="City2" >
-                <option *ngFor="let select of selectedCities">
+            <select id="City2"   class="form-control" size="1" style="size: initial; padding-left: 10px;" aria-checked="true" formControlName="City2" [ngClass]="{ 'is-invalid': submitted && f.City2.errors }">
+              <option></option> 
+              <option *ngFor="let select of selectedCities">
                     {{select.city}}
                 </option>
             </select>
-
+            <div *ngIf="submitted && f.City2.errors" class="invalid-feedback">
+            </div>
     </div>
 
 
     <div>
       <tr>
-        <input class="form-control" type="text" placeholder="Mark" formControlName="Mark" aria-label="Search">
+        <select id="Mark"   class="form-control" size="1" style="size: initial; padding-left: 10px;" aria-checked="true" formControlName="Mark" [ngClass]="{ 'is-invalid': submitted && f.Mark.errors }">
+          <option></option>
+          <option *ngFor="let select of carsList">
+              {{select.mark}}
+          </option>
+      </select>
+        <div *ngIf="submitted && f.Mark.errors" class="invalid-feedback">
+        </div>
 
-        <input class="form-control"  type="text" placeholder="Number of passengers" formControlName="Number" aria-label="Search">
+        <input class="form-control"  type="number" required placeholder="Number of passengers" formControlName="Number" aria-label="Search" [ngClass]="{ 'is-invalid': submitted && f.Number.errors }">
+        <div *ngIf="submitted && f.Number.errors" class="invalid-feedback">
+        </div>
         <button  type="submit">
           <img src="assets/images/search.png" height="35px" width="35px" data-holder-rendered="true">
         </button>
@@ -84,7 +103,7 @@
               <td>{{comp.bags}}</td>
               <td>{{comp.price}}</td>
               <td>
-                <ngb-rating [(rate)]="comp.rating" readonly="readonly" max="5" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.rating}}/5)</span>
+                <ngb-rating [(rate)]="comp.averageRating" readonly="readonly" max="5" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.averageRating}}/5)</span>
             </td>
               <td>
                 <div>

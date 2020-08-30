@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Luggage } from 'src/app/entities/luggage/luggage';
 import { Income } from 'src/app/entities/income/income';
+import { BranchOffice } from 'src/app/entities/branch-office/branch-office';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class CompanyService {
   constructor(private http: HttpClient) { }
 
   readonly BasURI = "https://localhost:44314/api";
-  loadCarCompanies(){
-    return this.http.get(this.BasURI + "/CarCompany/GetCarcompanies");
+  loadCarCompanies(): Observable<CarCompany[]>{
+    return this.http.get<CarCompany[]>(this.BasURI + "/CarCompany/GetCarcompanies");
   }
 
   loadAircompanies(){
@@ -37,6 +38,10 @@ export class CompanyService {
   getIncomeReportForCompany(id: number): Observable<Income[]>{
     console.log("USAOOOOOOO INCOMEREPORT", id);
     return this.http.get<Income[]>(this.BasURI + "/CarCompany/GetIncomeReportForCompany/" + id);
+  }
+
+  getAllCities(): Observable<BranchOffice[]>{
+    return this.http.get<BranchOffice[]>(this.BasURI + "/BranchOffice/GetAllCities");
   }
 
   addCompany(formData){

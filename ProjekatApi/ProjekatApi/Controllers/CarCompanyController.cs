@@ -180,13 +180,13 @@ namespace ProjekatApi.Controllers
 
             List<Car> listCars = new List<Car>();
 
-            CarCompany cc = new CarCompany();
+            /*CarCompany cc = new CarCompany();
 
             var pom = context.BranchOffices.Include(x => x.Id_company).ToList().SingleOrDefault(x => x.Id == Int32.Parse(id));
 
-            cc = pom.Id_company;
+            cc = pom.Id_company;*/
 
-            var pomCar = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == cc.Id).Cars.ToList();
+            var pomCar = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == Int32.Parse(id)).Cars.ToList();
 
             
 
@@ -270,20 +270,56 @@ namespace ProjekatApi.Controllers
             if (searchCar.Kategorija == "Mark")
 
             {
-
                 var pom = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == Int32.Parse(searchCar.IdComp)).Cars.ToList();
                 carList = pom.FindAll(x => x.Mark.ToLower() == searchCar.Search.ToLower());
             }
             else if (searchCar.Kategorija == "Bags")
             {
-                var pom = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == Int32.Parse(searchCar.IdComp)).Cars.ToList();
-                carList = pom.FindAll(x => x.Bags.ToLower() == searchCar.Search.ToLower());
+                bool isNumeric = true;
+                int broj;
+                foreach (char c in searchCar.Search)
+                {
+                    if (!Char.IsNumber(c))
+                    {
+                        isNumeric = false;
+                        break;
+                    }
+                    else
+                    {
+                        broj = Int32.Parse(searchCar.Search);
+                    }
+                }
+
+                if(isNumeric == true)
+                {
+                    var pom = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == Int32.Parse(searchCar.IdComp)).Cars.ToList();
+                    carList = pom.FindAll(x => x.Bags == searchCar.Search);
+                }
+
+
             }
 
             else if (searchCar.Kategorija == "Seat")
             {
-                var pom = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == Int32.Parse(searchCar.IdComp)).Cars.ToList();
-                carList = pom.FindAll(x => x.Seat.ToLower() == searchCar.Search.ToLower());
+                bool isNumeric = true;
+                int broj;
+                foreach (char c in searchCar.Search)
+                {
+                    if (!Char.IsNumber(c))
+                    {
+                        isNumeric = false;
+                        break;
+                    }
+                    else
+                    {
+                        broj = Int32.Parse(searchCar.Search);
+                    }
+                }
+                if (isNumeric == true)
+                {
+                    var pom = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == Int32.Parse(searchCar.IdComp)).Cars.ToList();
+                    carList = pom.FindAll(x => x.Seat.ToLower() == searchCar.Search.ToLower());
+                }
             }
 
             return carList;

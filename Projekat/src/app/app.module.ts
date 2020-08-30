@@ -47,6 +47,7 @@ import { AverageCarComponent } from './components/averageCar/average-car/average
 import { BusinessReportComponent } from './components/businessReport/business-report/business-report.component';
 import { IncomeReportComponent } from './components/income-report/income-report.component';
 import { FlightReservationsComponent } from './components/flight-reservations/flight-reservations/flight-reservations.component';
+import { FlightsViewComponent } from './components/availableFlightsView/flights-view/flights-view.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { FlightReservationsComponent } from './components/flight-reservations/fl
     BusinessReportComponent,
     IncomeReportComponent,
     FlightReservationsComponent,
+    FlightsViewComponent,
   ],
   imports: [
     BrowserModule,

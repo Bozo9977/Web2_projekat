@@ -49,7 +49,7 @@ namespace ProjekatApi.Controllers
 
             if (pom1.Count != 0)
             {
-                var pom2 = pom1.FindAll(x => x.Seat == filterCar.Number);
+                var pom2 = pom1.FindAll(x => x.Seat == filterCar.Number.ToString());
                 if (pom2.Count != 0)
                 {
                     if (context.ReservationCar.ToList().Count == 0)
@@ -240,7 +240,7 @@ namespace ProjekatApi.Controllers
         public async Task<IActionResult> CreateReservation(FilterCar filterCar)
         {
 
-            if(filterCar.City1 != "" && filterCar.City2 != "" && filterCar.endDay != null && filterCar.startDay != null && filterCar.Mark != "" && filterCar.Number != "")
+            if(filterCar.City1 != "" && filterCar.City2 != "" && filterCar.endDay != null && filterCar.startDay != null && filterCar.Mark != "" && filterCar.Number.ToString() != "")
             {
                 ReservationCar rc = new ReservationCar();
 

@@ -7,8 +7,18 @@
 
     <form class="form-inline " [formGroup]="searchCompanyForm" (ngSubmit)="onSearchCompany()">
         <div class="md-form my-0">
-          <input class="form-control" type="text" placeholder="Service name" formControlName="serviceName" aria-label="Search">
-          <input class="form-control" type="text" placeholder="Location" formControlName= "location" aria-label="Search">
+            <select id="serviceName"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="serviceName" >
+                <option></option>
+                <option *ngFor="let select of listCompany">
+                      {{select.name}}
+                </option>
+            </select>
+            <select id="location"   class="form-control" size="1" style="size: initial; padding-left: 10px;" formControlName="location" >
+                <option></option>
+                <option *ngFor="let select of listCities">
+                      {{select.city}}
+                </option>
+            </select>         
         </div>
         <button  type="submit">
             <img src="assets/images/search.png" height="35px" width="35px" data-holder-rendered="true">
@@ -34,7 +44,7 @@
                 <ngb-rating [(rate)]="comp.rating" readonly="readonly" max="5" style="color: yellow; font-size: x-large;"></ngb-rating> <span>&nbsp;&nbsp;&nbsp;&nbsp;({{comp.rating}}/5)</span>
             </td>
             <td>
-                <button class="btn btn-outline-info" style="background-color: white" routerLink="/{{comp.id}}/availableCars">
+                <button class="btn btn-outline-info" style="background-color: white" routerLink="/{{comp.idCompany}}/availableCars">
                         <img src="assets/images/car.png" data-holder-rendered="true" height="25px" width="25px" >                  
                 </button>
             </td>

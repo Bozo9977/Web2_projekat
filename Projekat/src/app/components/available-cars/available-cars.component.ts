@@ -25,6 +25,7 @@ export class AvailableCarsComponent implements OnInit {
   reservationCar: ReservationCars;
   selectedCities: Array<BranchOffice>;
   user;
+  submitted = false;
 
   constructor(private route: ActivatedRoute, private cars: CarsServiceService, private routerPrim: Router, private branch: BranchOfficeService) {
     route.params.subscribe(params => { this.id = params['id']; });
@@ -37,14 +38,16 @@ export class AvailableCarsComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('userDetails'));
     console.log(this.user);
     this.searchAvailableCarsForm = new FormGroup({
-      'City1': new FormControl(''),
-      'City2': new FormControl(''),
-      'startDay' : new FormControl(''),
-      'endDay': new FormControl(''),
-      'Mark': new FormControl(''),
-      'Number': new FormControl(''),
+      'City1': new FormControl(null, [Validators.required]),
+      'City2': new FormControl(null, [Validators.required]),
+      'startDay' : new FormControl(null, [Validators.required]),
+      'endDay': new FormControl(null, [Validators.required]),
+      'Mark': new FormControl(null, [Validators.required]),
+      'Number': new FormControl(null, [Validators.required, Validators.max(8), Validators.min(2)]),
     });
   }
+
+  get f() { return this.searchAvailableCarsForm.controls; }
 
   private selectCity(){
     this.branch.getBranchOfficeForSelect(this.id).subscribe(
@@ -72,6 +75,13 @@ export class AvailableCarsComponent implements OnInit {
 
   onSearchAvailableCars()
   {
+
+    this.submitted = true;
+
+    if (this.searchAvailableCarsForm.invalid) {
+        return;
+    }
+
     console.log(this.searchAvailableCarsForm.value);
     this.reservationCar = this.searchAvailableCarsForm.value;
     //id branchOffic-a
@@ -86,6 +96,8 @@ export class AvailableCarsComponent implements OnInit {
         console.log(err);
       }
     );
+
+
   }
 
   newReservation(idCar: string){
@@ -105,6 +117,7 @@ export class AvailableCarsComponent implements OnInit {
       }
     );
 
+    this.submitted = false;
     this.searchAvailableCarsForm.reset();
     this.routerPrim.navigateByUrl('/rentACarServices');
   }

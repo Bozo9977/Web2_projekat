@@ -14,12 +14,16 @@ export class RentACarServicesComponent implements OnInit {
 
   branchPom: Array<BranchOffice>;
   searchCompanyForm: FormGroup;
-  constructor(private branch: BranchOfficeService) { }
+  listCompany: Array<CarCompany>;
+  listCities: Array<BranchOffice>;
+  constructor(private branch: BranchOfficeService, private companies: CompanyService) { }
 
 
 
   ngOnInit(): void {
     this.loadBranchOffice();
+    this.getCompanies();
+    this.getCities();
     this.searchCompanyForm = new FormGroup({
       'serviceName': new FormControl(''),
       'location': new FormControl(''),
@@ -38,6 +42,32 @@ export class RentACarServicesComponent implements OnInit {
     );
   }
   
+  private getCompanies()
+  {
+    this.companies.loadCarCompanies().subscribe(
+      (res: any) => { 
+        this.listCompany = res as CarCompany[]
+        console.log("LIST COMPANY:", this.listCompany);
+      },
+      err => {
+        console.log(err);
+      }
+    );   
+  }
+
+  private getCities()
+  {
+    this.companies.getAllCities().subscribe(
+      (res: any) => { 
+        this.listCities = res as BranchOffice[]
+        console.log("LIST COMPANY:", this.listCities);
+      },
+      err => {
+        console.log(err);
+      }
+    );   
+  }
+
   onSearchCompany()
   {
     console.log(this.searchCompanyForm.value);

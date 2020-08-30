@@ -18,6 +18,7 @@ export class AvailableCarsViewComponent implements OnInit {
   availableCarsForm: FormGroup;
   car: SearchCar;
   carPom: SearchCar;
+  submitted = false;
 
   constructor(private route: ActivatedRoute, private cars: CarsServiceService, private routerPrim: Router) { 
     route.params.subscribe(params => { this.id = params['id']; });
@@ -27,10 +28,12 @@ export class AvailableCarsViewComponent implements OnInit {
     this.loadCars();
 
     this.availableCarsForm = new FormGroup({
-      'kategorija': new FormControl(''),
-      'search': new FormControl(''),
+      'kategorija': new FormControl(null, [Validators.required]),
+      'search': new FormControl(null, [Validators.required]),
     });
   }
+
+  get f() { return this.availableCarsForm.controls; }
 
   private loadCars(){
     this.cars.getCars(this.id).subscribe(
@@ -45,6 +48,12 @@ export class AvailableCarsViewComponent implements OnInit {
   } 
 
   onSearchAvailableCars(){
+
+    this.submitted = true;
+
+    if (this.availableCarsForm.invalid) {
+        return;
+    }
     console.log(this.availableCarsForm.value);
     this.carPom = new SearchCar();
     this.car = this.availableCarsForm.value;
@@ -62,6 +71,9 @@ export class AvailableCarsViewComponent implements OnInit {
         console.log(err);
       }
     );
+
+    this.submitted = false;
+    this.availableCarsForm.reset();
   }
 
 }

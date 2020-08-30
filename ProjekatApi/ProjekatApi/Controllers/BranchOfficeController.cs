@@ -101,25 +101,116 @@ namespace ProjekatApi.Controllers
 
         [HttpGet]
         [Route("GetAllBranchOffices")]
-        public async Task<ActionResult<IEnumerable<BranchOfficeForm>>> GetAllBranchOffices()
+        public async Task<ActionResult<IEnumerable<BranchOfficeGet>>> GetAllBranchOffices()
         {
-            List<BranchOfficeForm> bf = new List<BranchOfficeForm>();
+            List<BranchOfficeGet> bf = new List<BranchOfficeGet>();
 
             var pom = context.BranchOffices.Include(x => x.Id_company).ToList();
 
-            foreach(var v in pom)
+            if(pom.Count() != 0)
             {
-                BranchOfficeForm b = new BranchOfficeForm()
+                foreach (var v in pom)
                 {
-                    Id = v.Id.ToString(),
-                    Name = v.Name,
-                    Address = v.Address,
-                    City = v.City,
-                    Rating = v.Id_company.AverageRating.ToString(),
-                    Telephone = Int32.Parse(v.Telephone),
-                    IdCompany = v.Id_company.Id
-                };
-                bf.Add(b);
+                    BranchOfficeGet b = new BranchOfficeGet();
+                    b.Id = v.Id.ToString();
+                    b.Name = v.Name;
+                    b.Address = v.Address;
+                    b.City = v.City;
+                    b.Rating = v.Id_company.AverageRating.ToString();
+                    b.Telephone = Int32.Parse(v.Telephone);
+                    b.IdCompany = v.Id_company.Id;
+                    bf.Add(b);
+                }
+            }
+
+
+
+            var pomCarC = context.Carcompanies.ToList();
+
+            if(pomCarC.Count() != 0 )
+            {
+                foreach (var pomv in pomCarC)
+                {
+                    if(pom.Count() != 0)
+                    {
+                        var find = pom.Find(x => x.Id_company.Id == pomv.Id);
+                        if(find == null)
+                        {
+                            BranchOfficeGet b = new BranchOfficeGet();
+                            b.Name = pomv.Name;
+                            b.City = pomv.Address;
+                            b.Rating = pomv.AverageRating.ToString();
+                            b.IdCompany = pomv.Id;
+                            bf.Add(b);
+                        }
+                    }
+
+                }
+            }
+
+
+
+            return bf;
+        }
+
+        [HttpGet]
+        [Route("GetAllCities")]
+        public async Task<ActionResult<IEnumerable<BranchOfficeGet>>> GetAllCities()
+        {
+            List<BranchOfficeGet> bf = new List<BranchOfficeGet>();
+
+            var pom = context.BranchOffices.Include(x => x.Id_company).ToList();
+
+            var pomCom = context.Carcompanies.ToList();
+
+            foreach (var v in pom)
+            {
+                if(bf.Count() != 0)
+                {
+                    var postoji = bf.Find(x => x.City.ToLower() == v.City.ToLower());
+                    if (postoji == null)
+                    {
+                        BranchOfficeGet b = new BranchOfficeGet();
+                        b.Id = v.Id.ToString();
+                        b.Name = v.Name;
+                        b.City = v.City;
+                        bf.Add(b);
+                    }
+                }
+                else
+                {
+                    BranchOfficeGet b = new BranchOfficeGet();
+                    b.Id = v.Id.ToString();
+                    b.Name = v.Name;
+                    b.City = v.City;
+                    bf.Add(b);
+                }
+
+            }
+
+            foreach (var v in pomCom)
+            {
+                if (bf.Count() != 0)
+                {
+                    var postoji = bf.Find(x => x.City.ToLower() == v.Address.ToLower());
+                    if (postoji == null)
+                    {
+                        BranchOfficeGet b = new BranchOfficeGet();
+                        b.Id = v.Id.ToString();
+                        b.Name = v.Name;
+                        b.City = v.Address;
+                        bf.Add(b);
+                    }
+                }
+                else
+                {
+                    BranchOfficeGet b = new BranchOfficeGet();
+                    b.Id = v.Id.ToString();
+                    b.Name = v.Name;
+                    b.City = v.Address;
+                    bf.Add(b);
+                }
+
             }
 
             return bf;
@@ -137,12 +228,12 @@ namespace ProjekatApi.Controllers
         [Route("GetBranchOfficeForSelect/{IdBO}")]
         public async Task<ActionResult<IEnumerable<BranchOffices>>> GetBranchOfficeForSelect(string IdBO)
         {
-            var pom = context.BranchOffices.Include(x => x.Id_company).ToList().SingleOrDefault(x => x.Id == Int32.Parse(IdBO));
+            
 
-            CarCompany cc = new CarCompany();
-            cc = pom.Id_company;
+            var pom = context.Carcompanies.Include(x => x.BranchOffices).ToList().SingleOrDefault(x => x.Id == Int32.Parse(IdBO)).BranchOffices.ToList();
 
-            return context.Carcompanies.Include(x => x.BranchOffices).ToList().SingleOrDefault(x => x.Id == cc.Id).BranchOffices.ToList();
+
+            return pom;
 
         }
 

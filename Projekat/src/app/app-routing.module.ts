@@ -36,6 +36,7 @@ import { AverageCarComponent } from './components/averageCar/average-car/average
 import { BusinessReportComponent } from './components/businessReport/business-report/business-report.component';
 import { IncomeReportComponent } from './components/income-report/income-report.component';
 import { FlightReservationsComponent } from './components/flight-reservations/flight-reservations/flight-reservations.component';
+import { FlightsViewComponent } from './components/availableFlightsView/flights-view/flights-view.component';
 
 const routes: Routes = [
   {
@@ -216,6 +217,17 @@ const routes: Routes = [
     path: "incomeReport",
     component: IncomeReportComponent
   },
+
+  {
+    path: "destinationView",
+    component: DestinationViewComponent
+  },
+
+  {
+    path: ":id/availableFlightsView",
+    component: FlightsViewComponent
+  },
+
 ];
 
 @NgModule({
