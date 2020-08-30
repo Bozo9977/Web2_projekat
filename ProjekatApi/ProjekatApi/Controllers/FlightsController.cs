@@ -472,7 +472,8 @@ namespace ProjekatApi.Controllers
             try
             {
                 List<MyFlightReservation> retVal = new List<MyFlightReservation>();
-                List<FlightReservation> reservations = context.FlightReservations.Where(x => x.UserId == id).ToList();
+                List<FlightReservation> reservations = context.FlightReservations.Where(x => x.UserId == id && x.Accepted==true).ToList();
+
 
                 Flight flight = new Flight();
                 TimeSpan timeSpan = new TimeSpan();
@@ -488,7 +489,7 @@ namespace ProjekatApi.Controllers
                         DepartureDate = flight.TakeOff,
                         From = flight.Departure,
                         To = flight.Arrival,
-                        IdReservation = item.FlightId,
+                        IdReservation = item.Id,
                         CanBeErased = timeSpan.TotalHours >= 3
                     });
                 }
@@ -501,5 +502,40 @@ namespace ProjekatApi.Controllers
             }
         }
 
+
+        [HttpDelete]
+        [Route("CancelFlight/{id}")]
+        public async Task<IActionResult> CancelFlight(int id)
+        {
+            try
+            {
+                FlightReservation res = await context.FlightReservations.FindAsync(id);
+                Flight flight = await context.Flights.FindAsync(res.FlightId);
+                FlightSeat seat = await context.FlightSeats.FindAsync(res.SeatId);
+
+                TimeSpan timeSpan = flight.TakeOff - DateTime.Now;
+
+                if(timeSpan.TotalHours >= 3)
+                {
+                    seat.Reserved = false;
+
+                    context.FlightSeats.Update(seat);
+                    await context.SaveChangesAsync();
+
+                    context.FlightReservations.Remove(res);
+                    await context.SaveChangesAsync();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+                
+
+                return Ok();
+            }catch(Exception e)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

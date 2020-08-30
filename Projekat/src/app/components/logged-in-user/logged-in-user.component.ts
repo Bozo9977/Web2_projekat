@@ -29,6 +29,7 @@ export class LoggedInUserComponent implements OnInit {
     this.flightService.getFlightReservationsForUser(UserID).subscribe(
       (res:MyFlightReservation[])=>{
         this.myReservations = res;
+        console.log(this.myReservations);
       },
       err=>
       {
@@ -100,7 +101,16 @@ export class LoggedInUserComponent implements OnInit {
   }
 
   cancelFlight(id:number){
-
+    
+    this.flightService.cancelFlightReservation(id).subscribe(
+      (res:any)=>{
+        this.flightReservations = !this.flightReservations;
+        window.location.reload();
+      },
+      err=>{
+        alert("Some kind of error occurd on our servers, please try again later");
+      }
+    )
   }
 
 }

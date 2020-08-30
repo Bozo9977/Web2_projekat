@@ -5,6 +5,7 @@ import { FlightSeat } from 'src/app/entities/flight-seats/flight-seat';
 import { SearchCar } from 'src/app/entities/searchCar/search-car';
 import { FlightReservation } from 'src/app/entities/flight-reservation/flight-reservation';
 import { MyFlightReservation } from 'src/app/entities/my-flight-reservation/my-flight-reservation';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -62,4 +63,7 @@ export class FlightService {
     return this.http.get<MyFlightReservation[]>(this.BasURI + '/Flights/GetMyReservations/'+id);
   }
 
+  cancelFlightReservation(id:number): Observable<{}>{
+    return this.http.delete(this.BasURI + '/Flights/CancelFlight/' + id);
+  }
 }
