@@ -484,5 +484,14 @@ namespace ProjekatApi.Controllers
             return listIncomeReport;
         }
 
+        [HttpPost]
+        [Route("AddDiscountCar")]
+        public async Task<IActionResult> AddDiscountCar(DiscountFromModel car)
+        {
+
+
+            return Ok();
+        }
+
     }
 }

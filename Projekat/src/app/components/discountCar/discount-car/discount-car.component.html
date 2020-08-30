@@ -1,0 +1,37 @@
+<div class="signup-form">
+    <form [formGroup]="discountCarForm" (ngSubmit)="onCreateDiscount()">
+    <h2>Create sale</h2>
+            <div class="form-group">
+                <label >Start date: </label>
+                <input type="datetime-local" 
+                    id="startDay" 
+                    max="3000-12-31" 
+                    min="1000-01-01" 
+                    class="form-control"
+                    value="2020-06-13"
+                    formControlName="startDay" [ngClass]="{ 'is-invalid': submitted && f.startDay.errors }">
+                    <div *ngIf="submitted && f.startDay.errors" class="invalid-feedback">
+                    </div>
+            </div>
+            <div class="form-group">
+                <label>End date: </label>
+                <input type="datetime-local"
+                        id="endDay" 
+                        max="3000-12-31" 
+                        min="1000-01-01" 
+                        class="form-control"
+                        value="2020-06-14 14:00"
+                        formControlName="endDay" [ngClass]="{ 'is-invalid': submitted && f.endDay.errors }">
+                        <div *ngIf="submitted && f.endDay.errors" class="invalid-feedback">
+                        </div>
+            </div>
+        <div class="form-group">
+            <input type="number" class="form-control" name="procenat" placeholder="Procent" formControlName = "procenat" [ngClass]="{ 'is-invalid': submitted && f.procenat.errors }">
+            <div *ngIf="submitted && f.procenat.errors" class="invalid-feedback">
+            </div>
+        </div>        
+        <div class="form-group">
+          <button type="submit" class="btn  btn-lg btn-block" style="background-color: rgb(94, 94, 177); ">Add</button>
+        </div>
+    </form>
+  </div>

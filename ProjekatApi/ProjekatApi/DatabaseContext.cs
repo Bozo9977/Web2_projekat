@@ -54,5 +54,7 @@ namespace ProjekatApi
 
         public DbSet<Rating> Rating { get; set; }
         public DbSet<FlightLuggage> Luggages { get; set; }
+
+        public DbSet<DiscountCar> DiscountCars { get; set; }
     }
 }

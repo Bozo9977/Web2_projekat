@@ -37,6 +37,7 @@ import { BusinessReportComponent } from './components/businessReport/business-re
 import { IncomeReportComponent } from './components/income-report/income-report.component';
 import { FlightReservationsComponent } from './components/flight-reservations/flight-reservations/flight-reservations.component';
 import { FlightsViewComponent } from './components/availableFlightsView/flights-view/flights-view.component';
+import { DiscountCarComponent } from './components/discountCar/discount-car/discount-car.component';
 
 const routes: Routes = [
   {
@@ -227,7 +228,10 @@ const routes: Routes = [
     path: ":id/availableFlightsView",
     component: FlightsViewComponent
   },
-
+  {
+    path: ":id/discountCar",
+    component: DiscountCarComponent
+  },
 ];
 
 @NgModule({

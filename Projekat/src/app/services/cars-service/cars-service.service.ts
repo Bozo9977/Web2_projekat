@@ -6,6 +6,7 @@ import { AvailableCar } from 'src/app/entities/available-car';
 import { ReservationCars } from 'src/app/entities/reservationCar/reservation-cars';
 import { Rate } from 'src/app/entities/rate/rate';
 import { SearchCar } from 'src/app/entities/searchCar/search-car';
+import { DiscountCar } from 'src/app/entities/discountCar/discount-car';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,11 @@ export class CarsServiceService {
       return this.http.post(this.BasURI + '/CarCompany/AddCar', car);
   }
 
+  addDiscountCar(discount: DiscountCar)
+  {
+    console.log("CARS SERVIC:", discount);
+    return this.http.post(this.BasURI + '/CarCompany/AddDiscountCar', discount); 
+  }
   deleteCar(id: string): Observable<{}>{
     return this.http.delete(this.BasURI + '/CarCompany/DeleteCar/' + id);
 
