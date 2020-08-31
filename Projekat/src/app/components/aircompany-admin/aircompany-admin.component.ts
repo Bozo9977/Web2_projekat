@@ -5,6 +5,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { CompanyService } from 'src/app/services/company-service/company.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Luggage } from 'src/app/entities/luggage/luggage';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-aircompany-admin',
@@ -25,7 +26,7 @@ export class AircompanyAdminComponent implements OnInit {
   lugg: Luggage;
 
   company: Aircompany;
-  constructor(private companyService: CompanyService) { }
+  constructor(private companyService: CompanyService, private router: Router) { }
 
   ngOnInit(): void {
     this.luggageButton = "Add luggage"
@@ -137,5 +138,11 @@ export class AircompanyAdminComponent implements OnInit {
     //alert(id);
     this.baggageForm.patchValue(this.luggages[0]);
     this.luggageButton="Change";
+  }
+
+  logOut(){
+    console.log("USAO");
+    localStorage.clear();
+    this.router.navigateByUrl("/home");
   }
 }

@@ -5,6 +5,7 @@ import * as jwt_decode from 'jwt-decode';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Rate } from 'src/app/entities/rate/rate';
 import { CarsServiceService } from 'src/app/services/cars-service/cars-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-logged-in-user',
@@ -22,7 +23,7 @@ export class LoggedInUserComponent implements OnInit {
   myReservations: MyFlightReservation[] = [];
   myCarReservations: Array<Rate> = []
 
-  constructor(private flightService: FlightService,private reservations: CarsServiceService)
+  constructor(private flightService: FlightService,private reservations: CarsServiceService, private router: Router)
   {
      
   }
@@ -173,5 +174,11 @@ export class LoggedInUserComponent implements OnInit {
         console.log((err as HttpErrorResponse).message);
       }
     )
+  }
+
+  logOut(){
+    console.log("USAO");
+    localStorage.clear();
+    this.router.navigateByUrl("/home");
   }
 }

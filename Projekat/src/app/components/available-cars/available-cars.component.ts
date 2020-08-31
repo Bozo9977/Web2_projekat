@@ -33,7 +33,7 @@ export class AvailableCarsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadCars();
+    //this.loadCars();
     this.selectCity();
     this.user = JSON.parse(localStorage.getItem('userDetails'));
     console.log(this.user);

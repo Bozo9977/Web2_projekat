@@ -35,7 +35,7 @@
                 <button type="button" class="btn btn-outline-primary mr-auto" (click)="carcompanyClicked()">Rate car company</button>
             </li>
             <li class="nav-item">
-                <button type="button" class="btn btn-dark" routerLink="/">Logout</button>
+                <button type="button" class="btn btn-dark" (click)="logOut()">Logout</button>
             </li>
         </ul>
     </div>
@@ -52,7 +52,7 @@
     <button type="button" class="close mr-sm-5" data-dismiss="alert" aria-label="Close" (click)="aircompanyClicked()">
         <span aria-hidden="true" style="font-size: 25px;">&times;</span>
       </button>
-    <app-aircompany-service></app-aircompany-service>
+      <app-rate-flight></app-rate-flight>
 </div>
 
 <div [hidden]="rentCar">

@@ -23,5 +23,7 @@ namespace ProjekatApi.Model
         public float Price { get; set; }
         public string IdCar { get; set; }
 
+        public string IdDiscountCar { get; set; }
+
     }
 }

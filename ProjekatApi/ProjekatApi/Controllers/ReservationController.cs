@@ -249,7 +249,7 @@ namespace ProjekatApi.Controllers
         public async Task<IActionResult> CreateReservation(FilterCar filterCar)
         {
 
-            if(filterCar.City1 != "" && filterCar.City2 != "" && filterCar.endDay != null && filterCar.startDay != null && filterCar.Mark != "" && filterCar.Number.ToString() != "")
+            if (filterCar.City1 != "" && filterCar.City2 != "" && filterCar.endDay != null && filterCar.startDay != null && filterCar.Mark != "" && filterCar.Number.ToString() != "")
             {
                 ReservationCar rc = new ReservationCar();
 
@@ -260,7 +260,7 @@ namespace ProjekatApi.Controllers
                 // rc.Car = filterCar.Id;
 
                 //ApplicationUser user = await _userManager.Users.Include(x => x.ReservationCars).ThenInclude(x => x.Car).ThenInclude(x => x.Reservations).SingleOrDefaultAsync(x => x.Id == filterCar.Id);
-               // var pomUser = _userManager.Users.Include(x => x.ReservationCars).ThenInclude(x => x.Car).SingleOrDefault(x => x.Id == filterCar.IdUser);
+                // var pomUser = _userManager.Users.Include(x => x.ReservationCars).ThenInclude(x => x.Car).SingleOrDefault(x => x.Id == filterCar.IdUser);
                 var pomCar = context.Cars.Include(x => x.CarCompany).ToList().SingleOrDefault(x => x.Id == filterCar.Id);
 
                 var pomUser = await _userManager.FindByIdAsync(filterCar.IdUser);
@@ -272,7 +272,7 @@ namespace ProjekatApi.Controllers
 
                 TimeSpan t = filterCar.endDay - filterCar.startDay;
 
-                var elapsedDays = t.Days;
+                var elapsedDays = Math.Abs(t.Days);
 
                 var price = elapsedDays * Int32.Parse(pomCar.RentPerDay);
 
@@ -324,7 +324,7 @@ namespace ProjekatApi.Controllers
             {
                var day = DateTime.Compare(rez.Day2, DateTime.Now);
 
-                //if(day < 0)
+                if(day < 0)
                 {
                     var company = context.Cars.Include(x => x.CarCompany).ToList().SingleOrDefault(x => x.Id == rez.IdCar).CarCompany;
                     var car = context.Cars.Find(rez.IdCar);
@@ -344,43 +344,128 @@ namespace ProjekatApi.Controllers
         }
 
 
+        [HttpGet]
+        [Route("GetFlightReservations/{id}")]
+        public async Task<ActionResult<IEnumerable<Rate>>> GetFlightReservations(string id)
+        {
+            List<Rate> listRate = new List<Rate>();
+
+            var pom = context.FlightReservations.ToList();
+
+            var rezervacije = pom.FindAll(x => x.UserId == id);
+
+            
+
+            foreach (var rez in rezervacije)
+            {
+                
+                var flight = context.Flights.Find(rez.FlightId);
+                if(flight != null)
+                    {
+
+                
+                    var day = DateTime.Compare(flight.TouchDown, DateTime.Now);
+
+                    if (day < 0)
+                    {
+                        var company = context.Aircompanies.Include(x => x.Flights).SingleOrDefault(x => x.Flights.Any(x => x.Id == rez.FlightId));
+
+                    
+                    
+
+                        Rate rate = new Rate();
+                        rate.startDay = flight.TakeOff;
+                        rate.endDay = flight.TouchDown;
+                        rate.id = rez.Id.ToString();
+                        rate.serviceName = company.Name;
+
+                        listRate.Add(rate);
+                    }
+                }
+            }
+
+            return listRate;
+        }
+
+
         [HttpPost]
         [Route("CreateRate")]
         public async Task<IActionResult> CreateRate(CreateRate createRate)
         {
             var reservation = context.ReservationCar.Find(createRate.id);
 
-            var carId = reservation.IdCar;
+            if(reservation != null)
+            {
+                var carId = reservation.IdCar;
 
-            var cc = context.Cars.Include(x => x.CarCompany).ToList().SingleOrDefault(x => x.Id == carId).CarCompany;
+                var cc = context.Cars.Include(x => x.CarCompany).ToList().SingleOrDefault(x => x.Id == carId).CarCompany;
 
-            var car = context.Cars.Find(carId);
+                var car = context.Cars.Find(carId);
 
-            var companyId = cc.Id;
+                var companyId = cc.Id;
 
-            Rating ratingCompany = new Rating();
-
-
-            ratingCompany.IdService = companyId.ToString();
-            ratingCompany.Mark = Int32.Parse(createRate.serviceRating);
-            ratingCompany.Descriminator = ServiceType.Company;
+                Rating ratingCompany = new Rating();
 
 
-            context.Rating.Add(ratingCompany);
+                ratingCompany.IdService = companyId.ToString();
+                ratingCompany.Mark = Int32.Parse(createRate.serviceRating);
+                ratingCompany.Descriminator = ServiceType.Company;
 
-            await context.SaveChangesAsync();
 
-            ProsecnaOcena(companyId.ToString(), createRate.serviceRating, cc);
+                context.Rating.Add(ratingCompany);
 
-            Rating ratingCar = new Rating();
-            ratingCar.IdService = carId;
-            ratingCar.Mark = Int32.Parse(createRate.vehicleRating);
-            ratingCar.Descriminator = ServiceType.Car;
+                await context.SaveChangesAsync();
 
-            context.Rating.Add(ratingCar);
-            await context.SaveChangesAsync();
+                ProsecnaOcena(companyId.ToString(), createRate.serviceRating, cc);
 
-            ProsecnaOcena(carId, createRate.vehicleRating, car);
+                Rating ratingCar = new Rating();
+                ratingCar.IdService = carId;
+                ratingCar.Mark = Int32.Parse(createRate.vehicleRating);
+                ratingCar.Descriminator = ServiceType.Car;
+
+                context.Rating.Add(ratingCar);
+                await context.SaveChangesAsync();
+
+                ProsecnaOcena(carId, createRate.vehicleRating, car);
+            }
+
+            else
+            {
+                var reservationF = context.FlightReservations.Find(Int32.Parse(createRate.id));
+
+                if(reservationF != null)
+                {
+
+                    var let = reservationF.FlightId;
+                    var Let = context.Flights.Find(let);
+                    var company = context.Aircompanies.Include(x => x.Flights).SingleOrDefault(x => x.Flights.Any(x => x.Id == reservationF.FlightId));
+                    Rating ratingCompany = new Rating();
+
+
+                    ratingCompany.IdService = company.Id.ToString();
+                    ratingCompany.Mark = Int32.Parse(createRate.serviceRating);
+                    ratingCompany.Descriminator = ServiceType.Company;
+
+
+                    context.Rating.Add(ratingCompany);
+
+                    await context.SaveChangesAsync();
+
+                    ProsecnaOcena(company.Id.ToString(), createRate.serviceRating, company);
+
+                    Rating ratingFlight = new Rating();
+                    ratingFlight.IdService = let.ToString();
+                    ratingFlight.Mark = Int32.Parse(createRate.vehicleRating);
+                    ratingFlight.Descriminator = ServiceType.Flight;
+
+                    context.Rating.Add(ratingFlight);
+                    await context.SaveChangesAsync();
+
+
+                    ProsecnaOcena(let.ToString(), createRate.vehicleRating, Let);
+
+                }
+            }
 
             return Ok();
         }
@@ -448,7 +533,7 @@ namespace ProjekatApi.Controllers
                 // ukupuno += float.Parse(ocena);
                 prosek = ukupuno / (service.Count());
                 Flight c = (Flight)serviceToSend;
-              //  c.AverageRating = prosek;
+                c.AverageRating = prosek;
                 context.Entry(c).State = EntityState.Modified;
 
                 try

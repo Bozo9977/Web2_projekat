@@ -3,7 +3,7 @@
     <h2>Register</h2>
     <p class="hint-text">Confirm the code.</p>
         <div class="form-group">
-          <input type="number" required class="form-control" name="code" placeholder="First Name" formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+          <input type="number" required class="form-control" name="code" placeholder="Code" formControlName="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
             <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
           </div>
         </div>     

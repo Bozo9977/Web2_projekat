@@ -41,4 +41,11 @@ namespace ProjekatApi.FormModel
         public DateTime endDay { get; set; }
         public string Popust { get; set; }
     }
+
+    public class DiscountUser
+    {
+        public string IdCar { get; set; }
+
+        public string IdUser { get; set; }
+    }
 }

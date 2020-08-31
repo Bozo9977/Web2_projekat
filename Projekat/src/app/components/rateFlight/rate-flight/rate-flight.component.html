@@ -1,0 +1,25 @@
+<div class= "signup-form">
+
+        <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);">
+            <thead>
+              <tr>
+                <th scope="col">Start day</th>
+                <th scope="col">End day</th>
+                <th scope="col">Service name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let comp of reservationList">
+                <td>{{comp.startDay}}</td>
+                <td>{{comp.endDay}}</td>
+                <td>{{comp.serviceName}}</td>
+                <td>
+                  <div>
+                    <button type="button"  style="color: red;" routerLink="/{{comp.id}}/rating">Rate</button>
+                  </div>
+                    
+                </td>
+              </tr>
+            </tbody>
+          </table>  
+    </div>

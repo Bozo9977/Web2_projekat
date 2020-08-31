@@ -74,7 +74,6 @@ namespace ProjekatApi.Controllers
                 Door = car.Door.ToString(),
                 Fuel = car.Fuel,
                 Gearshift = car.Gearshift,
-                ImageCar = car.ImageCar,
                 RentPerDay = car.RentPerDay.ToString(),
                 Seat = car.Seat.ToString(),
                 YearProduction = car.YearProduction.ToString()
@@ -499,10 +498,10 @@ namespace ProjekatApi.Controllers
                 var losDatum1 = DateTime.Compare(discountCar.StartDay, DateTime.Now);
                 var losDatum2 = DateTime.Compare(discountCar.EndDay, DateTime.Now);
 
-                if (losDatum1 < 0 || losDatum2 < 0)
+                /*if (losDatum1 < 0 || losDatum2 < 0)
                 {
                     return BadRequest();
-                }
+                }*/
 
                 if (disList.Count() != 0)
                 {
@@ -524,7 +523,8 @@ namespace ProjekatApi.Controllers
                             discountPom.StartDay = discountCar.StartDay;
                             discountPom.Cena = float.Parse(car.RentPerDay);
 
-                            var novaCena = Int32.Parse(car.RentPerDay) * (discountCar.Procenat / 100);
+                            var pr = (float)discountCar.Procenat / 100;
+                            var novaCena = Int32.Parse(car.RentPerDay) * pr;
 
                             discountPom.NovaCena = Int32.Parse(car.RentPerDay) - (int)novaCena;
 
@@ -542,7 +542,8 @@ namespace ProjekatApi.Controllers
                             discountPom.StartDay = discountCar.StartDay;
                             discountPom.Cena = float.Parse(car.RentPerDay);
 
-                            var novaCena = Int32.Parse(car.RentPerDay) * (discountCar.Procenat / 100);
+                            var pr = (float)discountCar.Procenat / 100;
+                            var novaCena = Int32.Parse(car.RentPerDay) * pr;
 
                             discountPom.NovaCena = Int32.Parse(car.RentPerDay) - (int)novaCena;
 
@@ -564,9 +565,8 @@ namespace ProjekatApi.Controllers
                     discountPom.StartDay = discountCar.StartDay;
                     discountPom.Cena = float.Parse(car.RentPerDay);
 
-                    var procenatPrim = discountCar.Procenat / 100;
-
-                    var novaCena = float.Parse(car.RentPerDay) * procenatPrim;
+                    var pr = (float)discountCar.Procenat / 100;
+                    var novaCena = Int32.Parse(car.RentPerDay) * pr;
 
                     discountPom.NovaCena = Int32.Parse(car.RentPerDay) - (int)novaCena;
 
@@ -582,24 +582,26 @@ namespace ProjekatApi.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        [Route("GetDiscountCars")]
-        public async Task<ActionResult<IEnumerable<DiscaountCarsView>>> GetDiscountCars(GetDiscountFromModel discountCar)
+        [HttpGet]
+        [Route("GetDiscountCars/{id}")]
+        public async Task<ActionResult<IEnumerable<DiscaountCarsView>>> GetDiscountCars(string id)
         {
             List<DiscaountCarsView> dc = new List<DiscaountCarsView>();
             var rezNaPopustuLista = context.DiscountCars.ToList();
 
-            if(rezNaPopustuLista.Count()!=0)
+            var let = context.Flights.Find(Int32.Parse(id));
+
+            if (rezNaPopustuLista.Count() != 0)
             {
                 foreach (var v in rezNaPopustuLista)
                 {
-                    var poredjenje1 = DateTime.Compare(discountCar.startDay, v.StartDay);
-                    var poredjenje2 = DateTime.Compare(discountCar.endDay, v.StartDay);
+                    var poredjenje1 = DateTime.Compare(let.TakeOff, v.StartDay);
+                    var poredjenje2 = DateTime.Compare(let.TouchDown, v.StartDay);
 
                     if (poredjenje1 >= 0 && poredjenje2 >= 0)
                     {
-                        var poredjenje3 = DateTime.Compare(discountCar.startDay, v.EndDay);
-                        var poredjenje4 = DateTime.Compare(discountCar.endDay, v.EndDay);
+                        var poredjenje3 = DateTime.Compare(let.TakeOff, v.EndDay);
+                        var poredjenje4 = DateTime.Compare(let.TouchDown, v.EndDay);
 
                         if (poredjenje3 <= 0 && poredjenje4 <= 0)
                         {
@@ -617,14 +619,87 @@ namespace ProjekatApi.Controllers
                             dcv.YearProduction = car.YearProduction;
                             dcv.startDay = v.StartDay;
                             dcv.endDay = v.EndDay;
+                            dcv.Id = v.Id;
                             dc.Add(dcv);
 
                         }
                     }
+
+
                 }
             }
 
             return dc;
+        }
+
+        [HttpPost]
+        [Route("CreateFastRate")]
+        public async Task<IActionResult> CreateFastRate(DiscountUser discountUser)
+        {
+
+            ReservationCar rc = new ReservationCar();
+
+            var discountRez = context.DiscountCars.Find(discountUser.IdCar);
+
+            var daLiPostoji = context.ReservationCar.ToList();
+
+            var postoji = daLiPostoji.Find(x => x.IdDiscountCar == discountRez.Id);
+
+            if(postoji != null)
+            {
+                return BadRequest();
+            }
+
+            else
+            {
+                var car = context.Cars.Include(x => x.CarCompany).SingleOrDefault(x => x.Id == discountRez.carId);
+
+                rc.Day1 = discountRez.StartDay;
+                rc.Day2 = discountRez.EndDay;
+                rc.City1 = car.CarCompany.Address;
+                rc.City2 = car.CarCompany.Address;
+
+
+                var pomUser = await userManager.FindByIdAsync(discountUser.IdUser);
+
+
+                rc.IdCar = car.Id;
+                rc.IdUser = pomUser.Id;
+                rc.IdCompany = car.CarCompany.Id.ToString();
+
+                TimeSpan t = discountRez.StartDay - discountRez.EndDay;
+
+                var elapsedDays = Math.Abs(t.Days);
+
+                var price = elapsedDays * Int32.Parse(car.RentPerDay);
+
+                rc.Price = price;
+                rc.IdDiscountCar = discountRez.Id;
+
+                context.ReservationCar.Add(rc);
+
+                bool saveFailed;
+
+                do
+                {
+                    saveFailed = false;
+                    try
+                    {
+                        await context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException ex)
+                    {
+                        saveFailed = true;
+                        return null;
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw;
+                    }
+                } while (saveFailed);
+            }
+            return Ok();
         }
 
     }

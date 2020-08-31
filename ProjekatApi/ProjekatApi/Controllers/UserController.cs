@@ -28,7 +28,7 @@ namespace ProjekatApi.Controllers
         private UserManager<ApplicationUser> _userManager;
         private readonly ApplicationSettings _appSettings;
         private readonly DatabaseContext context;
-        private static Random random;
+        private static int random;
         public UserController(UserManager<ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings, DatabaseContext _context)
         {
             _userManager = userManager;
@@ -62,16 +62,13 @@ namespace ProjekatApi.Controllers
                     if (result.Succeeded)
                     {
                         _userManager.AddToRoleAsync(applicationUser, "RegisteredUser").Wait();
-                        int randNumber = SendActivationCode();
+                        random = SendActivationCode();
                         return Ok(result);
                     }
                     else
                     {
                         return BadRequest(new { message = "User already exist!." });
                     }
-
-                    
-
 
                 }
                 catch (Exception ex)
@@ -92,7 +89,7 @@ namespace ProjekatApi.Controllers
 
         public static int SendActivationCode()
         {
-            random = new Random();
+            Random random = new Random();
             int randNumber = random.Next(100001, 999999);
             string to = "bokimaric97@gmail.com";
             string from = "bokimaric97@gmail.com";
@@ -123,7 +120,26 @@ namespace ProjekatApi.Controllers
         //POST : /api/ApplicationUser/Register
         public async Task<Object> ConfirmEmail(UserModel model)
         {
-            //if(model.Code == random)
+            if (model.Code == random)
+            {
+                // User user = new User();
+                var user = await _userManager.FindByEmailAsync(model.Email);
+
+                if (user != null)
+                {
+                    user.EmailConfirmed = true;
+                    await _userManager.UpdateAsync(user);
+
+                    try
+                    {
+                        await context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        return NotFound();
+                    }
+                }
+            }
 
 
             return Ok();
@@ -141,8 +157,8 @@ namespace ProjekatApi.Controllers
                 LastName = model.LastName,
                 City = model.City,
                 PhoneNumber = model.PhoneNumber,
-                Email = model.Email
-
+                Email = model.Email,
+                EmailConfirmed = true
             };
 
             if (model.Password == model.ConfirmPassword)
@@ -192,8 +208,8 @@ namespace ProjekatApi.Controllers
                 LastName = model.LastName,
                 City = model.City,
                 PhoneNumber = model.PhoneNumber,
-                Email = model.Email
-
+                Email = model.Email,
+                EmailConfirmed = true
             };
 
             if (model.Password == model.ConfirmPassword)
@@ -229,8 +245,8 @@ namespace ProjekatApi.Controllers
                 LastName = model.LastName,
                 City = model.City,
                 PhoneNumber = model.PhoneNumber,
-                Email = model.Email
-
+                Email = model.Email,
+                EmailConfirmed = true
             };
 
             if (model.Password == model.ConfirmPassword)
@@ -322,6 +338,7 @@ namespace ProjekatApi.Controllers
 
                 if(roles.Count() > 0)
                 {
+                  
                     if(user.EmailConfirmed == true)
                     {
                         var tokenDescriptor = new SecurityTokenDescriptor

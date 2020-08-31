@@ -8,6 +8,7 @@ import { MyFlightReservation } from 'src/app/entities/my-flight-reservation/my-f
 import { Observable } from 'rxjs';
 import { MakeFlightQuickReservations } from 'src/app/entities/MakeFlightQuickReservations/make-flight-quick-reservations';
 import { FlightQuickReservation } from 'src/app/entities/Flight-quick-reservations/flight-quick-reservation';
+import { Rate } from 'src/app/entities/rate/rate';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,11 @@ export class FlightService {
 
   searchFlights(formData){
     return this.http.post(this.BasURI +'/Flights/GetSearchedFlights',formData);
+  }
+
+  getReservations(id: string)
+  {
+    return this.http.get<Rate[]>(this.BasURI + '/Reservation/GetFlightReservations/' + id);  
   }
 
   getFirstClassSeatsForFlight(id:number){

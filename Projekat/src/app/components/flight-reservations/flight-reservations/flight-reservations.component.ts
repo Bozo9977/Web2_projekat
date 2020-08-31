@@ -183,15 +183,17 @@ export class FlightReservationsComponent implements OnInit {
           console.log(response);
 
 
-          this.router.navigateByUrl("/mainPage");
+        //  this.router.navigateByUrl("/mainPage");
         },
         err=>{
           console.log((err as HttpErrorResponse).message);
         }
       )
 
+
       if(this.reservationForm.controls['rentCar'].value){
-        alert("Ovde rutiranje")
+
+        this.router.navigateByUrl( this.id + "/discountReservation");
       }
     }else{
       if(this.invitedFriends.length !== (this.seatsChecked.length - 1))

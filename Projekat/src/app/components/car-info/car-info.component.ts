@@ -32,8 +32,6 @@ export class CarInfoComponent implements OnInit {
       'door': new FormControl(null, [Validators.required, Validators.max(5), Validators.min(2)]),
       'airConditioning': new FormControl(null, [Validators.required]),
       'bags': new FormControl(null, [Validators.required, Validators.max(8), Validators.min(1)]),
-      'rentPerDay': new FormControl(null, [Validators.required, Validators.max(15000), Validators.min(1500)]),
-      'imageCar': new FormControl(null, [Validators.required]),
     });
   }
 

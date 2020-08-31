@@ -110,12 +110,6 @@
                                     <path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" clip-rule="evenodd"/>
                                   </svg>
                                 </label> 
-                                <div class="col-8">
-                                    <input type="file" name="imageCar" formControlName="imageCar" class="form-control-file" [ngClass]="{ 'is-invalid': submitted && f.imageCar.errors }">
-                                    <div *ngIf="submitted && f.imageCar.errors" class="invalid-feedback">
-                                      <div *ngIf="f.imageCar.errors.required">ImageCar is required</div>
-                                    </div>
-                                  </div>
                               </div>
                                 <div>
                                   <button type="submit" class="btn btn-secondary btn-lg btn-block">Add</button>

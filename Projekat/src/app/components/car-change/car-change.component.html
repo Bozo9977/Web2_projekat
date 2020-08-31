@@ -5,7 +5,6 @@
     <thead>
       <tr>
         <th></th>
-        <th></th>
         <th scope="col">Mark</th>
         <th scope="col">Year of production</th>
         <th scope="col">Fuel</th>
@@ -21,9 +20,6 @@
       
       <tr *ngFor="let comp of carsList">
         <td>{{comp.IdList}}</td>
-        <td>
-          <img src= {{comp.image}} height="55px" width="85px" data-holder-rendered="true">
-        </td>
         <td>{{comp.mark}}</td>
         <td>{{comp.yearProduction}}</td>
         <td>{{comp.fuel}}</td>

@@ -7,6 +7,8 @@ import { ReservationCars } from 'src/app/entities/reservationCar/reservation-car
 import { Rate } from 'src/app/entities/rate/rate';
 import { SearchCar } from 'src/app/entities/searchCar/search-car';
 import { DiscountCar } from 'src/app/entities/discountCar/discount-car';
+import { DiscountReservation } from 'src/app/entities/discountReservation/discount-reservation';
+import { DiscountUser } from 'src/app/entities/discountUser/discount-user';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,11 @@ export class CarsServiceService {
       return this.http.post(this.BasURI + '/CarCompany/AddCar', car);
   }
 
+  newFastReservationCar(reservationToSend: DiscountUser)
+  {
+    return this.http.post(this.BasURI + '/CarCompany/CreateFastRate', reservationToSend);  
+  }
+
   addDiscountCar(discount: DiscountCar)
   {
     console.log("CARS SERVIC:", discount);
@@ -40,6 +47,12 @@ export class CarsServiceService {
     console.log("SERVIS: COMPANYID: ", + id);
     return this.http.get<Cars[]>(this.BasURI + '/CarCompany/GetCars/' + id);
     
+  }
+
+  loadSaleReservation(id: string): Observable<DiscountReservation[]>
+  {
+    
+    return this.http.get<DiscountReservation[]>(this.BasURI + '/CarCompany/GetDiscountCars/' + id);
   }
 
   getAllCars(id:string){

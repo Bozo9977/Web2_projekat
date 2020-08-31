@@ -41,6 +41,7 @@ import { DiscountCarComponent } from './components/discountCar/discount-car/disc
 import { DiscountReservationComponent } from './components/discountReservation/discount-reservation/discount-reservation.component';
 import { RegistracijaPotvrdaComponent } from './components/registracijaPotvrda/registracija-potvrda/registracija-potvrda.component';
 import { FlightQuickReservationsComponent } from './components/flight-quick-reservations/flight-quick-reservations.component';
+import { RateFlightComponent } from './components/rateFlight/rate-flight/rate-flight.component';
 
 const routes: Routes = [
   {
@@ -190,6 +191,10 @@ const routes: Routes = [
     path: "rateACar",
     component: RateACarComponent
   },
+  {
+    path: "rateAFlight",
+    component: RateFlightComponent
+  },
 
   {
     path: ":id/rating",
@@ -240,7 +245,7 @@ const routes: Routes = [
     component: DiscountCarComponent
   },
   {
-    path: "discountReservation",
+    path: ":id/discountReservation",
     component: DiscountReservationComponent
   },
   {

@@ -1,1 +1,41 @@
-<p>discount-reservation works!</p>
+<div class= "signup-form">
+    <table class="table table-bordered table-light" >
+        <thead>
+          <tr>
+            <th scope="col">Mark</th>
+            <th scope="col">Year of production</th>
+            <th scope="col">Fuel</th>
+            <th scope="col">Gearshift</th>
+            <th scope="col">Seat</th>
+            <th scope="col">Door</th>
+            <th scope="col">Air conditioning</th>
+            <th scope="col">Bags</th>
+            <th scope="col">Price</th>
+            <th scope="col">Sale</th>
+            <th scope="col">Start day</th>
+            <th scope="col">End day</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let comp of carsList">
+            <td>{{comp.mark}}</td>
+            <td>{{comp.yearProduction}}</td>
+            <td>{{comp.fuel}}</td>
+            <td>{{comp.gearshift}}</td>
+            <td>{{comp.seat}}</td>
+            <td>{{comp.door}}</td>
+            <td>{{comp.airConditioning}}</td>
+            <td>{{comp.bags}}</td>
+            <td>{{comp.rentPerDay}}</td>
+            <td>{{comp.popust}}</td>
+            <td>{{comp.startDay}}</td>
+            <td>{{comp.endDay}}</td>
+            <td>
+              <div>
+                <button type="button"  style="color: red;" (click)="newReservation(comp.id)">Make a rezervation</button>
+              </div>                    
+            </td>
+          </tr>
+        </tbody>
+      </table>  
+</div>

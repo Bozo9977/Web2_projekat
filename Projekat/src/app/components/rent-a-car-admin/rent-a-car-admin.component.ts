@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rent-a-car-admin',
@@ -10,7 +11,7 @@ export class RentACarAdminComponent implements OnInit {
   cars: boolean = true;
   business: boolean = true;
   income: boolean = true;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -30,5 +31,11 @@ export class RentACarAdminComponent implements OnInit {
 
   incomeClicked(){
     this.income = !this.income;
+  }
+
+  logOut(){
+    console.log("USAO");
+    localStorage.clear();
+    this.router.navigateByUrl("/home");
   }
 }
