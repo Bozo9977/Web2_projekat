@@ -9,6 +9,9 @@ import { Observable } from 'rxjs';
 import { MakeFlightQuickReservations } from 'src/app/entities/MakeFlightQuickReservations/make-flight-quick-reservations';
 import { FlightQuickReservation } from 'src/app/entities/Flight-quick-reservations/flight-quick-reservation';
 import { Rate } from 'src/app/entities/rate/rate';
+import { BusinessReport } from 'src/app/entities/businessReport/business-report';
+import { IncomeReport } from 'src/app/entities/incomeReport/income-report';
+import { Income } from 'src/app/entities/income/income';
 
 @Injectable({
   providedIn: 'root'
@@ -83,7 +86,24 @@ export class FlightService {
     return this.http.get<FlightQuickReservation>(this.BasURI + '/Flights/GetQuickReservationsForFlight/'+id);
   }
 
+
   bookQuickFlightRes(id){
     return this.http.put(this.BasURI + '/Flights/BookQuickFlightReservation/'+ id,id);
+  }
+
+  acceptFlightInvite(id:string){
+    return this.http.put(this.BasURI + '/Flights/AcceptFlightInvitation/'+id, id);
+  }
+
+  getBusinessReport(id: number){
+    return this.http.get<BusinessReport[]>(this.BasURI + "/AirCompany/GetBusinessReportForAircompany/"+id);
+  }
+
+  getIncomeReport(id:number){
+    return this.http.get<Income[]>(this.BasURI + '/Aircompany/GetIncomeReportForCompany/'+id);
+  }
+
+  deleteFlight(id:number){
+    return this.http.delete(this.BasURI +'/Flights/DeleteFlight/'+id);
   }
 }

@@ -53,6 +53,7 @@ import { DiscountReservationComponent } from './components/discountReservation/d
 import { RegistracijaPotvrdaComponent } from './components/registracijaPotvrda/registracija-potvrda/registracija-potvrda.component';
 import { FlightQuickReservationsComponent } from './components/flight-quick-reservations/flight-quick-reservations.component';
 import { RateFlightComponent } from './components/rateFlight/rate-flight/rate-flight.component';
+import { AcceptFlightInvitationComponent } from './components/accept-flight-invitation/accept-flight-invitation.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { RateFlightComponent } from './components/rateFlight/rate-flight/rate-fl
     RegistracijaPotvrdaComponent,
     FlightQuickReservationsComponent,
     RateFlightComponent,
+    AcceptFlightInvitationComponent,
   ],
   imports: [
     BrowserModule,

@@ -138,5 +138,16 @@ export class AvailableFlightComponent implements OnInit {
     )
   }
 
+  deleteFlight(id:number){
+    this.flightService.deleteFlight(id).subscribe(
+      (res: any)=>{
+
+      },
+      err=>{
+        console.log((err as HttpErrorResponse).message);
+
+      }
+    )
+  }
 
 }

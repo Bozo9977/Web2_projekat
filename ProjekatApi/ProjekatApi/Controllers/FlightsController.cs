@@ -99,6 +99,44 @@ namespace ProjekatApi.Controllers
             return Ok();
         }
 
+        [HttpDelete]
+        [Route("DeleteFlight/{id}")]
+        public async Task<IActionResult> DeleteFlight(int id)
+        {
+            Flight f = context.Flights.Include(x => x.Seats).Include(x => x.FlightDestinations).ThenInclude(x => x.Destination).SingleOrDefault(x => x.Id == id);
+
+            if (f.Seats.Any(x => x.Reserved == true))
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                
+                    context.FlightDestinations.RemoveRange(f.FlightDestinations);
+                    await context.SaveChangesAsync();
+                
+
+                
+                    context.FlightSeats.RemoveRange(f.Seats);
+                    await context.SaveChangesAsync();
+                
+
+                context.Flights.Remove(f);
+                await context.SaveChangesAsync();
+                return Ok();
+            }
+            catch(DbUpdateConcurrencyException e)
+            {
+                return NotFound();
+            }
+            catch(Exception e)
+            {
+                return NoContent();
+            }
+            
+        }
+
 
         
         [Route("ChangeFlight")]
@@ -375,6 +413,7 @@ namespace ProjekatApi.Controllers
             }
         }
 
+        
 
         [HttpPost]
         [Route("MakeReservation")]
@@ -438,8 +477,8 @@ namespace ProjekatApi.Controllers
                     string body = $"Postovani ,\n" +
                         $"Pozvani ste na let\n" +
                         $"\n" +
-                        $"Kliknite na link http://localhost:4200/mainPage kako biste pristupili stranici " +
-                        $"za prihavatanje ili odbijanje ponude.";
+                        $"Kliknite na link: http://localhost:4200/" + item.Id + "/acceptFlight kako biste prihvatili zahtev. ";
+                    
                     using (MailMessage mailMessage = new MailMessage(from, to, subject, body))
                     {
                         try
@@ -469,6 +508,29 @@ namespace ProjekatApi.Controllers
             }
 
         }
+
+
+        [HttpPut]
+        [Route("AcceptFlightInvitation/{id}")]
+        public async Task<IActionResult> AcceptFlightInvitation(string id)
+        {
+            try
+            {
+                FlightReservation res = await context.FlightReservations.SingleOrDefaultAsync(x => x.UserId == id && x.Accepted == false);
+
+                res.Accepted = true;
+
+                context.FlightReservations.Update(res);
+                await context.SaveChangesAsync();
+                return Ok();
+
+            }
+            catch (Exception e)
+            {
+                return NoContent();
+            }
+        }
+
         [HttpPost]
         [Route("MakeQuickReservations")]
         public async Task<IActionResult> MakeQuickReservations(object form)
@@ -504,10 +566,16 @@ namespace ProjekatApi.Controllers
                 
 
                 return Ok();
-            }catch(Exception e)
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                return NotFound();
+            }
+            catch (Exception e)
             {
                 return NoContent();
             }
+            
         }
 
         [HttpGet]
@@ -615,7 +683,12 @@ namespace ProjekatApi.Controllers
                 context.FlightQuickReservations.Update(res);
                 await context.SaveChangesAsync();
                 return Ok();
-            }catch(Exception e)
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                return NotFound();
+            }
+            catch (Exception e)
             {
                 return NoContent();
             }
