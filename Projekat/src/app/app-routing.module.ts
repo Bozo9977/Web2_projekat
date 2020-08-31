@@ -40,6 +40,7 @@ import { FlightsViewComponent } from './components/availableFlightsView/flights-
 import { DiscountCarComponent } from './components/discountCar/discount-car/discount-car.component';
 import { DiscountReservationComponent } from './components/discountReservation/discount-reservation/discount-reservation.component';
 import { RegistracijaPotvrdaComponent } from './components/registracijaPotvrda/registracija-potvrda/registracija-potvrda.component';
+import { FlightQuickReservationsComponent } from './components/flight-quick-reservations/flight-quick-reservations.component';
 
 const routes: Routes = [
   {
@@ -144,6 +145,10 @@ const routes: Routes = [
   {
     path: ':id/availableFlight',
     component: AvailableFlightComponent
+  },
+  {
+    path: ':id/quickreservations',
+    component: FlightQuickReservationsComponent
   },
 
   {

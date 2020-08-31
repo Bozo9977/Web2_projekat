@@ -41,9 +41,12 @@ export class CarInfoComponent implements OnInit {
 
   onAddCar() {
     this.submitted = true;
+    console.log(this.addCarForm.value);
 
-    if (this.addCarForm.invalid) {
+    if (!this.addCarForm.valid) {
+      console.log(this.addCarForm.errors)
       return;
+     
   }
 
     console.log(this.addCarForm.value);

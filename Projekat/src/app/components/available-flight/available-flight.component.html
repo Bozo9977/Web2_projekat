@@ -70,6 +70,7 @@
               <th scope="col">Travel length</th>
               <th scope="col">Connections</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -92,7 +93,66 @@
               <td *ngIf="!admin">
                 <button class="btn btn-outline-primary" routerLink="/{{f.id}}/bookFlight">Book</button>
               </td>
+              <td *ngIf="admin">
+                <button class="btn btn-outline-primary" routerLink="/{{f.id}}/quickreservations">Quick Reservations</button>
+              </td>
+              <td *ngIf="!admin">
+                <button class="btn btn-outline-primary" (click)="showQuickReservations(f.id)">Quick reservation</button>
+              </td>
             </tr>
           </tbody>
         </table>  
   </div>
+
+  <div [hidden]="quickResClicked" class="container" style="display: flex; justify-content: center; align-items: center;">
+    <div class="col-md-13">
+        <div class="card">
+            <div class="card-body">
+              <div class="row" >
+                <div class="col-md-13">
+                    <div class="form-inline row">
+
+                      <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);" > 
+                
+                        <thead>
+                            <tr>
+                              <th scope="col">Departure</th>
+                              <th scope="col">Arrival</th>
+                              <th scope="col">Take-off</th>
+                              <th scope="col">Flight</th>
+                              <th scope="col">Seat No.</th>
+                              <th scope="col">Class</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">Discount</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            <tr *ngFor="let res of quickReservations">
+                              <td>{{res.departure}}</td>
+                              <td>{{res.arrival}}</td>
+                              <td>{{res.takeOff}}</td>
+                              <td>{{res.flightId}}</td>
+                              <td>{{res.seatNo}}</td>
+                              <td *ngIf="res.class === 0">First</td>
+                              <td *ngIf="res.class === 1">Business</td>
+                              <td *ngIf="res.class === 2">Economy</td>
+                              <td>{{res.price}}</td>
+                              <td>{{res.discount}}</td>
+                              <td *ngIf="!res.reserved">
+                                <button class="btn btn-outline-primary" (click)="bookQuickRes(res.id)">Book</button>
+                              </td>
+                            </tr>
+                          </tbody>
+
+                          </table>
+
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+    

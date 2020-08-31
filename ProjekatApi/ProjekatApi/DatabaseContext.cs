@@ -57,5 +57,6 @@ namespace ProjekatApi
 
         public DbSet<DiscountCar> DiscountCars { get; set; }
         public DbSet<FlightReservation> FlightReservations { get; set; }
+        public DbSet<FlightQuickReservation> FlightQuickReservations { get; set; }
     }
 }

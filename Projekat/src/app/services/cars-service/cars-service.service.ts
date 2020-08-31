@@ -106,4 +106,12 @@ export class CarsServiceService {
   }
 
 
+  cancelReservation(id: string){
+    return this.http.delete(this.BasURI + "/Reservation/CancelCarReservation/"+id);
+  }
+
+  cancelReservationWithFlight(id: number){
+    return this.http.delete(this.BasURI + "/Reservation/DeleteCarReservationWithFlight/" + id);
+  }
+
 }

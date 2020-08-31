@@ -29,7 +29,7 @@
                 <button type="button" class="btn btn-outline-primary" (click)="carClicked()">Rent car</button>
             </li>
             <li class="nav-item">
-                <button type="button" class="btn btn-outline-primary">Cancel car</button>
+                <button type="button" class="btn btn-outline-primary" (click)="carReservationClicked()">Cancel car</button>
             </li>
             <li class="nav-item">
                 <button type="button" class="btn btn-outline-primary mr-auto" (click)="carcompanyClicked()">Rate car company</button>
@@ -103,3 +103,44 @@
         </div>
     </div>
 </div>
+
+
+<div [hidden]="carReservations" class="container" style="display: flex; justify-content: center; align-items: center;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row" >
+                    <div class="col-md-12">
+                        <div class="form-inline row">       
+                        
+                            <table class="table table-bordered table-hover" style="background-color: rgba(255, 255, 255, .65);">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Start day</th>
+                                    <th scope="col">End day</th>
+                                    <th scope="col">Service name</th>
+                                    <th scope="col">Car</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr  *ngFor="let comp of myCarReservations">
+                                    <td>{{comp.startDay}}</td>
+                                    <td>{{comp.endDay}}</td>
+                                    <td>{{comp.serviceName}}</td>
+                                    <td>{{comp.vehicle}}</td>
+                                    <td>
+                                    <div>
+                                        <button type="button" class="btn btn-outline-danger" (click)="cancelCar(comp.id)">Cancel</button>
+                                    </div>
+                                        
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

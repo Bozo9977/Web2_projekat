@@ -6,6 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DestinationServiceService } from 'src/app/services/destination-service/destination-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FlightQuickReservation } from 'src/app/entities/Flight-quick-reservations/flight-quick-reservation';
 
 @Component({
   selector: 'app-available-flight',
@@ -21,6 +22,10 @@ export class AvailableFlightComponent implements OnInit {
   searchAvailableFlightsForm: FormGroup;
   
   idCompany: number;
+
+  quickReservations: Array<FlightQuickReservation> = new Array<FlightQuickReservation>();
+
+  quickResClicked: boolean = true;
 
   constructor(private flightService: FlightService,  private destinationService: DestinationServiceService, private route: ActivatedRoute) 
   { 
@@ -92,6 +97,7 @@ export class AvailableFlightComponent implements OnInit {
     // search.idCompany = this.idCompany;
 
     // console.log(search);
+    
 
     this.searchAvailableFlightsForm.patchValue({'Aircompany':this.idCompany});
     this.flightService.searchFlights(this.searchAvailableFlightsForm.value).subscribe(
@@ -104,5 +110,33 @@ export class AvailableFlightComponent implements OnInit {
       }
     )
   }
+
+
+  showQuickReservations(id: number){
+    this.quickResClicked = !this.quickResClicked;
+    this.flightService.getQuickReservationsForFlight(id).subscribe(
+      (res: any)=>{
+        this.quickReservations = res;
+        console.log(this.quickReservations);
+      },
+      err=>{
+        console.log((err as HttpErrorResponse).message);
+      }
+    )
+  }
+
+
+  bookQuickRes(id:number){
+    alert(id);
+    this.flightService.bookQuickFlightRes(id).subscribe(
+      (res:any)=>{
+
+      },
+      err=>{
+        console.log((err as HttpErrorResponse).message);
+      }
+    )
+  }
+
 
 }

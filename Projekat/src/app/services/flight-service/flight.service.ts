@@ -6,6 +6,8 @@ import { SearchCar } from 'src/app/entities/searchCar/search-car';
 import { FlightReservation } from 'src/app/entities/flight-reservation/flight-reservation';
 import { MyFlightReservation } from 'src/app/entities/my-flight-reservation/my-flight-reservation';
 import { Observable } from 'rxjs';
+import { MakeFlightQuickReservations } from 'src/app/entities/MakeFlightQuickReservations/make-flight-quick-reservations';
+import { FlightQuickReservation } from 'src/app/entities/Flight-quick-reservations/flight-quick-reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -65,5 +67,17 @@ export class FlightService {
 
   cancelFlightReservation(id:number): Observable<{}>{
     return this.http.delete(this.BasURI + '/Flights/CancelFlight/' + id);
+  }
+
+  makeQuickReservation(res: MakeFlightQuickReservations){
+    return this.http.post(this.BasURI + '/Flights/MakeQuickReservations', res);
+  }
+
+  getQuickReservationsForFlight(id:number){
+    return this.http.get<FlightQuickReservation>(this.BasURI + '/Flights/GetQuickReservationsForFlight/'+id);
+  }
+
+  bookQuickFlightRes(id){
+    return this.http.put(this.BasURI + '/Flights/BookQuickFlightReservation/'+ id,id);
   }
 }

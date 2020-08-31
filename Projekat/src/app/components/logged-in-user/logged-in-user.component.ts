@@ -3,6 +3,8 @@ import { FlightService } from 'src/app/services/flight-service/flight.service';
 import { MyFlightReservation } from 'src/app/entities/my-flight-reservation/my-flight-reservation';
 import * as jwt_decode from 'jwt-decode';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Rate } from 'src/app/entities/rate/rate';
+import { CarsServiceService } from 'src/app/services/cars-service/cars-service.service';
 
 @Component({
   selector: 'app-logged-in-user',
@@ -15,10 +17,12 @@ export class LoggedInUserComponent implements OnInit {
   rentCar: boolean = true;
   carcompany: boolean = true;
   flightReservations: boolean = true;
+  carReservations: boolean = true;
 
   myReservations: MyFlightReservation[] = [];
+  myCarReservations: Array<Rate> = []
 
-  constructor(private flightService: FlightService)
+  constructor(private flightService: FlightService,private reservations: CarsServiceService)
   {
      
   }
@@ -26,6 +30,18 @@ export class LoggedInUserComponent implements OnInit {
   ngOnInit(): void {
     var decode = jwt_decode(localStorage.getItem('token'));
     var UserID = decode['UserID'];
+
+    this.reservations.getReservations(UserID).subscribe(
+      (res: any) => { 
+        this.myCarReservations = res as Rate[]
+        console.log(this.myCarReservations);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
+
     this.flightService.getFlightReservationsForUser(UserID).subscribe(
       (res:MyFlightReservation[])=>{
         this.myReservations = res;
@@ -48,6 +64,22 @@ export class LoggedInUserComponent implements OnInit {
       this.carcompany = !this.carcompany;
     if(!this.flightReservations)
       this.flightReservations = !this.flightReservations;
+      if(!this.carReservations)
+    this.carReservations = !this.carReservations;
+  }
+
+  carReservationClicked(){
+    this.carReservations = !this.carReservations;
+    if(!this.aircompany)
+      this.aircompany = !this.aircompany;
+    if(!this.rentCar)
+      this.rentCar = !this.rentCar;
+    if(!this.carcompany)
+      this.carcompany = !this.carcompany;
+    if(!this.flightReservations)
+      this.flightReservations = !this.flightReservations;
+    if(!this.bookFlight)
+      this.bookFlight = !this.bookFlight;
   }
 
   aircompanyClicked(){
@@ -60,6 +92,8 @@ export class LoggedInUserComponent implements OnInit {
       this.carcompany = !this.carcompany;
     if(!this.flightReservations)
       this.flightReservations = !this.flightReservations;
+      if(!this.carReservations)
+    this.carReservations = !this.carReservations;
   }
 
   carClicked(){
@@ -72,6 +106,8 @@ export class LoggedInUserComponent implements OnInit {
       this.bookFlight = !this.bookFlight;
     if(!this.flightReservations)
       this.flightReservations = !this.flightReservations;
+      if(!this.carReservations)
+    this.carReservations = !this.carReservations;
   }
 
   carcompanyClicked(){
@@ -84,6 +120,8 @@ export class LoggedInUserComponent implements OnInit {
       this.bookFlight=!this.bookFlight;
     if(!this.flightReservations)
       this.flightReservations = !this.flightReservations;
+      if(!this.carReservations)
+    this.carReservations = !this.carReservations;
   }
 
   flightReservationsClicked(){
@@ -96,12 +134,22 @@ export class LoggedInUserComponent implements OnInit {
       this.bookFlight=!this.bookFlight;
     if(!this.carcompany)
       this.carcompany = !this.carcompany;
-
+    if(!this.carReservations)
+    this.carReservations = !this.carReservations;
 
   }
 
   cancelFlight(id:number){
     
+    this.reservations.cancelReservationWithFlight(id).subscribe(
+      (res: any)=>{
+
+      },
+      err=>{
+        console.log((err as HttpErrorResponse).message);
+      }
+    )
+
     this.flightService.cancelFlightReservation(id).subscribe(
       (res:any)=>{
         this.flightReservations = !this.flightReservations;
@@ -113,4 +161,17 @@ export class LoggedInUserComponent implements OnInit {
     )
   }
 
+
+  cancelCar(id: string){
+    alert(id);
+    this.reservations.cancelReservation(id).subscribe(
+      (res:any)=>{
+
+      },
+      err=>
+      {
+        console.log((err as HttpErrorResponse).message);
+      }
+    )
+  }
 }

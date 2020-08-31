@@ -5,6 +5,7 @@ import { BranchOffice } from 'src/app/entities/branch-office/branch-office';
 import { CompanyService } from 'src/app/services/company-service/company.service';
 import { CarCompany } from 'src/app/entities/car-company/car-company';
 import { min } from 'moment';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-add-branch-office',
@@ -56,8 +57,10 @@ export class AddBranchOfficeComponent implements OnInit {
   onBranchOffice() {
 
     this.submitted = true;
+    console.log(this.addBranchOfficeForm.value);
 
     if (this.addBranchOfficeForm.invalid) {
+      console.log(this.addBranchOfficeForm.valid)
         return;
     }
 

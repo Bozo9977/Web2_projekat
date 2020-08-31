@@ -106,6 +106,11 @@ namespace ProjekatApi.Controllers
         {
             Flight f =  context.Flights.Include(x => x.Seats).Include(x => x.FlightDestinations).ThenInclude(x => x.Destination).SingleOrDefault(x => x.Id == flight.Id);
 
+            if(f.Seats.Any(x=>x.Reserved == true))
+            {
+                return Ok();
+            }
+
             foreach(var item in f.Seats)
             {
                 context.FlightSeats.Remove(item);
@@ -464,6 +469,46 @@ namespace ProjekatApi.Controllers
             }
 
         }
+        [HttpPost]
+        [Route("MakeQuickReservations")]
+        public async Task<IActionResult> MakeQuickReservations(object form)
+        {
+            try
+            {
+                var jsonStr = form.ToString();
+
+                FlightQuickReservationForm res = new FlightQuickReservationForm();
+
+                res = JsonConvert.DeserializeObject<FlightQuickReservationForm>(jsonStr);
+
+                Flight flight = await context.Flights.Include(x=>x.FlightDestinations).ThenInclude(x=>x.Destination).SingleOrDefaultAsync(x=>x.Id==res.FlightId);
+
+                foreach(var seat in res.Seats)
+                {
+                    FlightQuickReservation resQ = new FlightQuickReservation()
+                    {
+                        Arrival = flight.Arrival,
+                        Departure = flight.Departure,
+                        SeatNo = seat.Id,
+                        Class = seat.Class,
+                        Discount = res.Discount,
+                        Price = seat.Price,
+                        TakeOff = flight.TakeOff,
+                        Reserved = false,
+                        FlightId = flight.Id
+                    };
+
+                    await context.FlightQuickReservations.AddAsync(resQ);
+                    await context.SaveChangesAsync();
+                }
+                
+
+                return Ok();
+            }catch(Exception e)
+            {
+                return NoContent();
+            }
+        }
 
         [HttpGet]
         [Route("GetMyReservations/{id}")]
@@ -535,6 +580,44 @@ namespace ProjekatApi.Controllers
             }catch(Exception e)
             {
                 return BadRequest();
+            }
+        }
+
+
+        [HttpGet]
+        [Route("GetQuickReservationsForFlight/{id}")]
+        public async Task<ActionResult<IEnumerable<FlightQuickReservation>>> GetQuickReservationsForFlight(int id)
+        {
+            List<FlightQuickReservation> retVal = new List<FlightQuickReservation>();
+            try
+            {
+                 retVal = context.FlightQuickReservations.Where(x => x.FlightId == id && x.Reserved == false).ToList();
+
+
+                return retVal;
+
+            }catch(Exception e)
+            {
+                return new List<FlightQuickReservation>();
+            }
+        }
+
+        [HttpPut]
+        [Route("BookQuickFlightReservation/{id}")]
+        public async Task<IActionResult> BookQuickFlightReservation(int id)
+        {
+            try
+            {
+                FlightQuickReservation res = await context.FlightQuickReservations.FindAsync(id);
+
+                res.Reserved = true;
+
+                context.FlightQuickReservations.Update(res);
+                await context.SaveChangesAsync();
+                return Ok();
+            }catch(Exception e)
+            {
+                return NoContent();
             }
         }
     }

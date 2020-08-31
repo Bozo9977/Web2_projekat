@@ -1,0 +1,124 @@
+<div class="container" style="display: flex; justify-content: center; align-items: center;">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                          <div class="form-inline row">
+                            <label for="code" class="col-4 col-form-label"><h6>Number of seats with discount</h6></label> 
+                            <div class="col-8">
+                              <input id="code" readonly name="code" placeholder="City" class="form-control here" value="{{seatsChecked.length}}" type="text">
+                              <!-- <button type="submit" class="btn btn-outline-primary" *ngIf="seatsChecked.length > 1" (click)="showFriends()">Invite Friends</button> -->
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                          <div class="form-inline row">
+                            <label for="code" class="col-4 col-form-label"><h6>Discount:</h6></label> 
+                            <div class="col-8">
+                                <form [formGroup]="discountForm" autocomplete="off" class="submit-form" (ngSubmit)="createQuickReservations()">
+                                <input  class="form-control here"  type="number" formControlName="discount">
+                                <button type="submit" class="btn btn-outline-primary">Add discount</button>
+                            </form>
+                            </div>
+                            </div>
+                            </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container"><h1>First class seats:</h1></div>
+<div class="container">
+    <div *ngFor="let i of firstClass">
+        <div *ngIf="i==4" style="display: inline;"></div>
+    <span width="30px" style="float: left;">
+        <div *ngIf="!i.reserved ; then thenBlock1 else elseBlock1"></div>
+        <ng-template #thenBlock1>
+            
+                <img src="../assets/images/chair.png"
+                    class="rounded-circle"  id=z{{i}} width="30px" alt="make discount"  
+                    data-toggle="tooltip" data-placement="right" title="make discount"
+                    style="background-color: turquoise;" (click)="checkSeat(i)"  > &nbsp; {{i.Id}}
+           
+        </ng-template>
+        <ng-template #elseBlock1>
+            
+                <img src="../assets/images/chair.png"
+                    class="rounded-circle"  id={{i}} width="30px" alt="reserved"  
+                    data-toggle="tooltip" data-placement="right" title="reserved"
+                    style="background-color: red;" >
+            
+        </ng-template>
+    </span>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<span class="container" style="display: flex;"><h1>Business class seats:</h1></span>
+<div class="container">
+    <div *ngFor="let i of businessClass">
+        <div *ngIf="i==4" style="display: inline;"></div>
+    <span width="30px" style="float: left;">
+        <div *ngIf="!i.reserved ; then thenBlock1 else elseBlock1"></div>
+        <ng-template #thenBlock1>
+           
+                <img src="../assets/images/chair.png"
+                    class="rounded-circle"  id=z{{i}} width="30px" alt="make discount"  
+                    data-toggle="tooltip" data-placement="right" title="make discount"
+                    style="background-color: yellowgreen;" (click)="checkSeat(i)"  > &nbsp; {{i.Id}}
+            
+        </ng-template>
+        <ng-template #elseBlock1>
+            
+                <img src="../assets/images/chair.png"
+                    class="rounded-circle"  id={{i}} width="30px" alt="reserved"  
+                    data-toggle="tooltip" data-placement="right" title="reserved"
+                    style="background-color: red;" >
+            
+        </ng-template>
+    </span>
+    </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<span class="container" style="display: flex;"><h1>Economy class seats:</h1></span>
+<div class="container">
+    <div *ngFor="let i of economyClass">
+        <div *ngIf="i==4" style="display: inline;"></div>
+    <span width="30px" style="float: left;">
+        <div *ngIf="!i.reserved ; then thenBlock1 else elseBlock1"></div>
+        <ng-template #thenBlock1>
+            
+                <img src="../assets/images/chair.png"
+                    class="rounded-circle"  id=z{{i}} width="30px" alt="make discount"  
+                    data-toggle="tooltip" data-placement="right" title="make discount"
+                    style="background-color: yellow;" (click)="checkSeat(i)"  > &nbsp; {{i.Id}}
+            
+        </ng-template>
+        <ng-template #elseBlock1>
+            
+                <img src="../assets/images/chair.png"
+                    class="rounded-circle"  id={{i}} width="30px" alt="reserved"  
+                    data-toggle="tooltip" data-placement="right" title="reserved"
+                    style="background-color: red;" >
+            
+        </ng-template>
+    </span>
+    </div>
+</div>

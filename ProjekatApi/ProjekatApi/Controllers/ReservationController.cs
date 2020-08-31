@@ -462,5 +462,57 @@ namespace ProjekatApi.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("CancelCarReservation/{id}")]
+        public async Task<IActionResult> CancelCarReservation(string id)
+        {
+            try
+            {
+                ReservationCar res = await context.ReservationCar.FindAsync(id);
+
+                TimeSpan ts = res.Day1 - DateTime.Now;
+
+                if(ts.TotalDays >= 2)
+                {
+                    context.ReservationCar.Remove(res);
+                    await context.SaveChangesAsync();
+                }
+
+                return Ok();
+            }catch(Exception e)
+            {
+                return NoContent();
+            }
+        }
+
+        [HttpDelete]
+        [Route("DeleteCarReservationWithFlight/{id}")]
+        public async Task<IActionResult> DeleteCarReservationWithFlight(int id)
+        {
+            try
+            {
+                FlightReservation fRes = await context.FlightReservations.FindAsync(id);
+                Flight flight = await context.Flights.FindAsync(fRes.FlightId);
+                ReservationCar cRes = await context.ReservationCar.SingleOrDefaultAsync(x => x.IdUser == fRes.UserId && x.Day1 == flight.TakeOff);
+
+                if (cRes != null)
+                {
+                    context.ReservationCar.Remove(cRes);
+                    await context.SaveChangesAsync();
+                }
+                else
+                {
+                    return Ok();
+                }
+
+                return Ok();
+
+            }catch(Exception e)
+            {
+                return NoContent();
+            }
+        }
+
+
     }
 }
