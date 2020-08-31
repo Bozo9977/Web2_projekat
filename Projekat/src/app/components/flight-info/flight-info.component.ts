@@ -53,6 +53,7 @@ export class FlightInfoComponent implements OnInit {
   }
   submit(){
 
+    console.log(this.flightForm.value);
     if(this.flightForm.valid){
       var company = JSON.parse(localStorage.getItem('company'));
       this.flightForm.patchValue({'Aircompany':company.id});

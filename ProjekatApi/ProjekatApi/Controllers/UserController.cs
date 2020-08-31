@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace ProjekatApi.Controllers
         private UserManager<ApplicationUser> _userManager;
         private readonly ApplicationSettings _appSettings;
         private readonly DatabaseContext context;
+        private static Random random;
         public UserController(UserManager<ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings, DatabaseContext _context)
         {
             _userManager = userManager;
@@ -60,6 +62,7 @@ namespace ProjekatApi.Controllers
                     if (result.Succeeded)
                     {
                         _userManager.AddToRoleAsync(applicationUser, "RegisteredUser").Wait();
+                        int randNumber = SendActivationCode();
                         return Ok(result);
                     }
                     else
@@ -85,6 +88,45 @@ namespace ProjekatApi.Controllers
             }
 
             
+        }
+
+        public static int SendActivationCode()
+        {
+            random = new Random();
+            int randNumber = random.Next(100001, 999999);
+            string to = "bokimaric97@gmail.com";
+            string from = "bokimaric97@gmail.com";
+            MailMessage message = new MailMessage(from, to);
+            message.Subject = "Aktivacioni kod";
+            //message.Body = @"Using this new feature, you can send an email message from an application very easily.";
+            message.Body = "Vas aktivacioni kod je: " + randNumber.ToString();
+            try
+            {
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.EnableSsl = true;
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //smtpClient.UseDefaultCredentials = true;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential(from, "Geografija9977");
+                smtpClient.Send(message);
+                //smtpClient.Send(message.From.ToString(), message.To.ToString(), message.Subject, message.Body);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ex: " + ex);
+            }
+            return randNumber;
+        }
+
+        [HttpPost]
+        [Route("ConfirmEmail")]
+        //POST : /api/ApplicationUser/Register
+        public async Task<Object> ConfirmEmail(UserModel model)
+        {
+            //if(model.Code == random)
+
+
+            return Ok();
         }
 
         [HttpPost]
@@ -280,20 +322,23 @@ namespace ProjekatApi.Controllers
 
                 if(roles.Count() > 0)
                 {
-                    var tokenDescriptor = new SecurityTokenDescriptor
+                    if(user.EmailConfirmed == true)
                     {
-                        Subject = new ClaimsIdentity(new Claim[]
+                        var tokenDescriptor = new SecurityTokenDescriptor
                         {
-                            new Claim("UserID",user.Id.ToString()),
-                            new Claim("Roles", roles[0])
-                        }),
-                        Expires = DateTime.UtcNow.AddDays(1),
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
-                    };
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                    var token = tokenHandler.WriteToken(securityToken);
-                    return Ok(new { token });
+                            Subject = new ClaimsIdentity(new Claim[]
+                            {
+                                new Claim("UserID",user.Id.ToString()),
+                                new Claim("Roles", roles[0])
+                            }),
+                            Expires = DateTime.UtcNow.AddDays(1),
+                            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                        };
+                        var tokenHandler = new JwtSecurityTokenHandler();
+                        var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                        var token = tokenHandler.WriteToken(securityToken);
+                        return Ok(new { token });
+                    }
                 }
                 return BadRequest(new { message = "Username or password is incorrect." });
             }

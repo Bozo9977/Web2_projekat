@@ -25,6 +25,7 @@ namespace ProjekatApi.FormModel
         public string Password { get; set; }
         [Required]
         public string ConfirmPassword { get; set; }
+        public int Code { get; set; }
 
         //public UserType UserType { get; set; }
     }

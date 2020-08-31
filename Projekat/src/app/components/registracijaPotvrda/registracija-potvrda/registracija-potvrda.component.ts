@@ -1,39 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegistrationService } from 'src/app/services/registration-service/registration.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { User } from 'src/app/entities/user/user';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-registracija-potvrda',
+  templateUrl: './registracija-potvrda.component.html',
+  styleUrls: ['./registracija-potvrda.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegistracijaPotvrdaComponent implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
-
+  user: User;
+  userPom: User;
+  code: number;
   constructor(private registration: RegistrationService) { }
 
-  ngOnInit(): void {
-    this.initForm();
-  }
 
-  private initForm() {
+  ngOnInit(): void {
+    this.userPom = JSON.parse(localStorage.getItem('email'));
+
     this.registerForm = new FormGroup({
-      'firstName': new FormControl(null, [Validators.required]),
-      'lastName': new FormControl(null, [Validators.required]),
-      'city': new FormControl(null, [Validators.required]),
-      'email': new FormControl(null, [Validators.required, Validators.email]),
-      'phoneNumber': new FormControl(null, [Validators.required]),
-      'password': new FormControl(null, [Validators.required, Validators.minLength(5)]),
-      'confirmPassword': new FormControl(null, [Validators.required]),
+      'code': new FormControl(null, [Validators.required]),
     });
   }
 
   get f() { return this.registerForm.controls; }
 
-  onRegister() {
+
+  onConfirmEmail() {
 
     this.submitted = true;
 
@@ -43,9 +39,11 @@ export class RegisterComponent implements OnInit {
     }
 
     console.log(this.registerForm.value);
-
-
-    this.registration.addUser(this.registerForm.value).subscribe(
+    this.code = this.registerForm.value;
+    this.user = this.registerForm.value;
+    this.userPom.code = this.user.code;
+    console.log(this.userPom);
+    this.registration.confirmEmail(this.userPom).subscribe(
       (res: any) => {
         console.log(res);
       },
@@ -55,9 +53,7 @@ export class RegisterComponent implements OnInit {
         alert("Incorrect registration! Check your password or change your email!");
       }
     );
-    localStorage.setItem('email', JSON.stringify(this.registerForm.value));
     this.submitted = false;
     this.registerForm.reset();
   }
-
 }

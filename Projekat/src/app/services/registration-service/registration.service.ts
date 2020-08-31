@@ -26,7 +26,9 @@ export class RegistrationService {
   addCarAddmin(formData){
     return this.http.post(this.BaseURI + '/User/RegisterCarcompanyAdmin',formData);
   }
-
+  confirmEmail(user: User){
+    return this.http.post(this.BaseURI + '/User/ConfirmEmail', user);
+  }
 
 }
 

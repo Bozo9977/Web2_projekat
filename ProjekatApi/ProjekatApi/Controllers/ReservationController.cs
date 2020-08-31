@@ -35,7 +35,18 @@ namespace ProjekatApi.Controllers
 
             var listCompany = context.BranchOffices.Include(x => x.Id_company).ToList().SingleOrDefault(x => x.Id == Int32.Parse(filterCar.Id));
 
-            cc = listCompany.Id_company;
+            if (listCompany == null)
+            {
+                var company = context.Companies.Find(Int32.Parse(filterCar.Id));
+                cc = (CarCompany)company;
+            }
+            else
+            {
+                cc = listCompany.Id_company;
+            }
+
+
+
 
             var rezervacije = context.ReservationCar.ToList();
 
@@ -43,7 +54,52 @@ namespace ProjekatApi.Controllers
 
             var pom = context.Carcompanies.Include(x => x.Cars).ToList().SingleOrDefault(x => x.Id == cc.Id).Cars.ToList();
 
-            
+
+            //PROVERITI DA LI SU KOLA NA POPUSTU
+
+            var listaVozilaNaPopustu = context.DiscountCars.ToList();
+
+            foreach (var popust in listaVozilaNaPopustu)
+            {
+                foreach (var auto in pom)
+                {
+                    if (auto.Id == popust.carId)
+                    {
+                        var poredjenje1 = DateTime.Compare(filterCar.startDay, popust.StartDay);
+                        var poredjenje2 = DateTime.Compare(filterCar.endDay, popust.StartDay);
+
+                        if (poredjenje1 < 0 && poredjenje2 < 0)
+                        {
+                            continue;
+                        }
+                        else if (poredjenje1 > 0 && poredjenje2 > 0)
+                        {
+                            var poredjenje3 = DateTime.Compare(filterCar.startDay, popust.EndDay);
+                            var poredjenje4 = DateTime.Compare(filterCar.endDay, popust.EndDay);
+
+                            if (poredjenje3 > 0 && poredjenje4 > 0)
+                            {
+                                continue;
+                            }
+                            else
+                            {
+                                carFromModels = null;
+                                return carFromModels;
+                            }
+                        }
+                        else
+                        {
+                            carFromModels = null;
+                            return carFromModels;
+                        }
+
+
+                    }
+                }
+            }
+
+
+
 
             var pom1 = pom.FindAll(x => x.Mark.ToLower() == filterCar.Mark.ToLower());
 
@@ -54,8 +110,8 @@ namespace ProjekatApi.Controllers
                 {
                     if (context.ReservationCar.ToList().Count == 0)
                     {
-                        
-                        foreach(var cars in pom2)
+
+                        foreach (var cars in pom2)
                         {
                             CarFromModel cfm = new CarFromModel();
                             cfm.AirConditioning = cars.AirConditioning;
@@ -71,7 +127,7 @@ namespace ProjekatApi.Controllers
                             cfm.YearProduction = Int32.Parse(cars.YearProduction);
                             cfm.Rating = cars.AverageRating.ToString();
                             carFromModels.Add(cfm);
-    
+
                         }
 
                     }
@@ -79,7 +135,7 @@ namespace ProjekatApi.Controllers
                     else
                     {
 
-                        foreach(var cars in pom2)
+                        foreach (var cars in pom2)
                         {
                             var rez = rezervacije.FindAll(x => x.IdCar == cars.Id);
                             Model.ReservationCar rc = new Model.ReservationCar();
@@ -87,7 +143,7 @@ namespace ProjekatApi.Controllers
                             if (rez.Count() != 0)
                             {
 
-                                foreach(var rezervacija in rez)
+                                foreach (var rezervacija in rez)
                                 {
 
                                     int result = DateTime.Compare(filterCar.startDay, rezervacija.Day1);
@@ -95,21 +151,7 @@ namespace ProjekatApi.Controllers
 
                                     if (result < 0 && result2 < 0)
                                     {
-                                        /* CarFromModel cfm = new CarFromModel();
-                                         cfm.AirConditioning = cars.AirConditioning;
-                                         cfm.Bags = cars.Bags;
-                                         cfm.Door = cars.Door;
-                                         cfm.Fuel = cars.Fuel;
-                                         cfm.Gearshift = cars.Gearshift;
-                                         cfm.Id = cars.Id;
-                                         cfm.HourlyRent = cars.HourlyRent;
-                                         cfm.ImageCar = cars.ImageCar;
-                                         cfm.Mark = cars.Mark;
-                                         cfm.RentPerDay = cars.RentPerDay;
-                                         cfm.Seat = cars.Seat;
-                                         cfm.Status = cars.Status;
-                                         cfm.YearProduction = cars.YearProduction;
-                                         carFromModels.Add(cfm);*/
+
                                         continue;
                                     }
                                     else if (result > 0 && result2 > 0)
@@ -117,42 +159,9 @@ namespace ProjekatApi.Controllers
                                         int result3 = DateTime.Compare(filterCar.startDay, rezervacija.Day2);
                                         int result4 = DateTime.Compare(filterCar.endDay, rezervacija.Day2);
 
-                                        if (result3 < 0 && result4 < 0)
+
+                                        if (result3 > 0 && result4 > 0)
                                         {
-                                            /* CarFromModel cfm = new CarFromModel();
-                                             cfm.AirConditioning = cars.AirConditioning;
-                                             cfm.Bags = cars.Bags;
-                                             cfm.Door = cars.Door;
-                                             cfm.Fuel = cars.Fuel;
-                                             cfm.Gearshift = cars.Gearshift;
-                                             cfm.Id = cars.Id;
-                                             cfm.HourlyRent = cars.HourlyRent;
-                                             cfm.ImageCar = cars.ImageCar;
-                                             cfm.Mark = cars.Mark;
-                                             cfm.RentPerDay = cars.RentPerDay;
-                                             cfm.Seat = cars.Seat;
-                                             cfm.Status = cars.Status;
-                                             cfm.YearProduction = cars.YearProduction;
-                                             carFromModels.Add(cfm);*/
-                                            continue;
-                                        }
-                                        else if(result3 > 0 && result4 > 0)
-                                        {
-                                            /* CarFromModel cfm = new CarFromModel();
-                                             cfm.AirConditioning = cars.AirConditioning;
-                                             cfm.Bags = cars.Bags;
-                                             cfm.Door = cars.Door;
-                                             cfm.Fuel = cars.Fuel;
-                                             cfm.Gearshift = cars.Gearshift;
-                                             cfm.Id = cars.Id;
-                                             cfm.HourlyRent = cars.HourlyRent;
-                                             cfm.ImageCar = cars.ImageCar;
-                                             cfm.Mark = cars.Mark;
-                                             cfm.RentPerDay = cars.RentPerDay;
-                                             cfm.Seat = cars.Seat;
-                                             cfm.Status = cars.Status;
-                                             cfm.YearProduction = cars.YearProduction;
-                                             carFromModels.Add(cfm);*/
                                             continue;
                                         }
                                         else
@@ -216,7 +225,7 @@ namespace ProjekatApi.Controllers
                             }
 
                         }
-                        
+
 
                         return carFromModels;
                     }
@@ -271,7 +280,26 @@ namespace ProjekatApi.Controllers
 
                 context.ReservationCar.Add(rc);
 
-                await context.SaveChangesAsync();
+                bool saveFailed;
+
+                do
+                {
+                    saveFailed = false;
+                    try
+                    {
+                        await context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException ex)
+                    {
+                        saveFailed = true;
+                        return null;
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw;
+                    }
+                } while (saveFailed);
 
                 return Ok();
             }

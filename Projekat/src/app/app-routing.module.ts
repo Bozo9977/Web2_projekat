@@ -38,6 +38,8 @@ import { IncomeReportComponent } from './components/income-report/income-report.
 import { FlightReservationsComponent } from './components/flight-reservations/flight-reservations/flight-reservations.component';
 import { FlightsViewComponent } from './components/availableFlightsView/flights-view/flights-view.component';
 import { DiscountCarComponent } from './components/discountCar/discount-car/discount-car.component';
+import { DiscountReservationComponent } from './components/discountReservation/discount-reservation/discount-reservation.component';
+import { RegistracijaPotvrdaComponent } from './components/registracijaPotvrda/registracija-potvrda/registracija-potvrda.component';
 
 const routes: Routes = [
   {
@@ -232,6 +234,15 @@ const routes: Routes = [
     path: ":id/discountCar",
     component: DiscountCarComponent
   },
+  {
+    path: "discountReservation",
+    component: DiscountReservationComponent
+  },
+  {
+    path: "rezervacijaPotvrda",
+    component: RegistracijaPotvrdaComponent
+  }
+
 ];
 
 @NgModule({
